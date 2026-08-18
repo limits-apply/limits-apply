@@ -1,0 +1,53 @@
+/* header — brand, anchors, then the theme switch */
+header{border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:5;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px)}
+.hbar{max-width:var(--measure);margin:0 auto;padding:0 var(--gutter);height:var(--bar);
+      display:flex;gap:22px;align-items:center}
+
+/* The wordmark is its own usage bar: letters inside the fill are knocked out,
+   letters past it stay ink. --fill is the single source for all three parts —
+   the track's width, the knockout's clip and the marker's offset — so they
+   cannot drift apart, and in the header it is driven by scroll position.
+   .over repeats the padding box so its clip and the track's width resolve
+   against the same border box. */
+@property --fill{syntax:"<percentage>";inherits:true;initial-value:68%}
+.brand{--s:15px;--fill:68%;position:relative;display:inline-block;white-space:nowrap;flex:none;
+       text-decoration:none;border-radius:2px;padding:calc(var(--s)*.3) calc(var(--s)*.42);
+       font:500 var(--s)/1 var(--mono);letter-spacing:-.03em;color:var(--ink);
+       box-shadow:inset 0 0 0 1px var(--rule)}
+.brand .track{position:absolute;left:0;top:0;bottom:0;width:var(--fill);background:var(--ink);
+              border-radius:2px 0 0 2px}
+.brand .base{position:relative}
+.brand .over{position:absolute;inset:0;padding:calc(var(--s)*.3) calc(var(--s)*.42);
+             color:var(--paper);clip-path:inset(0 calc(100% - var(--fill)) 0 0)}
+.brand i{position:absolute;top:calc(var(--s)*-.14);bottom:calc(var(--s)*-.14);left:var(--fill);
+         width:1.5px;background:var(--signal)}
+
+/* Scroll-driven, so it runs off the scroll thread and needs no listener. Where
+   scroll timelines are missing — and under prefers-reduced-motion, which kills
+   every animation in motion.css — --fill stays at the declared 68%. */
+@keyframes brandfill{from{--fill:0%}to{--fill:100%}}
+@supports (animation-timeline:scroll()){
+  .hbar .brand{animation-name:brandfill;animation-duration:auto;animation-timing-function:linear;
+               animation-fill-mode:both;animation-timeline:scroll(root block)}
+}
+
+.nav{display:flex;gap:20px;align-items:center;margin-left:6px}
+.nav a{font:400 13px var(--sans);color:var(--ink-2);text-decoration:none;padding:2px 0;
+       border-bottom:1px solid transparent}
+.nav a:hover,.nav a[aria-current]{color:var(--ink);border-bottom-color:var(--signal)}
+
+/* aria-pressed carries the state, so it is also the styling hook — the crescent
+   is an outline in light and fills in signal once dark is what's showing. */
+.theme{margin-left:auto;flex:none;display:grid;place-items:center;width:30px;height:30px;
+       padding:0;background:none;border:0;border-radius:2px;color:var(--ink-2);cursor:pointer;
+       box-shadow:inset 0 0 0 1px var(--rule);transition:color .15s ease,box-shadow .15s ease}
+.theme:hover{color:var(--ink);box-shadow:inset 0 0 0 1px var(--signal)}
+.theme svg{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round}
+.theme[aria-pressed="true"]{color:var(--signal)}
+.theme[aria-pressed="true"] svg{fill:currentColor}
+
+@media (max-width:860px){
+  .nav{overflow-x:auto;min-width:0;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+}

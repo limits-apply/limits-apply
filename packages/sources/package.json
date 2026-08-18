@@ -1,0 +1,9 @@
+{
+  "name": "@limits-apply/sources",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Validated source adapters and evidence normalization for Limits Apply.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": { "@limits-apply/intelligence": "workspace:*" }
+}

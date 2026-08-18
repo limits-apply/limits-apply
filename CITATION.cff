@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: Limits Apply
+message: >-
+  If Limits Apply materially supports your research or analysis, cite the release or commit and the
+  dated evidence snapshot you used.
+type: software
+authors:
+  - name: uslopia
+license: Apache-2.0
+abstract: >-
+  An open methodology and toolset for comparing the economics of AI subscriptions, APIs, and local
+  inference while preserving provenance and uncertainty.
+keywords:
+  - artificial intelligence
+  - benchmarking
+  - subscriptions
+  - provenance
+  - model routing

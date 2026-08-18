@@ -1,0 +1,38 @@
+name: stale-prices
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # lundi 9h UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "Prix à re-vérifier"
+        run: |
+          # freshness is the oldest verification, not the newest (docs/methodology.md) —
+          # scripts/freshness.mjs runs the same oldest-across-everything computation
+          # ui/freshness.ts renders on the page, across all five dated inputs, not just
+          # VERIFIED_ON.
+          oldest=$(node scripts/freshness.mjs)
+          age=$(( ( $(date +%s) - $(date -d "$oldest" +%s) ) / 86400 ))
+          echo "Vérification la plus ancienne : $oldest ($age j)"
+          if [ "$age" -lt 30 ]; then exit 0; fi
+          open=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq length)
+          if [ "$open" != "0" ]; then echo "issue déjà ouverte"; exit 0; fi
+          gh issue create --title "$TITLE ($age j)" --body \
+            "La vérification la plus ancienne du site est \`$oldest\`, soit $age jours — au-delà de
+          \`STALE_DAYS = 30\`, la table se rend grisée toute seule.
+
+          Re-vérifier les pricing pages de chaque plan, puis bumper le \`verified\` de la ligne
+          concernée dans \`src/data/plans.json\` (ou la date correspondante ailleurs)."

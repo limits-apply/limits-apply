@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limits Apply — the economics of using AI</title>
+<meta name="description" content="API pricing is measured down to the millionth token. Subscription limits are described as “usage limits apply.” We benchmark how much useful work AI subscriptions actually deliver.">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<header>
+  <div class="hbar">
+    <a class="brand" href="#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="./index.html" aria-current="page">Home</a>
+      <a href="./local.html">Local</a>
+      <a href="./gate.html">Gate</a>
+      <a href="./docs/index.html">Docs</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-pressed="false"
+            aria-label="Switch to the dark theme">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+        <path d="M16.4 12.7A7.1 7.1 0 0 1 7.3 3.6a7.1 7.1 0 1 0 9.1 9.1Z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="hero-figure" aria-hidden="true">
+    <span class="pt"></span>
+    <span class="ivl exact"></span>
+    <span class="ivl open"></span>
+    <span class="ivl void"></span>
+    <span class="ticks"></span>
+  </div>
+  <span class="eyebrow">“Usage limits apply”</span>
+  <h1>Always run the best model your money actually buys.</h1>
+  <p class="lead">
+    API pricing is measured down to the millionth token. Subscription limits are usually
+    described as “usage limits apply.” The benchmark below measures what’s actually behind that
+    sentence — how much useful work each plan delivers against the same workload, compared with
+    paying by the token.
+  </p>
+  <p class="lead">
+    This site is three layers. The <a href="#ledger">ledger</a> prices every subscription against
+    that same work. <a href="./local.html">Local</a> prices the alternative — your own machine, no
+    quota, a lower ceiling. <a href="./gate.html">Gate</a> is the CLI that takes whichever one wins
+    and points your editor at it.
+  </p>
+  <div class="cta">
+    <a class="btn" href="#benchmark">Explore the benchmark</a>
+    <a class="btn ghost" href="#methodology">Read the methodology</a>
+    <a class="btn ghost" href="./docs/index.html#quickstart">Run the quickstart</a>
+  </div>
+  <div class="pull">
+    <p>Intelligence matters. Token efficiency matters. Quota matters.</p>
+    <p>What ultimately matters is how much successful work you get for your money.</p>
+  </div>
+</section>
+
+<section class="decision" id="benchmark">
+  <div class="decision-head">
+    <div>
+      <span class="eyebrow">Decision table</span>
+      <h1>Which AI subscription has the best theoretical AA value?</h1>
+      <p class="lead">
+        One table, every plan, no blank cells. The best model and reasoning level we can map to each
+        plan, against an allowance resolved on a five-rung ladder — and every figure says which rung it
+        stands on, with the formula, the assumptions and the source one hover away.
+      </p>
+    </div>
+    <aside class="aa-source">
+      <span class="kicker">Primary benchmark source</span>
+      <p>
+        <a href="https://artificialanalysis.ai/models" target="_blank" rel="noreferrer">Artificial Analysis</a>
+        Intelligence Index v4.1.1 · snapshot 2026-08-14. Scores, task cost and reasoning tokens
+        link back to the evaluated model. <a id="aa-snapshot-link">Frozen data</a>.
+      </p>
+    </aside>
+  </div>
+
+  <div class="score-controls" data-filter="strategy" role="group" aria-label="Strategy">
+    <span class="kicker" data-tip="Two ways to spend the same allowance. Delivery picks, per plan, the configuration with the most AA Index per dollar of task cost — the most intelligence-weighted work per month. Planning picks the smartest configuration the plan grants and shows how many of those tasks the allowance covers. No configuration wins both; that trade-off is the point.">Strategy</span>
+    <button type="button" data-value="delivery" aria-pressed="true">Delivery — most work × intelligence</button>
+    <button type="button" data-value="planning" aria-pressed="false">Planning — smartest model first</button>
+  </div>
+
+  <div class="score-controls" data-filter="bracket" id="bracket-controls" role="group"
+       aria-label="Price point"></div>
+  <p class="note" style="margin:-4px 0 16px">
+    <strong>Price point</strong> buckets plans by published monthly price — ~$10 is up to $12,
+    ~$20 up to $29, ~$50 up to $69, ~$100 up to $149, $200+ above that. Plans with no published
+    USD price appear under <em>All</em> only.
+  </p>
+
+  <div class="score-summary" aria-live="polite">
+    <div id="score-winner-tile"><span id="score-winner-label" data-tip="Highest AA proxy per dollar in view — not a recommendation. Every plan is ranked, but a rank built on a modelled allowance is an estimate with a stated method, and this tile turns amber and says so when the leader rests on one.">Top of the ranked pool</span><strong id="score-winner">—</strong><span class="basis" id="score-pool"></span></div>
+    <div><span data-tip="The strongest AA Intelligence Index score reachable on any plan in view, whatever its allowance is worth.">Highest AA intelligence</span><strong id="score-highest">—</strong></div>
+    <div><span data-tip="Rows whose allowance is measured (the provider publishes it in dollars) or observed (somebody measured it and published the trace). Everything else is derived, chained or modelled — filled in, and labelled.">Rows resting on first-hand figures</span><strong id="score-coverage">—</strong></div>
+  </div>
+  <div class="coverage" id="coverage" aria-hidden="true"></div>
+
+  <div class="tw wide" role="region" aria-label="AI subscription decision table" tabindex="0">
+    <table class="score-table" data-sortable>
+      <caption class="sr-only">AI subscriptions ranked under the selected strategy using Artificial Analysis model data and published plan capacity.</caption>
+      <thead>
+        <tr>
+          <th scope="col" data-tip="Position by AA proxy per dollar across every plan in view, under the selected strategy — delivery ranks each plan on its most-Index-per-task-dollar configuration, planning on its smartest one. Read it with the rung badge on the row: rank 1 on a modelled allowance means &quot;best if the estimate holds&quot;, not &quot;best, proven&quot;." data-num>#</th>
+          <th scope="col" data-tip="The plan and its monthly price. Where no USD price is published, the price itself carries a rung — converted from another currency, or fitted from the allowance.">Subscription</th>
+          <th scope="col" data-tip="Of the models this plan grants, the configuration the selected strategy picks: delivery picks the reasoning level with the most AA Index per dollar of task cost; planning picks the highest AA Index the plan grants, full stop.">Best AA configuration · reasoning</th>
+          <th scope="col" class="num" data-tip="Artificial Analysis Intelligence Index v4.1.1 for that configuration. Higher is smarter.">AA Index</th>
+          <th scope="col" class="num" data-tip="Answer + reasoning tokens AA measured for one evaluated task. Higher means the model is more verbose to reach its score. The subline is AA Index per 10,000 generated tokens — token efficiency of the model, not of the plan. Two values are only comparable within one AA suite.">AA output / task</th>
+          <th scope="col" class="num" data-tip="What one AA-evaluated task costs at the model's published API rates.">AA cost / task</th>
+          <th scope="col" class="num" data-tip="Monthly allowance ÷ AA cost per task. The allowance is resolved on the ladder — measured, observed, derived, chained or modelled — and the range under each figure is the interval that rung carries. Hover a cell for its formula and sources.">Monthly capacity</th>
+          <th scope="col" class="num" data-tip="AA Index × monthly capacity ÷ plan price. Intelligence potential per subscription dollar — unitless, comparison only, and no stronger than the weakest rung feeding it.">AA API-cost proxy / $</th>
+          <th scope="col" data-tip="Provider pricing page, the AA model page, and — where it exists — the documented model list and billing page that verify exact model access.">Sources</th>
+        </tr>
+      </thead>
+      <tbody id="score-rows"></tbody>
+    </table>
+  </div>
+  <p class="note" id="score-note" style="margin-top:12px"></p>
+
+  <details class="glossary">
+    <summary>What every column means, and what it does not mean</summary>
+    <dl>
+      <dt>#</dt>
+      <dd>Position by AA proxy per dollar across every plan in view — all of them, because every plan now
+        resolves to a figure — under the selected strategy. Read the rank together with the rung badge on the
+        row: rank 1 on a <span class="rung measured">measured</span> allowance means “best, on the provider’s
+        own published numbers”; rank 1 on a <span class="rung modelled">modelled</span> one means “best if a
+        plan at this price in this billing class behaves like the plans that do disclose”. Neither means
+        “best plan to buy”.</dd>
+
+      <dt>Strategy</dt>
+      <dd>Two ways to spend the same allowance. Delivery picks, per plan, the configuration with the most AA
+        Index per dollar of task cost — the most intelligence-weighted work per month. Planning picks the
+        smartest configuration the plan grants and shows how many of those tasks the allowance covers. No
+        configuration wins both; that trade-off is the point.</dd>
+
+      <dt>The five rungs</dt>
+      <dd>Every figure on the table says how it was obtained. The ladder runs strongest to weakest, and a
+        figure built on another figure can never outrank the one underneath it:
+        <ul>
+          <li><span class="rung measured">measured</span> the provider publishes the allowance in dollars.
+            No assumption, no interval — eight plans, all of them metered.</li>
+          <li><span class="rung observed">observed</span> a subscriber measured it and published the trace.
+            Two plans, one account each; the interval is what the reports disagree about.</li>
+          <li><span class="rung derived">derived</span> the provider publishes a countable rate of messages
+            or requests, and that rate converts to less than the plan would ordinarily return — so the rate
+            is the binding constraint and becomes the figure.</li>
+          <li><span class="rung chained">chained</span> a ratio the provider prints itself (“5× Pro”,
+            “12× Build”) applied to another plan’s figure. Warp publishes both halves, which is how the
+            chaining is checked against its own arithmetic rather than against itself.</li>
+          <li><span class="rung modelled">modelled</span> nothing published and nobody measured it, so the
+            allowance is fitted from the plans in the same billing class that do disclose. This is an
+            estimate with a stated method and a stated spread — not a measurement, and never evidence that
+            a plan delivers what the row shows.</li>
+        </ul>
+      </dd>
+
+      <dt>Why billing class, and not one fit for everything</dt>
+      <dd>The plans that disclose split cleanly in two. <strong>Metered</strong> plans draw usage down
+        against a credit balance and hand back roughly what you pay — Copilot, Warp, Zed and Replit sit
+        between 0.5× and 2× the price. <strong>Flat</strong> plans charge a fee and impose rate limits, and
+        the two anybody has measured hand back more than twenty times the price to whoever pushes them
+        hardest. A single fit across both would average those into a multiple true of neither, so each
+        class is fitted on its own anchors and every modelled row says which class it inherited.</dd>
+
+      <dt>The interval under every figure</dt>
+      <dd>Not decoration. A wide band <em>is</em> the cell’s main claim: the flat class rests on two
+        reports, so its band is deliberately wide, and any row inheriting it carries that width down the
+        chain. Where a figure is published exactly, the line says so instead of inventing a spread.</dd>
+
+      <dt>Best AA configuration · reasoning</dt>
+      <dd>Providers grant a family of models at several reasoning levels, and the levels differ enormously
+        in cost per task. The strategy toggle picks which one this column shows: delivery picks the reasoning
+        level with the most AA Index per dollar of task cost — rarely the smartest level; planning picks the
+        smartest level the plan grants outright, whatever it costs per task. Two separate statements about
+        what the plan is worth, neither one the best answer it can give you.</dd>
+
+      <dt>Price point, and “best plan at $X”</dt>
+      <dd>Filtering to a price point answers “of the plans costing about this much, which one delivers most
+        per dollar”. Every bracket now has an answer, and most of those answers are modelled — the tile
+        turns amber and says so whenever the leader rests on an estimate rather than a published figure.
+        Highest intelligence is still not best value; it is only the one thing on this table that is
+        measured directly rather than inferred.</dd>
+
+      <dt>AA Index · AA output / task · AA cost / task</dt>
+      <dd>Straight from the Artificial Analysis snapshot, per model configuration: its Intelligence Index,
+        the answer + reasoning tokens it spent on one evaluated task, and what those tokens cost at that
+        model’s published <em>API</em> rates. None of it is measured through the subscription. Where a plan
+        grants a model the snapshot has not scored, the row shows the nearest scored model of the same
+        family and marks the cell <em>sibling model</em>. The subline below the token count is AA Index per
+        10,000 generated tokens — a token efficiency measure specific to that model’s reasoning level.</dd>
+
+      <dt>Monthly capacity</dt>
+      <dd>Monthly allowance ÷ AA cost per task. It answers “how many AA-sized tasks would that allowance
+        buy at API rates”, never “how many requests the provider will actually serve you” — their own
+        credit accounting is different and not public. A published reset rate (“160 messages / 3h”) is
+        treated as a hard ceiling on the month and caps the cell even when it is not what set the figure.</dd>
+
+      <dt>AA API-cost proxy / $</dt>
+      <dd>AA Index × monthly capacity ÷ plan price. Read it as <em>intelligence potential per subscription
+        dollar</em>. The unit is meaningless on its own; only the comparison between two rows carries
+        information, and only then when you have read both rungs. It ignores rate limits, harness overhead,
+        context handling, retries and failed tasks — which is exactly the gap the rest of this page is about.</dd>
+
+      <dt>What is still missing</dt>
+      <dd>Nothing on this table is Layer 2. Not one figure comes from us running the plan and counting what
+        it completed; the strongest evidence here is a provider’s own price list, and the second strongest
+        is two strangers’ screenshots. Filling every cell removed the blanks, not the ignorance — it made
+        the ignorance legible, and put a number on how much of the table it covers.</dd>
+    </dl>
+  </details>
+</section>
+
+<section id="agentic">
+  <span class="eyebrow">Agentic reality check</span>
+  <h2>What would that allowance buy in agentic work?</h2>
+  <p class="lead">
+    The table above prices tasks from a chat-suite snapshot. An agentic coding task — a dozen
+    tool-calling turns over a real repository — costs anywhere from $0.55 to $11.71 at API rates
+    across the scored harnesses, $7–8 on the frontier pairs.
+    Dividing each plan's resolved allowance by the cost of its own shipped agent turns
+    "monthly capacity" into a number you can compare against your sprint board. Theoretical
+    both times: an allowance ÷ cost division, never a measured completion count.
+  </p>
+  <div class="tw" role="region" aria-label="Agentic capacity table" tabindex="0">
+    <table class="score-table agent-table" data-sortable>
+      <caption class="sr-only">Plans whose shipped coding agent was scored by Artificial Analysis, with theoretical monthly agentic capacity.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Subscription</th>
+          <th scope="col">Shipped agent · model</th>
+          <th scope="col" class="num" data-tip="Artificial Analysis Coding Agent Index — DeepSWE, Terminal-Bench v2 and SWE-Atlas-QnA, run through the named harness over APIs. Higher is better.">Agent Index</th>
+          <th scope="col" class="num" data-tip="AA's pay-per-token API cost of one evaluated agentic task, including cache pricing where applicable. Not a subscription price.">API $ / agentic task</th>
+          <th scope="col" class="num" data-tip="Average agent wall time per evaluated task.">Wall time</th>
+          <th scope="col" class="num" data-tip="Monthly allowance (resolved on the ladder — hover for rung, formula and band) ÷ the agentic cost per task. A theoretical ceiling, not a measured throughput.">Agentic tasks / month</th>
+        </tr>
+      </thead>
+      <tbody id="agent-rows"></tbody>
+    </table>
+  </div>
+  <p class="note" id="agent-note" style="margin-top:12px"></p>
+</section>
+
+<section id="gap">
+  <span class="eyebrow">The gap</span>
+  <h2>API pricing is transparent. Subscription capacity isn’t.</h2>
+  <div class="cols">
+    <div class="panel">
+      <span class="kicker">Pay-as-you-go</span>
+      <dl class="gap-api">
+        <dt>Input</dt><dd>$3.00 / 1M tokens</dd>
+        <dt>Cached read</dt><dd>$0.30 / 1M tokens</dd>
+        <dt>Output</dt><dd>$15.00 / 1M tokens</dd>
+        <dt>Billing granularity</dt><dd>per token</dd>
+      </dl>
+      <p class="note">Illustrative frontier-tier pricing. The point is the shape, not the digits:
+        every quantity is published, dated and checkable.</p>
+    </div>
+    <div class="panel">
+      <span class="kicker">Subscription</span>
+      <dl class="gap-sub">
+        <dt>Price</dt><dd>$20.00 / month</dd>
+        <dt>Included compute</dt><dd class="empty">“Usage limits apply”</dd>
+        <dt>Reset window</dt><dd class="empty">partially documented</dd>
+        <dt>Billing granularity</dt><dd class="empty">—</dd>
+      </dl>
+      <p class="note">That is, in most cases, genuinely all of it.</p>
+    </div>
+  </div>
+  <p>
+    You can compare API prices down to a fraction of a cent. For subscriptions used by millions
+    of people every day, we often cannot answer how much compute the plan actually contains.
+  </p>
+</section>
+
+<section id="wrong-metric">
+  <span class="eyebrow">The wrong metric</span>
+  <h2>A token is not what you’re buying.</h2>
+  <p>What a subscription actually sells you is a bundle:</p>
+  <p>
+    access to a specific set of models · an implicit pool of compute · rate-limit windows ·
+    a context budget · tools · caching behaviour · reasoning effort · a harness ·
+    sometimes web search, code execution or agents.
+  </p>
+  <p>
+    Two models can burn wildly different amounts of compute to succeed at exactly the same task.
+    A model that is 20% cheaper per token and takes three attempts is not cheaper.
+  </p>
+  <p class="lead"><strong>Cheapest tokens ≠ cheapest useful work.</strong></p>
+</section>
+
+<section id="metrics">
+  <span class="eyebrow">The unit we propose</span>
+  <h2>Measure work, not tokens.</h2>
+  <div class="cols-4">
+    <div class="metric">
+      <h3>Successful tasks / subscription</h3>
+      <p>How many tasks complete correctly before a meaningful limit is hit.</p>
+    </div>
+    <div class="metric">
+      <h3>Cost / successful task</h3>
+      <p><code>subscription price ÷ successful tasks</code></p>
+    </div>
+    <div class="metric">
+      <h3>PAYG-equivalent value</h3>
+      <p>What the same runs would have cost at published API prices.</p>
+    </div>
+    <div class="metric">
+      <h3>Break-even utilization</h3>
+      <p>How much of the allowance you must actually use before the plan beats PAYG.</p>
+    </div>
+  </div>
+  <p class="note">
+    Failed tasks stay in the denominator of consumption and out of the numerator of value.
+    A plan that lets you attempt more and finish fewer is not a better plan.
+  </p>
+</section>
+
+<section id="community-measurements">
+  <span class="eyebrow">Community measurements</span>
+  <h2>What users can observe when providers do not publish the allowance.</h2>
+  <p>
+    These are sourced user measurements, not provider commitments and not Limits Apply Layer 2
+    results. They are kept outside the decision ranking. Their job is to expose the best available
+    evidence — including where a raw-token answer is not defensible.
+  </p>
+  <div class="tw" role="region" aria-label="Community measurements of AI subscription allowances" tabindex="0">
+    <table class="community-table" data-sortable>
+      <caption class="sr-only">User-reported measurements of opaque AI subscription allowances</caption>
+      <thead>
+        <tr><th scope="col">Plan · configuration</th><th scope="col">Observed window</th><th scope="col" data-num>Equivalent for 1%</th><th scope="col">Evidence</th><th scope="col">Status</th></tr>
+      </thead>
+      <tbody id="community-measurement-rows"></tbody>
+    </table>
+  </div>
+  <p class="note" style="margin-top:12px">
+    <strong>Raw tokens are workload-dependent.</strong> Cached input, uncached input, cache writes,
+    output and reasoning carry different prices or internal weights. A per-percent raw-token figure
+    is valid only for the observed mix and window.
+  </p>
+</section>
+
+<section id="break-even">
+  <span class="eyebrow">Subscription vs API</span>
+  <h2>Where a subscription starts winning.</h2>
+  <p>
+    Under PAYG, task number 400 costs the same as task number 1. Under a subscription, every
+    additional task inside the allowance drives the effective cost per task down — and every
+    unused unit of allowance is money spent on nothing.
+  </p>
+  <figure>
+    <svg id="chart-breakeven" viewBox="0 0 700 340" role="img"
+         aria-label="Effective cost per useful task against subscription utilization, showing a flat pay-as-you-go line and a falling subscription curve crossing at roughly 29 percent utilization."></svg>
+    <figcaption>
+      Illustrative — not benchmark data. Assumes a $20 plan whose allowance covers 200 tasks at
+      full utilization, against $0.35/task at API prices. The crossing point is the number the
+      benchmark exists to measure per plan and per workload.
+    </figcaption>
+  </figure>
+  <p class="pull" style="margin-top:28px">
+    A subscription worth $2,000 of API compute is worth $0 of API compute if you use it twice a month.
+  </p>
+</section>
+
+<section id="frontier">
+  <span class="eyebrow">Intelligence × efficiency</span>
+  <h2>The smartest model is not necessarily the best deal.</h2>
+  <p>
+    Ranking one to ten hides the trade-off. A scatter doesn’t. Points on the frontier are the
+    ones nothing else beats on both axes; points inside it are strictly worse than something
+    else — more expensive <em>and</em> less capable.
+  </p>
+  <figure>
+    <svg id="chart-pareto" viewBox="0 0 700 400" role="img"
+         aria-label="Scatter plot of AA Coding Agent Index against API cost per agentic task, with a Pareto frontier joining the non-dominated options."></svg>
+    <figcaption>Artificial Analysis Coding Agent Index vs API cost per agentic task ·
+snapshot 2026-08-15 — agents over APIs, not subscription quotas.
+Dominated points list what dominates them below.</figcaption>
+  </figure>
+  <div class="tw" style="margin-top:20px">
+    <table id="dominated-table" data-sortable>
+      <thead><tr><th>Dominated option</th><th class="num">API $ / agentic task</th><th class="num">Agent Index</th><th>Dominated by</th></tr></thead>
+      <tbody id="dominated-rows"></tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:40px">Illustrative: why the dimensions have to be combined</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Model</th><th class="num">Success rate</th><th class="num">Avg. tokens</th><th class="num">Tasks before limit</th><th class="num">Price</th><th class="num">Cost / successful task</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td class="num">82%</td><td class="num">1.8M</td><td class="num">90</td><td class="num">$20</td><td class="num">$0.27</td></tr>
+        <tr><td>B</td><td class="num">77%</td><td class="num">700k</td><td class="num">280</td><td class="num">$20</td><td class="num">$0.09</td></tr>
+        <tr><td>C</td><td class="num">88%</td><td class="num">3.1M</td><td class="num">45</td><td class="num">$20</td><td class="num">$0.51</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="margin-top:10px"><strong>Illustrative example — not benchmark data.</strong>
+    C is the most capable model and the worst deal at this price point. B is the least capable and
+    finishes the most work per dollar. Neither fact is visible from an intelligence score or a token price.</p>
+</section>
+
+<section id="harness">
+  <span class="eyebrow">Harness</span>
+  <h2>You’re not just benchmarking a model.</h2>
+  <p>
+    Nobody buys “GPT-5.x”. They buy ChatGPT, or Codex, or Claude Code, or an IDE plugin —
+    different harnesses wrapped around overlapping models.
+  </p>
+  <p>
+    The harness decides how many calls get made, how much context is resent, what gets cached,
+    which tools fire, how retries are handled, and how often the task actually finishes. Those
+    choices move token consumption by an order of magnitude and move success rate by double digits.
+  </p>
+  <p class="lead">So the unit of comparison is <strong>plan + model + harness + workload</strong> — never a model alone.</p>
+</section>
+
+<section id="methodology">
+  <span class="eyebrow">Methodology</span>
+  <h2>No proprietary magic score.</h2>
+  <p>
+    We keep intelligence, consumption and economics separate, and we publish the raw dimensions.
+    There is no <code>0.43 × intelligence + 0.27 × speed + 0.30 × value</code> here — that kind of
+    formula hides the trade-off it claims to resolve.
+  </p>
+  <p>
+    The decision table uses one transparent Layer 1 proxy: theoretical AA-equivalent intelligence
+    potential per subscription dollar. “Delivered” is reserved for our Layer 2 measurements. The
+    proxy’s formula, raw dimensions and eligibility tiers stay visible. The
+    Pareto frontier remains the cross-check: if the yield ranking repeatedly contradicts it, the
+    ranking is wrong — not the frontier.
+  </p>
+  <p class="lead"><strong>A composite score is a lens, not a verdict.</strong></p>
+
+  <h3 style="margin-top:36px">Every test follows the same loop</h3>
+  <ol>
+    <li>Start from a fresh usage window.</li>
+    <li>Run a standardized workload.</li>
+    <li>Record model, harness, tokens where observable, cache usage, runtime, outcome, rate-limit consumption, errors and retries.</li>
+    <li>Score the result: <strong>Pass</strong> / <strong>Partial</strong> / <strong>Fail</strong>. No three-decimal scores on a qualitative judgement.</li>
+    <li>Repeat until the relevant subscription limit is reached.</li>
+    <li>Compute the API-equivalent cost of the same runs where prices allow.</li>
+  </ol>
+
+  <h3 style="margin-top:36px">Four things that are constantly confused</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Notion</th><th>Unit</th><th>Example</th><th>Tells you nothing about</th></tr></thead>
+      <tbody>
+        <tr><td>Context limit</td><td>tokens / request</td><td class="num">1M tokens</td><td>what you’re allowed to consume</td></tr>
+        <tr><td>Consumption quota</td><td>tokens, messages or credits / window</td><td class="num">300 msg / 5h</td><td>how big one request can be</td></tr>
+        <tr><td>Inference speed</td><td>tokens / second</td><td class="num">84 tok/s</td><td>cost</td></tr>
+        <tr><td>Tokens per task</td><td>tokens / task</td><td class="num">12,400 out</td><td>the capacity of the plan</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lead" style="margin-top:16px">
+    A 1M token context window does not mean the plan lets you consume 1M tokens per request, repeatedly.
+  </p>
+
+  <h3 style="margin-top:36px">Two layers, never mixed</h3>
+  <div class="cols">
+    <div class="panel">
+      <span class="kicker">Layer 1 — Derived</span>
+      <p class="note" style="margin-top:8px">
+        Aggregated from third-party evaluations and published pricing and quota documentation.
+        Broad coverage, cheap, fully sourced — and structurally unable to say
+        “this plan completes N tasks”. It measures models over APIs, not subscriptions.
+      </p>
+    </div>
+    <div class="panel">
+      <span class="kicker">Layer 2 — Measured</span>
+      <p class="note" style="margin-top:8px">
+        Produced by our own runs against real subscriptions. Narrow, slow, expensive —
+        and the only source of a claim about what a plan delivers.
+      </p>
+    </div>
+  </div>
+  <p class="lead"><strong>Layer 1 makes the map. Layer 2 makes the claim.</strong></p>
+
+  <h3 style="margin-top:36px">Confidence, stated per cell</h3>
+  <p class="note">
+    <span class="badge high">High</span> published explicitly, in unambiguous units ·
+    <span class="badge medium">Medium</span> published in fuzzy units (“messages”, “credits”) requiring a documented conversion ·
+    <span class="badge estimated">Estimated</span> derived from observation or partial documentation ·
+    <span class="badge">Unknown</span> not published, not observed — the cell stays empty.
+  </p>
+  <p class="note">
+    We never invent a token quota a provider doesn’t publish. An empty cell is information;
+    an unlabelled estimate is a lie. Every derived cell exposes its formula, its numeric
+    assumptions, the source of the raw quota, the verification date and the confidence level.
+  </p>
+  <p class="note">
+    Third-party model evaluations are an <strong>input, not ground truth</strong>: their
+    methodological biases become ours, and a change of suite or version breaks historical
+    comparability. Snapshots are versioned and kept, never overwritten.
+  </p>
+</section>
+
+<section id="limitations">
+  <span class="eyebrow">Limitations</span>
+  <h2>Subscription limits are messy. We don’t pretend otherwise.</h2>
+  <p>
+    Providers can change caps, time windows, which model you actually get, throttling policy,
+    the amount of compute allocated, and the limits themselves during periods of high demand —
+    all without announcement.
+  </p>
+  <p>Which is why:</p>
+  <ul>
+    <li><strong>Every result is timestamped.</strong></li>
+    <li><strong>We report measured ranges when a single number would be misleading.</strong>
+      Not “ChatGPT Plus = 183 million tokens”, but “under workload X, during test period Y, the
+      plan completed 142–167 successful tasks before hitting its weekly constraint;
+      equivalent API cost $84–$103.”</li>
+    <li>Snapshots older than 30 days are marked <code>stale</code> in the header. The freshness
+      figure is the <em>oldest</em> verification in the table, not the newest.</li>
+    <li>Corrections are logged publicly. Nothing is silently overwritten.</li>
+  </ul>
+  <h3 style="margin-top:32px">Open risks, stated before launch</h3>
+  <ul>
+    <li><strong>Terms of service.</strong> Deliberately consuming a plan to exhaustion for measurement may fall under anti-abuse or anti-automation clauses. Each provider’s terms are being read and our position documented before any Layer 2 run against them.</li>
+    <li><strong>Cost.</strong> Layer 2 means paying for every plan tested, every month, indefinitely. That is why the MVP is three plans and not thirty.</li>
+    <li><strong>Variance.</strong> A single run measures nothing. Minimum run counts are fixed per task and variance is published.</li>
+    <li><strong>Non-determinism.</strong> Limits vary by hour, load, account age and region. A quota measured once is not a quota.</li>
+    <li><strong>Grading.</strong> Pass / Partial / Fail is subjective on research and knowledge work. A sample is double-graded and the inter-rater agreement rate is published.</li>
+  </ul>
+  <p class="note">These are not disclaimers buried at the bottom. They are the reason the project exists.</p>
+</section>
+
+<section id="portfolio">
+  <span class="eyebrow">Portfolio</span>
+  <h2>Don’t pick one AI. Optimize your stack.</h2>
+  <p>Monthly budget:</p>
+  <div class="budgets" id="budgets" role="group" aria-label="Monthly budget"></div>
+  <div class="panel">
+    <ul class="alloc" id="alloc"></ul>
+    <p class="note" id="alloc-note" style="margin:0"></p>
+  </div>
+  <p class="note" style="margin-top:16px">
+    <strong>Illustrative allocation — not a recommendation.</strong> Prices are real; the coverage
+    claim is what Layer 2 has to earn.
+  </p>
+  <p style="margin-top:26px">
+    The allocations above were written by hand. The ledger can do better than that — not by
+    guessing coverage, but by refusing to let two plans on the same surface count twice.
+  </p>
+  <button class="btn" id="budget-open" type="button">Build it from the ledger →</button>
+  <h3 style="margin-top:32px">Why a naive optimizer is worse than none</h3>
+  <p>
+    Two subscriptions covering the same workload <strong>do not add up — they substitute</strong>.
+    A naive optimizer will always recommend stacking $20 plans. Stacking is not always naive — the
+    measured flat plans return the same multiple of price at every tier up to $100 — but whether
+    two $20 units of work equal one $40 unit of yours is exactly the substitution question only
+    measurements can close. A real one has to model coverage per workload rather than the sum of
+    allowances, substitutability between plans on the same workload, the non-zero cost of switching
+    tools mid-task, and the fact that an unconsumed quota is worth exactly zero. The output is a
+    coverage map, not a total of notional dollars.
+  </p>
+
+  <h3 style="margin-top:32px">What’s actually behind these numbers</h3>
+  <div class="cols">
+    <div class="panel">
+      <span class="kicker">Shipped — computed from data already in the repo</span>
+      <ul>
+        <li>The <a href="#benchmark">global ranking</a>, cross-checked against its own
+          <a href="#frontier">Pareto frontier</a> — a yield ranking that contradicts it gets
+          flagged, not trusted.</li>
+        <li>The <a href="./local.html#trade">local ceiling</a>, and what running there costs you
+          in intelligence against the smartest model a subscription grants.</li>
+        <li>Combinations across <strong>subscriptions</strong> — what the button above builds:
+          one plan per vendor, one per harness, and headroom capped at what you say your month
+          needs, so a second plan on an already-covered workload adds nothing.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <span class="kicker">Not shipped — local hours and PAYG dollars in the same combination</span>
+      <p>
+        The builder above can’t add a local machine or a pay-as-you-go budget as a member of a
+        combination, because nothing here prices them the way it prices a subscription. A local
+        member needs a local dollars-per-task figure — energy plus amortized hardware — and
+        neither lives in the data this site ships. A PAYG member needs a rate per model; the one
+        rate this site publishes is a single blended figure used for one worked example on the
+        ledger, not a price table you could plug a real model into.
+      </p>
+      <p class="note">Tracked on the <a href="./docs/index.html#roadmap">roadmap</a>, alongside
+        every other gap this site states rather than papers over.</p>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <span class="eyebrow">Why this exists</span>
+  <h2>We couldn’t find the answer, so we’re measuring it.</h2>
+  <p>
+    There are dozens of sites comparing API token prices and model benchmark scores. We couldn’t
+    find a reliable answer to a much simpler question:
+  </p>
+  <p class="lead"><strong>If I spend $20 on an AI subscription, how much useful work do I actually get?</strong></p>
+  <p>So we’re measuring it.</p>
+  <p class="note">
+    In some workloads, subscriptions may deliver substantially more compute per dollar than
+    equivalent API usage. The problem is that almost nobody measures it systematically. We are
+    not going to tell you subscriptions are 20× cheaper than APIs — we don’t know that, and
+    neither does anyone else.
+  </p>
+</section>
+
+<section id="ledger">
+  <span class="eyebrow">Layer 1 — the ledger</span>
+  <h2>Everyone publishes a price. Almost nobody publishes what it buys.</h2>
+  <p class="lead">
+    Every consumer AI subscription in scope, priced. Then the same plans measured against a
+    harder question: does the provider tell you enough to work out what you get for the money?
+  </p>
+
+  <div class="staircase" id="staircase"></div>
+
+  <p class="note" style="margin-top:18px">
+    Each step is a stricter question about the same <span class="tot"></span> plans. A price is easy. A number
+    attached to the allowance is rarer. A number in a unit that converts to compute is nearly
+    extinct. A measurement of work actually completed does not exist — not here, and not
+    anywhere else public.
+  </p>
+
+  <h3 id="ledger-title" style="margin-top:48px;font-size:15px"></h3>
+  <p class="note">
+    Filled squares are things the provider publishes. Hollow squares are things it does not.
+    The rightmost column is the one that would let you compare a subscription to the API — and
+    ten rows in this table can fill it.
+  </p>
+
+  <div class="score-controls" id="ledger-controls">
+    <span class="kicker">Show</span>
+    <button type="button" data-value="all" aria-pressed="true">All</button>
+    <button type="button" data-value="conv" aria-pressed="false">Converts to $</button>
+    <button type="button" data-value="num" aria-pressed="false">Publishes a number</button>
+    <button type="button" data-value="none" aria-pressed="false">Publishes nothing</button>
+  </div>
+
+  <div class="tw wide" role="region" aria-label="Published disclosure per subscription plan" tabindex="0">
+    <table class="ledger" data-sortable>
+      <caption class="sr-only">Every plan in scope, with what its provider publishes about the allowance</caption>
+      <thead>
+        <tr>
+          <th scope="col">Plan</th>
+          <th scope="col" class="barcell" data-tip="The published USD price, or — for the three plans that publish none — a price converted from another currency or fitted back from the allowance.">Price / month</th>
+          <th scope="col">What the provider says you get</th>
+          <th scope="col" class="disc" data-tip="Is a USD price published?">Price</th>
+          <th scope="col" class="disc" data-tip="Is any number attached to the allowance?">Number</th>
+          <th scope="col" class="disc" data-tip="Is that number in a unit that converts to compute?">Converts</th>
+          <th scope="col" class="disc" data-tip="Has anyone published a trace of work completed before the limit bit?">Measured</th>
+          <th scope="col" class="r" data-tip="What the monthly allowance is worth in API dollars, resolved on the provenance ladder. Every plan carries one; the badge says how it was obtained and the line under it carries the interval.">API-$ equiv.</th>
+          <th scope="col">Confidence</th>
+        </tr>
+      </thead>
+      <tbody id="ledger-rows"></tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <span><i class="f-signal"></i>Allowance published in dollars</span>
+    <span><i class="f-derived"></i>Countable rate — ceiling derived</span>
+    <span><i class="f-flat"></i>Price only</span>
+    <span><i class="f-hollow"></i>Not published</span>
+  </div>
+  <p class="note" id="tally" style="margin-top:12px"></p>
+</section>
+
+<section id="the-four">
+  <span class="eyebrow">The ten that convert</span>
+  <h2>What a plan is worth, where the maths is allowed to run.</h2>
+  <p>
+    Eight of the ten need no assumption at all: GitHub, Warp, Zed and Replit each publish the
+    allowance in dollars, so the subscription price and the thing you are buying are quoted in
+    the same unit. That is the entire trick, and all four of them resell API compute for a
+    living. Not one plan that sells access to a model family does it.
+  </p>
+
+  <div class="four" id="four"></div>
+
+  <div class="callout">
+    <span class="eyebrow">The other two are ceilings, not values</span>
+    <p>
+      ChatGPT Plus publishes a countable rate — <span class="mono">160 messages / 3h</span> — and
+      the Qwen Coding Plan publishes <span class="mono">90,000 requests / month</span>. Both are
+      convertible, but only into an upper bound. Drain every one of Plus’s eight windows a day,
+      every day of an average month, and you would consume <span class="mono">38,960</span> tasks
+      worth about <span class="mono derived">$1,636</span> at API rates. Nobody is awake for 244
+      windows. Treat it as the ceiling of what the plan could be worth, and note that the ceiling
+      is over 80× the price — which is why providers stop publishing numbers.
+    </p>
+  </div>
+
+  <div class="assume">
+    <p>
+      A derived figure is only honest if you can move it yourself. Every
+      <span class="mono derived">ceiling</span> above rests on exactly two numbers — the size of a
+      task and the rate it is priced at:
+    </p>
+    <div class="formula">
+      TASK = <code>12,000</code> input + <code>1,500</code> output tokens<br>
+      RATE = <code>$2.00</code> / M in · <code>$12.00</code> / M out<br>
+      <br>
+      cost per task &nbsp;= 12,000 × $2/M + 1,500 × $12/M = <strong>$0.042</strong><br>
+      tasks / month &nbsp;= 160 × (24 ÷ 3) × 30.4375 = <strong>38,960</strong><br>
+      ceiling &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 38,960 × $0.042 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>$1,636</strong>
+    </div>
+    <p class="note">
+      A mid-sized agentic turn, priced at mid-tier frontier rates. Halve the task size and the
+      ceiling halves. <span class="mono">30.4375</span> is <span class="mono">365.25 ÷ 12</span>,
+      the average month, so a short month is not quietly billed as a long one. No other figure in
+      the ledger is derived from anything.
+    </p>
+  </div>
+</section>
+
+<section id="ledger-gaps">
+  <span class="eyebrow">Reading the ledger</span>
+  <h2>What is missing, and why it stays missing.</h2>
+  <div class="cols-4">
+    <div class="metric">
+      <h3>Filled is not known</h3>
+      <p>
+        Every cell now carries a figure, and most carry one nobody published: fitted from the
+        plans in the same billing class that do. The rung badge is the whole point — an
+        <em>unlabelled</em> estimate would make the table look complete and make it worthless. A
+        labelled one tells you exactly how far to trust the row.
+      </p>
+    </div>
+    <div class="metric">
+      <h3>Prices move in weeks</h3>
+      <p>
+        Google’s Ultra tier fell from $249.99 to $100 in May. Windsurf stopped existing —
+        windsurf.com now redirects to Devin. Copilot switched from counting premium requests to
+        quoting dollars. Every row carries the date it was checked.
+      </p>
+    </div>
+    <div class="metric">
+      <h3>Half the vendors block the check</h3>
+      <p>
+        OpenAI, xAI and Perplexity all refused automated requests to their own pricing pages during
+        this pass. Those rows were priced from third-party trackers and are capped at
+        <span class="badge estimated">estimated</span> for that reason alone.
+      </p>
+    </div>
+    <div class="metric">
+      <h3>The last column is the product</h3>
+      <p>
+        “Measured” is hollow on all <span class="tot"></span> rows because measuring it means running real
+        workloads against real subscriptions until the limits bite. That is the benchmark. This
+        table is only the map of what nobody has measured yet.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. Layer 1 is public pricing and third-party model evaluations, and every figure carries the rung that says how it was obtained. Those evaluations are credited and treated as an input, not as ground truth.</p>
+      </div>
+
+      <nav aria-label="The ledger">
+      <h3>The ledger</h3>
+      <ul>
+        <li><a href="#benchmark">Benchmark</a></li>
+        <li><a href="#agentic">Agentic work</a></li>
+        <li><a href="#break-even">Break-even</a></li>
+        <li><a href="#frontier">Budget frontier</a></li>
+        <li><a href="#portfolio">Optimise the stack</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#limitations">Limitations</a></li>
+        <li><a href="./gate.html">Gate</a></li>
+        <li><a href="./docs/index.html">Docs</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="Local">
+      <h3>Local</h3>
+      <ul>
+        <li><a href="./local.html#machine">Your machine</a></li>
+        <li><a href="./local.html#tier">What it reaches</a></li>
+        <li><a href="./local.html#trade">The trade</a></li>
+        <li><a href="#community-measurements">Community measurements</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">Artificial Analysis</a></li>
+        <li><a href="https://models.dev" target="_blank" rel="noopener">models.dev</a></li>
+        <li><a href="https://openrouter.ai/models" target="_blank" rel="noopener">OpenRouter</a></li>
+        <li><a href="https://opencode.ai" target="_blank" rel="noopener">OpenCode</a></li>
+        <li><a href="https://huggingface.co/models" target="_blank" rel="noopener">Hugging Face</a></li>
+        <li><a href="https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml" target="_blank" rel="noopener">ECB reference rates</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<dialog id="budget-modal" aria-labelledby="budget-title">
+  <form method="dialog" class="budget-dismiss">
+    <button id="budget-close" value="close" aria-label="Close">✕</button>
+  </form>
+
+  <span class="eyebrow">Budget frontier</span>
+  <h2 id="budget-title">Nothing here wins on all three.</h2>
+  <p>
+    What it costs, the ceiling it reaches, and how much of your month it covers. Raise the ceiling
+    and you buy fewer tasks at it; cover the whole month and you drop the ceiling. Every mark below
+    is a combination nothing else beats on all three at once — which is why there is more than one.
+  </p>
+
+  <div class="budget-controls">
+    <label for="budget-range">
+      <span class="kicker">Monthly budget</span>
+      <output id="budget-value" for="budget-range"></output>
+    </label>
+    <input type="range" id="budget-range" min="5" max="400" step="5" value="70"
+           aria-label="Monthly budget in dollars">
+
+    <label for="demand-range">
+      <span class="kicker">Your month, in modelled tasks</span>
+      <output id="demand-value" for="demand-range"></output>
+    </label>
+    <input type="range" id="demand-range" min="20" max="2000" step="20" value="200"
+           aria-label="Monthly workload in modelled tasks">
+  </div>
+
+  <svg id="chart-frontier" viewBox="0 0 620 196" role="img"
+       aria-label="Affordable combinations plotted by monthly price against the AA Index ceiling they reach. The larger the mark, the more of your stated month it covers."></svg>
+  <p class="note chart-key">
+    Every mark is a combination nothing else beats on price, ceiling and coverage at once.
+    <strong>Bigger means more of your month covered</strong> — a small mark high on the chart is a
+    good model you would run out of.
+  </p>
+
+  <div class="budget-results" id="budget-results" aria-live="polite"></div>
+  <p class="note budget-slack" id="budget-slack"></p>
+
+  <p class="note">
+    <strong>Ceilings, not values — and not a recommendation.</strong> Prices are real. Allowances
+    come off the provenance ladder and each combination carries the weakest rung in it. Headroom is
+    what the published allowances <em>could</em> cover in the month you set above; it is never a
+    count of tasks a provider will actually serve you. A combination reaching
+    <span id="budget-best-aa"></span> on the AA Index says what its best model scored on someone
+    else's suite, not what it will finish for you.
+  </p>
+  <p class="note">
+    <strong>One plan per vendor, one per harness.</strong> Two subscriptions covering the same
+    workload do not add up — they substitute. That is why no combination here stacks two tiers of
+    the same product, and why a plan added to a workload you have already covered shows zero extra
+    headroom: an unconsumed quota is worth exactly zero. What this still does not model is coverage
+    <em>per workload</em> — whether the two surfaces you bought are good at different things is a
+    Layer 2 measurement, and none exist yet.
+  </p>
+  <p class="note">
+    Drawn from the plans carrying a model mapping. No index could honestly be attached to these,
+    so they are absent rather than assumed: <span id="budget-unmapped"></span>.
+  </p>
+</dialog>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

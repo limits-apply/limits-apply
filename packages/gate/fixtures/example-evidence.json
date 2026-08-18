@@ -1,0 +1,49 @@
+{
+  "kind": "evidence",
+  "version": "example-v1",
+  "retrievedAt": "2026-08-18",
+  "candidates": [
+    {
+      "id": "example/cheap-fast",
+      "model": "example-cheap-fast",
+      "provider": "example",
+      "endpoint": "https://example.invalid/v1",
+      "failureDomain": "example",
+      "billing": "api",
+      "priceUsd": { "value": 0, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "allowanceUsd": { "value": null, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "inputRateUsdPerMillion": { "value": 0.5, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "cachedInputRateUsdPerMillion": { "value": 0.25, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "outputRateUsdPerMillion": { "value": 1.5, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "intelligence": { "value": 50, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "speed": { "value": 120, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "compatible": true,
+      "identityWorkaround": false,
+      "regions": ["global"],
+      "credentials": [],
+      "concurrency": 4,
+      "roles": ["build", "plan"]
+    },
+    {
+      "id": "example/frontier-strong",
+      "model": "example-frontier-strong",
+      "provider": "example",
+      "endpoint": "https://example.invalid/v1",
+      "failureDomain": "example",
+      "billing": "api",
+      "priceUsd": { "value": 0, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "allowanceUsd": { "value": null, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "inputRateUsdPerMillion": { "value": 3, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "cachedInputRateUsdPerMillion": { "value": 1.5, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "outputRateUsdPerMillion": { "value": 15, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "intelligence": { "value": 80, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "speed": { "value": 60, "rung": "modelled", "source": "https://example.invalid/pricing", "verified": "2026-08-18" },
+      "compatible": true,
+      "identityWorkaround": false,
+      "regions": ["global"],
+      "credentials": [],
+      "concurrency": 2,
+      "roles": ["build", "plan"]
+    }
+  ]
+}

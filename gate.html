@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gate — the verdict, running on your machine</title>
+<meta name="description" content="Gate is the local half of Limits Apply: it turns the published verdict into two stable aliases, build and plan, behind a loopback LiteLLM proxy — validated before activation.">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<link rel="stylesheet" href="/src/styles/parts/gate.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<header>
+  <div class="hbar">
+    <a class="brand" href="./index.html#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="./index.html">Home</a>
+      <a href="./local.html">Local</a>
+      <a href="./gate.html" aria-current="page">Gate</a>
+      <a href="./docs/index.html">Docs</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-pressed="false"
+            aria-label="Switch to the dark theme">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+        <path d="M16.4 12.7A7.1 7.1 0 0 1 7.3 3.6a7.1 7.1 0 1 0 9.1 9.1Z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <span class="eyebrow">The local half</span>
+  <h1>Two aliases: <span class="amt">build</span> and <span class="amt">plan</span>.</h1>
+  <p class="lead">
+    The site explains the verdict. Gate executes it — a TypeScript CLI that generates a local
+    LiteLLM configuration, points OpenCode at it, and keeps both aliases resolving to whatever
+    currently wins.
+  </p>
+  <p class="lead">
+    Neither half recreates the other's ranking. Gate consumes the same verdict the page renders.
+  </p>
+  <div class="cta">
+    <a class="btn" href="#install">Install it</a>
+    <a class="btn ghost" href="./index.html#benchmark">Back to the ledger</a>
+  </div>
+</section>
+
+<section id="install">
+  <span class="eyebrow">Install</span>
+  <h2>Four files, no secrets.</h2>
+  <p>
+    Gate keeps everything it owns under a single root directory. Three of those files are
+    outputs; one of them is yours.
+  </p>
+  <div class="panel">
+    <dl class="fields">
+      <dt>profile.json</dt><dd>Your local overlay. The only file you edit.</dd>
+      <dt>verdict.json</dt><dd>The verdict currently active on this machine.</dd>
+      <dt>litellm.yaml</dt><dd>Generated proxy configuration — an output, never a setting.</dd>
+      <dt>audit.jsonl</dt><dd>One line per transition: activation, no-op, failure, rollback.</dd>
+    </dl>
+  </div>
+  <p class="note">
+    Provider secrets never enter any of these files. Gate records credential <em>names</em> and
+    whether they are available; the values stay in your environment or secret store, and nothing
+    published here — this page included — can read them.
+  </p>
+  <p>
+    This page is the narrative: why two aliases, the audit model, the recovery argument. The
+    install steps, the full command reference and a runnable quickstart live in
+    <a href="./docs/index.html">the docs</a>.
+  </p>
+</section>
+
+<section id="aliases">
+  <span class="eyebrow">Stable aliases</span>
+  <h2>Two names that outlive the models behind them.</h2>
+  <p>
+    <code>build</code> and <code>plan</code> are stable, periodically recomputed aliases — not
+    per-request routing rules. When the verdict changes, the alias keeps its name and changes
+    what it resolves to, so nothing in your editor configuration has to move.
+  </p>
+  <div class="cols">
+    <div class="panel">
+      <span class="kicker">The proxy</span>
+      <dl class="fields">
+        <dt>Address</dt><dd><code>http://127.0.0.1:4000</code></dd>
+        <dt>Master key</dt><dd>read from <code>LITELLM_MASTER_KEY</code></dd>
+        <dt>Aliases</dt><dd><code>build</code> · <code>plan</code>, plus hidden role fallbacks</dd>
+      </dl>
+      <p class="note">
+        LiteLLM binds to loopback. A configuration that binds anywhere else fails validation
+        before it can be activated.
+      </p>
+    </div>
+    <div class="panel">
+      <span class="kicker">OpenCode fields Gate owns</span>
+      <dl class="fields">
+        <dt>provider.LIMITSAPPLY</dt><dd>an OpenAI-compatible provider at <code>http://127.0.0.1:4000/v1</code></dd>
+        <dt>model</dt><dd><code>LIMITSAPPLY/build</code></dd>
+        <dt>mode.build.model</dt><dd><code>LIMITSAPPLY/build</code></dd>
+        <dt>mode.plan.model</dt><dd><code>LIMITSAPPLY/plan</code></dd>
+      </dl>
+      <p class="note">
+        Every other field in your OpenCode configuration is left exactly as it was, including the
+        rest of <code>mode.build</code> and <code>mode.plan</code>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="profile">
+  <span class="eyebrow">Local profile</span>
+  <h2>The global verdict is the default. Your profile is the overlay.</h2>
+  <p>
+    With no local configuration at all, Gate runs the published <code>global-v1</code> workload —
+    the same assumptions the ledger prints:
+  </p>
+  <div class="panel">
+    <dl class="fields">
+      <dt>Monthly budget</dt><dd>$20</dd>
+      <dt>Turns per month</dt><dd>100</dd>
+      <dt>Tokens per turn</dt><dd>12,000 in · 1,500 out</dd>
+      <dt>Assumed cache discount</dt><dd>none</dd>
+      <dt>Minimum concurrency</dt><dd>2</dd>
+      <dt>Intelligence floor</dt><dd>45</dd>
+    </dl>
+  </div>
+  <p>Four fields in <code>profile.json</code> overlay that workload, and none of them are uploaded:</p>
+  <div class="panel">
+    <dl class="fields">
+      <dt>monthlyBudgetUsd</dt><dd>What you are actually willing to spend each month.</dd>
+      <dt>minimumConcurrency</dt><dd>How many requests a candidate must sustain to be eligible here.</dd>
+      <dt>region</dt><dd>Where you are, which decides what is available to you at all.</dd>
+      <dt>credentialNames</dt><dd>Which provider credentials exist on this machine — names only, never values.</dd>
+    </dl>
+  </div>
+  <p class="note">
+    An overlaid workload carries its own identity, <code>global-v1+local</code>, so a personalised
+    verdict is never mistaken for the published one — in the audit log or anywhere else.
+  </p>
+</section>
+
+<section id="update">
+  <span class="eyebrow">Update status</span>
+  <h2>Three outcomes, all of them logged.</h2>
+  <div class="panel">
+    <dl class="fields">
+      <dt>noop</dt><dd>The new verdict is identical to the one already active. Nothing is written.</dd>
+      <dt>activated</dt><dd>A candidate passed every check and replaced the previous configuration.</dd>
+      <dt>failed</dt><dd>A candidate was rejected. The active configuration is untouched.</dd>
+    </dl>
+  </div>
+  <p>A candidate has to clear three checks before it can become active:</p>
+  <ol>
+    <li>both <code>build</code> and <code>plan</code> aliases are present;</li>
+    <li>the master key setting is <code>LITELLM_MASTER_KEY</code>;</li>
+    <li>the proxy binds to <code>127.0.0.1</code>.</li>
+  </ol>
+  <p class="note">
+    A live <code>ping</code> to each alias runs after activation, not before it — informational
+    today, not a gate. A rate-limited alias counts as a pass: an HTTP 429 proves the route
+    reached a real provider, which is the only thing that check is asking. A 200 that never
+    says <code>pong</code> does not.
+  </p>
+</section>
+
+<section id="recovery">
+  <span class="eyebrow">Recovery</span>
+  <h2>Nothing is replaced until its replacement works.</h2>
+  <p>
+    Every file Gate replaces is written to a temporary name and renamed into place, so an
+    interrupted update leaves the previous configuration whole rather than half-written.
+    <code>audit.jsonl</code> is appended to, not replaced, so this guarantee doesn't cover it.
+  </p>
+  <p>
+    If a candidate fails validation, the previous configuration stays active
+    and the attempt is logged with the reason it was rejected. A rollback path exists for a
+    configuration that was already swapped in and later proves bad, but nothing calls it yet —
+    that's still ahead, tracked on the <a href="./docs/index.html#roadmap">roadmap</a>.
+  </p>
+  <p class="note">
+    Generated files are outputs, not settings. To change what Gate does, edit
+    <code>profile.json</code> and update — not <code>litellm.yaml</code>, and not the OpenCode
+    fields Gate owns, both of which are rewritten on the next activation.
+  </p>
+</section>
+
+<section id="audit">
+  <span class="eyebrow">Audit</span>
+  <h2>Every transition, one line each.</h2>
+  <p>
+    <code>audit.jsonl</code> is append-only: one JSON object per event, in order, readable
+    without any tooling.
+  </p>
+  <div class="panel">
+    <dl class="fields">
+      <dt>event</dt><dd><code>update</code> · <code>activate</code> · <code>rollback</code> · <code>noop</code> · <code>failure</code></dd>
+      <dt>at</dt><dd>When the transition happened.</dd>
+      <dt>oldVerdict / newVerdict</dt><dd>Verdict identifiers either side of it.</dd>
+      <dt>profileHash</dt><dd>A hash of the profile that produced it — comparable across entries, and non-secret.</dd>
+      <dt>reason</dt><dd>Present on a failure or a rollback: what rejected the candidate.</dd>
+    </dl>
+  </div>
+  <p class="note">
+    Credential names may appear in a profile; credential values appear nowhere, in the audit log
+    or in anything Gate uploads — which is nothing.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. Gate is the part that runs on your machine: it takes the published verdict and makes it the thing your editor actually calls.</p>
+      </div>
+
+      <nav aria-label="Gate">
+      <h3>Gate</h3>
+      <ul>
+        <li><a href="./docs/index.html">Docs</a></li>
+        <li><a href="#install">Install</a></li>
+        <li><a href="#aliases">Stable aliases</a></li>
+        <li><a href="#profile">Local profile</a></li>
+        <li><a href="#update">Update status</a></li>
+        <li><a href="#recovery">Recovery</a></li>
+        <li><a href="#audit">Audit</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="The ledger">
+      <h3>The ledger</h3>
+      <ul>
+        <li><a href="./index.html#benchmark">Benchmark</a></li>
+        <li><a href="./index.html#frontier">Budget frontier</a></li>
+        <li><a href="./index.html#methodology">Methodology</a></li>
+        <li><a href="./local.html#machine">Your machine</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://docs.litellm.ai/docs/proxy/configs" target="_blank" rel="noopener">LiteLLM proxy config</a></li>
+        <li><a href="https://opencode.ai/docs/config" target="_blank" rel="noopener">OpenCode configuration</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/gate.ts"></script>
+</body>
+</html>

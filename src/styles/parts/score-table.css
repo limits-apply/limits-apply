@@ -1,0 +1,46 @@
+.score-table{min-width:1040px}
+.score-table tbody tr[data-rank="1"]{background:var(--signal-soft)}
+.score-table td{vertical-align:middle;padding-top:9px;padding-bottom:9px}
+.score-table .plan-cell strong,.score-table .model-cell strong{display:block;font-weight:600;font-size:13.5px}
+.score-table .subline,.community-table .subline{display:block;color:var(--ink-3);font:400 10.5px/1.45 var(--mono);margin-top:3px}
+.community-table .empty{color:var(--ink-3)}
+/* the only cell long enough to push the ninth column off screen — let it wrap
+   so the whole table fits the breakout width instead of scrolling */
+.score-table td:last-child,.score-table th:last-child{white-space:normal;min-width:132px}
+.score-table .aa-link{font:500 18px var(--mono);letter-spacing:-.03em;text-decoration:none;color:var(--ink)}
+.score-table .aa-link:hover{color:var(--signal)}
+.score-table .yield{font:500 16px var(--mono);letter-spacing:-.03em;color:var(--signal)}
+.score-table tr.unranked td{color:var(--ink-3)}
+.score-table tr.unranked .aa-link{color:var(--ink-2)}
+.score-table th:first-child,.score-table td:first-child{position:sticky;left:0;z-index:2;background:var(--paper)}
+.score-table th:nth-child(2),.score-table td:nth-child(2){position:sticky;left:52px;z-index:2;background:var(--paper);box-shadow:1px 0 0 var(--rule)}
+.score-table thead th:first-child,.score-table thead th:nth-child(2){z-index:3;background:var(--panel)}
+.score-table tr[data-rank="1"] td:first-child,.score-table tr[data-rank="1"] td:nth-child(2){background:var(--signal-soft)}
+/* no rank column here, so column 2 is not the score table's second sticky pane — the
+   left:52px inherited from .score-table would overlap column 1 */
+.agent-table th:nth-child(2),.agent-table td:nth-child(2){position:static;left:auto;box-shadow:none}
+.rank{display:inline-grid;place-items:center;width:25px;height:25px;border:1px solid var(--rule);
+  border-radius:var(--r);font:500 11px var(--mono);color:var(--ink-3)}
+.rank.top{background:var(--signal);border-color:var(--signal);color:var(--paper)}
+.score-table tr.unranked .rank{border-color:transparent}
+.tier{display:inline-block;font:500 9px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 5px;border:1px solid currentColor;border-radius:var(--r);margin-top:6px}
+.tier.frontier{color:var(--ink)}
+.tier.near-frontier{color:var(--amber)}
+.tier.efficient{color:var(--ink-3)}
+.basis{font:400 10px/1.35 var(--mono);color:var(--ink-3);display:block;margin-top:4px}
+/* an unpublished quota is not a dash, it is a void */
+.score-table .empty{display:inline-block;min-width:48px;height:15px;vertical-align:-3px;color:transparent;
+  background:repeating-linear-gradient(-45deg,transparent 0 4px,var(--void) 4px 5px)}
+@media (max-width:760px){
+  /* narrowing the token, not the padding, keeps the breakout inset on the same gutter */
+  :root{--gutter:20px}
+  section{padding:56px var(--gutter)}
+  .hero{padding:56px var(--gutter) 48px}
+  .decision-head{grid-template-columns:1fr;align-items:start;gap:24px}
+  .aa-source{max-width:none}
+  .score-controls .kicker{flex-basis:100%;margin-bottom:4px}
+  .score-summary{overflow-x:auto}
+  .score-summary div{min-width:160px}
+}
+

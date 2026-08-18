@@ -1,0 +1,65 @@
+name: Measurement submission
+description: Submit a reproducible observation from an AI subscription, API, or local runtime.
+title: "measurement: "
+labels: [measurement]
+body:
+  - type: input
+    id: access
+    attributes:
+      label: Access path
+      description: Exact plan and billing tier.
+    validations:
+      required: true
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Configuration
+      description: Model, reasoning level, harness and harness version.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and quota window
+      description: Date, timezone, region, hardware/software, reset time, and usage before/after.
+    validations:
+      required: true
+  - type: textarea
+    id: sampling
+    attributes:
+      label: Workload and sampling
+      description: Workload versions, task mix, run count, ordering, failures, and exclusions.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcomes and consumption
+      description: Per-run grading, aggregate counts, tokens, calls, credits, elapsed time, and cost where exposed.
+    validations:
+      required: true
+  - type: textarea
+    id: grading
+    attributes:
+      label: Grading method
+      description: Name the grader, rubric and version; explain manual or automated grading and how disagreements were handled.
+    validations:
+      required: true
+  - type: input
+    id: artifact
+    attributes:
+      label: Sanitized evidence artifact
+      description: Durable URL to logs or data sufficient to audit the summary.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Submission checks
+      options:
+        - label: I removed credentials, personal identifiers, private prompts, and proprietary source code.
+          required: true
+        - label: I may lawfully share this evidence and contribute my original material under the repository license.
+          required: true
+        - label: I checked the provider terms applicable to the measurement method.
+          required: true

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs — clone it, build it, run it</title>
+<meta name="description" content="How to install and run the Gate CLI: prerequisites, a six-command quickstart against the bundled example evidence, troubleshooting, and what isn't shipped yet.">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<link rel="stylesheet" href="/src/styles/parts/docs.css">
+<link rel="stylesheet" href="/src/styles/parts/gate.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<header>
+  <div class="hbar">
+    <a class="brand" href="../index.html#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="../index.html">Home</a>
+      <a href="../local.html">Local</a>
+      <a href="../gate.html">Gate</a>
+      <a href="./index.html" aria-current="page">Docs</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-pressed="false"
+            aria-label="Switch to the dark theme">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+        <path d="M16.4 12.7A7.1 7.1 0 0 1 7.3 3.6a7.1 7.1 0 1 0 9.1 9.1Z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="docs-shell">
+
+<nav class="docs-nav" aria-label="Docs">
+  <h3 class="eyebrow">Docs</h3>
+  <ul>
+    <li><a href="./index.html" aria-current="page">Quickstart</a>
+      <ul>
+        <li><a href="#what">What this is</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#install">Install</a></li>
+        <li><a href="#quickstart">Quickstart</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+      </ul>
+    </li>
+    <li><a href="./cli.html">CLI reference</a></li>
+    <li><a href="./verdict.html">The verdict</a></li>
+    <li><a href="./harnesses.html">Harnesses</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+
+<section class="hero">
+  <span class="eyebrow">Documentation</span>
+  <h1>Install it, run it, audit it.</h1>
+  <p class="lead">
+    Gate is a small TypeScript CLI: it turns a verdict into a local LiteLLM configuration and
+    points OpenCode at it. <a href="../gate.html">gate.html</a> is the why — two aliases, the
+    audit model, the recovery argument. This section is the how.
+  </p>
+  <div class="cta">
+    <a class="btn" href="#quickstart">Jump to the quickstart</a>
+    <a class="btn ghost" href="../gate.html">Read the narrative</a>
+  </div>
+</section>
+
+<section id="what">
+  <span class="eyebrow">What this is</span>
+  <h2>A local activation tool, not a service.</h2>
+  <p>
+    Gate reads a verdict — a ranked candidate list plus two stable aliases, <code>build</code>
+    and <code>plan</code> — and writes it into a local LiteLLM configuration and, unless told
+    not to, your OpenCode config. It runs once per command, writes to a directory you own, and
+    calls out to nothing except whatever verdict or evidence source you point it at.
+  </p>
+  <p>
+    There's no Limits Apply account, no dashboard, and no hosted verdict yet — see the
+    <a href="#roadmap">roadmap</a> below for what that would take.
+  </p>
+</section>
+
+<section id="prerequisites">
+  <span class="eyebrow">Prerequisites</span>
+  <h2>Four things, one of them optional.</h2>
+  <div class="panel">
+    <dl class="fields">
+      <dt>Node</dt><dd>Node 20 or newer — the CLI's argument parsing uses Node's built-in <code>parseArgs</code>.</dd>
+      <dt>npm</dt><dd>Anything that runs <code>npx</code>. Building from a clone instead needs pnpm — this repository is a pnpm workspace.</dd>
+      <dt>LiteLLM</dt><dd>The proxy Gate configures but doesn't install or run — <code>pip install 'litellm[proxy]'</code> or equivalent.</dd>
+      <dt>A provider key</dt><dd>Only once you point Gate at real evidence. The bundled example fixture needs none.</dd>
+    </dl>
+  </div>
+  <p class="note">
+    No account exists to create. Nothing below uploads anything — <code>profile.json</code>,
+    <code>verdict.json</code> and the audit log all stay under a directory on your own machine.
+  </p>
+</section>
+
+<section id="install">
+  <span class="eyebrow">Install</span>
+  <h2>One package, no runtime dependencies.</h2>
+  <p>
+    <code>limitsapply</code> ships as a single pre-built file — everything it needs is bundled
+    into it, so installing it pulls nothing else down. Run it without installing at all, or put
+    it on your path.
+  </p>
+  <pre><code class="lang-sh">npx limitsapply --help
+npm install -g limitsapply</code></pre>
+  <p class="note">
+    Published from a tag by <a href="https://github.com/uslopia/limitsapply/blob/main/.github/workflows/publish.yml">a workflow</a>
+    with npm provenance, so the registry can attest which commit produced the file you install.
+    To build it from a clone instead: <code>pnpm install &amp;&amp; pnpm gate:build</code>, then
+    <code>pnpm gate</code> — see the <a href="./cli.html">CLI reference</a> for every command and
+    flag either way.
+  </p>
+</section>
+
+<section id="quickstart">
+  <span class="eyebrow">Quickstart</span>
+  <h2>Six commands, against the bundled example.</h2>
+  <p>
+    The example evidence fixture (<code>packages/gate/fixtures/example-evidence.json</code>) is
+    fictional — its models and endpoint don't resolve to anything real — but every file gets
+    written exactly the way it would with a real one, so this genuinely runs end to end.
+  </p>
+  <pre><code class="lang-sh">limitsapply init
+limitsapply update --example
+export LITELLM_MASTER_KEY=sk-local-anything
+litellm --config ~/.config/limitsapply/litellm.yaml
+limitsapply status
+limitsapply status --smoke</code></pre>
+  <p class="note">
+    <code>~/.config/limitsapply</code> is the default root only when neither
+    <code>LIMITSAPPLY_HOME</code> nor <code>XDG_CONFIG_HOME</code> is set — see
+    <a href="./cli.html#env">environment variables</a>. Every command also takes an explicit
+    <code>--root</code>.
+  </p>
+</section>
+
+<section id="troubleshooting">
+  <span class="eyebrow">Troubleshooting</span>
+  <h2>What the CLI actually says when something's wrong.</h2>
+  <div class="panel">
+    <dl class="fields">
+      <dt>missing build alias</dt><dd>No eligible candidate cleared the profile's intelligence floor. Check <code>intelligenceFloor</code>, or that your evidence has anything above it.</dd>
+      <dt>missing plan alias</dt><dd>No eligible candidate fit inside the monthly budget once multiplied by the turn count. Check <code>monthlyBudgetUsd</code>.</dd>
+      <dt>unexpected master key setting</dt><dd>The generated <code>litellm.yaml</code> doesn't read its master key from <code>LITELLM_MASTER_KEY</code>. That's a Gate invariant, not a setting — it means the file was hand-edited; the next <code>update</code> regenerates it.</dd>
+      <dt>proxy must bind to loopback</dt><dd>Same story: the generated host isn't <code>127.0.0.1</code>. Gate refuses to activate a config that binds anywhere else.</dd>
+      <dt>opencode config … is not valid JSON</dt><dd>Gate won't touch an OpenCode config it can't fully parse — JSONC comments included. Nothing is written; remove the comments, or rerun with <code>--no-opencode</code>.</dd>
+      <dt>Unknown command</dt><dd>Exits 2 and lists every real command on stderr — see the <a href="./cli.html">CLI reference</a>.</dd>
+      <dt>--smoke can't connect</dt><dd>It pings the proxy directly. If nothing is listening yet, the check currently fails hard with a connection error rather than a clean message — start LiteLLM first.</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="roadmap">
+  <span class="eyebrow">Roadmap</span>
+  <h2>What this doesn't do yet.</h2>
+  <p>
+    Every gap below is deliberate, not hidden — this register is what every other page on the
+    site links back to when it touches one of these.
+  </p>
+  <div class="panel">
+    <dl class="fields">
+      <dt>A hosted current.json</dt><dd>No <code>Candidate[]</code> catalog exists anywhere in this repo yet. <code>--verdict</code>, <code>--evidence</code> and <code>--example</code> are the only sources Gate has.</dd>
+      <dt>Hourly polling</dt><dd>Removed. Gate runs once per command — nothing schedules it.</dd>
+      <dt>A published library</dt><dd>Only the CLI is on npm. <code>@limits-apply/intelligence</code> and <code>@limits-apply/sources</code> stay internal — no stable API, no types, no semver promise.</dd>
+      <dt>Rollback on a post-activation smoke failure</dt><dd>The network smoke check runs after activation and is reported, but doesn't yet trigger a rollback — recorded in <code>docs/gate-parity.md</code>.</dd>
+      <dt>Every harness but OpenCode</dt><dd><code>mergeOpencodeConfig</code> is the only config writer Gate ships.</dd>
+      <dt>Local and pay-as-you-go inside one combination</dt><dd>The budget frontier combines subscription plans only — a local member needs a local $/task, a PAYG member needs per-model rates, and neither is in <code>src/data/</code> yet.</dd>
+      <dt>Personalized verdicts over a real catalog</dt><dd><code>--evidence</code> and <code>--example</code> rank whatever you hand them locally. There's no hosted catalog to personalize against automatically.</dd>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. This section is Gate's how-to: install it, run it, and see what every flag and exit code means.</p>
+      </div>
+
+      <nav aria-label="Docs">
+      <h3>Docs</h3>
+      <ul>
+        <li><a href="./index.html#prerequisites">Prerequisites</a></li>
+        <li><a href="./index.html#quickstart">Quickstart</a></li>
+        <li><a href="./cli.html#commands">CLI reference</a></li>
+        <li><a href="./verdict.html#source">The verdict</a></li>
+        <li><a href="./harnesses.html#status">Harnesses</a></li>
+        <li><a href="./index.html#roadmap">Roadmap</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="The site">
+      <h3>The site</h3>
+      <ul>
+        <li><a href="../index.html#benchmark">Benchmark</a></li>
+        <li><a href="../local.html#machine">Your machine</a></li>
+        <li><a href="../gate.html#install">Gate</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://docs.litellm.ai/docs/proxy/configs" target="_blank" rel="noopener">LiteLLM proxy config</a></li>
+        <li><a href="https://opencode.ai/docs/config" target="_blank" rel="noopener">OpenCode configuration</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/docs.ts"></script>
+</body>
+</html>

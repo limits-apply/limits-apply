@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": ["src/local.ts", "src/gate.ts", "src/docs.ts", "scripts/*.mjs"],
+      "project": ["src/**/*.ts", "scripts/**/*.mjs", "test/**/*.ts"]
+    },
+    "packages/*": {
+      "entry": ["index.ts"],
+      "project": ["**/*.ts"]
+    },
+    "packages/gate": {
+      "entry": ["index.ts", "src/bin.ts"],
+      "project": ["**/*.ts"]
+    }
+  }
+}

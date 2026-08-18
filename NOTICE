@@ -1,0 +1,11 @@
+Limits Apply
+Copyright 2026 uslopia
+
+Limits Apply includes attributed, dated facts and snapshots obtained from
+third-party sources. Those sources, provider names, logos, trademarks, and
+third-party datasets are not relicensed under the Apache License 2.0.
+
+Artificial Analysis data is used with attribution as an input to the project,
+not as ground truth. See THIRD_PARTY.md for the source inventory and reuse
+boundary.
+

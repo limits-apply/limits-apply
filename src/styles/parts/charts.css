@@ -1,0 +1,16 @@
+/* charts */
+figure{margin:var(--block) 0 0}
+figcaption{font-family:var(--sans);font-size:12.5px;color:var(--ink-3);margin-top:12px;max-width:70ch;line-height:1.6}
+svg{display:block;width:100%;height:auto;overflow:visible}
+/* the viewBox is 700 units wide, so a full-bleed chart scales its own labels up
+   with it — cap the width and the tick sizes stay the sizes set below */
+figure svg{max-width:880px}
+.ax{stroke:var(--ink-3);stroke-width:1}
+.gridline{stroke:var(--rule-2);stroke-width:1}
+.tick{font:400 10px var(--mono);fill:var(--ink-3)}
+.axlabel{font:500 9.5px var(--mono);letter-spacing:.14em;fill:var(--ink-3);text-transform:uppercase}
+.serieslabel{font:500 11.5px var(--mono);fill:var(--ink)}
+.dot{fill:var(--signal)}
+.dot.dominated{fill:var(--paper);stroke:var(--ink-3);stroke-width:1.5}
+.dotlabel{font:400 11px var(--sans);fill:var(--ink-2)}
+

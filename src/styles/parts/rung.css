@@ -1,0 +1,31 @@
+/* ------------------------------------------------------------------ *
+ * The provenance ladder. Rungs are ordinal, so the encoding is fill
+ * weight — solid, half, diagonal, hollow — and the column still reads
+ * with the colour switched off. Hue only separates first-hand
+ * (ink, signal) from inferred (amber).
+ * ------------------------------------------------------------------ */
+.rung{display:inline-flex;align-items:center;gap:4px;font:500 9px var(--mono);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-3);vertical-align:1px;white-space:nowrap}
+.rung::before{content:"";width:6px;height:6px;border:1px solid currentColor;flex:none;border-radius:1px}
+.rung.measured{color:var(--ink)}
+.rung.measured::before{background:currentColor}
+.rung.observed{color:var(--signal)}
+.rung.observed::before{background:currentColor}
+.rung.derived{color:var(--ink-2)}
+.rung.derived::before{background:linear-gradient(-45deg,currentColor 50%,transparent 50%)}
+.rung.chained{color:var(--amber)}
+.rung.chained::before{background:linear-gradient(-45deg,currentColor 25%,transparent 25%)}
+.rung.modelled{color:var(--amber)}
+
+/* an interval is not decoration: a wide one is the cell's main claim */
+.basis.band{font-variant-numeric:tabular-nums;color:var(--ink-3)}
+.basis.exact{color:var(--ink-3);font-style:italic}
+.basis.sibling{color:var(--amber);cursor:help;text-decoration:underline dotted;text-underline-offset:2px}
+.score-table td[data-tip]{cursor:help}
+.score-table td[data-tip]:hover{background:var(--panel-2)}
+.score-table .rung{margin-left:5px}
+/* a row is only as good as its weakest rung — inferred rows recede, they don't vanish */
+.score-table tr.rung-chained td,.score-table tr.rung-modelled td{color:var(--ink-2)}
+.score-table tr.rung-modelled .yield{color:var(--amber)}
+.score-table tr.rung-modelled .rank{border-style:dashed}
+

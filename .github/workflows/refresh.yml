@@ -1,0 +1,71 @@
+name: refresh
+
+on:
+  schedule:
+    - cron: "0 8 * * 1" # lundi 8h UTC, une heure avant stale-prices
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: refresh:check
+        id: check
+        env:
+          AA_API_KEY: ${{ secrets.AA_API_KEY }}
+        run: node scripts/refresh.mjs --check || true
+      - name: drift summary
+        id: summary
+        run: |
+          set +e
+          body=$(node scripts/drift-summary.mjs)
+          real=$?
+          set -e
+          echo "real=$real" >> "$GITHUB_OUTPUT"
+          {
+            echo 'body<<EOF'
+            echo "$body"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+      - name: refresh (write dated snapshots)
+        if: steps.summary.outputs.real != '0'
+        env:
+          AA_API_KEY: ${{ secrets.AA_API_KEY }}
+        run: node scripts/refresh.mjs || true
+      - name: open or update the PR
+        if: steps.summary.outputs.real != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BODY: ${{ steps.summary.outputs.body }}
+        run: |
+          # `git diff` alone is blind to the untracked new dated files `refresh` just
+          # wrote — `status --porcelain` is the check that actually sees them.
+          if [ -z "$(git status --porcelain -- src/data)" ]; then
+            echo "drift was report-only (no snapshot file changed) — nothing to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B refresh/weekly
+          git add src/data
+          git commit -m "refresh: weekly snapshot drift"
+          git push --force origin refresh/weekly
+          open=$(gh pr list --head refresh/weekly --state open --json number --jq length)
+          if [ "$open" != "0" ]; then
+            gh pr edit refresh/weekly --body "$BODY"
+          else
+            gh pr create --head refresh/weekly --title "Weekly snapshot drift" --body "$BODY"
+          fi
+      - name: fail the run on real drift
+        if: steps.summary.outputs.real != '0'
+        run: |
+          echo "Real drift or an unexpected error was found — see the drift summary step above."
+          exit 1

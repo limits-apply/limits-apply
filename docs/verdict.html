@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The verdict — how build and plan get picked</title>
+<meta name="description" content="Where a verdict comes from, effective cost, the build and plan rules, dominance, and every rejection code — with no hosted current.json behind any of it.">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<link rel="stylesheet" href="/src/styles/parts/docs.css">
+<link rel="stylesheet" href="/src/styles/parts/gate.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<header>
+  <div class="hbar">
+    <a class="brand" href="../index.html#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="../index.html">Home</a>
+      <a href="../local.html">Local</a>
+      <a href="../gate.html">Gate</a>
+      <a href="./index.html" aria-current="page">Docs</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-pressed="false"
+            aria-label="Switch to the dark theme">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+        <path d="M16.4 12.7A7.1 7.1 0 0 1 7.3 3.6a7.1 7.1 0 1 0 9.1 9.1Z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="docs-shell">
+
+<nav class="docs-nav" aria-label="Docs">
+  <h3 class="eyebrow">Docs</h3>
+  <ul>
+    <li><a href="./index.html">Quickstart</a></li>
+    <li><a href="./cli.html">CLI reference</a></li>
+    <li><a href="./verdict.html" aria-current="page">The verdict</a>
+      <ul>
+        <li><a href="#source">Where it comes from</a></li>
+        <li><a href="#effective-cost">Effective cost</a></li>
+        <li><a href="#build-rule">The build rule</a></li>
+        <li><a href="#plan-rule">The plan rule</a></li>
+        <li><a href="#dominance">Dominance</a></li>
+        <li><a href="#rejections">Rejections</a></li>
+      </ul>
+    </li>
+    <li><a href="./harnesses.html">Harnesses</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+
+<section class="hero">
+  <span class="eyebrow">The verdict</span>
+  <h1>Two names. One ranking.</h1>
+  <p class="lead">
+    How a list of candidates turns into <code>build</code> and <code>plan</code> — the same
+    rules whether they came from a real evidence file or the bundled example.
+  </p>
+</section>
+
+<section id="source">
+  <span class="eyebrow">Where it comes from</span>
+  <h2>Nothing is hosted yet.</h2>
+  <p>
+    A verdict ranks a list of candidates against a workload profile and produces two
+    selections — <code>build</code> and <code>plan</code> — plus everything that didn't make
+    it, and why. There is no published <code>current.json</code>: no <code>Candidate[]</code>
+    catalog exists in this repository yet (see the <a href="./index.html#roadmap">roadmap</a>).
+    Gate takes its candidates from whatever you hand it — a full verdict via
+    <code>--verdict</code>, an evidence file via <code>--evidence</code>, or the bundled fixture
+    via <code>--example</code>.
+  </p>
+</section>
+
+<section id="effective-cost">
+  <span class="eyebrow">Effective cost</span>
+  <h2>What a turn actually costs, per candidate.</h2>
+  <pre><code>effective cost = input + cached input × (1 − cache discount) + output</code></pre>
+  <p>
+    In dollars per turn, using the workload profile's token counts and each candidate's own
+    per-million rates. Where a candidate publishes a finite allowance, <code>capacity</code> is
+    that allowance divided by this same effective cost.
+  </p>
+</section>
+
+<section id="build-rule">
+  <span class="eyebrow">The build rule</span>
+  <h2>Cheapest, above the floor.</h2>
+  <pre><code>build = cheapest frontier candidate above the intelligence floor</code></pre>
+  <p>
+    The frontier here excludes local candidates outright — <code>build</code> never resolves to
+    one. Among what's left, whichever clears <code>intelligenceFloor</code> at the lowest
+    effective cost wins; ties break toward the faster candidate.
+  </p>
+</section>
+
+<section id="plan-rule">
+  <span class="eyebrow">The plan rule</span>
+  <h2>Strongest, inside the budget.</h2>
+  <pre><code>plan = strongest frontier candidate within the monthly budget</code></pre>
+  <p>
+    Same non-local frontier, filtered to candidates whose effective cost times
+    <code>turnsPerMonth</code> fits under <code>monthlyBudgetUsd</code>. Among those, the
+    highest-intelligence candidate wins; ties break by cost, then by speed.
+  </p>
+</section>
+
+<section id="dominance">
+  <span class="eyebrow">Dominance</span>
+  <h2>Catalog-wide, not per plan.</h2>
+  <p>
+    A candidate is dominated, and dropped from the frontier, when another eligible candidate is
+    at least as good on intelligence, cost and speed, and strictly better on at least one.
+    Dominance runs across the whole eligible catalog, not scoped to one provider or one plan — a
+    cheaper, faster, equally capable route from anywhere beats a locked-in one.
+  </p>
+</section>
+
+<section id="rejections">
+  <span class="eyebrow">Rejections</span>
+  <h2>Six reasons a candidate never reaches the frontier.</h2>
+  <div class="panel">
+    <dl class="fields">
+      <dt>incompatible</dt><dd>Gateway compatibility is not verified.</dd>
+      <dt>identity-workaround</dt><dd>The access path requires a prohibited identity workaround.</dd>
+      <dt>credentials</dt><dd>A required local credential is unavailable.</dd>
+      <dt>region</dt><dd>The access path is unavailable in the profile's region.</dd>
+      <dt>concurrency</dt><dd>The candidate's concurrency is below what the profile requires.</dd>
+      <dt>stale-evidence</dt><dd>Critical price evidence has expired.</dd>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. This section is Gate's how-to: install it, run it, and see what every flag and exit code means.</p>
+      </div>
+
+      <nav aria-label="Docs">
+      <h3>Docs</h3>
+      <ul>
+        <li><a href="./index.html#prerequisites">Prerequisites</a></li>
+        <li><a href="./index.html#quickstart">Quickstart</a></li>
+        <li><a href="./cli.html#commands">CLI reference</a></li>
+        <li><a href="./verdict.html#source">The verdict</a></li>
+        <li><a href="./harnesses.html#status">Harnesses</a></li>
+        <li><a href="./index.html#roadmap">Roadmap</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="The site">
+      <h3>The site</h3>
+      <ul>
+        <li><a href="../index.html#benchmark">Benchmark</a></li>
+        <li><a href="../local.html#machine">Your machine</a></li>
+        <li><a href="../gate.html#install">Gate</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://docs.litellm.ai/docs/proxy/configs" target="_blank" rel="noopener">LiteLLM proxy config</a></li>
+        <li><a href="https://opencode.ai/docs/config" target="_blank" rel="noopener">OpenCode configuration</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/docs.ts"></script>
+</body>
+</html>

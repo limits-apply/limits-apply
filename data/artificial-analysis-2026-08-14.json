@@ -1,0 +1,22 @@
+{
+  "source": "Artificial Analysis",
+  "source_url": "https://artificialanalysis.ai/models",
+  "data_api_docs": "https://artificialanalysis.ai/data-api/docs",
+  "intelligence_index_version": "4.1.1",
+  "retrieved_on": "2026-08-14",
+  "notes": "Static Layer 1 snapshot. Output tokens include answer and reasoning tokens. Cost is the weighted AA Intelligence Index cost per task.",
+  "models": [
+    {"slug":"claude-opus-5","name":"Claude Opus 5","reasoning":"max · adaptive","intelligence":63.0532,"cost_per_task_usd":2.3369,"output_tokens_per_task":40249},
+    {"slug":"gpt-5-6-sol-non-reasoning","name":"GPT-5.6 Sol","reasoning":"non-reasoning","intelligence":41.8780,"cost_per_task_usd":0.2366,"output_tokens_per_task":2304},
+    {"slug":"gpt-5-6-sol-low","name":"GPT-5.6 Sol","reasoning":"low","intelligence":50.7315,"cost_per_task_usd":0.2311,"output_tokens_per_task":2834},
+    {"slug":"gpt-5-6-sol-medium","name":"GPT-5.6 Sol","reasoning":"medium","intelligence":55.5729,"cost_per_task_usd":0.3717,"output_tokens_per_task":4758},
+    {"slug":"gpt-5-6-sol-high","name":"GPT-5.6 Sol","reasoning":"high","intelligence":57.3317,"cost_per_task_usd":0.5477,"output_tokens_per_task":7545},
+    {"slug":"gpt-5-6-sol-xhigh","name":"GPT-5.6 Sol","reasoning":"xhigh","intelligence":59.0090,"cost_per_task_usd":0.8072,"output_tokens_per_task":11098},
+    {"slug":"gpt-5-6-sol","name":"GPT-5.6 Sol","reasoning":"max","intelligence":60.9299,"cost_per_task_usd":1.2312,"output_tokens_per_task":16879},
+    {"slug":"gpt-5-6-luna","name":"GPT-5.6 Luna","reasoning":"max","intelligence":52.3181,"cost_per_task_usd":0.0471,"output_tokens_per_task":20046},
+    {"slug":"gemini-3-7-flash","name":"Gemini 3.7 Flash","reasoning":"high","intelligence":56.0301,"cost_per_task_usd":0.4022,"output_tokens_per_task":36847},
+    {"slug":"grok-4-6","name":"Grok 4.6","reasoning":"high","intelligence":60.9230,"cost_per_task_usd":0.8367,"output_tokens_per_task":21735},
+    {"slug":"kimi-k3","name":"Kimi K3","reasoning":"max","intelligence":59.6995,"cost_per_task_usd":0.8375,"output_tokens_per_task":25474},
+    {"slug":"glm-5-2","name":"GLM-5.2","reasoning":"max","intelligence":52.6410,"cost_per_task_usd":0.3206,"output_tokens_per_task":45685}
+  ]
+}

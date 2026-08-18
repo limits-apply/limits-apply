@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLI reference — Gate</title>
+<meta name="description" content="Every limitsapply command, flag and exit code the Gate CLI defines, the four files it owns and the default root, and the environment variables it reads.">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<link rel="stylesheet" href="/src/styles/parts/docs.css">
+<link rel="stylesheet" href="/src/styles/parts/gate.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<header>
+  <div class="hbar">
+    <a class="brand" href="../index.html#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="../index.html">Home</a>
+      <a href="../local.html">Local</a>
+      <a href="../gate.html">Gate</a>
+      <a href="./index.html" aria-current="page">Docs</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-pressed="false"
+            aria-label="Switch to the dark theme">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+        <path d="M16.4 12.7A7.1 7.1 0 0 1 7.3 3.6a7.1 7.1 0 1 0 9.1 9.1Z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="docs-shell">
+
+<nav class="docs-nav" aria-label="Docs">
+  <h3 class="eyebrow">Docs</h3>
+  <ul>
+    <li><a href="./index.html">Quickstart</a></li>
+    <li><a href="./cli.html" aria-current="page">CLI reference</a>
+      <ul>
+        <li><a href="#commands">Commands</a></li>
+        <li><a href="#exit-codes">Exit codes</a></li>
+        <li><a href="#files">Files &amp; root</a></li>
+        <li><a href="#format">litellm.yaml</a></li>
+        <li><a href="#env">Environment</a></li>
+      </ul>
+    </li>
+    <li><a href="./verdict.html">The verdict</a></li>
+    <li><a href="./harnesses.html">Harnesses</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+
+<section class="hero">
+  <span class="eyebrow">CLI reference</span>
+  <h1>Three commands. No hidden ones.</h1>
+  <p class="lead">
+    Every command below comes straight from the CLI's own command table —
+    <code>limitsapply --help</code> prints the same list, in the same order.
+  </p>
+</section>
+
+<section id="commands">
+  <span class="eyebrow">Commands</span>
+  <h2>init · update · status.</h2>
+
+  <div class="panel">
+    <h3 id="cmd-init">limitsapply init</h3>
+    <p>Write the default local profile if none exists yet.</p>
+    <dl class="fields">
+      <dt>--root &lt;value&gt;</dt><dd>Gate root directory (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+    </dl>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-update">limitsapply update</h3>
+    <p>Activate a verdict: write the LiteLLM config and point OpenCode at it.</p>
+    <dl class="fields">
+      <dt>--root &lt;value&gt;</dt><dd>Gate root directory (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+      <dt>--verdict &lt;value&gt;</dt><dd>Path or URL to a verdict snapshot.</dd>
+      <dt>--evidence &lt;value&gt;</dt><dd>Path or URL to an evidence snapshot, ranked locally against the global workload.</dd>
+      <dt>--example</dt><dd>Rank the bundled example evidence fixture instead of a real source.</dd>
+      <dt>--opencode &lt;value&gt;</dt><dd>OpenCode config path (default: <code>OPENCODE_CONFIG</code>, then <code>$XDG_CONFIG_HOME/opencode/opencode.json</code>).</dd>
+      <dt>--no-opencode</dt><dd>Skip writing an OpenCode config.</dd>
+    </dl>
+    <p class="note">Exactly one of <code>--verdict</code>, <code>--evidence</code> or <code>--example</code> is required — with none, <code>update</code> exits 2.</p>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-status">limitsapply status</h3>
+    <p>Print the verdict currently active in this root.</p>
+    <dl class="fields">
+      <dt>--root &lt;value&gt;</dt><dd>Gate root directory (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+      <dt>--smoke</dt><dd>Also ping the build and plan aliases through the LiteLLM proxy.</dd>
+      <dt>--proxy &lt;value&gt;</dt><dd>LiteLLM proxy base URL for --smoke (default: http://127.0.0.1:4000).</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="exit-codes">
+  <span class="eyebrow">Exit codes</span>
+  <h2>Four, and they mean the same thing every time.</h2>
+  <div class="panel">
+    <dl class="fields">
+      <dt>0 — ok</dt><dd>The command did what it says.</dd>
+      <dt>1 — failed</dt><dd>A candidate was rejected, or an OpenCode config couldn't be parsed. Nothing already active was overwritten.</dd>
+      <dt>2 — usage</dt><dd>Bad or missing arguments — an unknown command, or <code>update</code> with no verdict source.</dd>
+      <dt>3 — smoke</dt><dd>Activation succeeded, but a post-activation ping to <code>build</code> or <code>plan</code> didn't come back clean.</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="files">
+  <span class="eyebrow">Files &amp; root</span>
+  <h2>One root directory, four files.</h2>
+  <p>
+    Every command resolves its root the same way: <code>LIMITSAPPLY_HOME</code>, then
+    <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code> — or
+    whatever <code>--root</code> says instead.
+  </p>
+  <div class="panel">
+    <dl class="fields">
+      <dt>profile.json</dt><dd>Your local overlay. The only file you edit.</dd>
+      <dt>verdict.json</dt><dd>The verdict currently active on this machine.</dd>
+      <dt>litellm.yaml</dt><dd>Generated proxy configuration — an output, never a setting.</dd>
+      <dt>audit.jsonl</dt><dd>One line per transition: activation, no-op, failure, rollback.</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="format">
+  <span class="eyebrow">litellm.yaml</span>
+  <h2>It's JSON. That's not a bug.</h2>
+  <p>
+    <code>litellm.yaml</code> is generated as JSON, not hand-written YAML — and that's fine.
+    JSON is a strict subset of YAML, and PyYAML, what LiteLLM's proxy loads its config with,
+    parses it exactly the same as any other YAML document. The extension stays
+    <code>.yaml</code> because that's what LiteLLM's <code>--config</code> flag expects; the
+    contents don't need to look more YAML-like than this to be read correctly.
+  </p>
+</section>
+
+<section id="env">
+  <span class="eyebrow">Environment</span>
+  <h2>Four variables, none of them secret to Gate.</h2>
+  <div class="panel">
+    <dl class="fields">
+      <dt>LIMITSAPPLY_HOME</dt><dd>Overrides the gate root outright — checked first, ahead of everything else.</dd>
+      <dt>XDG_CONFIG_HOME</dt><dd>If set and <code>LIMITSAPPLY_HOME</code> isn't, the root becomes <code>$XDG_CONFIG_HOME/limitsapply</code>, and the OpenCode default becomes <code>$XDG_CONFIG_HOME/opencode/opencode.json</code>.</dd>
+      <dt>LITELLM_MASTER_KEY</dt><dd>Read by LiteLLM itself, not by Gate — Gate only writes the setting name into <code>litellm.yaml</code>. The proxy binds to <code>http://127.0.0.1:4000</code> and its master key setting is always <code>LITELLM_MASTER_KEY</code>.</dd>
+      <dt>OPENCODE_CONFIG</dt><dd>Overrides the OpenCode config path Gate writes to, ahead of the <code>$XDG_CONFIG_HOME</code> default.</dd>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. This section is Gate's how-to: install it, run it, and see what every flag and exit code means.</p>
+      </div>
+
+      <nav aria-label="Docs">
+      <h3>Docs</h3>
+      <ul>
+        <li><a href="./index.html#prerequisites">Prerequisites</a></li>
+        <li><a href="./index.html#quickstart">Quickstart</a></li>
+        <li><a href="./cli.html#commands">CLI reference</a></li>
+        <li><a href="./verdict.html#source">The verdict</a></li>
+        <li><a href="./harnesses.html#status">Harnesses</a></li>
+        <li><a href="./index.html#roadmap">Roadmap</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="The site">
+      <h3>The site</h3>
+      <ul>
+        <li><a href="../index.html#benchmark">Benchmark</a></li>
+        <li><a href="../local.html#machine">Your machine</a></li>
+        <li><a href="../gate.html#install">Gate</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://docs.litellm.ai/docs/proxy/configs" target="_blank" rel="noopener">LiteLLM proxy config</a></li>
+        <li><a href="https://opencode.ai/docs/config" target="_blank" rel="noopener">OpenCode configuration</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/docs.ts"></script>
+</body>
+</html>

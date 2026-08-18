@@ -1,0 +1,35 @@
+{
+  "name": "limitsapply-site",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Open evidence and tooling for the economics of AI subscriptions, APIs, and local inference.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "packageManager": "pnpm@11.21.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "knip": "knip",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "refresh": "node scripts/refresh.mjs",
+    "refresh:check": "node scripts/refresh.mjs --check",
+    "gate:build": "vite build --config packages/gate/vite.config.ts",
+    "gate": "node packages/gate/dist/limitsapply.mjs",
+    "gate:pack-test": "node scripts/pack-test.mjs"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.8",
+    "@types/node": "^26.2.0",
+    "knip": "^6.32.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "lit-html": "^3.3.3"
+  }
+}

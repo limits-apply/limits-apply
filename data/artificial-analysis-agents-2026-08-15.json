@@ -1,0 +1,17 @@
+{
+  "attribution": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+  "retrieved": "2026-08-15",
+  "note": "Top-10 agent variants embedded in the page's JSON-LD. Index is the AA Coding Agent Index (DeepSWE, Terminal-Bench v2, SWE-Atlas-QnA); cost is pay-per-token API USD per task.",
+  "variants": [
+    { "label": "Claude Code - Opus 5 (xhigh)", "index": 0.6674377366641141, "costUsd": 8.235, "wallSeconds": 1416 },
+    { "label": "Codex - GPT-5.6 Sol (max)", "index": 0.6656984867090491, "costUsd": 7.084, "wallSeconds": 612 },
+    { "label": "Claude Code - Fable 5 (max) (with fallback)", "index": 0.658470366292233, "costUsd": 11.705, "wallSeconds": 1404 },
+    { "label": "Grok Build - Grok 4.5 (high)", "index": 0.6443924859568593, "costUsd": 2.592, "wallSeconds": 990 },
+    { "label": "Kimi Code CLI - Kimi K3", "index": 0.6133537089146563, "costUsd": 3.175, "wallSeconds": 1428 },
+    { "label": "Muse Code - Muse Spark 1.2 (xhigh)", "index": 0.6052533202832947, "costUsd": 2.326, "wallSeconds": 2520 },
+    { "label": "Opencode - Gemini 3.7 Flash (high)", "index": 0.5706854442224124, "costUsd": null, "wallSeconds": 510 },
+    { "label": "Codex - DeepSeek V4 Flash (max)", "index": 0.5546772456564061, "costUsd": 0.071, "wallSeconds": 876 },
+    { "label": "Claude Code - GLM-5.2", "index": 0.4317779252895107, "costUsd": 6.511, "wallSeconds": 1506 },
+    { "label": "Cursor CLI - Composer 2.5 Fast", "index": 0.3819077223302175, "costUsd": 0.549, "wallSeconds": 408 }
+  ]
+}

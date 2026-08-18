@@ -1,0 +1,8 @@
+{
+  "retrieved_on": "2026-08-17",
+  "rates": {
+    "EUR": 1.1593
+  },
+  "source": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
+  "notes": "Normalized from the ECB XML feed; published reference-rate values are unchanged."
+}

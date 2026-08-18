@@ -1,0 +1,630 @@
+[
+  {
+    "plan": "Claude Pro",
+    "price": 20,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "medium",
+    "src": "claude.com/pricing",
+    "quota": "“Usage limits apply”; never quantified",
+    "sourceUrl": "https://claude.com/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Claude Max 5×",
+    "price": 100,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "medium",
+    "src": "claude.com/pricing",
+    "quota": "5× Pro — and Pro is not published",
+    "sourceUrl": "https://claude.com/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Claude Max 20×",
+    "price": 200,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "medium",
+    "src": "claude.com/pricing",
+    "quota": "20× Pro — and Pro is not published",
+    "sourceUrl": "https://claude.com/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "ChatGPT Go",
+    "price": 8,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "“~10× Free limits”; not quantified",
+    "sourceUrl": "https://www.cometapi.com/chatgpt-pricing-2026-free-vs-go-vs-plus-vs-pro/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "ChatGPT Plus",
+    "price": 20,
+    "quantified": true,
+    "equiv": {
+      "per": 160,
+      "hours": 3,
+      "unit": "messages"
+    },
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "160 messages / 3h",
+    "sourceUrl": "https://www.cometapi.com/chatgpt-pricing-2026-free-vs-go-vs-plus-vs-pro/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "ChatGPT Pro 5×",
+    "price": 100,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "5× Plus limits",
+    "sourceUrl": "https://www.cometapi.com/chatgpt-pricing-2026-free-vs-go-vs-plus-vs-pro/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "ChatGPT Pro 20×",
+    "price": 200,
+    "quantified": true,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "20× Plus limits; 250 Deep Research / mo",
+    "sourceUrl": "https://www.cometapi.com/chatgpt-pricing-2026-free-vs-go-vs-plus-vs-pro/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Google AI Plus",
+    "price": null,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "unknown",
+    "src": "gemini.google/subscriptions",
+    "quota": "€4.99/mo in the EU; no USD price shown",
+    "sourceUrl": "https://gemini.google/subscriptions",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Google AI Pro",
+    "price": 19.99,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "medium",
+    "src": "gemini.google/subscriptions",
+    "quota": "“4× free limits”, refreshed every 5h",
+    "sourceUrl": "https://gemini.google/subscriptions",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Google AI Ultra",
+    "price": 100,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "medium",
+    "src": "gemini.google/subscriptions",
+    "quota": "“up to 20× free limits”; not quantified",
+    "sourceUrl": "https://gemini.google/subscriptions",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Google AI Ultra 4×",
+    "price": 200,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "4× Ultra; Project Genie access",
+    "sourceUrl": "https://www.digitalapplied.com/blog/google-ai-plans-free-plus-pro-ultra-2026",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Mistral Le Chat Pro",
+    "price": 14.99,
+    "quantified": true,
+    "equiv": {
+      "per": 150,
+      "hours": 24,
+      "unit": "answers"
+    },
+    "billing": "flat",
+    "conf": "medium",
+    "src": "mistral.ai/pricing",
+    "quota": "“More messages and web searches”; 150 Flash answers / day",
+    "sourceUrl": "https://mistral.ai/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "GitHub Copilot Pro",
+    "price": 10,
+    "quantified": true,
+    "equiv": {
+      "usd": 15
+    },
+    "billing": "metered",
+    "conf": "high",
+    "src": "github.com/features/copilot/plans",
+    "quota": "$15 / mo of GitHub AI Credits",
+    "sourceUrl": "https://github.com/features/copilot/plans",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "GitHub Copilot Pro+",
+    "price": 39,
+    "quantified": true,
+    "equiv": {
+      "usd": 70
+    },
+    "billing": "metered",
+    "conf": "high",
+    "src": "github.com/features/copilot/plans",
+    "quota": "$70 / mo of GitHub AI Credits",
+    "sourceUrl": "https://github.com/features/copilot/plans",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "GitHub Copilot Max",
+    "price": 100,
+    "quantified": true,
+    "equiv": {
+      "usd": 200
+    },
+    "billing": "metered",
+    "conf": "high",
+    "src": "github.com/features/copilot/plans",
+    "quota": "$200 / mo of GitHub AI Credits",
+    "sourceUrl": "https://github.com/features/copilot/plans",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Cursor Pro",
+    "price": 20,
+    "quantified": false,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "medium",
+    "src": "cursor.com/pricing",
+    "quota": "“Extended limits on Agent”; not quantified",
+    "sourceUrl": "https://cursor.com/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Cursor Pro+",
+    "price": 60,
+    "quantified": false,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "3× Pro limits on Agent",
+    "sourceUrl": "https://felloai.com/cursor-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Cursor Ultra",
+    "price": 200,
+    "quantified": false,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "20× Pro limits on Agent",
+    "sourceUrl": "https://felloai.com/cursor-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Perplexity Pro",
+    "price": 20,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "Pro searches / day; figure not published",
+    "sourceUrl": "https://geotoolbox.ai/blog/perplexity-pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Perplexity Max",
+    "price": 200,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "“No usage restrictions” on the web UI",
+    "sourceUrl": "https://geotoolbox.ai/blog/perplexity-pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "SuperGrok",
+    "price": 30,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "Higher limits; not quantified",
+    "sourceUrl": "https://www.ai-toolbox.co/grok-models/grok-pricing-plans-api-2026",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "SuperGrok Heavy",
+    "price": 300,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "Maximum rate limits; not quantified",
+    "sourceUrl": "https://www.ai-toolbox.co/grok-models/grok-pricing-plans-api-2026",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Kimi Moderato",
+    "price": 19,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "Not published",
+    "sourceUrl": "https://felloai.com/kimi-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Kimi Allegretto",
+    "price": 39,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "Not published",
+    "sourceUrl": "https://felloai.com/kimi-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Kimi Allegro",
+    "price": 99,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "Not published",
+    "sourceUrl": "https://felloai.com/kimi-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Kimi Vivace",
+    "price": 199,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "Not published",
+    "sourceUrl": "https://felloai.com/kimi-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "GLM Coding Lite",
+    "price": 18,
+    "quantified": true,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "medium",
+    "src": "docs.z.ai/devpack/overview",
+    "quota": "2,000 credits / 5h · 10,000 / week",
+    "sourceUrl": "https://docs.z.ai/devpack/overview",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "GLM Coding Pro",
+    "price": null,
+    "quantified": true,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "unknown",
+    "src": "docs.z.ai/devpack/overview",
+    "quota": "12,000 credits / 5h · 60,000 / week",
+    "sourceUrl": "https://docs.z.ai/devpack/overview",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "GLM Coding Max",
+    "price": null,
+    "quantified": true,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "unknown",
+    "src": "docs.z.ai/devpack/overview",
+    "quota": "28,000 credits / 5h · 140,000 / week",
+    "sourceUrl": "https://docs.z.ai/devpack/overview",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Qwen Coding Pro",
+    "price": 50,
+    "quantified": true,
+    "equiv": {
+      "per": 90000,
+      "hours": 720,
+      "unit": "requests"
+    },
+    "billing": "flat",
+    "conf": "high",
+    "src": "alibabacloud.com/help/en/model-studio/coding-plan",
+    "quota": "6,000 requests / 5h · 45,000 / week · 90,000 / month",
+    "sourceUrl": "https://alibabacloud.com/help/en/model-studio/coding-plan",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "MiniMax Starter",
+    "price": 10,
+    "quantified": true,
+    "equiv": {
+      "per": 1500,
+      "hours": 5,
+      "unit": "requests"
+    },
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "1,500 requests / 5h",
+    "sourceUrl": "https://felloai.com/minimax-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "MiniMax Plus",
+    "price": 20,
+    "quantified": true,
+    "equiv": {
+      "per": 4500,
+      "hours": 5,
+      "unit": "requests"
+    },
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "4,500 requests / 5h",
+    "sourceUrl": "https://felloai.com/minimax-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "MiniMax Max",
+    "price": 50,
+    "quantified": true,
+    "equiv": {
+      "per": 15000,
+      "hours": 5,
+      "unit": "requests"
+    },
+    "billing": "flat",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "15,000 requests / 5h",
+    "sourceUrl": "https://felloai.com/minimax-pricing/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "OpenCode Go",
+    "price": 10,
+    "quantified": true,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "medium",
+    "src": "opencode.ai/go",
+    "quota": "110–30,100 requests / 5h, per model — no plan-wide figure",
+    "sourceUrl": "https://opencode.ai/go",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Warp Build",
+    "price": 20,
+    "quantified": true,
+    "equiv": {
+      "usd": 20
+    },
+    "billing": "metered",
+    "conf": "high",
+    "src": "warp.dev/pricing",
+    "quota": "1,500 credits — “$20 of included agent usage at API rates”",
+    "sourceUrl": "https://warp.dev/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Warp Max",
+    "price": 200,
+    "quantified": true,
+    "equiv": {
+      "usd": 240
+    },
+    "billing": "metered",
+    "conf": "medium",
+    "src": "warp.dev/pricing",
+    "quota": "18,000 credits — “12× the included usage of Build”",
+    "sourceUrl": "https://warp.dev/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Zed Pro",
+    "price": 10,
+    "quantified": true,
+    "equiv": {
+      "usd": 5
+    },
+    "billing": "metered",
+    "conf": "high",
+    "src": "zed.dev/pricing",
+    "quota": "“$5 of tokens included”, then usage-based billing",
+    "sourceUrl": "https://zed.dev/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Replit Core",
+    "price": 25,
+    "quantified": true,
+    "equiv": {
+      "usd": 25
+    },
+    "billing": "metered",
+    "conf": "high",
+    "src": "replit.com/pricing",
+    "quota": "$25 of monthly credits ($20/mo billed annually)",
+    "sourceUrl": "https://replit.com/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Replit Pro",
+    "price": 100,
+    "quantified": true,
+    "equiv": {
+      "usd": 100
+    },
+    "billing": "metered",
+    "conf": "high",
+    "src": "replit.com/pricing",
+    "quota": "$100 monthly credits ($95/mo billed annually)",
+    "sourceUrl": "https://replit.com/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Factory Pro",
+    "price": 20,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "high",
+    "src": "factory.ai/pricing",
+    "quota": "“Standard rate limits”; never quantified",
+    "sourceUrl": "https://factory.ai/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Factory Plus",
+    "price": 100,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "high",
+    "src": "factory.ai/pricing",
+    "quota": "“~5× the usage of Pro” — and Pro is not published",
+    "sourceUrl": "https://factory.ai/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Factory Max",
+    "price": 200,
+    "quantified": false,
+    "equiv": null,
+    "billing": "flat",
+    "conf": "high",
+    "src": "factory.ai/pricing",
+    "quota": "“~10× the usage of Pro” — and Pro is not published",
+    "sourceUrl": "https://factory.ai/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Devin Pro",
+    "price": 20,
+    "quantified": false,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "high",
+    "src": "devin.ai/pricing",
+    "quota": "“A usage allowance”; ACUs not published",
+    "sourceUrl": "https://devin.ai/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Devin Max",
+    "price": 200,
+    "quantified": false,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "high",
+    "src": "devin.ai/pricing",
+    "quota": "“A usage allowance”; ACUs not published",
+    "sourceUrl": "https://devin.ai/pricing",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Poe Starter",
+    "price": 4.99,
+    "quantified": true,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "10,000 compute points / day",
+    "sourceUrl": "https://costbench.com/software/ai-chatbots/poe/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Poe Premium",
+    "price": 19.99,
+    "quantified": true,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "660,000 compute points / mo",
+    "sourceUrl": "https://costbench.com/software/ai-chatbots/poe/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Poe Premium Plus",
+    "price": 49.99,
+    "quantified": true,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "1,650,000 compute points / mo",
+    "sourceUrl": "https://costbench.com/software/ai-chatbots/poe/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Poe Pro",
+    "price": 99.99,
+    "quantified": false,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "Compute points / mo; figure not published",
+    "sourceUrl": "https://costbench.com/software/ai-chatbots/poe/",
+    "verified": "2026-08-15"
+  },
+  {
+    "plan": "Poe Pro Max",
+    "price": 249.99,
+    "quantified": true,
+    "equiv": null,
+    "billing": "metered",
+    "conf": "estimated",
+    "src": "secondary",
+    "quota": "12,500,000 compute points / mo",
+    "sourceUrl": "https://costbench.com/software/ai-chatbots/poe/",
+    "verified": "2026-08-15"
+  }
+]

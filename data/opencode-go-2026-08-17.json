@@ -1,0 +1,74 @@
+{
+  "source": "OpenCode Go",
+  "source_url": "https://opencode.ai/fr/go",
+  "retrieved_on": "2026-08-17",
+  "notes": "Requests per 5-hour window, per model, as published on the plan page. A request is not a work unit of known size; it is countable, which is all the ladder asks of it.",
+  "models": [
+    {
+      "slug": "kimi-k3",
+      "kind": "go",
+      "name": "Kimi K3",
+      "requestsPer5h": 110
+    },
+    {
+      "slug": "grok-4.5",
+      "kind": "go",
+      "name": "Grok 4.5",
+      "requestsPer5h": 120
+    },
+    {
+      "slug": "qwen3.8-max",
+      "kind": "go",
+      "name": "Qwen3.8 Max",
+      "requestsPer5h": 160
+    },
+    {
+      "slug": "glm-5.2",
+      "kind": "go",
+      "name": "GLM-5.2",
+      "requestsPer5h": 880
+    },
+    {
+      "slug": "deepseek-v4-pro",
+      "kind": "go",
+      "name": "DeepSeek V4 Pro",
+      "requestsPer5h": 1050
+    },
+    {
+      "slug": "minimax-m3",
+      "kind": "go",
+      "name": "MiniMax M3",
+      "requestsPer5h": 3200
+    },
+    {
+      "slug": "deepseek-v4-flash",
+      "kind": "go",
+      "name": "DeepSeek V4 Flash",
+      "requestsPer5h": 3800
+    },
+    {
+      "slug": "gpt-5.6-luna",
+      "kind": "go",
+      "name": "GPT 5.6 Luna",
+      "requestsPer5h": 4100
+    },
+    {
+      "slug": "qwen3.7-plus",
+      "kind": "go",
+      "name": "Qwen3.7 Plus",
+      "requestsPer5h": 4300
+    },
+    {
+      "slug": "hy3",
+      "kind": "go",
+      "name": "Hy3",
+      "requestsPer5h": 4300
+    },
+    {
+      "slug": "mimo-v2.5",
+      "kind": "go",
+      "name": "MiMo-V2.5",
+      "requestsPer5h": 30100
+    }
+  ]
+}

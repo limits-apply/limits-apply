@@ -1,0 +1,71 @@
+name: Source correction or refresh
+description: Correct or re-verify a price, quota, model, release, or hardware fact.
+title: "source: "
+labels: [data]
+body:
+  - type: input
+    id: subject
+    attributes:
+      label: Affected row
+      description: Exact plan, model, or hardware name.
+    validations:
+      required: true
+  - type: input
+    id: field
+    attributes:
+      label: Field
+      description: The exact field or displayed claim being corrected.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Current and proposed values
+      description: State both values and explain the discrepancy.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Best available source URL
+    validations:
+      required: true
+  - type: dropdown
+    id: source_type
+    attributes:
+      label: Source type
+      options:
+        - Provider or first-party source
+        - Independent measurement or primary trace
+        - Secondary source
+        - Community report
+    validations:
+      required: true
+  - type: textarea
+    id: source_limits
+    attributes:
+      label: Source limitations
+      description: If this is not a first-party source, explain why none is available and what uncertainty remains.
+    validations:
+      required: true
+  - type: input
+    id: verified
+    attributes:
+      label: Verification date and region
+      placeholder: 2026-08-18, France
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: How to verify
+      description: Give a short quotation or navigation path; mention login or JavaScript requirements.
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Submission checks
+      options:
+        - label: I have not included credentials, private account data, or copied material I cannot share.
+          required: true

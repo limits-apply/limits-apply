@@ -1,0 +1,89 @@
+export type BillingMode = "subscription" | "api" | "local";
+export type ProvenanceRung = "measured" | "observed" | "derived" | "chained" | "modelled";
+export type RejectionCode =
+  | "incompatible"
+  | "identity-workaround"
+  | "region"
+  | "credentials"
+  | "concurrency"
+  | "stale-evidence";
+
+export interface Evidence<T> {
+  value: T;
+  rung: ProvenanceRung;
+  source: string;
+  verified: string;
+  expires?: string;
+}
+
+export interface Candidate {
+  id: string;
+  model: string;
+  provider: string;
+  endpoint: string;
+  failureDomain: string;
+  billing: BillingMode;
+  priceUsd: Evidence<number>;
+  allowanceUsd: Evidence<number | null>;
+  inputRateUsdPerMillion: Evidence<number>;
+  cachedInputRateUsdPerMillion: Evidence<number>;
+  outputRateUsdPerMillion: Evidence<number>;
+  intelligence: Evidence<number>;
+  speed: Evidence<number>;
+  compatible: boolean;
+  identityWorkaround: boolean;
+  regions: string[];
+  credentials: string[];
+  concurrency: number;
+  roles?: string[];
+}
+
+export interface WorkloadProfile {
+  id: string;
+  currency: "USD";
+  monthlyBudgetUsd: number;
+  turnsPerMonth: number;
+  inputTokensPerTurn: number;
+  cachedInputTokensPerTurn: number;
+  outputTokensPerTurn: number;
+  cacheDiscount: number;
+  minimumConcurrency: number;
+  intelligenceFloor: number;
+  region: string;
+  availableCredentials?: string[];
+}
+
+export interface LocalOverlay {
+  ownedSubscriptions?: string[];
+  credentials?: string[];
+  region?: string;
+  monthlyBudgetUsd?: number;
+  minimumConcurrency?: number;
+}
+
+export interface Rejection {
+  candidateId: string;
+  code: RejectionCode;
+  reason: string;
+}
+
+export interface RankedCandidate {
+  candidate: Candidate;
+  effectiveCostUsd: number;
+  capacity: number | null;
+  speed: number;
+}
+
+export interface Verdict {
+  id: string;
+  evidenceVersion: string;
+  profile: WorkloadProfile;
+  selected: { build: string | null; plan: string | null };
+  fallbacks: Record<string, string[]>;
+  frontier: RankedCandidate[];
+  dominated: RankedCandidate[];
+  rejected: Rejection[];
+  formulas: string[];
+  degraded: boolean;
+  generatedAt: string;
+}

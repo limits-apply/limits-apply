@@ -1,0 +1,48 @@
+name: Workload proposal
+description: Propose a representative, versionable workload for future measurements.
+title: "workload: "
+labels: [workload]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Use sanitized, shareable examples only. Do not include credentials, personal data, private prompts, or proprietary source code.
+  - type: textarea
+    id: outcome
+    attributes:
+      label: User goal and representative input
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Tools and constraints
+      description: Permitted tools, files, network access, context, and time limit.
+    validations:
+      required: true
+  - type: textarea
+    id: grading
+    attributes:
+      label: Pass / Partial / Fail criteria
+    validations:
+      required: true
+  - type: textarea
+    id: population
+    attributes:
+      label: Representativeness
+      description: Who performs this work and why the workload matters.
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Ambiguities and data sensitivity
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Submission checks
+      options:
+        - label: I removed sensitive material and may lawfully share every example in this proposal.
+          required: true

@@ -1,0 +1,30 @@
+name: publish
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - name: npm with trusted publishing support
+        run: npm install -g npm@latest
+      - run: pnpm install --frozen-lockfile
+      - name: version matches tag
+        run: test "v$(jq -r .version package.json)" = "$GITHUB_REF_NAME"
+        working-directory: packages/gate
+      - name: publish # prepublishOnly rebuilds and re-runs the pack test
+        run: npm publish --provenance
+        working-directory: packages/gate

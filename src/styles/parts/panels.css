@@ -1,0 +1,72 @@
+/* panels */
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:22px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:var(--block) 0;
+      background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.cols>.panel{border:0;margin:0;border-radius:0}
+.cols-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:var(--block) 0;
+        background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+@media (max-width:820px){.cols,.cols-4{grid-template-columns:1fr}}
+.kicker{font:500 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.gap-api dt,.gap-sub dt{font:400 10.5px var(--mono);color:var(--ink-3);letter-spacing:.12em;text-transform:uppercase}
+.gap-api dd,.gap-sub dd{margin:5px 0 18px;font:500 26px var(--mono);color:var(--ink);letter-spacing:-.03em}
+/* the void, legibly: the hatch is lightened where words sit on top of it */
+.gap-sub dd.empty{color:var(--ink-2);font-size:15px;font-weight:400;padding:8px 10px;
+  background:repeating-linear-gradient(-45deg,transparent 0 5px,
+             color-mix(in srgb,var(--void) 60%,transparent) 5px 6px)}
+/* the four proposed metrics: a spec sheet, not four identical cards */
+.metric{background:var(--paper);padding:22px 20px 24px}
+.metric h3{font-family:var(--mono);font-weight:500;font-size:11.5px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--signal)}
+.metric p{font-family:var(--sans);font-size:14px;margin:10px 0 0;color:var(--ink-2)}
+.metric code{font-size:12.5px;color:var(--ink)}
+
+.decision{padding-top:60px}
+.decision-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:36px;align-items:end;margin-bottom:28px}
+.decision-head h1{max-width:24ch}
+.aa-source{max-width:320px;border-left:1px solid var(--rule);padding:2px 0 2px 18px}
+.aa-source p{font-family:var(--sans);font-size:12.5px;margin:6px 0 0;overflow-wrap:anywhere;color:var(--ink-3)}
+.score-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.score-controls .kicker{margin-right:8px}
+.score-controls button{font:400 12.5px var(--sans);padding:7px 13px;border:1px solid var(--rule);
+  background:var(--paper);color:var(--ink-2);cursor:pointer;border-radius:var(--r)}
+.score-controls button:hover{color:var(--ink);border-color:var(--ink-3)}
+.score-controls button[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:var(--paper)}
+.score-summary{display:flex;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.score-summary div{flex:1;background:var(--panel);padding:14px 16px;min-width:0}
+.score-summary span{display:block;font:400 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.score-summary strong{display:block;font:500 18px/1.35 var(--mono);letter-spacing:-.03em;margin-top:6px}
+.score-summary .basis{text-transform:none;letter-spacing:0}
+/* a bracket where nothing can be ranked: amber, and it must not look like a verdict */
+.score-summary .soft span,.score-summary .soft strong{color:var(--amber)}
+.score-summary .soft .basis{color:var(--ink-3)}
+.score-summary .soft #score-winner-label::before{content:"⚠ "}
+.no-rows{text-align:center;color:var(--ink-3);font:400 12px var(--mono);padding:28px 16px!important}
+.score-table th[data-tip],.score-summary span[data-tip],.ledger th[data-tip],.score-controls .kicker[data-tip]{
+  text-decoration:underline dotted var(--ink-3);text-underline-offset:3px;cursor:help}
+/* Sortable headers. The caret stays dim until the column is the one sorted, so a
+   table at rest still reads as a ranking rather than as a control panel. */
+th[aria-sort],th[aria-sort][data-tip]{position:relative;cursor:pointer;user-select:none}
+/* in the padding, not in the flow: these columns are width-tuned already */
+th[aria-sort]::after{content:"▾";position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  font-size:8px;opacity:0;transition:opacity .12s}
+th[aria-sort]:hover::after,th[aria-sort]:focus-visible::after{opacity:.4}
+th[aria-sort="ascending"]::after{content:"▴";opacity:1}
+th[aria-sort="descending"]::after{opacity:1}
+.glossary{border:1px solid var(--rule);border-radius:var(--r);margin-top:14px}
+.glossary summary{padding:11px 16px;cursor:pointer;font:500 12.5px var(--sans);color:var(--ink-2)}
+.glossary summary:hover{color:var(--signal)}
+.glossary dl{margin:0;padding:0 16px 18px;font-size:13px;line-height:1.65;color:var(--ink-3);max-width:72ch}
+.glossary dt{font:500 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-top:16px}
+.glossary dd{margin:5px 0 0}
+.glossary ul{margin:6px 0 0;padding-left:18px;font-family:var(--sans)}
+.glossary li{margin-top:5px}
+/* coverage bar — how much of the table rests on somebody else's published figure */
+.coverage{display:flex;height:8px;gap:2px;margin:0 0 24px;border-radius:1px;overflow:hidden}
+.coverage span{display:block;min-width:3px;cursor:help}
+.cv-measured{background:var(--ink)}
+.cv-observed{background:var(--signal)}
+.cv-derived{background:var(--ink-2)}
+.cv-chained{background:var(--amber)}
+.cv-modelled{background:repeating-linear-gradient(-45deg,transparent 0 4px,var(--void) 4px 5px)}
+

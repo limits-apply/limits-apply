@@ -1,0 +1,19 @@
+/* one orchestrated page-load, nothing scattered after it */
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* Delays key off classes, not child index, so the stagger survives a reordered hero. */
+.hero>*{animation:rise .6s cubic-bezier(.16,.84,.28,1) backwards}
+.hero .eyebrow{animation-delay:.02s}
+.hero h1{animation-delay:.08s}
+.hero .lead{animation-delay:.16s}
+.hero .cta{animation-delay:.26s}
+.hero .pull{animation-delay:.34s}
+.hero-figure{animation-delay:.1s;animation-duration:.9s}
+
+/* the ambient half: an interval that keeps failing to settle, over a drifting scale */
+@keyframes breathe{to{width:var(--w2)}}
+@keyframes drift{to{background-position-x:-22px}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+

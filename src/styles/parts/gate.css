@@ -1,0 +1,5 @@
+.fields{margin:0}
+.fields dt{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:16px}
+.fields dt:first-of-type{margin-top:0}
+.fields dd{margin:5px 0 0;font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--ink-2)}
+.fields dd code{font-family:var(--mono);font-size:12.5px;color:var(--ink)}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+public/reports/
+.ruff_cache/
+.claude/
+.superpowers/
+tasks/
+docs/plans/
+docs/superpowers/
