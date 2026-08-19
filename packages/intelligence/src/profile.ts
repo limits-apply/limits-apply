@@ -23,5 +23,6 @@ export function overlayProfile(base: WorkloadProfile, overlay: LocalOverlay = {}
     intelligenceFloor: overlay.intelligenceFloor ?? base.intelligenceFloor,
     region: overlay.region ?? base.region,
     availableCredentials: overlay.credentials ?? base.availableCredentials,
+    exhaustedDomains: overlay.exhaustedDomains ?? base.exhaustedDomains,
   };
 }

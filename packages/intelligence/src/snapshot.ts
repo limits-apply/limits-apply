@@ -47,5 +47,6 @@ export function validateVerdictSnapshot(snapshot: VerdictSnapshot): string[] {
   if (!snapshot.version) errors.push("version is required");
   if (snapshot.evidenceVersion !== snapshot.verdict.evidenceVersion) errors.push("evidence versions do not match");
   if (snapshot.profile.id !== snapshot.verdict.profile.id) errors.push("profiles do not match");
+  if (!snapshot.verdict.routes) errors.push("verdict predates ranked routes");
   return errors;
 }

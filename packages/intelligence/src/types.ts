@@ -6,7 +6,8 @@ export type RejectionCode =
   | "region"
   | "credentials"
   | "concurrency"
-  | "stale-evidence";
+  | "stale-evidence"
+  | "exhausted";
 
 export interface Evidence<T> {
   value: T;
@@ -35,7 +36,6 @@ export interface Candidate {
   regions: string[];
   credentials: string[];
   concurrency: number;
-  roles?: string[];
 }
 
 export interface WorkloadProfile {
@@ -51,11 +51,12 @@ export interface WorkloadProfile {
   intelligenceFloor: number;
   region: string;
   availableCredentials?: string[];
+  exhaustedDomains?: string[];
 }
 
 export interface LocalOverlay {
-  ownedSubscriptions?: string[];
   credentials?: string[];
+  exhaustedDomains?: string[];
   region?: string;
   monthlyBudgetUsd?: number;
   minimumConcurrency?: number;
@@ -81,6 +82,7 @@ export interface Verdict {
   evidenceVersion: string;
   profile: WorkloadProfile;
   selected: { build: string | null; plan: string | null };
+  routes: { build: string[]; plan: string[] };
   fallbacks: Record<string, string[]>;
   frontier: RankedCandidate[];
   dominated: RankedCandidate[];

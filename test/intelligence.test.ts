@@ -31,6 +31,58 @@ test("verdict rejects hard-gated candidates and selects stable roles", () => {
   expect(generateLiteLlmConfig(verdict, candidates).model_list[0].model_name).toBe("build");
 });
 
+test("build falls back to plan, and LiteLLM gets the list-of-dicts shape it documents", () => {
+  const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2)];
+  const verdict = buildVerdict(candidates, { ...GLOBAL_PROFILE, turnsPerMonth: 1 }, "evidence-v1", "2026-08-17");
+  expect(verdict.fallbacks).toEqual({ build: ["plan"] });
+  expect(generateLiteLlmConfig(verdict, candidates).litellm_settings.fallbacks)
+    .toEqual([{ build: ["build-2", "plan"] }, { plan: ["plan-2"] }]);
+});
+
+test("two access paths on one failure domain yield one deployment, not two rungs of the same ladder", () => {
+  const shared = (id: string, intelligence: number, cost: number): Candidate =>
+    ({ ...candidate(id, intelligence, cost), failureDomain: "one-account" });
+  const candidates = [shared("first", 50, 1), shared("second", 70, 2), candidate("elsewhere", 60, 1.5)];
+  const verdict = buildVerdict(candidates, { ...GLOBAL_PROFILE, turnsPerMonth: 1 }, "evidence-v1", "2026-08-17");
+  expect(verdict.routes.build).toEqual(["first", "elsewhere"]);
+  expect(generateLiteLlmConfig(verdict, candidates).model_list
+    .filter(model => model.model_name.startsWith("build"))
+    .map(model => model.litellm_params.model)).toEqual(["first", "elsewhere"]);
+});
+
+test("a subscription sits out a closed window; a metered path only sits out a burst", () => {
+  const subscription = { ...candidate("seat", 70, 1), billing: "subscription" as const };
+  const metered = candidate("metered", 50, 0.5);
+  const candidates = [subscription, metered];
+  const verdict = buildVerdict(candidates, { ...GLOBAL_PROFILE, turnsPerMonth: 1 }, "evidence-v1", "2026-08-17");
+  const cooldowns = Object.fromEntries(generateLiteLlmConfig(verdict, candidates).model_list
+    .map(model => [model.litellm_params.model, model.litellm_params.cooldown_time]));
+  expect(cooldowns).toEqual({ seat: 300, metered: 60 });
+});
+
+test("an exhausted failure domain leaves both routes at once, not one alias at a time", () => {
+  const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2)];
+  const profile = overlayProfile(GLOBAL_PROFILE, { exhaustedDomains: ["cheap"] });
+  const verdict = buildVerdict(candidates, { ...profile, turnsPerMonth: 1 }, "evidence-v1", "2026-08-17");
+  expect(verdict.rejected).toContainEqual(expect.objectContaining({ candidateId: "cheap", code: "exhausted" }));
+  expect(verdict.routes).toEqual({ build: ["smart"], plan: ["smart"] });
+});
+
+test("exhausting every domain yields null aliases rather than promoting a rejected candidate", () => {
+  const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2)];
+  const profile = overlayProfile(GLOBAL_PROFILE, { exhaustedDomains: ["cheap", "smart"] });
+  const verdict = buildVerdict(candidates, { ...profile, turnsPerMonth: 1 }, "evidence-v1", "2026-08-17");
+  expect(verdict.selected).toEqual({ build: null, plan: null });
+  expect(verdict.routes).toEqual({ build: [], plan: [] });
+});
+
+test("an alias that resolved to nothing is never named as a fallback target", () => {
+  const candidates = [candidate("pricey", 70, 100)];
+  const verdict = buildVerdict(candidates, GLOBAL_PROFILE, "evidence-v1", "2026-08-17");
+  expect(verdict.selected).toEqual({ build: "pricey", plan: null });
+  expect(generateLiteLlmConfig(verdict, candidates).litellm_settings.fallbacks).toEqual([]);
+});
+
 test("build and plan never select a local-billing candidate", () => {
   const cloud = candidate("cloud", 50, 1);
   const local = { ...candidate("local-model", 90, 0.0001), billing: "local" as const, speed: evidence(1) };
@@ -58,7 +110,7 @@ test("local-only evidence fills both aliases: build takes the fastest, plan the 
   expect(verdict.selected.build).toBe("ling");
   expect(verdict.selected.plan).toBe("qwen");
   expect(generateLiteLlmConfig(verdict, candidates).model_list.map(model => model.model_name))
-    .toEqual(["build", "plan"]);
+    .toEqual(["build", "build-2", "plan", "plan-2"]);
 });
 
 test("dominance runs catalog-wide, not scoped to a single provider/plan (diverges from llm-gate)", () => {

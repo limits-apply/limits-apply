@@ -31,13 +31,13 @@ export async function updateGate(
   const previous = await readJson<VerdictSnapshot>(paths.verdict);
   const oldId = previous?.verdict.id ?? null;
   const profileHash = hash(snapshot.profile);
-  if (isNoop(oldId, snapshot.verdict.id)) {
+  const current = await readJson<LiteLlmConfig>(paths.runtime);
+  const config = generateLiteLlmConfig(snapshot.verdict, candidates);
+  if (isNoop(oldId, snapshot.verdict.id) && current && stableJson(current) === stableJson(config)) {
     await appendAudit(paths, auditEntry("noop", { at: now, oldVerdict: oldId, newVerdict: oldId, profileHash }));
     return "noop";
   }
 
-  const current = await readJson<LiteLlmConfig>(paths.runtime);
-  const config = generateLiteLlmConfig(snapshot.verdict, candidates);
   const result = activate(current, config, smokeTest);
   if (result.error) {
     await appendAudit(paths, auditEntry("failure", {

@@ -128,7 +128,7 @@
 
 <section id="rejections">
   <span class="eyebrow">Rejections</span>
-  <h2>Six reasons a candidate never reaches the frontier.</h2>
+  <h2>Seven reasons a candidate never reaches the frontier.</h2>
   <dl class="fields">
     <dt>incompatible</dt><dd>Gateway compatibility is not verified.</dd>
     <dt>identity-workaround</dt><dd>The access path requires a prohibited identity workaround.</dd>
@@ -136,6 +136,11 @@
     <dt>region</dt><dd>The access path is unavailable in the profile's region.</dd>
     <dt>concurrency</dt><dd>The candidate's concurrency is below what the profile requires.</dd>
     <dt>stale-evidence</dt><dd>Critical price evidence has expired.</dd>
+    <dt>exhausted</dt><dd>
+      A quota window on this access path was observed closed and has not reopened yet. The only
+      transient rejection of the seven, and the only one recorded on your machine rather than read
+      from evidence.
+    </dd>
   </dl>
 </section>
 

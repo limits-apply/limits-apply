@@ -47,6 +47,14 @@ export const COMMANDS: CommandSpec[] = [
       { name: "proxy", hasValue: true, description: "LiteLLM proxy base URL for --smoke (default: http://127.0.0.1:4000)." },
     ],
   },
+  {
+    name: "quota",
+    summary: "List access paths recorded as exhausted, record one (quota exhausted <domain> --resets <iso>), or read them out of OpenCode's own message records (quota scan <path>).",
+    flags: [
+      ROOT_FLAG,
+      { name: "resets", hasValue: true, description: "ISO timestamp the window is said to reopen at." },
+    ],
+  },
 ];
 
 export function formatHelp(): string {

@@ -92,6 +92,7 @@ test("every buildVerdict formula and every RejectionCode appears on verdict.html
     credentials: true,
     concurrency: true,
     "stale-evidence": true,
+    exhausted: true,
   };
   for (const code of Object.keys(REJECTION_CODES)) {
     expect(PAGES.verdict, `rejection code missing: ${code}`).toContain(code);
@@ -101,7 +102,7 @@ test("every buildVerdict formula and every RejectionCode appears on verdict.html
 test("validateConfig's four errors appear in the troubleshooting section", () => {
   const errors = validateConfig({
     model_list: [],
-    litellm_settings: { drop_params: true, fallbacks: {} },
+    litellm_settings: { drop_params: true, fallbacks: [] },
     general_settings: { master_key_env: "OTHER", host: "0.0.0.0" as "127.0.0.1", port: 4000 },
   });
   expect(errors).toEqual([

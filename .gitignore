@@ -7,3 +7,5 @@ public/reports/
 tasks/
 docs/plans/
 docs/superpowers/
+.DS_Store
+.env*

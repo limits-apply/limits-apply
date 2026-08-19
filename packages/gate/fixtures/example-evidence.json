@@ -21,8 +21,7 @@
       "identityWorkaround": false,
       "regions": ["global"],
       "credentials": [],
-      "concurrency": 4,
-      "roles": ["build", "plan"]
+      "concurrency": 4
     },
     {
       "id": "example/frontier-strong",
@@ -42,8 +41,27 @@
       "identityWorkaround": false,
       "regions": ["global"],
       "credentials": [],
-      "concurrency": 2,
-      "roles": ["build", "plan"]
+      "concurrency": 2
+    },
+    {
+      "id": "second-vendor/frontier-strong",
+      "model": "second-vendor-frontier-strong",
+      "provider": "second-vendor",
+      "endpoint": "https://second-vendor.invalid/v1",
+      "failureDomain": "second-vendor",
+      "billing": "subscription",
+      "priceUsd": { "value": 20, "rung": "modelled", "source": "https://second-vendor.invalid/pricing", "verified": "2026-08-18" },
+      "allowanceUsd": { "value": 240, "rung": "modelled", "source": "https://second-vendor.invalid/pricing", "verified": "2026-08-18" },
+      "inputRateUsdPerMillion": { "value": 2.4, "rung": "modelled", "source": "https://second-vendor.invalid/pricing", "verified": "2026-08-18" },
+      "cachedInputRateUsdPerMillion": { "value": 1.2, "rung": "modelled", "source": "https://second-vendor.invalid/pricing", "verified": "2026-08-18" },
+      "outputRateUsdPerMillion": { "value": 7.2, "rung": "modelled", "source": "https://second-vendor.invalid/pricing", "verified": "2026-08-18" },
+      "intelligence": { "value": 62, "rung": "modelled", "source": "https://second-vendor.invalid/pricing", "verified": "2026-08-18" },
+      "speed": { "value": 80, "rung": "modelled", "source": "https://second-vendor.invalid/pricing", "verified": "2026-08-18" },
+      "compatible": true,
+      "identityWorkaround": false,
+      "regions": ["global"],
+      "credentials": [],
+      "concurrency": 2
     }
   ]
 }

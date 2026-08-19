@@ -83,9 +83,15 @@
   <span class="eyebrow">Stable aliases</span>
   <h2>Two names that outlive the models behind them.</h2>
   <p>
-    <code>build</code> and <code>plan</code> are stable, periodically recomputed aliases — not
-    per-request routing rules. When the verdict changes, the alias keeps its name and changes
-    what it resolves to, so nothing in your editor configuration has to move.
+    <code>build</code> and <code>plan</code> are stable, periodically recomputed names. What each
+    one resolves to is an ordered chain of access paths rather than a single one — tried best
+    first, with a path that has just refused a request skipped until it recovers. When the verdict
+    changes, the names keep their names and the chains change underneath, so nothing in your editor
+    configuration has to move either way.
+  </p>
+  <p class="note">
+    One access path per failure domain. Two paths onto the same account share a ceiling, so the
+    second is not a route out of the first — the ranking keeps the better one and drops the other.
   </p>
   <div class="cols">
     <div class="panel">
@@ -93,7 +99,7 @@
       <dl class="fields">
         <dt>Address</dt><dd><code>http://127.0.0.1:4000</code></dd>
         <dt>Master key</dt><dd>read from <code>LITELLM_MASTER_KEY</code></dd>
-        <dt>Aliases</dt><dd><code>build</code> · <code>plan</code>, plus hidden role fallbacks</dd>
+        <dt>Aliases</dt><dd><code>build</code> · <code>plan</code>, with <code>build</code> falling back to <code>plan</code></dd>
       </dl>
       <p class="note">
         LiteLLM binds to loopback. A configuration that binds anywhere else fails validation
@@ -148,7 +154,7 @@
   <span class="eyebrow">Update status</span>
   <h2>Three outcomes, all of them logged.</h2>
   <dl class="fields">
-    <dt>noop</dt><dd>The new verdict is identical to the one already active. Nothing is written.</dd>
+    <dt>noop</dt><dd>The new verdict is identical to the one already active <em>and</em> the configuration it generates already matches what is on disk. Nothing is written — and a configuration that has drifted from either is rewritten rather than skipped.</dd>
     <dt>activated</dt><dd>A candidate passed every check and replaced the previous configuration.</dd>
     <dt>failed</dt><dd>A candidate was rejected. The active configuration is untouched.</dd>
   </dl>
@@ -187,6 +193,43 @@
   </p>
 </section>
 
+<section id="quota">
+  <span class="eyebrow">Closed windows</span>
+  <h2>Gate never counts what you have left.</h2>
+  <p>
+    It records only that a window was observed closed, and the time it was said to reopen — and it
+    says which of the two it was told and which it inferred. A count of what remains would need a
+    published ceiling, and dividing your usage by a published ceiling is exactly the inference this
+    project refuses to make.
+  </p>
+  <p>
+    Two timescales, two mechanisms. A burst refusal is LiteLLM's problem: the path it came from
+    cools for seconds and the chain moves on, with no involvement from Gate at all. A flat-rate
+    window closing for hours is Gate's: the failure domain is recorded in
+    <code>quota.jsonl</code> and the next <code>update</code> rejects every candidate on it until
+    the timestamp passes. That rejection removes the domain from both chains at once, which
+    per-deployment cooling cannot do.
+  </p>
+  <div class="cols">
+    <div class="panel">
+      <span class="kicker">What a record says</span>
+      <dl class="fields">
+        <dt>domain</dt><dd>The failure domain, not a plan or a model</dd>
+        <dt>resetsAt</dt><dd>When the window was said to reopen</dd>
+        <dt>rung</dt><dd><code>observed</code> read from the refusal · <code>derived</code> inferred from a window length</dd>
+      </dl>
+    </div>
+    <div class="panel">
+      <span class="kicker">Where it comes from</span>
+      <p class="note">
+        A refusal you record yourself, or one read out of OpenCode's own message records. A
+        post-activation ping cannot supply one: a refusal at the alias means every path behind it
+        is cooling, which names no domain.
+      </p>
+    </div>
+  </div>
+</section>
+
 <section id="audit">
   <span class="eyebrow">Audit</span>
   <h2>Every transition, one line each.</h2>
@@ -198,7 +241,7 @@
     <dt>event</dt><dd><code>update</code> · <code>activate</code> · <code>rollback</code> · <code>noop</code> · <code>failure</code></dd>
     <dt>at</dt><dd>When the transition happened.</dd>
     <dt>oldVerdict / newVerdict</dt><dd>Verdict identifiers either side of it.</dd>
-    <dt>profileHash</dt><dd>A hash of the profile that produced it — comparable across entries, and non-secret.</dd>
+    <dt>profileHash</dt><dd>A hash of the overlaid profile that produced it, locally observed quota state included — comparable across entries, and non-secret.</dd>
     <dt>reason</dt><dd>Present on a failure or a rollback: what rejected the candidate.</dd>
   </dl>
   <p class="note">
@@ -226,7 +269,8 @@
         <li><a href="#profile">Local profile</a></li>
         <li><a href="#update">Update status</a></li>
         <li><a href="#recovery">Recovery</a></li>
-        <li><a href="#audit">Audit</a></li>
+        <li><a href="#quota">Closed windows</a></li>
+<li><a href="#audit">Audit</a></li>
       </ul>
       </nav>
 

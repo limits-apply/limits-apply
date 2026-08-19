@@ -20,7 +20,22 @@ function reject(candidate: Candidate, profile: WorkloadProfile, now: string): Re
   if (profile.region !== "global" && !candidate.regions.includes(profile.region)) return { candidateId: candidate.id, code: "region", reason: `The access path is unavailable in ${profile.region}.` };
   if (candidate.concurrency < profile.minimumConcurrency) return { candidateId: candidate.id, code: "concurrency", reason: `Concurrency ${candidate.concurrency} is below the required ${profile.minimumConcurrency}.` };
   if (candidate.priceUsd.expires && candidate.priceUsd.expires < now) return { candidateId: candidate.id, code: "stale-evidence", reason: "Critical price evidence has expired." };
+  if (profile.exhaustedDomains?.includes(candidate.failureDomain)) {
+    return { candidateId: candidate.id, code: "exhausted", reason: "The observed quota window on this access path has not reopened yet." };
+  }
   return null;
+}
+
+/** Two access paths on one failure domain share a ceiling, so the second is not a route out of the first. */
+function routeOrder(rows: RankedCandidate[]): string[] {
+  const domains = new Set<string>();
+  const ids: string[] = [];
+  for (const row of rows) {
+    if (domains.has(row.candidate.failureDomain)) continue;
+    domains.add(row.candidate.failureDomain);
+    ids.push(row.candidate.id);
+  }
+  return ids;
 }
 
 function frontier(rows: RankedCandidate[]): { frontier: RankedCandidate[]; dominated: RankedCandidate[] } {
@@ -59,20 +74,24 @@ export function buildVerdict(
   const pool = candidates.every(candidate => candidate.billing === "local")
     ? front
     : frontier(eligible.filter(row => row.candidate.billing !== "local")).frontier;
-  const build = pool
-    .filter(row => row.candidate.intelligence.value >= profile.intelligenceFloor)
-    .sort((a, b) => a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)[0]?.candidate.id ?? null;
-  const plan = pool
-    .filter(row => row.effectiveCostUsd * profile.turnsPerMonth <= profile.monthlyBudgetUsd)
-    .sort((a, b) => b.candidate.intelligence.value - a.candidate.intelligence.value
-      || a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)[0]?.candidate.id ?? null;
+  const routes = {
+    build: routeOrder(pool
+      .filter(row => row.candidate.intelligence.value >= profile.intelligenceFloor)
+      .sort((a, b) => a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)),
+    plan: routeOrder(pool
+      .filter(row => row.effectiveCostUsd * profile.turnsPerMonth <= profile.monthlyBudgetUsd)
+      .sort((a, b) => b.candidate.intelligence.value - a.candidate.intelligence.value
+        || a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)),
+  };
+  const build = routes.build[0] ?? null;
+  const plan = routes.plan[0] ?? null;
   const selected = { build, plan };
   const formulas = [
     "effective cost = input + cached input × (1 − cache discount) + output",
     "build = cheapest frontier candidate above the intelligence floor",
     "plan = strongest frontier candidate within the monthly budget",
   ];
-  const body = JSON.stringify({ evidenceVersion, profile, selected, rejected, frontier: front.map(row => row.candidate.id) });
+  const body = JSON.stringify({ evidenceVersion, profile, selected, routes, rejected, frontier: front.map(row => row.candidate.id) });
   let hash = 2166136261;
   for (let index = 0; index < body.length; index += 1) hash = Math.imul(hash ^ body.charCodeAt(index), 16777619);
   return {
@@ -80,7 +99,8 @@ export function buildVerdict(
     evidenceVersion,
     profile,
     selected,
-    fallbacks: {},
+    routes,
+    fallbacks: build && plan ? { build: ["plan"] } : {},
     frontier: front,
     dominated,
     rejected,

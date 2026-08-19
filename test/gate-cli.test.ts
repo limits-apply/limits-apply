@@ -89,6 +89,66 @@ test("running update --example --no-opencode twice appends noop and leaves the r
   });
 });
 
+test("update --example emits a ranked chain per alias, one deployment per failure domain", async () => {
+  await withRoot(async root => {
+    expect(await main(["update", "--root", root, "--example", "--no-opencode"], io())).toBe(EXIT.ok);
+    const runtime = JSON.parse(await readFile(gatePaths(root).runtime, "utf8"));
+
+    expect(runtime.model_list.map((model: { model_name: string }) => model.model_name))
+      .toEqual(["build", "build-2", "plan", "plan-2"]);
+    const domains = runtime.model_list.map((model: { litellm_params: { api_base: string } }) => model.litellm_params.api_base);
+    expect(new Set(domains.slice(0, 2)).size).toBe(2);
+    expect(runtime.litellm_settings.fallbacks).toEqual([{ build: ["build-2", "plan"] }, { plan: ["plan-2"] }]);
+  });
+});
+
+test("a recorded window removes its failure domain from the next update, and returns it once it reopens", async () => {
+  await withRoot(async root => {
+    const paths = gatePaths(root);
+    expect(await main(["update", "--root", root, "--example", "--no-opencode"], io())).toBe(EXIT.ok);
+    const before = JSON.parse(await readFile(paths.runtime, "utf8"));
+    const domainOf = (config: { model_list: { litellm_params: { api_base: string } }[] }) =>
+      new Set(config.model_list.map(model => model.litellm_params.api_base));
+    expect(domainOf(before)).toContain("https://second-vendor.invalid/v1");
+
+    const closed = io();
+    expect(await main(["quota", "--root", root, "exhausted", "second-vendor", "--resets", "2099-01-01T00:00:00Z"], closed)).toBe(EXIT.ok);
+    expect(await main(["update", "--root", root, "--example", "--no-opencode"], io())).toBe(EXIT.ok);
+    const during = JSON.parse(await readFile(paths.runtime, "utf8"));
+    expect(domainOf(during)).not.toContain("https://second-vendor.invalid/v1");
+
+    const listed = io();
+    expect(await main(["quota", "--root", root], listed)).toBe(EXIT.ok);
+    expect(listed.stdoutLines.join("")).toContain("second-vendor: reopens 2099-01-01T00:00:00.000Z (derived, manual)");
+
+    expect(await main(["quota", "--root", root, "exhausted", "second-vendor", "--resets", "2020-01-01T00:00:00Z"], io())).toBe(EXIT.ok);
+    expect(await main(["update", "--root", root, "--example", "--no-opencode"], io())).toBe(EXIT.ok);
+    const after = JSON.parse(await readFile(paths.runtime, "utf8"));
+    expect(domainOf(after)).toContain("https://second-vendor.invalid/v1");
+  });
+});
+
+test("a runtime that no longer matches what the verdict generates is rewritten, not skipped as a noop", async () => {
+  await withRoot(async root => {
+    const paths = gatePaths(root);
+    expect(await main(["update", "--root", root, "--example", "--no-opencode"], io())).toBe(EXIT.ok);
+    const generated = await readFile(paths.runtime, "utf8");
+
+    const stale = JSON.parse(generated);
+    delete stale.litellm_settings.fallbacks;
+    await writeFile(paths.runtime, `${JSON.stringify(stale, null, 2)}\n`, "utf8");
+
+    expect(await main(["update", "--root", root, "--example", "--no-opencode"], io())).toBe(EXIT.ok);
+    expect(await readFile(paths.runtime, "utf8")).toBe(generated);
+    const afterRewrite = (await readFile(paths.audit, "utf8")).trim().split("\n").map(line => JSON.parse(line));
+    expect(afterRewrite.at(-1).event).toBe("activate");
+
+    expect(await main(["update", "--root", root, "--example", "--no-opencode"], io())).toBe(EXIT.ok);
+    const afterSettling = (await readFile(paths.audit, "utf8")).trim().split("\n").map(line => JSON.parse(line));
+    expect(afterSettling.at(-1).event).toBe("noop");
+  });
+});
+
 test("an OpenCode file with unrelated keys survives the merge", async () => {
   await withRoot(async root => {
     const opencodePath = join(root, "opencode.json");
@@ -154,7 +214,9 @@ test("status --smoke reports failure and exits smoke when the proxy is unreachab
     expect(await main(["update", "--root", root, "--example", "--no-opencode"], context)).toBe(EXIT.ok);
     const code = await main(["status", "--root", root, "--smoke"], context);
     expect(code).toBe(EXIT.smoke);
-    expect(context.stdoutLines.join("")).toContain("smoke build: fail");
+    const printed = context.stdoutLines.join("");
+    expect(printed).toContain("smoke build: fail");
+    expect(printed.match(/smoke build:/g)).toHaveLength(1);
   });
 });
 

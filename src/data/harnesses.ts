@@ -1,6 +1,6 @@
 import { mergeOpencodeConfig } from "../../packages/gate/src/opencode";
 
-export type HarnessStatus = "verified" | "recipe" | "planned";
+type HarnessStatus = "verified" | "recipe" | "planned";
 
 export interface Harness {
   id: string;
@@ -15,19 +15,9 @@ export interface Harness {
   lang?: "json" | "toml";
 }
 
-export const STATUS_DEFS: Record<HarnessStatus, { label: string; description: string }> = {
-  verified: {
-    label: "Verified",
-    description: "Gate writes this configuration itself, and a test compares the published snippet to the code that writes it.",
-  },
-  recipe: {
-    label: "Recipe",
-    description: "A configuration a human ran once, on a dated day — not generated, not exercised in CI.",
-  },
-  planned: {
-    label: "Planned",
-    description: "No integration code, no verified recipe. The snippet column stays empty.",
-  },
+export const VERIFIED_DEF = {
+  label: "Verified",
+  description: "Gate writes this configuration itself, and a test compares the published snippet to the code that writes it.",
 };
 
 const OPENCODE_SNIPPET = JSON.stringify(mergeOpencodeConfig({}).config, null, 2);

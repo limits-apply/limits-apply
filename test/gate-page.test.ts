@@ -22,6 +22,7 @@ const VERDICT: Verdict = {
   evidenceVersion: "e1",
   profile: GLOBAL_PROFILE,
   selected: { build: null, plan: null },
+  routes: { build: [], plan: [] },
   fallbacks: {},
   frontier: [],
   dominated: [],
@@ -115,7 +116,7 @@ test("the update section names all three outcomes updateGate can return", () => 
 test("the validation list matches what validateConfig actually rejects", () => {
   const errors = validateConfig({
     model_list: [],
-    litellm_settings: { drop_params: true, fallbacks: {} },
+    litellm_settings: { drop_params: true, fallbacks: [] },
     general_settings: { master_key_env: "OTHER", host: "0.0.0.0" as "127.0.0.1", port: 4000 },
   });
   expect(errors).toEqual([

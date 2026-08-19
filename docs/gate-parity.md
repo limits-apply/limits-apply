@@ -37,6 +37,10 @@ exactly the fallback promotion the next section preserves from `rank.py`. `GLOBA
 `intelligenceFloor` is set for the frontier and no local tier clears it, so `LocalOverlay` carries an
 `intelligenceFloor` override for callers asking the local question.
 
+A fallback tier does exist here, but it is not `rank.py`'s: `build` falls back to `plan`, and each
+alias resolves to a chain of access paths ranked by its own sort — an ordering, not a caste of
+billing mode. A PAYG row can still fill a primary alias, and can still be the first link in it.
+
 ## Preserved behavior
 
 - **Tie-breaking**: `plan` orders by intelligence descending, then effective cost ascending —
@@ -48,6 +52,10 @@ exactly the fallback promotion the next section preserves from `rank.py`. `GLOBA
   list is empty ("No eligible subscription is a hard failure, not permission to promote PAYG").
   Tested in `test/intelligence.test.ts` ("build/plan stay null when every remote candidate is
   rejected...").
+  Ranked routes make this rule carry more, not less: an exhausted quota window is a *rejection*,
+  so exhausting every domain empties both chains and both aliases resolve to `null` rather than
+  promoting a rejected or local candidate. Tested in `test/intelligence.test.ts` ("exhausting every
+  domain yields null aliases rather than promoting a rejected candidate").
 - **Dominance test**: "at least as good on every axis, strictly better on at least one" — same
   logical shape as `rank.py`'s `smarter and cheaper and strict`, just applied catalog-wide
   instead of per-tuple (divergence 1 above).
@@ -70,3 +78,10 @@ exactly the fallback promotion the next section preserves from `rank.py`. `GLOBA
   requires `activate`/`updateGate` to accept an async smoke-test callback so a real network
   check can gate the commit itself; that is a change to already-tested existing code and is
   deliberately left for when Gate drives a real LiteLLM process end-to-end.
+
+## Beyond the port
+
+`rank.py` has no notion of ranked routes or of an observed quota window. `Verdict.routes` (one
+access path per `failureDomain`, in each alias's own preference order) and `quota.jsonl` (a closed
+window and the time it was said to reopen, recorded on the local machine) are additions on top of
+the port, not parity gaps to close. Neither has a counterpart to diverge from.

@@ -10,6 +10,7 @@ export interface GatePaths {
   verdict: string;
   runtime: string;
   audit: string;
+  quota: string;
 }
 
 export function gatePaths(root: string): GatePaths {
@@ -19,6 +20,7 @@ export function gatePaths(root: string): GatePaths {
     verdict: join(root, "verdict.json"),
     runtime: join(root, "litellm.yaml"),
     audit: join(root, "audit.jsonl"),
+    quota: join(root, "quota.jsonl"),
   };
 }
 

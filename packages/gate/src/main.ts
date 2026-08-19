@@ -1,4 +1,4 @@
-import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rename, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { parseArgs } from "node:util";
 import type { Candidate, VerdictSnapshot } from "@limits-apply/intelligence";
@@ -11,6 +11,10 @@ import { profileOverlay } from "./profile";
 import { defaultGateRoot, gatePaths, type GatePaths } from "./storage";
 import type { LiteLlmConfig } from "./litellm";
 import { smokeTestAliases, type SmokePoster } from "./smoke";
+import { appendQuota, readQuota, scanOpencodeMessages, type OpencodeMessage } from "./quota";
+
+/** A refusal record carries no reset time, so the window length is what turns it into a reopen time. */
+const WINDOW_HOURS = 5;
 
 export interface GateIO {
   env: Record<string, string | undefined>;
@@ -63,15 +67,18 @@ async function loadUpdateSource(
   paths: GatePaths,
   io: GateIO,
 ): Promise<{ snapshot: VerdictSnapshot; candidates: Candidate[] }> {
+  const exhausted = await readQuota(paths.quota, new Date().toISOString());
   if (values.verdict) {
     const snapshot = parseCurrentVerdict(await loadText(values.verdict, io));
     const candidates = [...snapshot.verdict.frontier, ...snapshot.verdict.dominated].map(row => row.candidate);
+    if (exhausted.length) io.stderr(`note: ${exhausted.length} exhausted domain(s) recorded locally do not apply to a published verdict\n`);
     return { snapshot, candidates };
   }
   const raw = values.evidence ? await loadText(values.evidence, io) : JSON.stringify(exampleEvidenceJson);
   const evidence = parseEvidence(raw);
   const profile = await bootstrapProfile(paths);
-  const verdict = personalizeVerdict(evidence.candidates, GLOBAL_PROFILE, profileOverlay(profile), evidence.version);
+  const overlay = { ...profileOverlay(profile), exhaustedDomains: exhausted.map(event => event.domain) };
+  const verdict = personalizeVerdict(evidence.candidates, GLOBAL_PROFILE, overlay, evidence.version);
   const snapshot: VerdictSnapshot = {
     kind: "verdict",
     version: "1",
@@ -153,6 +160,73 @@ async function cmdUpdate(rest: string[], io: GateIO): Promise<number> {
   return result.gate === "failed" ? EXIT.failed : EXIT.ok;
 }
 
+async function cmdQuota(rest: string[], io: GateIO): Promise<number> {
+  let values: { root?: string; resets?: string };
+  let positionals: string[];
+  try {
+    ({ values, positionals } = parseArgs({
+      args: rest,
+      options: { root: { type: "string" }, resets: { type: "string" } },
+      allowPositionals: true,
+    }));
+  } catch (error) {
+    io.stderr(`${(error as Error).message}\n`);
+    return EXIT.usage;
+  }
+  const paths = gatePaths(values.root ?? defaultGateRoot(io.env, io.home));
+  const now = new Date().toISOString();
+
+  if (positionals.length === 0) {
+    const live = await readQuota(paths.quota, now);
+    if (live.length === 0) io.stdout("No access path is recorded as exhausted.\n");
+    for (const event of live) io.stdout(`${event.domain}: reopens ${event.resetsAt} (${event.rung}, ${event.source})\n`);
+    return EXIT.ok;
+  }
+
+  const [verb, domain] = positionals;
+  if (verb === "scan") {
+    if (!domain) {
+      io.stderr("quota scan needs the path to an OpenCode message directory\n");
+      return EXIT.usage;
+    }
+    const snapshot = await readJsonOrNull<VerdictSnapshot>(paths.verdict);
+    if (!snapshot) {
+      io.stderr("No verdict is active in this root, so a provider cannot be mapped to a failure domain.\n");
+      return EXIT.failed;
+    }
+    const byProvider = new Map([...snapshot.verdict.frontier, ...snapshot.verdict.dominated]
+      .map(row => [row.candidate.provider, row.candidate.failureDomain] as const));
+    const messages: OpencodeMessage[] = [];
+    for (const file of await readdir(domain, { recursive: true, withFileTypes: true })) {
+      if (!file.isFile() || !file.name.endsWith(".json")) continue;
+      const parsed = await readJsonOrNull<OpencodeMessage>(join(file.parentPath, file.name));
+      if (parsed) messages.push(parsed);
+    }
+    const { events, unmapped } = scanOpencodeMessages(messages, provider => byProvider.get(provider) ?? null, WINDOW_HOURS);
+    for (const event of events) await appendQuota(paths.quota, event);
+    for (const provider of unmapped) io.stderr(`note: no candidate maps provider "${provider}" to a failure domain\n`);
+    io.stdout(`quota: ${events.length} closed window(s) recorded from ${messages.length} message(s)\n`);
+    return EXIT.ok;
+  }
+  if (verb !== "exhausted" || !domain) {
+    io.stderr("quota takes no arguments, or `exhausted <domain> --resets <iso>`, or `scan <path>`\n");
+    return EXIT.usage;
+  }
+  if (!values.resets || Number.isNaN(Date.parse(values.resets))) {
+    io.stderr("quota exhausted needs --resets with an ISO timestamp\n");
+    return EXIT.usage;
+  }
+  await appendQuota(paths.quota, {
+    domain,
+    observedAt: now,
+    resetsAt: new Date(values.resets).toISOString(),
+    rung: "derived",
+    source: "manual",
+  });
+  io.stdout(`quota: ${domain} exhausted until ${new Date(values.resets).toISOString()}\n`);
+  return EXIT.ok;
+}
+
 async function cmdStatus(rest: string[], io: GateIO): Promise<number> {
   let values: { root?: string; smoke?: boolean; proxy?: string };
   try {
@@ -175,6 +249,9 @@ async function cmdStatus(rest: string[], io: GateIO): Promise<number> {
   io.stdout(`verdict: ${snapshot.verdict.id}\n`);
   io.stdout(`build: ${snapshot.verdict.selected.build ?? "none"}\n`);
   io.stdout(`plan: ${snapshot.verdict.selected.plan ?? "none"}\n`);
+  for (const event of await readQuota(paths.quota, new Date().toISOString())) {
+    io.stdout(`exhausted ${event.domain}: reopens ${event.resetsAt} (${event.rung}, ${event.source})\n`);
+  }
 
   if (!values.smoke) return EXIT.ok;
 
@@ -191,7 +268,9 @@ async function cmdStatus(rest: string[], io: GateIO): Promise<number> {
     });
     return { status: response.status, body: await response.text() };
   };
-  const results = await smokeTestAliases(post, values.proxy ?? "http://127.0.0.1:4000", runtime.model_list.map(model => model.model_name));
+  const deployed = new Set(runtime.model_list.map(model => model.model_name));
+  const aliases = (["build", "plan"] as const).filter(alias => deployed.has(alias));
+  const results = await smokeTestAliases(post, values.proxy ?? "http://127.0.0.1:4000", aliases);
   for (const [alias, ok] of Object.entries(results)) io.stdout(`smoke ${alias}: ${ok ? "ok" : "fail"}\n`);
   return Object.values(results).every(Boolean) ? EXIT.ok : EXIT.smoke;
 }
@@ -213,6 +292,7 @@ export async function main(argv: string[], io: GateIO): Promise<number> {
     case "init": return cmdInit(rest, io);
     case "update": return cmdUpdate(rest, io);
     case "status": return cmdStatus(rest, io);
+    case "quota": return cmdQuota(rest, io);
     default: return EXIT.usage;
   }
 }

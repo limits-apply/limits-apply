@@ -69,7 +69,7 @@
 
 <section id="commands">
   <span class="eyebrow">Commands</span>
-  <h2>init · update · status.</h2>
+  <h2>init · update · status · quota.</h2>
 
   <div class="panel">
     <h3 id="cmd-init">limitsapply init</h3>
@@ -102,6 +102,27 @@
       <dt>--proxy &lt;value&gt;</dt><dd>LiteLLM proxy base URL for --smoke (default: http://127.0.0.1:4000).</dd>
     </dl>
   </div>
+
+  <div class="panel">
+    <h3 id="cmd-quota">limitsapply quota</h3>
+    <p>
+      With no arguments, list the access paths recorded as exhausted. With
+      <code>exhausted &lt;domain&gt;</code>, record that one closed its window. With
+      <code>scan &lt;path&gt;</code>, read them out of OpenCode's own message records — one JSON file
+      per message — mapping each <code>providerID</code> to a failure domain through the active
+      verdict, and naming on stderr any provider it cannot map rather than dropping it.
+    </p>
+    <dl class="fields">
+      <dt>--root &lt;value&gt;</dt><dd>Gate root directory (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+      <dt>--resets &lt;value&gt;</dt><dd>ISO timestamp the window is said to reopen at.</dd>
+    </dl>
+    <p class="note">
+      A recorded window takes effect at the next <code>update</code>, which rejects every candidate
+      on that failure domain until the timestamp passes. It counts nothing: Gate never knows how
+      much of an allowance is left, only that a window was seen closed and when it was said to
+      reopen.
+    </p>
+  </div>
 </section>
 
 <section id="exit-codes">
@@ -117,7 +138,7 @@
 
 <section id="files">
   <span class="eyebrow">Files &amp; root</span>
-  <h2>One root directory, four files.</h2>
+  <h2>One root directory, five files.</h2>
   <p>
     Every command resolves its root the same way: <code>LIMITSAPPLY_HOME</code>, then
     <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code> — or
@@ -128,6 +149,7 @@
     <dt>verdict.json</dt><dd>The verdict currently active on this machine.</dd>
     <dt>litellm.yaml</dt><dd>Generated proxy configuration — an output, never a setting.</dd>
     <dt>audit.jsonl</dt><dd>One line per transition: activation, no-op, failure, rollback.</dd>
+    <dt>quota.jsonl</dt><dd>One line per observed closed window. Local to this machine, never published.</dd>
   </dl>
 </section>
 

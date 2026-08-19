@@ -47,7 +47,15 @@ pre code .t-ph,pre code .t-com{color:var(--ink-3);font-style:italic}
 .hcard-head{display:flex;align-items:center;gap:8px;margin:0 0 8px}
 .hcard-head h3{margin:0;font:600 15px var(--sans);flex:1}
 .hcard p{margin:0 0 12px;font-family:var(--serif);font-size:13.5px;line-height:1.6;color:var(--ink-2)}
-.hcard pre{margin:0 0 12px;padding:12px 14px}
+.hsnip{margin:0 0 12px}
+.hsnip summary{cursor:pointer;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.hsnip summary:hover{color:var(--signal)}
+.hsnip-body{position:relative;margin:10px 0 0}
+.hcopy{position:absolute;top:8px;right:8px;padding:4px 8px;background:var(--panel);
+  border:1px solid var(--rule);border-radius:var(--r);cursor:pointer;
+  font:500 9px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.hcopy:hover{color:var(--signal);border-color:var(--signal)}
+.hcard pre{margin:0;padding:12px 14px}
 .hcard pre code{font-size:11.5px;line-height:1.55}
 .hcard .fields{margin:0 0 12px}
 .hcard .note{margin:0}
@@ -60,6 +68,3 @@ pre code .t-ph,pre code .t-com{color:var(--ink-3);font-style:italic}
 .hstatus::before{content:"";width:6px;height:6px;border:1px solid currentColor;flex:none;border-radius:1px}
 .hstatus.verified{color:var(--signal)}
 .hstatus.verified::before{background:currentColor}
-.hstatus.recipe{color:var(--amber)}
-.hstatus.recipe::before{background:linear-gradient(-45deg,currentColor 50%,transparent 50%)}
-.hstatus.planned{color:var(--ink-3)}

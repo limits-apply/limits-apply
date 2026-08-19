@@ -8,7 +8,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test } from "vitest";
 import { mergeOpencodeConfig } from "../packages/gate/src/opencode";
-import { HARNESSES, STATUS_DEFS } from "../src/data/harnesses";
+import { HARNESSES, VERIFIED_DEF } from "../src/data/harnesses";
 
 const ROOT = join(__dirname, "..");
 const harnessesHtml = readFileSync(join(ROOT, "docs", "harnesses.html"), "utf8");
@@ -44,14 +44,20 @@ test("ids are unique and slug-safe, and every site URL is https:", () => {
   }
 });
 
-test("all three status definitions appear on docs/harnesses.html", () => {
-  for (const { description } of Object.values(STATUS_DEFS)) {
-    expect(harnessesHtml, `missing status definition: ${description}`).toContain(description);
-  }
+test("the one mark the cards can carry is defined on docs/harnesses.html", () => {
+  expect(harnessesHtml.replace(/\s+/g, " ")).toContain(VERIFIED_DEF.description);
 });
 
-test("the page declares the mount point src/ui/harness-table.ts renders into", () => {
+test("the page declares both mount points src/ui/harness-table.ts renders into", () => {
   expect(harnessesHtml).toContain(`id="harness-cards"`);
+  expect(harnessesHtml).toContain(`id="harness-planned"`);
+});
+
+test("a row carries a snippet exactly when it is not planned, so the two sections split cleanly", () => {
+  for (const harness of HARNESSES) {
+    expect(harness.snippet === null, `${harness.id} is on the wrong side of the split`)
+      .toBe(harness.status === "planned");
+  }
 });
 
 test("the openai-compatible surface names the same proxy address gate.html and the CLI reference use", () => {

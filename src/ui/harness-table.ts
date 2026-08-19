@@ -1,11 +1,19 @@
 import { html, nothing } from "lit-html";
 
-import { HARNESSES, STATUS_DEFS, type Harness } from "../data/harnesses";
+import { HARNESSES, VERIFIED_DEF, type Harness } from "../data/harnesses";
 import { icon } from "./cells";
 import { el, mount } from "./dom";
 
+const copy = (text: string) => (event: Event) => {
+  const button = event.currentTarget as HTMLButtonElement;
+  navigator.clipboard.writeText(text).then(() => {
+    button.textContent = "Copied";
+    setTimeout(() => { button.textContent = "Copy"; }, 1200);
+  });
+};
+
 const statusTag = (status: Harness["status"]) =>
-  html`<span class="hstatus ${status}">${STATUS_DEFS[status].label}</span>`;
+  status === "verified" ? html`<span class="hstatus verified">${VERIFIED_DEF.label}</span>` : nothing;
 
 function card(harness: Harness) {
   return html`
@@ -17,8 +25,14 @@ function card(harness: Harness) {
     </div>
     <p>${harness.summary}</p>
     ${harness.snippet
-      ? html`<pre><code class="lang-${harness.lang ?? "json"}">${harness.snippet}</code></pre>`
-      : html`<p class="note">No snippet yet — see the <a href="./index.html#roadmap">roadmap</a>.</p>`}
+      ? html`<details class="hsnip">
+          <summary>Configuration</summary>
+          <div class="hsnip-body">
+            <button class="hcopy" type="button" @click=${copy(harness.snippet)}>Copy</button>
+            <pre><code class="lang-${harness.lang ?? "json"}">${harness.snippet}</code></pre>
+          </div>
+        </details>`
+      : nothing}
     ${(harness.date || harness.configPath) ? html`
     <dl class="fields">
       ${harness.date ? html`<dt>Run on</dt><dd>${harness.date}</dd>` : nothing}
@@ -29,5 +43,6 @@ function card(harness: Harness) {
 }
 
 export function renderHarnesses(): void {
-  mount(el("harness-cards"), html`${HARNESSES.map(card)}`);
+  mount(el("harness-cards"), html`${HARNESSES.filter(h => h.snippet !== null).map(card)}`);
+  mount(el("harness-planned"), html`${HARNESSES.filter(h => h.snippet === null).map(card)}`);
 }

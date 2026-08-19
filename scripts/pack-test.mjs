@@ -19,8 +19,12 @@ try {
   const app = join(work, "app");
   run("npm", ["install", "--prefix", app, "--no-audit", "--no-fund", "--install-strategy=shallow", packed], work);
 
-  const installed = readdirSync(join(app, "node_modules")).filter(name => !name.startsWith("."));
-  if (installed.join() !== "limitsapply") {
+  const listed = dir => readdirSync(dir).filter(name => !name.startsWith("."));
+  const scopes = listed(join(app, "node_modules"));
+  const installed = scopes.flatMap(scope =>
+    scope.startsWith("@") ? listed(join(app, "node_modules", scope)).map(name => `${scope}/${name}`) : [scope],
+  );
+  if (installed.join() !== "@limits-apply/cli") {
     throw new Error(`tarball pulled in more than itself: ${installed.join(", ")}`);
   }
 

@@ -1,15 +1,15 @@
 # Changelog
 
 All notable changes will be documented here. The project follows Keep a Changelog's structure.
-`limitsapply`, the Gate CLI, is the one distributable package and follows semantic versioning; the
-site and the data snapshots are dated rather than versioned.
+`@limits-apply/cli`, the Gate CLI, is the one distributable package and follows semantic
+versioning; the site and the data snapshots are dated rather than versioned.
 
 ## Unreleased
 
 ### Added
 
-- `limitsapply` published to npm as a single pre-built file with no runtime dependencies, released
-  from a `v*` tag with npm provenance.
+- `@limits-apply/cli` published to npm as a single pre-built file with no runtime dependencies,
+  released from a `v*` tag with npm provenance. It installs one command, `limitsapply`.
 - `pnpm gate:pack-test` packs the tarball, installs it into a throwaway prefix and drives the CLI
   through it, so a broken package fails before the registry sees it.
 - Syntax colouring on the documentation code blocks.

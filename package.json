@@ -1,5 +1,5 @@
 {
-  "name": "limitsapply-site",
+  "name": "@limits-apply/site",
   "private": true,
   "version": "0.1.0",
   "description": "Open evidence and tooling for the economics of AI subscriptions, APIs, and local inference.",
