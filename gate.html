@@ -61,14 +61,12 @@
     Gate keeps everything it owns under a single root directory. Three of those files are
     outputs; one of them is yours.
   </p>
-  <div class="panel">
-    <dl class="fields">
-      <dt>profile.json</dt><dd>Your local overlay. The only file you edit.</dd>
-      <dt>verdict.json</dt><dd>The verdict currently active on this machine.</dd>
-      <dt>litellm.yaml</dt><dd>Generated proxy configuration — an output, never a setting.</dd>
-      <dt>audit.jsonl</dt><dd>One line per transition: activation, no-op, failure, rollback.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>profile.json</dt><dd>Your local overlay. The only file you edit.</dd>
+    <dt>verdict.json</dt><dd>The verdict currently active on this machine.</dd>
+    <dt>litellm.yaml</dt><dd>Generated proxy configuration — an output, never a setting.</dd>
+    <dt>audit.jsonl</dt><dd>One line per transition: activation, no-op, failure, rollback.</dd>
+  </dl>
   <p class="note">
     Provider secrets never enter any of these files. Gate records credential <em>names</em> and
     whether they are available; the values stay in your environment or secret store, and nothing
@@ -125,25 +123,21 @@
     With no local configuration at all, Gate runs the published <code>global-v1</code> workload —
     the same assumptions the ledger prints:
   </p>
-  <div class="panel">
-    <dl class="fields">
-      <dt>Monthly budget</dt><dd>$20</dd>
-      <dt>Turns per month</dt><dd>100</dd>
-      <dt>Tokens per turn</dt><dd>12,000 in · 1,500 out</dd>
-      <dt>Assumed cache discount</dt><dd>none</dd>
-      <dt>Minimum concurrency</dt><dd>2</dd>
-      <dt>Intelligence floor</dt><dd>45</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>Monthly budget</dt><dd>$20</dd>
+    <dt>Turns per month</dt><dd>100</dd>
+    <dt>Tokens per turn</dt><dd>12,000 in · 1,500 out</dd>
+    <dt>Assumed cache discount</dt><dd>none</dd>
+    <dt>Minimum concurrency</dt><dd>2</dd>
+    <dt>Intelligence floor</dt><dd>45</dd>
+  </dl>
   <p>Four fields in <code>profile.json</code> overlay that workload, and none of them are uploaded:</p>
-  <div class="panel">
-    <dl class="fields">
-      <dt>monthlyBudgetUsd</dt><dd>What you are actually willing to spend each month.</dd>
-      <dt>minimumConcurrency</dt><dd>How many requests a candidate must sustain to be eligible here.</dd>
-      <dt>region</dt><dd>Where you are, which decides what is available to you at all.</dd>
-      <dt>credentialNames</dt><dd>Which provider credentials exist on this machine — names only, never values.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>monthlyBudgetUsd</dt><dd>What you are actually willing to spend each month.</dd>
+    <dt>minimumConcurrency</dt><dd>How many requests a candidate must sustain to be eligible here.</dd>
+    <dt>region</dt><dd>Where you are, which decides what is available to you at all.</dd>
+    <dt>credentialNames</dt><dd>Which provider credentials exist on this machine — names only, never values.</dd>
+  </dl>
   <p class="note">
     An overlaid workload carries its own identity, <code>global-v1+local</code>, so a personalised
     verdict is never mistaken for the published one — in the audit log or anywhere else.
@@ -153,13 +147,11 @@
 <section id="update">
   <span class="eyebrow">Update status</span>
   <h2>Three outcomes, all of them logged.</h2>
-  <div class="panel">
-    <dl class="fields">
-      <dt>noop</dt><dd>The new verdict is identical to the one already active. Nothing is written.</dd>
-      <dt>activated</dt><dd>A candidate passed every check and replaced the previous configuration.</dd>
-      <dt>failed</dt><dd>A candidate was rejected. The active configuration is untouched.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>noop</dt><dd>The new verdict is identical to the one already active. Nothing is written.</dd>
+    <dt>activated</dt><dd>A candidate passed every check and replaced the previous configuration.</dd>
+    <dt>failed</dt><dd>A candidate was rejected. The active configuration is untouched.</dd>
+  </dl>
   <p>A candidate has to clear three checks before it can become active:</p>
   <ol>
     <li>both <code>build</code> and <code>plan</code> aliases are present;</li>
@@ -202,15 +194,13 @@
     <code>audit.jsonl</code> is append-only: one JSON object per event, in order, readable
     without any tooling.
   </p>
-  <div class="panel">
-    <dl class="fields">
-      <dt>event</dt><dd><code>update</code> · <code>activate</code> · <code>rollback</code> · <code>noop</code> · <code>failure</code></dd>
-      <dt>at</dt><dd>When the transition happened.</dd>
-      <dt>oldVerdict / newVerdict</dt><dd>Verdict identifiers either side of it.</dd>
-      <dt>profileHash</dt><dd>A hash of the profile that produced it — comparable across entries, and non-secret.</dd>
-      <dt>reason</dt><dd>Present on a failure or a rollback: what rejected the candidate.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>event</dt><dd><code>update</code> · <code>activate</code> · <code>rollback</code> · <code>noop</code> · <code>failure</code></dd>
+    <dt>at</dt><dd>When the transition happened.</dd>
+    <dt>oldVerdict / newVerdict</dt><dd>Verdict identifiers either side of it.</dd>
+    <dt>profileHash</dt><dd>A hash of the profile that produced it — comparable across entries, and non-secret.</dd>
+    <dt>reason</dt><dd>Present on a failure or a rollback: what rejected the candidate.</dd>
+  </dl>
   <p class="note">
     Credential names may appear in a profile; credential values appear nowhere, in the audit log
     or in anything Gate uploads — which is nothing.

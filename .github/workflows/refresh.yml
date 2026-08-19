@@ -47,15 +47,16 @@ jobs:
           BODY: ${{ steps.summary.outputs.body }}
         run: |
           # `git diff` alone is blind to the untracked new dated files `refresh` just
-          # wrote — `status --porcelain` is the check that actually sees them.
-          if [ -z "$(git status --porcelain -- src/data)" ]; then
+          # wrote — `status --porcelain` is the check that actually sees them, and the
+          # dated snapshots land in `data/`, not `src/data`.
+          if [ -z "$(git status --porcelain -- src/data data)" ]; then
             echo "drift was report-only (no snapshot file changed) — nothing to commit"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -B refresh/weekly
-          git add src/data
+          git add src/data data
           git commit -m "refresh: weekly snapshot drift"
           git push --force origin refresh/weekly
           open=$(gh pr list --head refresh/weekly --state open --json number --jq length)

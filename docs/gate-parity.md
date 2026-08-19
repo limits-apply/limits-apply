@@ -15,14 +15,27 @@ per-plan siloing. `packages/intelligence/src/ranking.ts`'s `frontier()` follows 
 eligible candidate can dominate any other. Tested in
 `test/intelligence.test.ts` ("dominance runs catalog-wide...").
 
-**2. `build`/`plan` pool `subscription` and `api` together; only `local` is excluded.**
+**2. `build`/`plan` pool `subscription` and `api` together; `local` is excluded whenever any remote
+candidate is present.**
 
 `rank.py`'s `paths()` picks `build`/`plan` only from `billing == "subscription"` rows, holding
 PAYG (`api`-equivalent) rows back as a fallback-only tier that can never fill a primary alias.
 The design says `build` selects the lowest-effective-cost **subscription or API**
 frontier candidate — one uniform pool. `buildVerdict` pools `subscription` and `api`
-candidates together and excludes only `billing: "local"`. Tested in
+candidates together and holds `billing: "local"` out of that pool. Tested in
 `test/intelligence.test.ts` ("build and plan never select a local-billing candidate").
+
+A local model costs nothing to run, so pooled with priced candidates it would take `build` on cost
+alone and say nothing about the market. It fills the aliases only when the evidence carries **no
+remote candidate at all** — a local-only question, asked deliberately, rather than a remote catalog
+that came back empty. The test that a local candidate wins both aliases on local-only evidence is
+`test/intelligence.test.ts` ("local-only evidence fills both aliases...").
+
+The distinction is "no remote candidate exists", not "no remote candidate is eligible", and that is
+load-bearing: the looser reading would promote a local model the moment a price went stale, which is
+exactly the fallback promotion the next section preserves from `rank.py`. `GLOBAL_PROFILE`'s
+`intelligenceFloor` is set for the frontier and no local tier clears it, so `LocalOverlay` carries an
+`intelligenceFloor` override for callers asking the local question.
 
 ## Preserved behavior
 

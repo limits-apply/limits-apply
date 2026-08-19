@@ -128,7 +128,7 @@ test("every plan carries a price field, a quota, a confidence and a source", () 
 });
 
 test("every plan name resolves to a provider icon that exists on disk", () => {
-  const icons = new Set(Object.keys(import.meta.glob("../public/icons/*.png"))
+  const icons = new Set(Object.keys(import.meta.glob("../src/assets/icons/*.png"))
     .map(path => path.split("/").pop()!.slice(0, -4)));
   const names = [...PLANS.map(plan => plan.plan), ...COMMUNITY_MEASUREMENTS.map(row => row.plan)];
   for (const name of names) {

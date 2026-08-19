@@ -16,7 +16,8 @@ import { chipFor, chipLabel } from "../data/silicon";
 import { TASK } from "../data/task";
 import type { Estimate } from "../lib/provenance";
 import {
-  type FitLevel, KV_ALLOWANCE, QUANTS, USABLE_SHARE, tasksPerHour, weightedScore,
+  type FitLevel, KV_ALLOWANCE, QUANTS, STRATEGY, USABLE_SHARE, footprint, tasksPerHour,
+  weightedScore, weights,
 } from "../lib/throughput";
 import { icon, rungTag, sourceLink } from "./cells";
 import { el, mount } from "./dom";
@@ -43,7 +44,9 @@ const FIT_BASIS: Record<FitLevel, string> = { full: "fits", half: "half-fits", o
  * machine is a real trade and not a preference for its own sake. Build is the
  * default because this is the throughput page.
  */
-const view = { factor: 0.5 };
+const STRATEGY_LABEL: Record<number, string> = { [STRATEGY.plan]: "Plan", [STRATEGY.build]: "Build" };
+
+const view = { factor: STRATEGY.build as number };
 /** The machine the table is currently showing, so the factor can re-render it alone. */
 let shown: Machine | null = null;
 
@@ -142,7 +145,8 @@ export function renderLocalTable(machine: Machine): void {
   shown = machine;
 
   // Both axes are normalised by the best row on this table, so the score ranks the
-  // tier on this machine and nothing beyond it.
+  // tier on this machine and nothing beyond it. The speed ceiling is a raw rate;
+  // `weightedScore` compresses it and the row alike.
   const ceiling = {
     intelligence: Math.max(...rows.map(row => row.model.intelligence)),
     tokensPerSecond: Math.max(...rows.map(row => row.speed.value)),
@@ -188,7 +192,7 @@ export function renderLocalTable(machine: Machine): void {
        <td class="num">${tokensPerSecond(hourly.value)}
          <span class="basis band">${tokensPerSecond(hourly.low)} – ${tokensPerSecond(hourly.high)}</span></td>
       <td class="num yield" data-tip=${tip(
-        estimateTip(`Score at factor ${view.factor.toFixed(2)} — ${model.name}`, scoreEstimate))}>
+        estimateTip(`Score — ${STRATEGY_LABEL[view.factor]} · ${model.name}`, scoreEstimate))}>
          ${tokensPerSecond(score.band.value)}
          <span class="basis band">${tokensPerSecond(score.band.low)} – ${tokensPerSecond(score.band.high)}</span></td>
       <td class="disc">${FIT_MARK[fit]}</td>
@@ -211,25 +215,17 @@ export function renderLocalTable(machine: Machine): void {
        <span class="basis">of ${BEST_LOCAL_AA} in the whole tier</span></div>`);
 }
 
-/**
- * The factor, as two presets and the slider between them. The presets are the two
- * questions people actually arrive with; the slider is there because the answer
- * between them is nobody's to fix.
- */
+/** The factor, as the two questions people actually arrive with. */
 export function wireWeighting(): void {
-  const slider = el("weight-factor") as HTMLInputElement;
   const buttons = [...document.querySelectorAll<HTMLButtonElement>("#weight-controls button")];
 
   const apply = (factor: number): void => {
     view.factor = factor;
-    slider.value = String(factor);
-    el("weight-readout").textContent = factor.toFixed(2);
     buttons.forEach(button =>
       button.setAttribute("aria-pressed", String(Number(button.dataset.value) === factor)));
     if (shown) renderLocalTable(shown);
   };
 
-  slider.addEventListener("input", () => apply(Number(slider.value)));
   buttons.forEach(button =>
     button.addEventListener("click", () => apply(Number(button.dataset.value))));
   apply(view.factor);
@@ -242,9 +238,13 @@ export function renderLocalNotes(): void {
     A dense model reaches <strong>${(LOCAL_FIT.dense.value * 100).toFixed(0)} %</strong> of its
     bandwidth ceiling — band ${(LOCAL_FIT.dense.low * 100).toFixed(0)}–${(LOCAL_FIT.dense.high * 100).toFixed(0)} %,
     fitted on ${LOCAL_FIT.denseN} published runs${LOCAL_FIT.denseThin ? " (thin sample — band widened)" : ""}.
-    A mixture-of-experts returns <strong>×${LOCAL_FIT.moe.value.toFixed(2)}</strong> of what its active
-    weights alone promise — band ×${LOCAL_FIT.moe.low.toFixed(2)}–×${LOCAL_FIT.moe.high.toFixed(2)},
-    fitted on ${LOCAL_FIT.moeN} runs${LOCAL_FIT.moeThin ? " (thin sample — band widened)" : ""}.
+    A mixture-of-experts returns <strong>×${LOCAL_FIT.moeReturn.value.toFixed(2)}</strong> of what its active
+    weights alone promise — band ×${LOCAL_FIT.moeReturn.low.toFixed(2)}–×${LOCAL_FIT.moeReturn.high.toFixed(2)},
+    fitted on ${LOCAL_FIT.moeReturnN} runs${LOCAL_FIT.moeReturnThin ? " (thin sample — band widened)" : ""}.
+    That shortfall is not the runtime being slow: the active count leaves out the embeddings, the
+    attention, the router, the shared expert and the output head, which are read every token like
+    the rest — so the constant holds for mixtures routed like the ones it was fitted on, and not
+    for one routed differently.
     Change the measurements and both numbers move; that is the point of fitting them.
     Sources: ${[...new Set(MEASUREMENTS.map(one => one.source))]
       .map((source, index) => html`${index ? " · " : nothing}${sourceLink(source, new URL(source).hostname)}`)}.`);
@@ -255,9 +255,13 @@ export function renderLocalNotes(): void {
     The strongest configuration any subscription on the
     <a href="./index.html#benchmark">ledger</a> grants scores
     <strong>${BEST_AA.toFixed(1)}</strong>. Same index, same version — v${LOCAL_AA_SNAPSHOT.version}.
-    Above 40B the open-weights catalogue jumps to 400B+ total parameters, which no portable Mac
-    loads at any quantisation. There is no middle rung, and that gap is the trade: local removes
-    the quota and caps the intelligence.`);
+    The table stops at 40B because the snapshot does, not because the hardware does: a sparse 120B
+    on 10B active would hold in ${gb(footprint(weights(120, QUANTS.q4.bits)))} at ${QUANTS.q4.label}
+    — a 128 GB machine with the rest of it idle — and generate at the speed of its active weights.
+    No snapshot here carries an index for one, so none gets a row: an absent row is the honest
+    answer and a guessed index is not. The trade still stands — local removes the quota and caps the
+    intelligence — but read the cap as the memory you bought and the snapshot you have, not as a
+    hole in the catalogue.`);
 
   mount(el("task-note"), html`
     <strong>Tasks / hour = tok/s × 3,600 ÷ ${TASK.outTok.toLocaleString("en-US")} output tokens</strong>

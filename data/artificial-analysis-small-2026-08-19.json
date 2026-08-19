@@ -1,0 +1,101 @@
+{
+  "retrieved_on": "2026-08-19",
+  "source": "Artificial Analysis",
+  "data_api_docs": "https://artificialanalysis.ai/data-api/docs",
+  "tier": "Open-weights models of 4B to 40B total parameters — the tier a portable Mac can hold.",
+  "notes": "Static Layer 1 snapshot. Parameter counts are the released weights, not the evaluated endpoint. A model listed twice differs only in reasoning mode: same weights file, same throughput, different index.",
+  "source_url": "https://artificialanalysis.ai/models/open-source/small",
+  "intelligence_index_version": "4.1.1",
+  "models": [
+    {
+      "name": "Qwen3.8 27B",
+      "variant": "",
+      "intelligence": 52,
+      "total_params_b": 27,
+      "active_params_b": null
+    },
+    {
+      "name": "Qwen3.6 27B",
+      "variant": "Reasoning",
+      "intelligence": 38,
+      "total_params_b": 27.8,
+      "active_params_b": null
+    },
+    {
+      "name": "Muse Glimmer",
+      "variant": "high",
+      "intelligence": 35,
+      "total_params_b": 30,
+      "active_params_b": null
+    },
+    {
+      "name": "Qwen3.6 35B A3B",
+      "variant": "Reasoning",
+      "intelligence": 32,
+      "total_params_b": 36,
+      "active_params_b": 3
+    },
+    {
+      "name": "G9v3-39A5B",
+      "variant": "",
+      "intelligence": 32,
+      "total_params_b": 39,
+      "active_params_b": 5
+    },
+    {
+      "name": "Qwen3.6 27B",
+      "variant": "Non-reasoning",
+      "intelligence": 31,
+      "total_params_b": 27.8,
+      "active_params_b": null
+    },
+    {
+      "name": "Gemma 4 31B",
+      "variant": "Reasoning",
+      "intelligence": 30,
+      "total_params_b": 30.7,
+      "active_params_b": null
+    },
+    {
+      "name": "Gemma 4 26B A4B",
+      "variant": "Reasoning",
+      "intelligence": 26,
+      "total_params_b": 25.2,
+      "active_params_b": 3.8
+    },
+    {
+      "name": "Qwen3.6 35B A3B",
+      "variant": "Non-reasoning",
+      "intelligence": 25,
+      "total_params_b": 36,
+      "active_params_b": 3
+    },
+    {
+      "name": "Ling 3.0 Tiny",
+      "variant": "",
+      "intelligence": 25,
+      "total_params_b": 7.9,
+      "active_params_b": 1.3
+    },
+    {
+      "name": "Qwen3.5 35B A3B",
+      "variant": "Non-reasoning",
+      "intelligence": 24,
+      "total_params_b": 36,
+      "active_params_b": 3
+    },
+    {
+      "name": "Nemotron 3.5 Lightning",
+      "variant": "",
+      "intelligence": 24,
+      "total_params_b": 31.6,
+      "active_params_b": 3.6
+    }
+  ],
+  "entered": [
+    "Qwen3.8 27B"
+  ],
+  "left": [
+    "Gemma 4 31B (Non-reasoning)"
+  ]
+}

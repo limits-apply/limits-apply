@@ -1,6 +1,6 @@
 /**
  * When each weights file in the local tier was released. Reads
- * data/model-releases-2026-08-17.json, written by `node scripts/refresh.mjs releases`.
+ * data/model-releases-2026-08-19.json, written by `node scripts/refresh.mjs releases`.
  *
  * Its own module rather than a second table inside `local-models.ts`, because
  * `scripts/refresh.mjs` reads the `import snapshot from` line to learn which snapshot
@@ -9,7 +9,7 @@
  * the one place a snapshot could drift from what the page claimed without anything
  * noticing.
  */
-import snapshot from "../../data/model-releases-2026-08-17.json";
+import snapshot from "../../data/model-releases-2026-08-19.json";
 import { LOCAL_MODELS, type LocalModel } from "./local-models";
 
 export interface Release {

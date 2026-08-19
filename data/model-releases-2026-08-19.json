@@ -1,11 +1,21 @@
 {
+  "retrieved_on": "2026-08-19",
   "source": "models.dev catalogue, with the Hugging Face weights repository as fallback",
   "source_url": "https://models.dev/api.json",
   "fallback_url": "https://huggingface.co/api/models",
-  "retrieved_on": "2026-08-17",
-  "tier": "the models in artificial-analysis-small-2026-08-17.json",
   "notes": "via=catalogue is the release date models.dev publishes, taken as the date most of its providers agree on. via=weights is the creation date of the weights repository, which is when the weights went up rather than when the maker announced them — a proxy, and labelled as one. A model with neither stays null; inventing the date is what the ladder forbids.",
   "models": [
+    {
+      "name": "Qwen3.8 27B",
+      "maker": "qwen",
+      "released": {
+        "on": "2026-08-14",
+        "via": "catalogue"
+      },
+      "listings": 18,
+      "agree": 16,
+      "weights_repo": null
+    },
     {
       "name": "Qwen3.6 27B",
       "maker": "qwen",
@@ -24,8 +34,8 @@
         "on": "2026-08-10",
         "via": "catalogue"
       },
-      "listings": 13,
-      "agree": 13,
+      "listings": 14,
+      "agree": 14,
       "weights_repo": null
     },
     {
@@ -57,8 +67,8 @@
         "on": "2026-04-02",
         "via": "catalogue"
       },
-      "listings": 48,
-      "agree": 40,
+      "listings": 49,
+      "agree": 41,
       "weights_repo": null
     },
     {
@@ -68,18 +78,18 @@
         "on": "2026-04-02",
         "via": "catalogue"
       },
-      "listings": 23,
-      "agree": 20,
+      "listings": 24,
+      "agree": 21,
       "weights_repo": null
     },
     {
       "name": "Ling 3.0 Tiny",
       "maker": "inclusionai",
       "released": {
-        "on": "2026-08-06",
+        "on": "2026-08-05",
         "via": "catalogue"
       },
-      "listings": 1,
+      "listings": 2,
       "agree": 1,
       "weights_repo": "inclusionAI/Ling-3.0-tiny"
     },
@@ -90,8 +100,8 @@
         "on": "2026-02-23",
         "via": "catalogue"
       },
-      "listings": 16,
-      "agree": 11,
+      "listings": 18,
+      "agree": 13,
       "weights_repo": null
     },
     {
@@ -101,8 +111,8 @@
         "on": "2026-08-11",
         "via": "catalogue"
       },
-      "listings": 10,
-      "agree": 10,
+      "listings": 11,
+      "agree": 11,
       "weights_repo": null
     }
   ]

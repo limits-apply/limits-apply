@@ -21,7 +21,7 @@ const CITED = new Set([...register.matchAll(/`([^`]+)`/g)].map(match => match[1]
  */
 const snapshots = Object.keys(import.meta.glob("../data/*.json")).map(path => `data/${basename(path)}`);
 const dataFiles = [...snapshots, "src/data/plans.json"];
-const icons = Object.keys(import.meta.glob("../public/icons/*.png")).map(path => basename(path));
+const icons = Object.keys(import.meta.glob("../src/assets/icons/*.png")).map(path => basename(path));
 
 test("every bundled data snapshot has a row in the register", () => {
   expect(snapshots.length).toBeGreaterThan(0);

@@ -28,6 +28,7 @@ import { checkOpenRouter, summarizeOpenRouter } from "./sources/openrouter.mjs";
 import { checkModelsDev, summarizeModelsDev } from "./sources/models-dev.mjs";
 import { fetchFx, summarizeFx } from "./sources/ecb.mjs";
 import { fetchAa, mergeAa, summarizeAa } from "./sources/aa.mjs";
+import { fetchAaSmall, mergeAaSmall, summarizeAaSmall } from "./sources/aa-small.mjs";
 import { checkPricing, summarizePricing } from "./sources/pricing.mjs";
 
 const DATA_DIR = new URL("../data/", import.meta.url).pathname;
@@ -46,7 +47,7 @@ function aaModels() {
 /** The AA small-tier snapshot `src/data/local-models.ts` actually imports right now. */
 function aaSmall() {
   const { file, snapshot } = importedSnapshot("src/data/local-models.ts");
-  return { file, models: snapshot.models };
+  return { file, ...snapshot };
 }
 
 function loadPlans() {
@@ -61,7 +62,7 @@ function drifted(previous, fetched, key = "models") {
 
 /* ---------- the two modes ---------- */
 
-const STEP_NAMES = ["opencode", "releases", "ecb", "aa", "prices", "access", "pricing"];
+const STEP_NAMES = ["opencode", "releases", "ecb", "aa", "aa-small", "prices", "access", "pricing"];
 const args = process.argv.slice(2);
 const CHECK = args.includes("--check");
 const only = args.find(a => a !== "--check");
@@ -82,9 +83,10 @@ async function runWriteStep(name, prefix, fetcher, summarize, diffKey = "models"
     if (CHECK) {
       const previous = resolvePrevious();
       const changed = drifted(previous, fetched, diffKey);
-      report.steps[name] = { drifted: changed };
+      report.steps[name] = changed ? { drifted: true, detail: summarize(fetched) } : { drifted: false };
       if (changed) anyDrift = true;
       console.log(`${name} · ${changed ? "drift detected" : "unchanged"} vs. the committed snapshot`);
+      if (changed) console.log(summarize(fetched));
     } else {
       const file = join(DATA_DIR, `${prefix}${today}.json`);
       writeFileSync(file, JSON.stringify({ retrieved_on: today, ...fetched }, null, 2) + "\n");
@@ -131,6 +133,11 @@ await runWriteStep("aa", "artificial-analysis-", async () => {
   const previous = aaModels();
   return mergeAa(previous, fetched);
 }, summarizeAa, "models", () => aaModels());
+
+await runWriteStep("aa-small", "artificial-analysis-small-", async () => {
+  const fetched = await fetchAaSmall();
+  return mergeAaSmall(aaSmall(), fetched);
+}, summarizeAaSmall, "models", () => aaSmall());
 
 await runReportStep("prices", async () => {
   const { names, models } = aaModels();

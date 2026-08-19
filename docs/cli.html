@@ -107,14 +107,12 @@
 <section id="exit-codes">
   <span class="eyebrow">Exit codes</span>
   <h2>Four, and they mean the same thing every time.</h2>
-  <div class="panel">
-    <dl class="fields">
-      <dt>0 — ok</dt><dd>The command did what it says.</dd>
-      <dt>1 — failed</dt><dd>A candidate was rejected, or an OpenCode config couldn't be parsed. Nothing already active was overwritten.</dd>
-      <dt>2 — usage</dt><dd>Bad or missing arguments — an unknown command, or <code>update</code> with no verdict source.</dd>
-      <dt>3 — smoke</dt><dd>Activation succeeded, but a post-activation ping to <code>build</code> or <code>plan</code> didn't come back clean.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>0 — ok</dt><dd>The command did what it says.</dd>
+    <dt>1 — failed</dt><dd>A candidate was rejected, or an OpenCode config couldn't be parsed. Nothing already active was overwritten.</dd>
+    <dt>2 — usage</dt><dd>Bad or missing arguments — an unknown command, or <code>update</code> with no verdict source.</dd>
+    <dt>3 — smoke</dt><dd>Activation succeeded, but a post-activation ping to <code>build</code> or <code>plan</code> didn't come back clean.</dd>
+  </dl>
 </section>
 
 <section id="files">
@@ -125,14 +123,12 @@
     <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code> — or
     whatever <code>--root</code> says instead.
   </p>
-  <div class="panel">
-    <dl class="fields">
-      <dt>profile.json</dt><dd>Your local overlay. The only file you edit.</dd>
-      <dt>verdict.json</dt><dd>The verdict currently active on this machine.</dd>
-      <dt>litellm.yaml</dt><dd>Generated proxy configuration — an output, never a setting.</dd>
-      <dt>audit.jsonl</dt><dd>One line per transition: activation, no-op, failure, rollback.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>profile.json</dt><dd>Your local overlay. The only file you edit.</dd>
+    <dt>verdict.json</dt><dd>The verdict currently active on this machine.</dd>
+    <dt>litellm.yaml</dt><dd>Generated proxy configuration — an output, never a setting.</dd>
+    <dt>audit.jsonl</dt><dd>One line per transition: activation, no-op, failure, rollback.</dd>
+  </dl>
 </section>
 
 <section id="format">
@@ -150,14 +146,12 @@
 <section id="env">
   <span class="eyebrow">Environment</span>
   <h2>Four variables, none of them secret to Gate.</h2>
-  <div class="panel">
-    <dl class="fields">
-      <dt>LIMITSAPPLY_HOME</dt><dd>Overrides the gate root outright — checked first, ahead of everything else.</dd>
-      <dt>XDG_CONFIG_HOME</dt><dd>If set and <code>LIMITSAPPLY_HOME</code> isn't, the root becomes <code>$XDG_CONFIG_HOME/limitsapply</code>, and the OpenCode default becomes <code>$XDG_CONFIG_HOME/opencode/opencode.json</code>.</dd>
-      <dt>LITELLM_MASTER_KEY</dt><dd>Read by LiteLLM itself, not by Gate — Gate only writes the setting name into <code>litellm.yaml</code>. The proxy binds to <code>http://127.0.0.1:4000</code> and its master key setting is always <code>LITELLM_MASTER_KEY</code>.</dd>
-      <dt>OPENCODE_CONFIG</dt><dd>Overrides the OpenCode config path Gate writes to, ahead of the <code>$XDG_CONFIG_HOME</code> default.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>LIMITSAPPLY_HOME</dt><dd>Overrides the gate root outright — checked first, ahead of everything else.</dd>
+    <dt>XDG_CONFIG_HOME</dt><dd>If set and <code>LIMITSAPPLY_HOME</code> isn't, the root becomes <code>$XDG_CONFIG_HOME/limitsapply</code>, and the OpenCode default becomes <code>$XDG_CONFIG_HOME/opencode/opencode.json</code>.</dd>
+    <dt>LITELLM_MASTER_KEY</dt><dd>Read by LiteLLM itself, not by Gate — Gate only writes the setting name into <code>litellm.yaml</code>. The proxy binds to <code>http://127.0.0.1:4000</code> and its master key setting is always <code>LITELLM_MASTER_KEY</code>.</dd>
+    <dt>OPENCODE_CONFIG</dt><dd>Overrides the OpenCode config path Gate writes to, ahead of the <code>$XDG_CONFIG_HOME</code> default.</dd>
+  </dl>
 </section>
 
 </main>

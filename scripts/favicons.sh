@@ -8,7 +8,7 @@
 # publishes the weights, which for a lab with no product site is the only page there is.
 set -euo pipefail
 
-out="$(dirname "$0")/../public/icons"
+out="$(dirname "$0")/../src/assets/icons"
 mkdir -p "$out"
 
 while read -r slug domain; do

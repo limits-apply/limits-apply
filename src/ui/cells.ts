@@ -22,9 +22,13 @@ export const modelCell = (name: string, detail: string) => html`
   <strong>${name}</strong><span class="subline">${detail}</span>
 `;
 
-/** An icon from public/icons — see scripts/favicons.sh. */
+const ICONS = import.meta.glob<string>("../assets/icons/*.png", {
+  eager: true, query: "?no-inline&url", import: "default",
+});
+
+/** An icon from src/assets/icons — see scripts/favicons.sh. */
 export const icon = (slug: string, alt = "") => html`
-  <img class="pico" src=${`${import.meta.env.BASE_URL}icons/${slug}.png`} alt=${alt} loading="lazy">
+  <img class="pico" src=${ICONS[`../assets/icons/${slug}.png`]} alt=${alt} loading="lazy">
 `;
 
 /** Provider favicon, filed under the plan name's first word. */

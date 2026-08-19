@@ -91,14 +91,12 @@
 <section id="prerequisites">
   <span class="eyebrow">Prerequisites</span>
   <h2>Four things, one of them optional.</h2>
-  <div class="panel">
-    <dl class="fields">
-      <dt>Node</dt><dd>Node 20 or newer — the CLI's argument parsing uses Node's built-in <code>parseArgs</code>.</dd>
-      <dt>npm</dt><dd>Anything that runs <code>npx</code>. Building from a clone instead needs pnpm — this repository is a pnpm workspace.</dd>
-      <dt>LiteLLM</dt><dd>The proxy Gate configures but doesn't install or run — <code>pip install 'litellm[proxy]'</code> or equivalent.</dd>
-      <dt>A provider key</dt><dd>Only once you point Gate at real evidence. The bundled example fixture needs none.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>Node</dt><dd>Node 20 or newer — the CLI's argument parsing uses Node's built-in <code>parseArgs</code>.</dd>
+    <dt>npm</dt><dd>Anything that runs <code>npx</code>. Building from a clone instead needs pnpm — this repository is a pnpm workspace.</dd>
+    <dt>LiteLLM</dt><dd>The proxy Gate configures but doesn't install or run — <code>pip install 'litellm[proxy]'</code> or equivalent.</dd>
+    <dt>A provider key</dt><dd>Only once you point Gate at real evidence. The bundled example fixture needs none.</dd>
+  </dl>
   <p class="note">
     No account exists to create. Nothing below uploads anything — <code>profile.json</code>,
     <code>verdict.json</code> and the audit log all stay under a directory on your own machine.
@@ -149,17 +147,15 @@ limitsapply status --smoke</code></pre>
 <section id="troubleshooting">
   <span class="eyebrow">Troubleshooting</span>
   <h2>What the CLI actually says when something's wrong.</h2>
-  <div class="panel">
-    <dl class="fields">
-      <dt>missing build alias</dt><dd>No eligible candidate cleared the profile's intelligence floor. Check <code>intelligenceFloor</code>, or that your evidence has anything above it.</dd>
-      <dt>missing plan alias</dt><dd>No eligible candidate fit inside the monthly budget once multiplied by the turn count. Check <code>monthlyBudgetUsd</code>.</dd>
-      <dt>unexpected master key setting</dt><dd>The generated <code>litellm.yaml</code> doesn't read its master key from <code>LITELLM_MASTER_KEY</code>. That's a Gate invariant, not a setting — it means the file was hand-edited; the next <code>update</code> regenerates it.</dd>
-      <dt>proxy must bind to loopback</dt><dd>Same story: the generated host isn't <code>127.0.0.1</code>. Gate refuses to activate a config that binds anywhere else.</dd>
-      <dt>opencode config … is not valid JSON</dt><dd>Gate won't touch an OpenCode config it can't fully parse — JSONC comments included. Nothing is written; remove the comments, or rerun with <code>--no-opencode</code>.</dd>
-      <dt>Unknown command</dt><dd>Exits 2 and lists every real command on stderr — see the <a href="./cli.html">CLI reference</a>.</dd>
-      <dt>--smoke can't connect</dt><dd>It pings the proxy directly. If nothing is listening yet, the check currently fails hard with a connection error rather than a clean message — start LiteLLM first.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>missing build alias</dt><dd>No eligible candidate cleared the profile's intelligence floor. Check <code>intelligenceFloor</code>, or that your evidence has anything above it.</dd>
+    <dt>missing plan alias</dt><dd>No eligible candidate fit inside the monthly budget once multiplied by the turn count. Check <code>monthlyBudgetUsd</code>.</dd>
+    <dt>unexpected master key setting</dt><dd>The generated <code>litellm.yaml</code> doesn't read its master key from <code>LITELLM_MASTER_KEY</code>. That's a Gate invariant, not a setting — it means the file was hand-edited; the next <code>update</code> regenerates it.</dd>
+    <dt>proxy must bind to loopback</dt><dd>Same story: the generated host isn't <code>127.0.0.1</code>. Gate refuses to activate a config that binds anywhere else.</dd>
+    <dt>opencode config … is not valid JSON</dt><dd>Gate won't touch an OpenCode config it can't fully parse — JSONC comments included. Nothing is written; remove the comments, or rerun with <code>--no-opencode</code>.</dd>
+    <dt>Unknown command</dt><dd>Exits 2 and lists every real command on stderr — see the <a href="./cli.html">CLI reference</a>.</dd>
+    <dt>--smoke can't connect</dt><dd>It pings the proxy directly. If nothing is listening yet, the check currently fails hard with a connection error rather than a clean message — start LiteLLM first.</dd>
+  </dl>
 </section>
 
 <section id="roadmap">
@@ -169,17 +165,15 @@ limitsapply status --smoke</code></pre>
     Every gap below is deliberate, not hidden — this register is what every other page on the
     site links back to when it touches one of these.
   </p>
-  <div class="panel">
-    <dl class="fields">
-      <dt>A hosted current.json</dt><dd>No <code>Candidate[]</code> catalog exists anywhere in this repo yet. <code>--verdict</code>, <code>--evidence</code> and <code>--example</code> are the only sources Gate has.</dd>
-      <dt>Hourly polling</dt><dd>Removed. Gate runs once per command — nothing schedules it.</dd>
-      <dt>A published library</dt><dd>Only the CLI is on npm. <code>@limits-apply/intelligence</code> and <code>@limits-apply/sources</code> stay internal — no stable API, no types, no semver promise.</dd>
-      <dt>Rollback on a post-activation smoke failure</dt><dd>The network smoke check runs after activation and is reported, but doesn't yet trigger a rollback — recorded in <code>docs/gate-parity.md</code>.</dd>
-      <dt>Every harness but OpenCode</dt><dd><code>mergeOpencodeConfig</code> is the only config writer Gate ships.</dd>
-      <dt>Local and pay-as-you-go inside one combination</dt><dd>The budget frontier combines subscription plans only — a local member needs a local $/task, a PAYG member needs per-model rates, and neither is in <code>src/data/</code> yet.</dd>
-      <dt>Personalized verdicts over a real catalog</dt><dd><code>--evidence</code> and <code>--example</code> rank whatever you hand them locally. There's no hosted catalog to personalize against automatically.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>A hosted current.json</dt><dd>No <code>Candidate[]</code> catalog exists anywhere in this repo yet. <code>--verdict</code>, <code>--evidence</code> and <code>--example</code> are the only sources Gate has.</dd>
+    <dt>Hourly polling</dt><dd>Removed. Gate runs once per command — nothing schedules it.</dd>
+    <dt>A published library</dt><dd>Only the CLI is on npm. <code>@limits-apply/intelligence</code> and <code>@limits-apply/sources</code> stay internal — no stable API, no types, no semver promise.</dd>
+    <dt>Rollback on a post-activation smoke failure</dt><dd>The network smoke check runs after activation and is reported, but doesn't yet trigger a rollback — recorded in <code>docs/gate-parity.md</code>.</dd>
+    <dt>Every harness but OpenCode</dt><dd><code>mergeOpencodeConfig</code> is the only config writer Gate ships.</dd>
+    <dt>Local and pay-as-you-go inside one combination</dt><dd>The budget frontier combines subscription plans only — a local member needs a local $/task, a PAYG member needs per-model rates, and neither is in <code>src/data/</code> yet.</dd>
+    <dt>Personalized verdicts over a real catalog</dt><dd><code>--evidence</code> and <code>--example</code> rank whatever you hand them locally. There's no hosted catalog to personalize against automatically.</dd>
+  </dl>
 </section>
 
 </main>

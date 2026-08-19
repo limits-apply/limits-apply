@@ -38,9 +38,9 @@ under the Apache License 2.0. A file absent from this register is original, not 
 | --- | --- | --- | --- |
 | `data/artificial-analysis-2026-08-14.json` | [Artificial Analysis models](https://artificialanalysis.ai/models) and Data API | **Blocked** | Obtain redistribution rights or replace the bundled snapshot with a user-authenticated fetch. Artificial Analysis documents self-serve API data as internal/restricted use and directs external redistribution requests to its team. |
 | `data/artificial-analysis-agents-2026-08-15.json` | [Artificial Analysis coding agents](https://artificialanalysis.ai/agents/coding-agents) | **Blocked** | Obtain explicit redistribution permission or remove the embedded snapshot. |
-| `data/artificial-analysis-small-2026-08-17.json` | [Artificial Analysis small open-weights table](https://artificialanalysis.ai/models/open-source/small) and Data API | **Blocked** | Obtain redistribution rights or replace the bundled snapshot with a permitted source. Open model weights do not imply an open licence for AA's index data. |
+| `data/artificial-analysis-small-2026-08-19.json` | [Artificial Analysis small open-weights table](https://artificialanalysis.ai/models/open-source/small) and Data API | **Blocked** | Obtain redistribution rights or replace the bundled snapshot with a permitted source. Open model weights do not imply an open licence for AA's index data. |
 | `data/fx-rates-2026-08-17.json` | [European Central Bank reference rates](https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml) | Review pending | Record the ECB reuse terms that cover redistribution of the normalized snapshot. |
-| `data/model-releases-2026-08-17.json` | [models.dev catalogue](https://models.dev/api.json) and linked Hugging Face repositories | Review pending | Record the catalogue licence and preserve per-model upstream attribution where required. |
+| `data/model-releases-2026-08-19.json` | [models.dev catalogue](https://models.dev/api.json) and linked Hugging Face repositories | Review pending | Record the catalogue licence and preserve per-model upstream attribution where required. |
 | `data/opencode-go-2026-08-17.json` | [OpenCode Go](https://opencode.ai/fr/go) | Review pending | Confirm that the recorded factual quota table may be redistributed in this form. |
 | `src/data/plans.json` | Per-row provider and secondary URLs | Review per row | Keep factual extracts minimal; record any copied expressive text and applicable reuse terms during source review. |
 
@@ -60,7 +60,7 @@ not establish permission to redistribute a particular image file.
 `ai9stars.png`, `chatgpt.png`, `claude.png`, `cursor.png`, `devin.png`, `factory.png`, `github.png`,
 `glm.png`, `google.png`, `inclusionai.png`, `kimi.png`, `meta.png`, `minimax.png`, `mistral.png`,
 `nvidia.png`, `opencode.png`, `perplexity.png`, `poe.png`, `qwen.png`, `replit.png`, `supergrok.png`,
-`warp.png`, and `zed.png` under `public/icons/`.
+`warp.png`, and `zed.png` under `src/assets/icons/`.
 
 **Required action**, per retained asset: record the source URL, the owner, the applicable brand
 terms, the retrieval date, and the basis for inclusion — or replace the asset with an original,

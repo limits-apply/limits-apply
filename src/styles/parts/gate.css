@@ -1,5 +1,15 @@
-.fields{margin:0}
-.fields dt{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:16px}
-.fields dt:first-of-type{margin-top:0}
-.fields dd{margin:5px 0 0;font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--ink-2)}
+/* Reference registers. Hairlines and column position carry the hierarchy, so the
+   filled box stays reserved for literal machine text — see pre in docs.css. */
+.fields{margin:6px 0 22px;display:grid;grid-template-columns:fit-content(15rem) minmax(0,1fr);
+  max-width:930px;border-top:1px solid var(--rule)}
+.fields:last-child{margin-bottom:0}
+.fields dt{grid-column:1;font:500 12.5px/1.5 var(--mono);color:var(--ink);
+  padding:11px 0 12px;border-bottom:1px solid var(--rule-2);overflow-wrap:anywhere}
+.fields dd{grid-column:2;margin:0;padding:11px 0 12px 24px;border-bottom:1px solid var(--rule-2);
+  font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--ink-2)}
 .fields dd code{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+@media (max-width:620px){
+  .fields{grid-template-columns:minmax(0,1fr)}
+  .fields dt{grid-column:1;padding-bottom:0;border-bottom:0}
+  .fields dd{grid-column:1;padding:4px 0 12px}
+}

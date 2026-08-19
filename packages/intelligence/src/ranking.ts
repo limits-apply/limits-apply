@@ -52,11 +52,17 @@ export function buildVerdict(
     });
   }
   const { frontier: front, dominated } = frontier(eligible);
-  const remote = frontier(eligible.filter(row => row.candidate.billing !== "local")).frontier;
-  const build = remote
+  // A local model costs nothing to run, so pooled with priced candidates it would take `build` on cost
+  // alone and say nothing about the market. It fills an alias only when the evidence asks a local-only
+  // question — never when a remote candidate exists but was rejected, which stays the hard failure
+  // `docs/gate-parity.md` preserves from rank.py's `paths()`.
+  const pool = candidates.every(candidate => candidate.billing === "local")
+    ? front
+    : frontier(eligible.filter(row => row.candidate.billing !== "local")).frontier;
+  const build = pool
     .filter(row => row.candidate.intelligence.value >= profile.intelligenceFloor)
     .sort((a, b) => a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)[0]?.candidate.id ?? null;
-  const plan = remote
+  const plan = pool
     .filter(row => row.effectiveCostUsd * profile.turnsPerMonth <= profile.monthlyBudgetUsd)
     .sort((a, b) => b.candidate.intelligence.value - a.candidate.intelligence.value
       || a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)[0]?.candidate.id ?? null;

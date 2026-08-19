@@ -38,7 +38,7 @@ not own.
 
 ## Names, logos, and icons
 
-Files under `public/icons/` identify providers and products discussed by the benchmark. Provider
+Files under `src/assets/icons/` identify providers and products discussed by the benchmark. Provider
 names, product names, logos, and trademarks belong to their respective owners. Their presence does
 not imply endorsement and they are excluded from the Apache License 2.0 grant.
 

@@ -20,6 +20,7 @@ export function overlayProfile(base: WorkloadProfile, overlay: LocalOverlay = {}
     id: overlay === undefined ? base.id : `${base.id}+local`,
     monthlyBudgetUsd: overlay.monthlyBudgetUsd ?? base.monthlyBudgetUsd,
     minimumConcurrency: overlay.minimumConcurrency ?? base.minimumConcurrency,
+    intelligenceFloor: overlay.intelligenceFloor ?? base.intelligenceFloor,
     region: overlay.region ?? base.region,
     availableCredentials: overlay.credentials ?? base.availableCredentials,
   };

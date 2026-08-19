@@ -47,6 +47,20 @@ test("a dominant local-billing candidate does not veto remote build/plan selecti
   expect(verdict.selected.plan).toBe("cloud");
 });
 
+test("local-only evidence fills both aliases: build takes the fastest, plan the strongest", () => {
+  const local = (id: string, intelligence: number, speed: number): Candidate => ({
+    ...candidate(id, intelligence, 0), billing: "local" as const, speed: evidence(speed),
+  });
+  // The local tier sits below the frontier's floor, so the overlay lowers it — otherwise nothing clears it.
+  const profile = overlayProfile(GLOBAL_PROFILE, { intelligenceFloor: 20 });
+  const candidates = [local("ling", 25, 127), local("qwen", 38, 17)];
+  const verdict = buildVerdict(candidates, profile, "evidence-v1", "2026-08-17");
+  expect(verdict.selected.build).toBe("ling");
+  expect(verdict.selected.plan).toBe("qwen");
+  expect(generateLiteLlmConfig(verdict, candidates).model_list.map(model => model.model_name))
+    .toEqual(["build", "plan"]);
+});
+
 test("dominance runs catalog-wide, not scoped to a single provider/plan (diverges from llm-gate)", () => {
   const weak = { ...candidate("weak", 50, 2), provider: "provider-a" };
   const strong = { ...candidate("strong", 60, 1), provider: "provider-b" };

@@ -33,6 +33,7 @@ for (const [name, step] of Object.entries(report.steps)) {
     if (!expected) real = true;
   } else if (step.drifted) {
     lines.push(`- **${name}**: drifted`);
+    if (step.detail) lines.push("", "```", step.detail, "```", "");
     real = true;
   } else {
     lines.push(`- **${name}**: unchanged`);

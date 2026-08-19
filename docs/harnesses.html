@@ -57,7 +57,7 @@
 
 <section class="hero">
   <span class="eyebrow">Harnesses</span>
-  <h1>One harness writes itself. The rest are honest about not yet.</h1>
+  <h1>One harness writes itself. Three were wired by hand. The rest are honest about not yet.</h1>
   <p class="lead">
     <code>build</code> and <code>plan</code> resolve behind a loopback LiteLLM proxy, so any
     OpenAI-compatible client can use them — but Gate only generates a client's own config file
@@ -73,24 +73,28 @@
     observed · derived · chained · modelled</code> ladder the benchmark tables use, since that
     ladder is about the strength of a <em>figure</em>, not whether Gate can talk to a tool yet.
   </p>
-  <div class="panel">
-    <dl class="fields">
-      <dt>Verified</dt><dd>Gate writes this configuration itself, and a test compares the published snippet to the code that writes it.</dd>
-      <dt>Recipe</dt><dd>A configuration a human ran once, on a dated day — not generated, not exercised in CI.</dd>
-      <dt>Planned</dt><dd>No integration code, no verified recipe. The snippet column stays empty.</dd>
-    </dl>
-  </div>
+  <dl class="fields">
+    <dt>Verified</dt><dd>Gate writes this configuration itself, and a test compares the published snippet to the code that writes it.</dd>
+    <dt>Recipe</dt><dd>A configuration a human ran once, on a dated day — not generated, not exercised in CI.</dd>
+    <dt>Planned</dt><dd>No integration code, no verified recipe. The snippet column stays empty.</dd>
+  </dl>
 </section>
 
 <section id="harnesses">
   <span class="eyebrow">Harnesses</span>
-  <h2>Eleven rows. One of them is a real function call.</h2>
+  <h2>Eleven rows. One is a real function call, three are a dated afternoon.</h2>
   <p>
     <code>opencode</code> is the only harness Gate writes to directly — the snippet on its card
     is generated straight from <code>mergeOpencodeConfig</code>, the same function
-    <a href="../gate.html#aliases">gate.html</a> describes. Everything else stays
-    <span class="hstatus planned">Planned</span> until it has its own integration code and its
-    own test, per the <a href="./index.html#roadmap">roadmap</a>.
+    <a href="../gate.html#aliases">gate.html</a> describes. <code>pi</code>,
+    <code>codex</code> and <code>claude-code</code> are each a
+    <span class="hstatus recipe">Recipe</span>: the block on the card was pasted into a real config
+    and answered, but Gate does not write it and nothing catches it drifting. Pi answered on both
+    aliases; Codex and Claude Code answered on <code>build</code> only, because the model behind
+    <code>plan</code> that day was served in the chat-completions shape alone and neither the
+    Responses nor the Anthropic endpoint could reach it. Everything
+    else stays <span class="hstatus planned">Planned</span> until it has its own integration code and
+    its own test, per the <a href="./index.html#roadmap">roadmap</a>.
   </p>
   <div id="harness-cards" class="hgrid"></div>
 </section>

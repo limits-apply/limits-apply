@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="public/logo-dark.svg">
+  <img src="public/logo.svg" alt="Limits Apply" width="72" height="72">
+</picture>
+
 # Limits Apply
 
 An open benchmark in progress for the economics of using AI — not the price of tokens.

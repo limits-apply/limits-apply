@@ -98,22 +98,17 @@
   <span class="eyebrow">02 — the tier</span>
   <h1>What this machine runs, and how smart it is.</h1>
   <p class="lead">
-    Open-weights models of 4B to 40B total parameters — the tier a portable Mac can actually hold —
-    against the throughput the machine above delivers on each. Speed tables and intelligence
+    Open-weights models of 4B to 40B total parameters — the tier a portable Mac holds without
+    being dedicated to it — against the throughput the machine above delivers on each. Speed tables and intelligence
     tables both exist. This is the join.
   </p>
 
   <div class="score-summary" id="local-summary" aria-live="polite"></div>
 
   <div class="score-controls" id="weight-controls" role="group" aria-label="What to optimise for">
-    <span class="kicker" data-tip="One factor, weighting intelligence against tokens per second. At 0 the score is the AA Index alone — the smartest model the machine holds, however long it takes to answer. At 1 it is throughput alone. Between them each axis is divided by the best row in view and the two are multiplied, so neither unit survives into the score and a collapse on one axis cannot be bought back with the other. It is a preference you set, not a measurement of anything.">Optimise for</span>
+    <span class="kicker" data-tip="Two questions, two weightings. Plan scores on the AA Index alone — the smartest model the machine holds, however long it takes to answer. Build puts 0.30 of the weight on speed, enough for it to separate models that can do the job and not enough for it to stand in for doing the job. Each axis is divided by the best row in view — speed after the 40 tok/s knee compresses it — and the two are multiplied, so neither unit survives into the score and a collapse on one axis cannot be bought back with the other. Both are preferences, not measurements of anything.">Optimise for</span>
     <button type="button" data-value="0">Plan — smartest model</button>
-    <button type="button" data-value="0.5">Build — intelligence × speed</button>
-    <label class="factor" for="weight-factor">
-      <input type="range" id="weight-factor" min="0" max="1" step="0.05" value="0.5"
-             aria-label="Weight on throughput, from 0 to 1">
-      <span class="mono" id="weight-readout">0.50</span>
-    </label>
+    <button type="button" data-value="0.3">Build — smartest that answers back</button>
   </div>
 
   <div class="tw wide" role="region" aria-label="Local throughput by model" tabindex="0">
@@ -122,13 +117,13 @@
       <thead>
         <tr>
           <th scope="col">Model · mode</th>
-          <th scope="col" class="num" data-tip="Artificial Analysis Intelligence Index v4.1.1, same index and same version as the subscription ledger. Higher is smarter.">AA Index</th>
+          <th scope="col" class="num" data-tip="Artificial Analysis Intelligence Index v4.1.1, same index and same version as the subscription ledger. Higher is smarter. It was measured on the provider&#39;s own endpoint, at whatever precision that serves — so the quantisation control above moves throughput and footprint and never this column. What Q4 or Q2 costs in intelligence on these weights is not published anywhere, and this page will not invent it.">AA Index</th>
           <th scope="col" class="num" data-tip="When the weights went public. Taken from the models.dev catalogue, at the date most of its listings agree on — observed. Where no catalogue carries a date, the creation of the weights repository stands in for one, which is a proxy and is marked derived. A release date belongs to the weights file, so both reasoning modes of a model carry the same one.">Released</th>
           <th scope="col" class="num" data-tip="Total parameters held in memory. A mixture-of-experts holds all of them and reads only the active share per token — which is why it is fast and large at the same time.">Held</th>
           <th scope="col" class="num" data-tip="Weights at the selected quantisation, plus a flat 20 % allowance for KV cache, activations and the runtime. The real figure depends on the context length you choose, and nobody publishes theirs.">Footprint</th>
           <th scope="col" class="num" data-tip="Tokens per second during generation. Observed where somebody published a run of exactly this weights file on exactly this chip; modelled from the fitted constants otherwise. Hover a cell for its formula, its assumptions and its source.">Throughput</th>
           <th scope="col" class="num" data-tip="Throughput × 3,600 ÷ 1,500 output tokens — the same modelled task the ledger uses. A rate, never a month.">Tasks / hour</th>
-          <th scope="col" class="num" data-tip="The two axes on one figure, weighted by the factor above, normalised by the best row in view and scaled to 100. The table arrives sorted on it, highest first. It ranks rows against each other on this machine and means nothing outside this table — and it is never stronger than the throughput inside it, so a modelled row scores modelled.">Score</th>
+          <th scope="col" class="num" data-tip="The two axes on one figure, weighted by the factor above, normalised by the best row in view and scaled to 100. Speed enters compressed: in full to 40 tok/s, logarithmically past it, because beyond the wait more tokens per second stop buying a better answer. The table arrives sorted on it, highest first. It ranks rows against each other on this machine and means nothing outside this table — and it is never stronger than the throughput inside it, so a modelled row scores modelled.">Score</th>
           <th scope="col" class="disc" data-tip="Does the footprint fit the unified memory you selected? Under half of it, the model fits — filled mark. Between half and all of it, it half-fits — the weights load only with the rest of the machine idle, and the mark is half filled. Above it, nothing loads. A model that does not fit stays on the table and stays marked — it is never dropped.">Fits</th>
         </tr>
       </thead>
@@ -143,12 +138,18 @@
   </p>
   <p class="note" style="margin-top:14px">
     <strong>Score = (AA Index ÷ best index in view)<sup>1&nbsp;−&nbsp;f</sup> ×
-    (tok/s ÷ fastest in view)<sup>f</sup> × 100.</strong>
-    The factor <em>f</em> is yours: 0 ranks on intelligence alone, which is what a planning model is
-    for, and 0.5 weights intelligence and speed equally, which is what a model you are building with
-    has to survive. Both axes are divided by the best row in view, so the score ranks this table and
-    carries no unit outside it — and it inherits the rung of the throughput inside it, never a
-    stronger one. Sort by any other column and the ranking stays; only the order you see changes.
+    (felt speed ÷ fastest felt speed in view)<sup>f</sup> × 100</strong>, where felt speed is
+    <strong>tok/s ÷ 40</strong> up to 40 tok/s and <strong>1 + ln(tok/s ÷ 40)</strong> above it.
+The factor <em>f</em> is one of two, because a third
+    would be a number nobody can defend. <strong>Plan</strong> sets it to 0 and ranks on the index
+    alone, which is what a planning model is for. <strong>Build</strong> sets it to 0.30: 25 tok/s
+    and 75 tok/s are both usable, an index of 32 and an index of 52 are not, so speed separates
+    models that can do the job and never stands in for doing it. Speed is compressed past 40 tok/s
+    for the same reason — a model twice as fast as the wait is not twice the model, and dividing raw
+    rates lets the smallest thing in the tier set the axis every other row is then measured
+    against. Both axes are divided by the best row in view, so the score
+    ranks this table and carries no unit outside it — and it inherits the rung of the throughput
+    inside it, never a stronger one. Sort by any other column and the ranking stays; only the order you see changes.
   </p>
 
   <p class="note" id="fit-note" style="margin-top:18px"></p>

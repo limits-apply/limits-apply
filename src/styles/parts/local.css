@@ -31,10 +31,6 @@
 .ruler-tick.on{stroke:var(--signal);stroke-width:2}
 
 .local-table{min-width:1180px}
-/* the factor sits in the same row as its two presets: one control, three ways in */
-.score-controls .factor{display:flex;align-items:center;gap:9px;margin-left:6px;cursor:pointer}
-.score-controls .factor input{accent-color:var(--signal);width:132px;cursor:pointer}
-.score-controls .factor .mono{font:500 12.5px var(--mono);color:var(--ink-2);min-width:32px}
 .local-table th:nth-child(2),.local-table td:nth-child(2){position:static;left:auto;box-shadow:none}
 .local-table .aa-link{font-size:17px}
 .local-table td.disc{text-align:center}

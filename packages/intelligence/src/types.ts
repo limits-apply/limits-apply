@@ -59,6 +59,8 @@ export interface LocalOverlay {
   region?: string;
   monthlyBudgetUsd?: number;
   minimumConcurrency?: number;
+  /** The global floor is set for the frontier; a local tier sits well below it and would select nothing. */
+  intelligenceFloor?: number;
 }
 
 export interface Rejection {

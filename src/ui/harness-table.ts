@@ -17,7 +17,7 @@ function card(harness: Harness) {
     </div>
     <p>${harness.summary}</p>
     ${harness.snippet
-      ? html`<pre><code class="lang-json">${harness.snippet}</code></pre>`
+      ? html`<pre><code class="lang-${harness.lang ?? "json"}">${harness.snippet}</code></pre>`
       : html`<p class="note">No snippet yet — see the <a href="./index.html#roadmap">roadmap</a>.</p>`}
     ${(harness.date || harness.configPath) ? html`
     <dl class="fields">

@@ -93,9 +93,9 @@ test("a constant fitted on one point is widened, never returned exact", () => {
     { bandwidth: 400, params: 30, active: 3, bits: 4.8, tokensPerSecond: 60 },
   ]);
   expect(isExact(one.dense)).toBe(false);
-  expect(isExact(one.moe)).toBe(false);
+  expect(isExact(one.moeReturn)).toBe(false);
   expect(one.denseThin).toBe(true);
-  expect(one.moeThin).toBe(true);
+  expect(one.moeReturnThin).toBe(true);
 });
 
 test("a fit with no anchor above the floor throws rather than inventing a constant", () => {
@@ -306,7 +306,7 @@ test("on the real tier, planning tops out on the smartest row and building on a 
 /* ---------- release dates and makers ---------- */
 
 test("every model resolves to a release date and a maker, keyed on the weights and not the mode", () => {
-  const icons = new Set(Object.keys(import.meta.glob("../public/icons/*.png"))
+  const icons = new Set(Object.keys(import.meta.glob("../src/assets/icons/*.png"))
     .map(path => path.split("/").pop()!.slice(0, -4)));
 
   for (const model of LOCAL_MODELS) {

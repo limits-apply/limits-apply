@@ -83,12 +83,18 @@ export interface Sample {
 export interface Fit {
   /** Share of the theoretical ceiling a dense model reaches. */
   dense: Band;
-  /** What a mixture-of-experts returns of what its active weights alone promise. */
-  moe: Band;
+  /**
+   * What a mixture-of-experts returns of what its active weights alone promise.
+   * Not a runtime penalty: `active` counts only the routed experts a token
+   * selects, while embeddings, attention, the router, the shared expert and the
+   * output head are read on every token too. The shortfall is mostly them, so
+   * this constant does not transfer to a mixture with a different routing ratio.
+   */
+  moeReturn: Band;
   denseN: number;
-  moeN: number;
+  moeReturnN: number;
   denseThin: boolean;
-  moeThin: boolean;
+  moeReturnThin: boolean;
 }
 
 /**
@@ -113,7 +119,7 @@ function spread(ratios: number[]): { band: Band; thin: boolean } {
 }
 
 /**
- * Solve the dense efficiency and the MoE penalty from the measurements, and
+ * Solve the dense efficiency and the mixture-of-experts return from the measurements, and
  * return each as a band whose width is the residual spread. A constant fitted on
  * one point is not exact, so `widenIfDegenerate` applies here as everywhere.
  */
@@ -126,7 +132,7 @@ export function fitEfficiency(samples: Sample[]): Fit {
     sample.tokensPerSecond / bandwidthCeiling(sample.bandwidth, weights(sample.params, sample.bits))));
 
   const moe = samples.filter(sample => sample.active != null);
-  if (!moe.length) throw new Error("no mixture-of-experts measurement — the penalty cannot be fitted");
+  if (!moe.length) throw new Error("no mixture-of-experts measurement — the return cannot be fitted");
 
   const moeFit = spread(moe.map(sample =>
     sample.tokensPerSecond
@@ -134,11 +140,11 @@ export function fitEfficiency(samples: Sample[]): Fit {
 
   return {
     dense: denseFit.band,
-    moe: moeFit.band,
+    moeReturn: moeFit.band,
     denseN: dense.length,
-    moeN: moe.length,
+    moeReturnN: moe.length,
     denseThin: denseFit.thin,
-    moeThin: moeFit.thin,
+    moeReturnThin: moeFit.thin,
   };
 }
 
@@ -190,9 +196,9 @@ export function throughput(
     };
   }
 
-  const penalty = model.active == null ? null : fit.moe;
-  const efficiency = penalty
-    ? { value: fit.dense.value * penalty.value, low: fit.dense.low * penalty.low, high: fit.dense.high * penalty.high }
+  const returns = model.active == null ? null : fit.moeReturn;
+  const efficiency = returns
+    ? { value: fit.dense.value * returns.value, low: fit.dense.low * returns.low, high: fit.dense.high * returns.high }
     : fit.dense;
 
   const band = {
@@ -211,10 +217,12 @@ export function throughput(
       `generation reads every active parameter once per token — ${gb(read)} of ${gb(held)} held`,
       `dense fit: ${round(fit.dense.value * 100)} % of the bandwidth ceiling,`
         + ` band ${round(fit.dense.low * 100)}–${round(fit.dense.high * 100)} % (n=${fit.denseN}${fit.denseThin ? ", thin sample — band widened" : ""})`,
-      ...(penalty
-        ? [`mixture-of-experts penalty: ×${round(penalty.value)} of what the active weights alone promise,`
-          + ` band ×${round(penalty.low)}–×${round(penalty.high)} (n=${fit.moeN}${fit.moeThin ? ", thin sample — band widened" : ""})`,
-          "routing and expert gather are fitted together, not separated — nobody publishes the split"]
+      ...(returns
+        ? [`mixture-of-experts return: ×${round(returns.value)} of what the active weights alone promise,`
+          + ` band ×${round(returns.low)}–×${round(returns.high)} (n=${fit.moeReturnN}${fit.moeReturnThin ? ", thin sample — band widened" : ""})`,
+          "the shortfall is mostly weights the active count leaves out — embeddings, attention, router,"
+          + " shared expert, output head — read every token like the rest, so this does not transfer"
+          + " to a mixture with a different routing ratio"]
         : []),
       ...(thin
         ? [`${gb(read)} of weights sits below the ${gb(FIT_FLOOR)} the constant was fitted above,`
@@ -224,6 +232,29 @@ export function throughput(
     ],
   };
 }
+
+/**
+ * Where more tokens per second stop buying a better answer. Under it the machine
+ * is the thing you wait for; over it the wait is gone and the rest is headroom,
+ * so 174 tok/s is not seven times the model 25 tok/s is. The knee is absolute —
+ * a property of waiting, not of the tier in view — and it is a stated preference
+ * like the factor itself, not a measurement of anything. The shape is the one
+ * Magnitude's local-model recommendation policy publishes.
+ */
+export const SPEED_KNEE = 40;
+
+/**
+ * The two questions people arrive with, as the only two weightings offered — a
+ * slider between them asks the reader for a number they have no way to defend,
+ * and every value between these two ranks the tier the way one of them already
+ * does. `plan` scores on the index alone. `build` gives speed enough weight to
+ * separate models that can do the job, and not enough to stand in for doing it.
+ */
+export const STRATEGY = { plan: 0, build: 0.3 } as const;
+
+/** Speed as the reader gets it: linear to the knee, logarithmic past it. */
+const feltSpeed = (rate: number): number =>
+  rate <= SPEED_KNEE ? rate / SPEED_KNEE : 1 + Math.log(rate / SPEED_KNEE);
 
 export interface Weighted {
   /** 0 to 100, where 100 leads the tier on both axes at once. */
@@ -240,6 +271,8 @@ export interface Weighted {
  *
  * Geometric, and normalised by the strongest row on each axis, so no unit survives
  * into the score and a row cannot buy back a collapse on one axis with the other.
+ * Speed enters through `feltSpeed`, because dividing raw rates lets the smallest
+ * model in the tier set the axis every other row is then measured against.
  * It is a preference applied to two Layer 1 figures, never a measurement of
  * anything: it ranks rows against each other and says nothing about a row alone.
  */
@@ -255,7 +288,8 @@ export function weightedScore(
   }
 
   const smart = intelligence / ceiling.intelligence;
-  const at = (rate: number) => 100 * smart ** (1 - factor) * (rate / ceiling.tokensPerSecond) ** factor;
+  const quickest = feltSpeed(ceiling.tokensPerSecond);
+  const at = (rate: number) => 100 * smart ** (1 - factor) * (feltSpeed(rate) / quickest) ** factor;
 
   return {
     band: {
@@ -264,7 +298,7 @@ export function weightedScore(
       high: at(tokensPerSecond.high),
     },
     formula: `(${round(intelligence)} ÷ ${round(ceiling.intelligence)} index)^${(1 - factor).toFixed(2)}`
-      + ` × (${round(tokensPerSecond.value)} ÷ ${round(ceiling.tokensPerSecond)} tok/s)^${factor.toFixed(2)}`
+      + ` × (${round(feltSpeed(tokensPerSecond.value))} ÷ ${round(quickest)} felt speed)^${factor.toFixed(2)}`
       + ` × 100 = ${round(at(tokensPerSecond.value))}`,
     assumptions: [
       factor === 0
@@ -272,6 +306,9 @@ export function weightedScore(
         : factor === 1
           ? "the factor is 1: intelligence is ignored and the ranking is tokens per second"
           : `the factor is ${factor.toFixed(2)}: a preference you set, not a measurement — every row is scored on the same one`,
+      `speed counts in full to the ${SPEED_KNEE} tok/s knee and logarithmically past it —`
+        + ` ${round(tokensPerSecond.value)} tok/s reads as ${round(feltSpeed(tokensPerSecond.value))},`
+        + ` the tier's fastest ${round(ceiling.tokensPerSecond)} as ${round(quickest)}`,
       "each axis is divided by the best row in the tier, so the score is a rank within this table and"
         + " carries no unit that survives outside it",
       "the band is the throughput band carried through — the index has no band, the machine does",

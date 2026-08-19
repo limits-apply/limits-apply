@@ -13,6 +13,7 @@ import { PLANS } from "../src/data/plans";
 import { CHIPS } from "../src/data/silicon";
 import { RATE, TASK } from "../src/data/task";
 import { PRICE_BRACKETS } from "../src/lib/benchmark";
+import { SPEED_KNEE, STRATEGY } from "../src/lib/throughput";
 import { DAYS_PER_MONTH, monthlyCeiling } from "../src/lib/provenance";
 
 const ROOT = join(__dirname, "..");
@@ -60,6 +61,16 @@ test("the illustrative break-even figures match BREAK_EVEN", () => {
 test("local.html's two M4 Max bandwidth bins match silicon.ts", () => {
   const bySlim = Object.fromEntries(CHIPS.map(c => [c.id, c.bandwidth.value]));
   expect(localHtml).toContain(`runs at ${bySlim.m4max32} GB/s; the 16-core part runs at ${bySlim.m4max40}`);
+});
+
+test("local.html's two strategy buttons carry the factors STRATEGY defines", () => {
+  expect(localHtml).toContain(`data-value="${STRATEGY.plan}">Plan`);
+  expect(localHtml).toContain(`data-value="${STRATEGY.build}">Build`);
+});
+
+test("local.html's printed score formula matches the speed knee in throughput.ts", () => {
+  expect(localHtml).toContain(`<strong>tok/s ÷ ${SPEED_KNEE}</strong> up to ${SPEED_KNEE} tok/s`);
+  expect(localHtml).toContain(`<strong>1 + ln(tok/s ÷ ${SPEED_KNEE})</strong> above it`);
 });
 
 test("the landing links to the docs roadmap, which names the local+PAYG gap", () => {
