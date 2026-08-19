@@ -8,9 +8,9 @@
   "files": ["dist"],
   "engines": { "node": ">=20" },
   "keywords": ["llm", "cli", "litellm", "model-routing", "opencode", "provenance"],
-  "homepage": "https://github.com/limits-apply/limitsapply#readme",
-  "repository": { "type": "git", "url": "git+https://github.com/limits-apply/limitsapply.git", "directory": "packages/gate" },
-  "bugs": "https://github.com/limits-apply/limitsapply/issues",
+  "homepage": "https://github.com/limits-apply/limits-apply#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/limits-apply/limits-apply.git", "directory": "packages/gate" },
+  "bugs": "https://github.com/limits-apply/limits-apply/issues",
   "publishConfig": { "access": "public" },
   "scripts": {
     "prepublishOnly": "pnpm -w gate:build && pnpm -w gate:pack-test"
