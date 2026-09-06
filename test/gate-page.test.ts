@@ -11,6 +11,7 @@ import { generateLiteLlmConfig } from "../packages/gate/src/litellm";
 import { mergeOpencodeConfig } from "../packages/gate/src/opencode";
 import { gatePaths } from "../packages/gate/src/storage";
 import { defaultGateProfile } from "../packages/gate/src/profile";
+import { PROBE_WINDOW_MINUTES } from "../packages/gate/src/main";
 import type { AuditEvent } from "../packages/gate/src/audit";
 import { validateConfig } from "../packages/gate/src/activation";
 
@@ -120,12 +121,11 @@ test("the validation list matches what validateConfig actually rejects", () => {
     general_settings: { master_key_env: "OTHER", host: "0.0.0.0" as "127.0.0.1", port: 4000 },
   });
   expect(errors).toEqual([
-    "missing build alias",
-    "missing plan alias",
+    "no alias is deployed",
     "unexpected master key setting",
     "proxy must bind to loopback",
   ]);
-  expect(gateHtml).toContain("both <code>build</code> and <code>plan</code> aliases are present");
+  expect(gateHtml).toContain("every alias the verdict selected is one of them");
   expect(gateHtml).toContain("the master key setting is <code>LITELLM_MASTER_KEY</code>");
   expect(gateHtml).toContain("the proxy binds to <code>127.0.0.1</code>");
 });
@@ -154,4 +154,11 @@ test("both existing entries link to the Gate page", () => {
     const html = readFileSync(join(ROOT, page), "utf8");
     expect(html, `${page} does not link to gate.html`).toContain(`<a href="./gate.html">Gate</a>`);
   }
+});
+
+test("the local-candidate fields and the probe window match what update actually does", () => {
+  expect(gateHtml).toContain(`<dt>includeLocal</dt>`);
+  expect(gateHtml).toContain(`<dt>localCandidates</dt>`);
+  expect(gateHtml).toContain(`closed for ${PROBE_WINDOW_MINUTES} minutes`);
+  expect(gateHtml).toContain(`<code>endpoint-probe</code>`);
 });

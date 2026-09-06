@@ -3,8 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The verdict — how build and plan get picked</title>
+<title>The verdict — how each task class gets picked</title>
 <meta name="description" content="Where a verdict comes from, effective cost, the build and plan rules, dominance, and every rejection code — with no hosted current.json behind any of it.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="The verdict — how each task class gets picked">
+<meta property="og:description" content="Where a verdict comes from, effective cost, the build and plan rules, dominance, and every rejection code — with no hosted current.json behind any of it.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/docs/verdict.html">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,9 +30,11 @@
     <a class="brand" href="../index.html#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
     <nav class="nav" aria-label="Sections">
       <a href="../index.html">Home</a>
+      <a href="../break-even.html">Break-even</a>
       <a href="../local.html">Local</a>
       <a href="../gate.html">Gate</a>
       <a href="./index.html" aria-current="page">Docs</a>
+      <a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">GitHub</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-pressed="false"
             aria-label="Switch to the dark theme">
@@ -61,10 +70,11 @@
 
 <section class="hero">
   <span class="eyebrow">The verdict</span>
-  <h1>Two names. One ranking.</h1>
+  <h1>Every name. One ranking.</h1>
   <p class="lead">
-    How a list of candidates turns into <code>build</code> and <code>plan</code> — the same
-    rules whether they came from a real evidence file or the bundled example.
+    How a list of candidates turns into one alias per task class — <code>build</code> and
+    <code>plan</code> by default — under the same rules whether they came from a real evidence
+    file or the bundled example.
   </p>
 </section>
 
@@ -72,9 +82,9 @@
   <span class="eyebrow">Where it comes from</span>
   <h2>Nothing is hosted yet.</h2>
   <p>
-    A verdict ranks a list of candidates against a workload profile and produces two
-    selections — <code>build</code> and <code>plan</code> — plus everything that didn't make
-    it, and why. There is no published <code>current.json</code>: no <code>Candidate[]</code>
+    A verdict ranks a list of candidates against a workload profile and produces one selection
+    per task class the profile declares — <code>build</code> and <code>plan</code> ship as the
+    defaults — plus everything that didn't make it, and why. There is no published <code>current.json</code>: no <code>Candidate[]</code>
     catalog exists in this repository yet (see the <a href="./index.html#roadmap">roadmap</a>).
     Gate takes its candidates from whatever you hand it — a full verdict via
     <code>--verdict</code>, an evidence file via <code>--evidence</code>, or the bundled fixture
@@ -100,7 +110,8 @@
   <p>
     The frontier here excludes local candidates outright — <code>build</code> never resolves to
     one. Among what's left, whichever clears <code>intelligenceFloor</code> at the lowest
-    effective cost wins; ties break toward the faster candidate.
+    effective cost wins; ties break toward the faster candidate. Any task class can pick this
+    way, over its own floor.
   </p>
 </section>
 
@@ -111,7 +122,8 @@
   <p>
     Same non-local frontier, filtered to candidates whose effective cost times
     <code>turnsPerMonth</code> fits under <code>monthlyBudgetUsd</code>. Among those, the
-    highest-intelligence candidate wins; ties break by cost, then by speed.
+    highest-intelligence candidate wins; ties break by cost, then by speed. Any task class can
+    pick this way, under its own budget.
   </p>
 </section>
 

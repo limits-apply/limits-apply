@@ -19,6 +19,7 @@
     "refresh:check": "node scripts/refresh.mjs --check",
     "gate:build": "vite build --config packages/gate/vite.config.ts",
     "gate": "node packages/gate/dist/limitsapply.mjs",
+    "evidence": "pnpm gate:build && node packages/gate/dist/limitsapply.mjs evidence --candidates src/data/candidates.json --aa data/artificial-analysis-2026-08-14.json --agents data/artificial-analysis-agents-2026-08-15.json --agent-pairs src/data/agent-pairs.json --out public/current.json",
     "gate:pack-test": "node scripts/pack-test.mjs"
   },
   "devDependencies": {

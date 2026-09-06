@@ -7,7 +7,7 @@
     "baseUrl": ".",
     "paths": {
       "@limits-apply/intelligence": ["packages/intelligence/src/index.ts"],
-      "@limits-apply/sources": ["packages/sources/src/normalize.ts"],
+      "@limits-apply/sources": ["packages/sources/index.ts"],
       "@limits-apply/gate": ["packages/gate/src/litellm.ts"]
     },
     "types": ["vite/client", "node"],

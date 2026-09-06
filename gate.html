@@ -4,7 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gate — the verdict, running on your machine</title>
-<meta name="description" content="Gate is the local half of Limits Apply: it turns the published verdict into two stable aliases, build and plan, behind a loopback LiteLLM proxy — validated before activation.">
+<meta name="description" content="Gate is the local half of Limits Apply: it turns the published verdict into one stable alias per task class — build and plan ship as the defaults — behind a loopback LiteLLM proxy, validated before activation.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="Gate — the verdict, running on your machine">
+<meta property="og:description" content="Gate is the local half of Limits Apply: it turns the published verdict into one stable alias per task class — build and plan ship as the defaults — behind a loopback LiteLLM proxy, validated before activation.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/gate.html">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,9 +29,11 @@
     <a class="brand" href="./index.html#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
     <nav class="nav" aria-label="Sections">
       <a href="./index.html">Home</a>
+      <a href="./break-even.html">Break-even</a>
       <a href="./local.html">Local</a>
       <a href="./gate.html" aria-current="page">Gate</a>
       <a href="./docs/index.html">Docs</a>
+      <a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">GitHub</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-pressed="false"
             aria-label="Switch to the dark theme">
@@ -39,10 +48,15 @@
 
 <section class="hero">
   <span class="eyebrow">The local half</span>
-  <h1>Two aliases: <span class="amt">build</span> and <span class="amt">plan</span>.</h1>
+  <h1>One alias per task class: <span class="amt">build</span>, <span class="amt">plan</span>, and any you declare.</h1>
+  <p class="lead">
+    Not a router that borrows your subscription — a router that knows when yours is closed. No
+    subscription OAuth ever leaves the harness it belongs to: Gate dispatches work to the
+    official harness while its quota window is open, and routes around it when it shuts.
+  </p>
   <p class="lead">
     The site explains the verdict. Gate executes it — a TypeScript CLI that generates a local
-    LiteLLM configuration, points OpenCode at it, and keeps both aliases resolving to whatever
+    LiteLLM configuration, points OpenCode at it, and keeps every alias resolving to whatever
     currently wins.
   </p>
   <p class="lead">
@@ -73,7 +87,7 @@
     published here — this page included — can read them.
   </p>
   <p>
-    This page is the narrative: why two aliases, the audit model, the recovery argument. The
+    This page is the narrative: why task-class aliases, the audit model, the recovery argument. The
     install steps, the full command reference and a runnable quickstart live in
     <a href="./docs/index.html">the docs</a>.
   </p>
@@ -81,9 +95,10 @@
 
 <section id="aliases">
   <span class="eyebrow">Stable aliases</span>
-  <h2>Two names that outlive the models behind them.</h2>
+  <h2>Names that outlive the models behind them.</h2>
   <p>
-    <code>build</code> and <code>plan</code> are stable, periodically recomputed names. What each
+    Each task class in the profile gets one stable, periodically recomputed name; <code>build</code>
+    and <code>plan</code> are the two that ship as defaults. What each
     one resolves to is an ordered chain of access paths rather than a single one — tried best
     first, with a path that has just refused a request skipped until it recovers. When the verdict
     changes, the names keep their names and the chains change underneath, so nothing in your editor
@@ -99,7 +114,7 @@
       <dl class="fields">
         <dt>Address</dt><dd><code>http://127.0.0.1:4000</code></dd>
         <dt>Master key</dt><dd>read from <code>LITELLM_MASTER_KEY</code></dd>
-        <dt>Aliases</dt><dd><code>build</code> · <code>plan</code>, with <code>build</code> falling back to <code>plan</code></dd>
+        <dt>Aliases</dt><dd>one per task class — by default <code>build</code> · <code>plan</code>, with <code>build</code> falling back to <code>plan</code></dd>
       </dl>
       <p class="note">
         LiteLLM binds to loopback. A configuration that binds anywhere else fails validation
@@ -144,6 +159,20 @@
     <dt>region</dt><dd>Where you are, which decides what is available to you at all.</dd>
     <dt>credentialNames</dt><dd>Which provider credentials exist on this machine — names only, never values.</dd>
   </dl>
+  <p>Two more make the machine you already own a routing candidate rather than a footnote:</p>
+  <dl class="fields">
+    <dt>includeLocal</dt><dd>Pool local candidates with the priced ones. Off by default, and off is what keeps a published verdict a statement about the market: a model that costs nothing to run would take every cheapest-first class on price alone and say nothing about what is worth buying.</dd>
+    <dt>localCandidates</dt><dd>The endpoints on your own network, each declaring its <code>intelligence</code> and its <code>speed</code> with a rung, a source and a date. Neither has a default — a candidate that can't say where its numbers came from is refused by name rather than quietly ranked.</dd>
+  </dl>
+  <p class="note">
+    Price is not what makes this safe; the floor is. A local model takes a task class only when it
+    clears that class's <code>intelligenceFloor</code>, so the classes that need a stronger model
+    keep it — which is what stops "free" from meaning "always". Before ranking, Gate asks each
+    declared endpoint for its model list. One that doesn't answer is written to
+    <code>quota.jsonl</code> as a window closed for 15 minutes — rung <code>derived</code>, source
+    <code>endpoint-probe</code> — and sits the run out through the same path an exhausted
+    subscription takes, so an unreachable machine degrades the route instead of breaking it.
+  </p>
   <p class="note">
     An overlaid workload carries its own identity, <code>global-v1+local</code>, so a personalised
     verdict is never mistaken for the published one — in the audit log or anywhere else.
@@ -160,7 +189,8 @@
   </dl>
   <p>A candidate has to clear three checks before it can become active:</p>
   <ol>
-    <li>both <code>build</code> and <code>plan</code> aliases are present;</li>
+    <li>at least one alias is deployed, and every alias the verdict selected is one of them —
+      its own task classes, not a fixed pair;</li>
     <li>the master key setting is <code>LITELLM_MASTER_KEY</code>;</li>
     <li>the proxy binds to <code>127.0.0.1</code>.</li>
   </ol>
@@ -182,9 +212,12 @@
   </p>
   <p>
     If a candidate fails validation, the previous configuration stays active
-    and the attempt is logged with the reason it was rejected. A rollback path exists for a
-    configuration that was already swapped in and later proves bad, but nothing calls it yet —
-    that's still ahead, tracked on the <a href="./docs/index.html#roadmap">roadmap</a>.
+    and the attempt is logged with the reason it was rejected. A configuration that was already
+    swapped in and then fails its <code>--smoke</code> probe is rolled back to the previous one and
+    logged as <code>rollback</code>; on a first run there is nothing to go back to, so the new
+    configuration is kept and <code>update</code> says <code>gate: kept</code> rather than claiming
+    otherwise — see the <a href="./docs/cli.html#cmd-update">CLI reference</a> for what the probe
+    can and cannot prove.
   </p>
   <p class="note">
     Generated files are outputs, not settings. To change what Gate does, edit

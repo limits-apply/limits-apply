@@ -4,7 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Docs — clone it, build it, run it</title>
-<meta name="description" content="How to install and run the Gate CLI: prerequisites, a six-command quickstart against the bundled example evidence, troubleshooting, and what isn't shipped yet.">
+<meta name="description" content="How to install and run the Gate CLI: prerequisites, a six-command quickstart against the hosted candidate catalog, troubleshooting, and what isn't shipped yet.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="Docs — clone it, build it, run it">
+<meta property="og:description" content="How to install and run the Gate CLI: prerequisites, a six-command quickstart against the hosted candidate catalog, troubleshooting, and what isn't shipped yet.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/docs/index.html">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,9 +30,11 @@
     <a class="brand" href="../index.html#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
     <nav class="nav" aria-label="Sections">
       <a href="../index.html">Home</a>
+      <a href="../break-even.html">Break-even</a>
       <a href="../local.html">Local</a>
       <a href="../gate.html">Gate</a>
       <a href="./index.html" aria-current="page">Docs</a>
+      <a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">GitHub</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-pressed="false"
             aria-label="Switch to the dark theme">
@@ -64,7 +73,7 @@
   <h1>Install it, run it, audit it.</h1>
   <p class="lead">
     Gate is a small TypeScript CLI: it turns a verdict into a local LiteLLM configuration and
-    points OpenCode at it. <a href="../gate.html">gate.html</a> is the why — two aliases, the
+    points OpenCode at it. <a href="../gate.html">gate.html</a> is the why — task-class aliases, the
     audit model, the recovery argument. This section is the how.
   </p>
   <div class="cta">
@@ -77,7 +86,7 @@
   <span class="eyebrow">What this is</span>
   <h2>A local activation tool, not a service.</h2>
   <p>
-    Gate reads a verdict — a ranked candidate list plus two stable aliases, <code>build</code>
+    Gate reads a verdict — a ranked candidate list plus one stable alias per task class, <code>build</code>
     and <code>plan</code> — and writes it into a local LiteLLM configuration and, unless told
     not to, your OpenCode config. It runs once per command, writes to a directory you own, and
     calls out to nothing except whatever verdict or evidence source you point it at.
@@ -124,18 +133,24 @@ npm install -g @limits-apply/cli</code></pre>
 
 <section id="quickstart">
   <span class="eyebrow">Quickstart</span>
-  <h2>Six commands, against the bundled example.</h2>
+  <h2>Six commands, against the hosted catalog.</h2>
   <p>
-    The example evidence fixture (<code>packages/gate/fixtures/example-evidence.json</code>) is
-    fictional — its models and endpoint don't resolve to anything real — but every file gets
-    written exactly the way it would with a real one, so this genuinely runs end to end.
+    <code>current.json</code> is the hand-verified candidate catalog joined with the committed
+    Artificial Analysis snapshot — real rates, real endpoints, each carrying the page it was read
+    on and the day it was read. Gate ranks it against your local profile; nothing is sent anywhere.
   </p>
   <pre><code class="lang-sh">limitsapply init
-limitsapply update --example
+limitsapply update --evidence https://limits-apply.github.io/limits-apply/current.json
 export LITELLM_MASTER_KEY=sk-local-anything
 litellm --config ~/.config/limitsapply/litellm.yaml
 limitsapply status
 limitsapply status --smoke</code></pre>
+  <p class="note">
+    Offline, or without an API key to spend? <code>limitsapply update --example</code> ranks the
+    bundled fixture (<code>packages/gate/fixtures/example-evidence.json</code>) instead. Its models
+    and endpoint are fictional, but every file gets written exactly the same way, so it still runs
+    end to end.
+  </p>
   <p class="note">
     <code>~/.config/limitsapply</code> is the default root only when neither
     <code>LIMITSAPPLY_HOME</code> nor <code>XDG_CONFIG_HOME</code> is set — see
@@ -148,13 +163,13 @@ limitsapply status --smoke</code></pre>
   <span class="eyebrow">Troubleshooting</span>
   <h2>What the CLI actually says when something's wrong.</h2>
   <dl class="fields">
-    <dt>missing build alias</dt><dd>No eligible candidate cleared the profile's intelligence floor. Check <code>intelligenceFloor</code>, or that your evidence has anything above it.</dd>
-    <dt>missing plan alias</dt><dd>No eligible candidate fit inside the monthly budget once multiplied by the turn count. Check <code>monthlyBudgetUsd</code>.</dd>
+    <dt>no alias is deployed</dt><dd>Not one task class resolved to a candidate, so there would be nothing behind the proxy. On the default classes that means nothing cleared <code>intelligenceFloor</code> and nothing fit inside <code>monthlyBudgetUsd</code> once multiplied by the turn count — check both, or that your evidence has anything in range.</dd>
+    <dt>missing <var>alias</var> alias</dt><dd>The verdict selected a candidate for that task class but the generated config doesn't carry it. Named per class — <code>missing plan alias</code> on the defaults, <code>missing bulk alias</code> on a class you declared.</dd>
     <dt>unexpected master key setting</dt><dd>The generated <code>litellm.yaml</code> doesn't read its master key from <code>LITELLM_MASTER_KEY</code>. That's a Gate invariant, not a setting — it means the file was hand-edited; the next <code>update</code> regenerates it.</dd>
     <dt>proxy must bind to loopback</dt><dd>Same story: the generated host isn't <code>127.0.0.1</code>. Gate refuses to activate a config that binds anywhere else.</dd>
     <dt>opencode config … is not valid JSON</dt><dd>Gate won't touch an OpenCode config it can't fully parse — JSONC comments included. Nothing is written; remove the comments, or rerun with <code>--no-opencode</code>.</dd>
     <dt>Unknown command</dt><dd>Exits 2 and lists every real command on stderr — see the <a href="./cli.html">CLI reference</a>.</dd>
-    <dt>--smoke can't connect</dt><dd>It pings the proxy directly. If nothing is listening yet, the check currently fails hard with a connection error rather than a clean message — start LiteLLM first.</dd>
+    <dt>--smoke can't connect</dt><dd>It pings the proxy directly, so a connection refused reads as <code>smoke build: fail</code> and exit 3, not as a crash — on a no-op update too, where there is nothing to undo. Start LiteLLM first: on <code>status</code> a failed ping is only a report, but on <code>update</code> it restores the previous configuration where there is one, and where there isn't it says <code>gate: kept</code> rather than claiming a rollback that didn't happen.</dd>
   </dl>
 </section>
 
@@ -163,16 +178,20 @@ limitsapply status --smoke</code></pre>
   <h2>What this doesn't do yet.</h2>
   <p>
     Every gap below is deliberate, not hidden — this register is what every other page on the
-    site links back to when it touches one of these.
+    site links back to when it touches one of these. Two entries are marked as non-goals: they
+    are not waiting on work. For the gaps in the benchmark rather than in Gate, see
+    <a href="https://github.com/limits-apply/limits-apply/blob/main/README.md#deliberately-not-built">Deliberately not built</a>
+    in the README, and
+    <a href="https://github.com/limits-apply/limits-apply/blob/main/docs/methodology.md#open-risks">Open risks</a>
+    in the methodology.
   </p>
   <dl class="fields">
-    <dt>A hosted current.json</dt><dd>No <code>Candidate[]</code> catalog exists anywhere in this repo yet. <code>--verdict</code>, <code>--evidence</code> and <code>--example</code> are the only sources Gate has.</dd>
-    <dt>Hourly polling</dt><dd>Removed. Gate runs once per command — nothing schedules it.</dd>
-    <dt>A published library</dt><dd>Only the CLI is on npm. <code>@limits-apply/intelligence</code> and <code>@limits-apply/sources</code> stay internal — no stable API, no types, no semver promise.</dd>
-    <dt>Rollback on a post-activation smoke failure</dt><dd>The network smoke check runs after activation and is reported, but doesn't yet trigger a rollback — recorded in <code>docs/gate-parity.md</code>.</dd>
-    <dt>Every harness but OpenCode</dt><dd><code>mergeOpencodeConfig</code> is the only config writer Gate ships.</dd>
-    <dt>Local and pay-as-you-go inside one combination</dt><dd>The budget frontier combines subscription plans only — a local member needs a local $/task, a PAYG member needs per-model rates, and neither is in <code>src/data/</code> yet.</dd>
-    <dt>Personalized verdicts over a real catalog</dt><dd><code>--evidence</code> and <code>--example</code> rank whatever you hand them locally. There's no hosted catalog to personalize against automatically.</dd>
+    <dt>Hourly polling</dt><dd><em>Non-goal.</em> Removed. Gate runs once per command — nothing schedules it.</dd>
+    <dt>A published library</dt><dd><em>Non-goal, for now.</em> Only the CLI is on npm. Publishing <code>@limits-apply/intelligence</code> and <code>@limits-apply/sources</code> means a semver promise, and the ranking surface is still moving — one recent branch changed <code>activate</code>'s signature, renamed a config-change type and split the harness writers out of their module. They stay internal until that surface stops moving.</dd>
+    <dt>Every harness but OpenCode, pi and Claude Code</dt><dd>Those three are the config writers Gate ships, and only OpenCode's runs on its own — pi and Claude Code are written when <code>--pi</code> or <code>--claude-code</code> names the file, never because Gate recognised a path. Codex's block is generated from code but pasted by hand: merging into an existing <code>config.toml</code> needs a TOML parser Gate doesn't carry. Cursor, Aider, Crush and Goose have no writer; T3 Code and Hermes wrap other harnesses rather than talking to an endpoint, so they wouldn't get one.</dd>
+    <dt>OpenCode records newer than its SQLite migration</dt><dd><code>quota scan</code> and <code>advise</code> read OpenCode's per-message JSON files, and OpenCode ≥ 1.x writes <code>opencode.db</code> (SQLite) instead — on a current install both commands see only pre-migration history. Reading the database needs a reader Gate doesn't carry yet; until then the message directory they accept is the legacy one.</dd>
+    <dt>Quota windows from anything but OpenCode or the Claude subscription</dt><dd><code>quota scan</code> reads OpenCode's own message records, and <code>quota pull</code> reads the Claude subscription's own usage windows. Every other access path still has to be recorded by hand with <code>quota exhausted &lt;domain&gt; --resets &lt;iso&gt;</code>.</dd>
+    <dt>Local plans inside a budget combination</dt><dd>Gate already <em>routes</em> to a local endpoint: <code>includeLocal</code> pools a declared local candidate with the priced ones, and the task class's intelligence floor — not its price — decides whether it wins. What still waits is the ledger's budget frontier, which combines subscription plans only. Routing needs no $/task figure for the machine; combining does, and that one can't be derived without knowing how many hours a day it runs. The <a href="https://github.com/limits-apply/limits-apply/blob/main/docs/methodology.md#local-throughput">methodology</a> rules it out of Layer 1 for exactly that reason — it would need Layer 2 runs, which do not exist.</dd>
   </dl>
 </section>
 
@@ -204,6 +223,7 @@ limitsapply status --smoke</code></pre>
       <h3>The site</h3>
       <ul>
         <li><a href="../index.html#benchmark">Benchmark</a></li>
+        <li><a href="../break-even.html">Break-even</a></li>
         <li><a href="../local.html#machine">Your machine</a></li>
         <li><a href="../gate.html#install">Gate</a></li>
       </ul>

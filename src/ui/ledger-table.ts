@@ -1,12 +1,14 @@
 /** 04 — Layer 1 ledger. Same ladder as the decision table, one row per plan. */
 import { html } from "lit-html";
 
+import { DISCLOSURE } from "../data/derived/disclosure";
 import { ESTIMATES, estimateFor } from "../data/derived/estimates";
 import { PLANS, type Plan } from "../data/plans";
 import { RUNGS, type Band, type Rung } from "../lib/provenance";
 import { badge, pico, rungTag } from "./cells";
 import { el, mount } from "./dom";
 import { money } from "./format";
+import { renderStaircase } from "./staircase";
 import { sortable } from "./table-sort";
 import { estimateTip, tip } from "./tooltip";
 
@@ -23,13 +25,6 @@ const firsthand = (rung: Rung) => rung === "measured" || rung === "observed";
 const sorted = [...PLANS].sort((a, b) =>
   estimateFor(b.plan).price.value - estimateFor(a.plan).price.value);
 const maxPrice = Math.max(...PLANS.map(plan => estimateFor(plan.plan).price.value));
-
-const counts = {
-  price: PLANS.filter(plan => plan.price != null).length,
-  num: PLANS.filter(plan => plan.quantified).length,
-  conv: PLANS.filter(plan => plan.equiv != null).length,
-  meas: PLANS.filter(plan => estimateFor(plan.plan).allowance.rung === "observed").length,
-};
 
 const sq = (on: boolean, tone = "") => html`
   <td class="disc" data-sort=${on ? 1 : 0}><span class="sq ${on ? "yes " + tone : ""}"
@@ -97,17 +92,7 @@ export function renderLedger(): void {
   el("ledger-title").textContent = `All ${total} plans, sorted by price.`;
   document.querySelectorAll(".tot").forEach(node => { node.textContent = String(total); });
 
-  mount(el("staircase"), html`${([
-    ["Publishes a price", counts.price, "in USD, on a page you can read today"],
-    ["Attaches a number", counts.num, "any figure at all bound to the allowance"],
-    ["In a convertible unit", counts.conv, "dollars, or a countable rate of messages or requests"],
-    ["Measured by anyone", counts.meas, "a published trace of work completed before the limit bit"],
-  ] as const).map(([label, value, detail], index) => html`
-    <div class="step ${value === 0 ? "off" : index === 2 ? "on" : ""}">
-      <span class="k">${label}</span>
-      <span class="v">${value}<span class="of"> / ${total}</span></span>
-      <span class="d">${detail}</span>
-    </div>`)}`);
+  renderStaircase();
 
   renderLedgerRows();
 
@@ -117,8 +102,8 @@ export function renderLedger(): void {
     .map(([rung, n]) => `${n} ${rung}`)
     .join(" · ");
   el("tally").textContent =
-    `${total} plans · ${counts.price} priced · ${counts.num} with a number · ${counts.conv} convertible`
-    + ` · allowance: ${rungTally}`;
+    `${total} plans · ${DISCLOSURE.priced} priced · ${DISCLOSURE.quantified} with a number`
+    + ` · ${DISCLOSURE.convertible} convertible · allowance: ${rungTally}`;
 
   const group = el("ledger-controls");
   group.querySelectorAll<HTMLButtonElement>("button").forEach(button => {

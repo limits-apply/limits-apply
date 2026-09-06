@@ -1,14 +1,11 @@
-export interface OpencodeChange {
-  field: string;
-  oldValue: unknown;
-  newValue: unknown;
-}
+import { type ConfigChange, recorder } from "./harness";
+import { DEFAULT_PROXY } from "./smoke";
 
-function limitsApplyProvider(baseUrl: string) {
+function limitsApplyProvider(proxy: string) {
   return {
     npm: "@ai-sdk/openai-compatible",
     name: "LIMITSAPPLY",
-    options: { baseURL: baseUrl, apiKey: "local" },
+    options: { baseURL: `${proxy}/v1`, apiKey: "local" },
     models: {
       build: { name: "Limits Apply build" },
       plan: { name: "Limits Apply plan" },
@@ -25,15 +22,13 @@ function limitsApplyProvider(baseUrl: string) {
 // leave those nested objects aliased and any field write on them would mutate the caller's data.
 export function mergeOpencodeConfig(
   config: Record<string, unknown>,
-  baseUrl = "http://127.0.0.1:4000/v1",
-): { config: Record<string, unknown>; changes: OpencodeChange[] } {
-  const changes: OpencodeChange[] = [];
-  const record = (field: string, oldValue: unknown, newValue: unknown): void => {
-    if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) changes.push({ field, oldValue, newValue });
-  };
+  proxy = DEFAULT_PROXY,
+): { config: Record<string, unknown>; changes: ConfigChange[] } {
+  const changes: ConfigChange[] = [];
+  const record = recorder(changes);
 
   const provider = { ...((config.provider as Record<string, unknown> | undefined) ?? {}) };
-  const newLimitsApply = limitsApplyProvider(baseUrl);
+  const newLimitsApply = limitsApplyProvider(proxy);
   record("provider.LIMITSAPPLY", provider.LIMITSAPPLY, newLimitsApply);
   provider.LIMITSAPPLY = newLimitsApply;
 

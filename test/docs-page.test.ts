@@ -11,6 +11,7 @@ import { generateLiteLlmConfig } from "../packages/gate/src/litellm";
 import { defaultGateRoot, gatePaths } from "../packages/gate/src/storage";
 import { validateConfig } from "../packages/gate/src/activation";
 import { COMMANDS, EXIT } from "../packages/gate/src/commands";
+import { PROBE_WINDOW_MINUTES } from "../packages/gate/src/main";
 
 const ROOT = join(__dirname, "..");
 const PAGES = {
@@ -99,19 +100,23 @@ test("every buildVerdict formula and every RejectionCode appears on verdict.html
   }
 });
 
-test("validateConfig's four errors appear in the troubleshooting section", () => {
-  const errors = validateConfig({
-    model_list: [],
+test("every error validateConfig can raise appears in the troubleshooting section", () => {
+  const settings = {
     litellm_settings: { drop_params: true, fallbacks: [] },
     general_settings: { master_key_env: "OTHER", host: "0.0.0.0" as "127.0.0.1", port: 4000 },
-  });
+  };
+  const errors = validateConfig({ model_list: [], ...settings });
   expect(errors).toEqual([
-    "missing build alias",
-    "missing plan alias",
+    "no alias is deployed",
     "unexpected master key setting",
     "proxy must bind to loopback",
   ]);
   for (const error of errors) expect(PAGES.index, `troubleshooting is missing "${error}"`).toContain(error);
+
+  const deployed = { model_name: "bulk", litellm_params: { model: "x/y", cooldown_time: 60 } };
+  expect(validateConfig({ model_list: [deployed], ...settings }, ["bulk", "deep"]))
+    .toContain("missing deep alias");
+  expect(PAGES.index, "troubleshooting is missing the per-class alias error").toContain("alias</var> alias");
 });
 
 test("no docs page or its entry script contains node: or @limits-apply/gate", () => {
@@ -133,4 +138,8 @@ test("the site nav points at docs/, and only the docs rail carries Harnesses", (
     expect(html, `docs/${name}.html has no docs rail`).toContain(`<nav class="docs-nav" aria-label="Docs">`);
     expect(html, `the rail on docs/${name}.html is missing Harnesses`).toMatch(/<a href="\.\/harnesses\.html"[^>]*>Harnesses<\/a>/);
   }
+});
+
+test("the CLI reference states the probe window update actually writes", () => {
+  expect(PAGES.cli).toContain(`${PROBE_WINDOW_MINUTES}-minute closed window with source <code>endpoint-probe</code>`);
 });

@@ -6,7 +6,9 @@
 import { AA_SNAPSHOT } from "../data/aa";
 import { LOCAL_AA_SNAPSHOT } from "../data/local-models";
 import { MEASUREMENTS_VERIFIED } from "../data/local-measurements";
+import { FIRST_PARTY_MEASUREMENTS } from "../data/measured";
 import { STALE_DAYS, VERIFIED_ON } from "../data/plans";
+import { CLAUDE_CODE_USAGE } from "../data/provider-usage";
 import { SILICON_VERIFIED } from "../data/silicon";
 import { el } from "./dom";
 
@@ -15,6 +17,8 @@ const daysSince = (iso: string) => (Date.now() - Date.parse(iso)) / 86400000;
 /** Every dated snapshot on the site. The oldest of these is what gets printed. */
 const VERIFICATIONS = [
   VERIFIED_ON, AA_SNAPSHOT.verified, LOCAL_AA_SNAPSHOT.verified, SILICON_VERIFIED, MEASUREMENTS_VERIFIED,
+  CLAUDE_CODE_USAGE.verified,
+  ...FIRST_PARTY_MEASUREMENTS.map(row => row.verified),
 ];
 
 const OLDEST_VERIFICATION = VERIFICATIONS.reduce((a, b) => (a < b ? a : b));

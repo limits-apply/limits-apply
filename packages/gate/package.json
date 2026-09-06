@@ -15,5 +15,5 @@
   "scripts": {
     "prepublishOnly": "pnpm -w gate:build && pnpm -w gate:pack-test"
   },
-  "devDependencies": { "@limits-apply/intelligence": "workspace:*" }
+  "devDependencies": { "@limits-apply/intelligence": "workspace:*", "@limits-apply/sources": "workspace:*" }
 }

@@ -5,7 +5,11 @@ message: >-
   dated evidence snapshot you used.
 type: software
 authors:
-  - name: uslopia
+  - name: Limits Apply
+repository-code: https://github.com/limits-apply/limits-apply
+url: https://limits-apply.github.io/limits-apply/
+version: 0.1.0
+date-released: 2026-08-19
 license: Apache-2.0
 abstract: >-
   An open methodology and toolset for comparing the economics of AI subscriptions, APIs, and local

@@ -19,6 +19,7 @@ import {
   yieldBand,
 } from "../src/lib/provenance";
 import { CLASS_FIT, ESTIMATES, TASK_COST } from "../src/data/derived/estimates";
+import { FIRST_PARTY_MEASUREMENTS } from "../src/data/measured";
 import { FX, PLANS, PUBLISHED_MULTIPLES, narrowPlan, type RawPlan } from "../src/data/plans";
 
 /* ---------- plans.ts's validator: the trust boundary a script-writable file needs ---------- */
@@ -236,16 +237,21 @@ test("the two billing classes are fitted apart, because one fit would fit neithe
   expect(CLASS_FIT.metered.thin).toBe(false);
   expect(CLASS_FIT.metered.band.value).toBeCloseTo(1.1, 6);
 
-  expect(CLASS_FIT.flat.n).toBe(2);
+  expect(CLASS_FIT.flat.n).toBe(3);
   expect(CLASS_FIT.flat.thin).toBe(true);
   expect(CLASS_FIT.flat.band.value).toBeGreaterThan(10 * CLASS_FIT.metered.band.value);
 });
 
 test("a class fit is built only from plans of that class that disclose first-hand", () => {
-  const measured = PLANS.filter(plan => plan.equiv?.usd != null);
-  expect(measured.every(plan => plan.billing === "metered")).toBe(true);
-  expect(measured).toHaveLength(CLASS_FIT.metered.n);
-  expect(measured.every(plan => ESTIMATES[plan.plan].allowance.rung === "measured")).toBe(true);
+  const disclosed = PLANS.filter(plan => plan.equiv?.usd != null);
+  expect(disclosed.every(plan => ESTIMATES[plan.plan].allowance.rung === "measured")).toBe(true);
+  for (const billing of ["metered", "flat"] as const) {
+    const own = disclosed.filter(plan => plan.billing === billing);
+    // The flat class also counts the two plans a subscriber measured, which publish
+    // no dollar figure of their own — hence ≤, not an equality, on that side.
+    expect(own.length, billing).toBeLessThanOrEqual(CLASS_FIT[billing].n);
+  }
+  expect(disclosed.filter(plan => plan.billing === "flat")).toHaveLength(1);
 });
 
 test("a price nobody publishes is derived from a currency or inverted from the allowance", () => {
@@ -266,5 +272,27 @@ test("every inferred figure states its assumptions, and no measured one invents 
       expect(allowance.assumptions.length, plan.plan).toBeGreaterThan(0);
       expect(isExact(allowance), plan.plan).toBe(false);
     }
+  }
+});
+
+test("every first-party measurement names a plan that exists and meets the protocol minimum", () => {
+  for (const row of FIRST_PARTY_MEASUREMENTS) {
+    // Only a row that feeds a plan's allowance must name a plans.json row; a
+    // metered control names its access path, which has no PLANS row to claim.
+    if (row.apiPerPercent !== null) expect(PLANS.some(plan => plan.plan === row.plan)).toBe(true);
+    expect(row.runs).toBeGreaterThanOrEqual(10);
+    expect(row.outcomes.pass + row.outcomes.partial + row.outcomes.fail).toBe(row.runs);
+    expect(row.evidence).toBeTruthy();
+    expect(Number.isNaN(Date.parse(row.verified))).toBe(false);
+  }
+});
+
+test("a first-party trace outranks the community trace for the same plan", () => {
+  // Guarded so it activates the day the first subscription row is committed.
+  for (const row of FIRST_PARTY_MEASUREMENTS) {
+    if (!row.apiPerPercent) continue;
+    const estimate = ESTIMATES[row.plan];
+    expect(estimate.allowance.rung).toBe("observed");
+    expect(estimate.allowance.assumptions.join(" ")).toContain("first-party");
   }
 });

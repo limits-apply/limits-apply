@@ -24,5 +24,7 @@ export function overlayProfile(base: WorkloadProfile, overlay: LocalOverlay = {}
     region: overlay.region ?? base.region,
     availableCredentials: overlay.credentials ?? base.availableCredentials,
     exhaustedDomains: overlay.exhaustedDomains ?? base.exhaustedDomains,
+    taskClasses: overlay.taskClasses ?? base.taskClasses,
+    includeLocal: overlay.includeLocal ?? base.includeLocal,
   };
 }

@@ -73,8 +73,9 @@ test("local.html's printed score formula matches the speed knee in throughput.ts
   expect(localHtml).toContain(`<strong>1 + ln(tok/s ÷ ${SPEED_KNEE})</strong> above it`);
 });
 
-test("the landing links to the docs roadmap, which names the local+PAYG gap", () => {
+test("the landing links to the docs roadmap, which names the local+PAYG gap as the frontier's alone", () => {
   expect(indexHtml).toContain(`href="./docs/index.html#roadmap"`);
   const docsIndexHtml = readFileSync(join(ROOT, "docs", "index.html"), "utf8");
-  expect(docsIndexHtml).toContain("Local and pay-as-you-go inside one combination");
+  expect(docsIndexHtml).toContain("Local plans inside a budget combination");
+  expect(docsIndexHtml).toContain("Gate already <em>routes</em> to a local endpoint");
 });

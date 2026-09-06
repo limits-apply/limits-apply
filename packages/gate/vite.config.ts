@@ -10,6 +10,9 @@ export default defineConfig({
   },
   ssr: { noExternal: true },
   resolve: {
-    alias: { "@limits-apply/intelligence": fileURLToPath(new URL("../intelligence/index.ts", import.meta.url)) },
+    alias: {
+      "@limits-apply/intelligence": fileURLToPath(new URL("../intelligence/index.ts", import.meta.url)),
+      "@limits-apply/sources": fileURLToPath(new URL("../sources/index.ts", import.meta.url)),
+    },
   },
 });

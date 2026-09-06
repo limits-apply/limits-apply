@@ -18,7 +18,7 @@ import { COMMUNITY_MEASUREMENTS, codexPlusObserved } from "../src/data/community
 import { AGENT_POINTS } from "../src/data/agents";
 import { PLAN_MODEL_KEYS, SCORE_PLANS } from "../src/data/aa";
 import { ESTIMATES } from "../src/data/derived/estimates";
-import { OPENCODE_QUOTA, OPENCODE_RANGE, UNSCORED_OPENCODE_MODELS } from "../src/data/opencode";
+import { OPENCODE_LIMITS, OPENCODE_MODEL_CAP, OPENCODE_QUOTA, UNSCORED_OPENCODE_MODELS } from "../src/data/opencode";
 
 test("apiEquivalentCost weights uncached, cached, cache-write, and output tokens independently", () => {
   const cost = apiEquivalentCost(
@@ -113,7 +113,7 @@ test("the disclosure staircase descends: priced ≥ quantified ≥ convertible �
   ];
 
   expect(steps.every((v, i) => i === 0 || v <= steps[i - 1])).toBe(true);
-  expect(steps[2]).toBe(14);
+  expect(steps[2]).toBe(15);
   // Layer 2 has not run: the only measured plans are the two somebody else measured.
   expect(steps[3]).toBe(2);
 });
@@ -184,23 +184,29 @@ test("community observations can inform a range but never satisfy ranking eligib
   expect(COMMUNITY_MEASUREMENTS.some(row => row.rankable)).toBe(false);
 });
 
-test("every model OpenCode Go grants carries the quota OpenCode publishes for it", () => {
+test("every model OpenCode Go grants carries the ration OpenCode publishes for it", () => {
   for (const key of PLAN_MODEL_KEYS["OpenCode Go"]) {
-    expect(OPENCODE_QUOTA[key], key).toBeGreaterThan(0);
+    expect(OPENCODE_QUOTA[key]?.usdPerMonth, key).toBeGreaterThan(0);
+    expect(OPENCODE_QUOTA[key]!.usdPerMonth, key).toBeLessThanOrEqual(OPENCODE_LIMITS.usdPerMonth);
+    expect(OPENCODE_QUOTA[key]?.requestsPer5h, key).toBeGreaterThan(0);
   }
   expect(UNSCORED_OPENCODE_MODELS.length).toBeGreaterThan(0);
 });
 
-test("the quota OpenCode Go prints is the range OpenCode publishes, not a rounder one", () => {
+test("the quota OpenCode Go prints is the dollar limits OpenCode publishes, not a rounder set", () => {
   const quota = PLANS.find(plan => plan.plan === "OpenCode Go")!.quota;
   const shown = quota.match(/[\d,]+/g)!.map(n => Number(n.replace(/,/g, "")));
-  expect(shown).toContain(OPENCODE_RANGE.low);
-  expect(shown).toContain(OPENCODE_RANGE.high);
+  expect(shown).toContain(OPENCODE_LIMITS.usdPer5h);
+  expect(shown).toContain(OPENCODE_LIMITS.usdPerWeek);
+  expect(shown).toContain(OPENCODE_LIMITS.usdPerMonth);
+  expect(shown).toContain(OPENCODE_MODEL_CAP.low);
+  expect(shown).toContain(OPENCODE_MODEL_CAP.high);
 });
 
-test("a per-model quota is recorded but never converted, because no plan-wide rate is published", () => {
+test("OpenCode Go converts on its published dollars, not on its estimated request counts", () => {
   const openCode = PLANS.find(plan => plan.plan === "OpenCode Go")!;
   expect(openCode.quantified).toBe(true);
-  expect(openCode.equiv).toBe(null);
-  expect(convertible(openCode.equiv)).toBe(false);
+  expect(openCode.equiv?.usd).toBe(OPENCODE_LIMITS.usdPerMonth);
+  expect(convertible(openCode.equiv)).toBe(true);
+  expect(ESTIMATES[openCode.plan].allowance.rung).toBe("measured");
 });

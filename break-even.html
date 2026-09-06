@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Break-even — when a subscription beats the API</title>
+<meta name="description" content="Of 49 AI subscription plans, 9 publish what the money buys. The break-even arithmetic on the other 40 — every figure dated, sourced, and labelled with how it was obtained.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="Break-even — when a subscription beats the API">
+<meta property="og:description" content="Of 49 AI subscription plans, 9 publish what the money buys. The break-even arithmetic on the other 40 — every figure dated, sourced, and labelled with how it was obtained.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/break-even.html">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<header>
+  <div class="hbar">
+    <a class="brand" href="./index.html"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="./index.html">Home</a>
+      <a href="./break-even.html" aria-current="page">Break-even</a>
+      <a href="./local.html">Local</a>
+      <a href="./gate.html">Gate</a>
+      <a href="./docs/index.html">Docs</a>
+      <a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-pressed="false"
+            aria-label="Switch to the dark theme">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+        <path d="M16.4 12.7A7.1 7.1 0 0 1 7.3 3.6a7.1 7.1 0 1 0 9.1 9.1Z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <span class="eyebrow">“Usage limits apply”</span>
+  <h1 id="be-headline"></h1>
+  <p class="lead">
+    Every leaderboard prices models through APIs and says so. Every cost tracker meters requests
+    and cannot see a flat seat. The thing people actually buy — a subscription with a limit
+    nobody states — sits between the two, unmeasured. This page is the arithmetic of that gap:
+    what the providers disclose, where a subscription starts beating the metered price, and the
+    one break-even anchor a provider has published about its own plan.
+  </p>
+  <p class="lead">
+    Every figure below carries the rung that says how it was obtained. The full per-plan table
+    is <a href="./index.html#ledger">the ledger</a>; the method is
+    <a href="./index.html#methodology">the methodology</a>.
+  </p>
+</section>
+
+<section id="disclosure">
+  <span class="eyebrow">Disclosure</span>
+  <h2>Four questions, each stricter than the last.</h2>
+  <p>
+    The same <span data-count="total"></span> plans, asked what their provider actually
+    publishes. A price is easy. A number attached to the allowance is rarer. A number in a unit
+    that converts to compute is nearly extinct — and only
+    <span data-count="usd"></span> plans state it in dollars, the one unit that needs no
+    conversion at all. A measurement of work completed before the limit bit exists for
+    <span data-count="observed"></span>.
+  </p>
+
+  <div class="staircase" id="staircase"></div>
+
+  <p class="note" style="margin-top:18px">
+    Counted from the committed plan snapshot — one row per plan, each with its own source URL
+    and verification date. The per-plan squares are on
+    <a href="./index.html#ledger">the ledger</a>.
+  </p>
+</section>
+
+<section id="curve">
+  <span class="eyebrow">Subscription vs API</span>
+  <h2>Where a subscription starts winning.</h2>
+  <p>
+    Under PAYG, task number 400 costs the same as task number 1. Under a subscription, every
+    additional task inside the allowance drives the effective cost per task down — and every
+    unused unit of allowance is money spent on nothing.
+  </p>
+  <figure>
+    <svg id="chart-breakeven" viewBox="0 0 700 340" role="img"
+         aria-label="Effective cost per useful task against subscription utilization, showing a flat pay-as-you-go line and a falling subscription curve crossing at roughly 29 percent utilization."></svg>
+    <figcaption>
+      Illustrative — not benchmark data. Assumes a $20 plan whose allowance covers 200 tasks at
+      full utilization, against $0.35/task at API prices. The crossing point is the number the
+      benchmark exists to measure per plan and per workload.
+    </figcaption>
+  </figure>
+
+  <div class="assume" style="margin-top:28px">
+    <p>The whole curve rests on three numbers, and moves if you move any of them:</p>
+    <div class="formula">
+      cost per task &nbsp;= price ÷ (tasks × utilization) = $20 ÷ (200 × u)<br>
+      break-even &nbsp;&nbsp;&nbsp;= price ÷ (tasks × API cost per task)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = $20 ÷ (200 × $0.35) ≈ <strong>29%</strong>
+    </div>
+    <p class="note">
+      Use a plan below 29% of its allowance and PAYG was cheaper. The catch is the middle term:
+      for most plans, “tasks at full utilization” is exactly the number the provider does not
+      publish — which is why the staircase above, not this curve, is the finding.
+    </p>
+  </div>
+
+  <p class="pull" style="margin-top:28px">
+    A subscription worth $2,000 of API compute is worth $0 of API compute if you use it twice a month.
+  </p>
+</section>
+
+<section id="anchor">
+  <span class="eyebrow">The provider’s own number</span>
+  <h2>Anthropic has published one half of the equation.</h2>
+  <p class="lead" id="be-anchor"></p>
+  <p class="note" style="margin-top:14px">
+    “Active day” is Anthropic’s unit, not ours — the band is quoted as published, and no
+    per-day figure here is multiplied into a month by us. The monthly band is the provider’s own.
+  </p>
+</section>
+
+<section id="cite">
+  <span class="eyebrow">Cite this</span>
+  <h2>Dated, versioned, reproducible.</h2>
+  <p>
+    Every figure on this page is computed from a committed, dated snapshot — cite the snapshot
+    date printed in the footer alongside the page, and it can be reproduced from the repository
+    at that commit. Citation metadata is in
+    <a href="https://github.com/limits-apply/limits-apply/blob/main/CITATION.cff" target="_blank" rel="noopener">CITATION.cff</a>;
+    corrections travel fastest as
+    <a href="https://github.com/limits-apply/limits-apply/issues" target="_blank" rel="noopener">issues</a>.
+  </p>
+  <div class="formula">
+    Limits Apply — the economics of using AI. https://limits-apply.github.io/limits-apply/<br>
+    Source: https://github.com/limits-apply/limits-apply · License: Apache-2.0
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. This page is the break-even arithmetic: what providers disclose, and where a subscription beats the metered price.</p>
+      </div>
+
+      <nav aria-label="This page">
+      <h3>This page</h3>
+      <ul>
+        <li><a href="#disclosure">Disclosure</a></li>
+        <li><a href="#curve">The curve</a></li>
+        <li><a href="#anchor">The provider’s own number</a></li>
+        <li><a href="#cite">Cite this</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="The ledger">
+      <h3>The ledger</h3>
+      <ul>
+        <li><a href="./index.html#ledger">All plans</a></li>
+        <li><a href="./index.html#benchmark">Benchmark</a></li>
+        <li><a href="./index.html#methodology">Methodology</a></li>
+        <li><a href="./local.html">Local</a></li>
+        <li><a href="./gate.html">Gate</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Project</h3>
+      <ul>
+        <li><a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">Source on GitHub</a></li>
+        <li><a href="https://github.com/limits-apply/limits-apply/issues" target="_blank" rel="noopener">Correct a figure</a></li>
+        <li><a href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Anthropic cost docs</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/break-even.ts"></script>
+</body>
+</html>

@@ -23,6 +23,9 @@ You can help by correcting a source, proposing a workload, or submitting a measu
 with the [contribution paths](CONTRIBUTING.md#ways-to-contribute); the evidence rules are in
 [Data contributions](docs/data-contributions.md).
 
+Where this is going: [docs/vision.md](docs/vision.md) — the benchmark's verdict becoming a
+local master router across subscription quota, metered APIs and local models.
+
 ## The two-layer rule
 
 The single constraint that governs every number here:
@@ -74,9 +77,11 @@ Deployment builds `dist/` and publishes it to GitHub Pages
 ## Layout
 
 - `index.html` — the landing page: decision table, agentic table, the method sections, and the
-  Layer 1 ledger. `local.html` — local throughput, the zero-limit baseline. `gate.html` — what the
-  CLI does with a verdict. `docs/*.html` — reference pages off the same data. Seven entries in
-  all; adding a page means an HTML file, a `src/*.ts` entry, and a line in `vite.config.ts`.
+  Layer 1 ledger. `break-even.html` — the standalone break-even arithmetic: disclosure staircase,
+  the curve, and the provider-published anchor. `local.html` — local throughput, the zero-limit
+  baseline. `gate.html` — what the CLI does with a verdict. `docs/*.html` — reference pages off
+  the same data. Eight entries in all; adding a page means an HTML file, a `src/*.ts` entry, and
+  a line in `vite.config.ts`.
 - `data/` — third-party payloads we did not author: dated, attributed, never hand-edited, one
   entry each in the [review register](docs/third-party-review.md).
 - `src/data/` — every editable figure and the loaders that adopt a snapshot.
@@ -85,7 +90,7 @@ Deployment builds `dist/` and publishes it to GitHub Pages
   `DAYS_PER_MONTH`, `bestConfig`/`strongestConfig`), `portfolio.ts` (budget frontier),
   `throughput.ts` (local).
 - `src/ui/` — rendering only. `src/styles/index.css` — the palette *is* the confidence taxonomy.
-- `packages/` — the `limitsapply` CLI and the pure logic it shares with the site.
+- `packages/` — the `@limits-apply/cli` package (the `limitsapply` command) and the pure logic it shares with the site.
 - `scripts/refresh.mjs` + `scripts/sources/*.mjs` — the refresh runner; `test/` — vitest.
 
 No page holds data or maths.
@@ -136,8 +141,8 @@ only `published-usd`, so community data cannot enter the ranking by accident.
 ### Freshness
 
 Every row in `plans.json` carries its own `verified` date; `VERIFIED_ON` (`src/data/plans.ts`) is
-derived as the **oldest** of them, and `src/ui/freshness.ts` takes the oldest across five inputs —
-both AA snapshot dates and the two hand-maintained ones as well. Past `STALE_DAYS` (30) the footer
+derived as the **oldest** of them, and `src/ui/freshness.ts` takes the oldest across six inputs —
+both AA snapshot dates, the two hand-maintained ones and the provider-usage anchor as well. Past `STALE_DAYS` (30) the footer
 marks the snapshot stale, and `.github/workflows/stale-prices.yml` opens an issue weekly.
 Re-verifying a price means bumping that row's `verified` date; `VERIFIED_ON` is never bumped
 directly.
@@ -159,12 +164,6 @@ only a provider's own docs support a `VERIFIED_PLAN_ACCESS` entry. Any failure e
 leaves the previous snapshot standing rather than writing a degraded one under today's date.
 `.github/workflows/refresh.yml` runs `refresh:check` weekly and opens a PR on drift.
 
-### `FORM_ENDPOINT`
-
-Empty by default in `src/main.ts`, so the form says it isn't wired up instead of silently dropping
-an email address. Point it at Formspree, Buttondown or your own handler; it POSTs `FormData` and
-expects JSON.
-
 ## Contributing
 
 Contributions are welcome across data, workloads, measurements, code and documentation. Start with
@@ -178,7 +177,9 @@ The project is maintainer-led; see [GOVERNANCE.md](GOVERNANCE.md),
 ## Deliberately not built
 
 Not omissions — each needs data that doesn't exist yet, and shipping it empty would turn a
-benchmark into a directory. The definitions are already in `docs/methodology.md`.
+benchmark into a directory. The definitions are already in `docs/methodology.md`. These are the
+benchmark's gaps; Gate's own live in its roadmap register, at the foot of
+[`docs/index.html`](docs/index.html).
 
 | Not built | Add when |
 | --- | --- |
@@ -189,16 +190,27 @@ benchmark into a directory. The definitions are already in `docs/methodology.md`
 | `View run details` drill-down | the first runs produce logs |
 | Historical tracking | there is a second snapshot to compare |
 
-## Before launch
+## Before the first Layer 2 run
 
-Decisions, not chores — stated in full in `docs/methodology.md`.
+Decisions, not chores — stated in full in `docs/methodology.md`. None of them blocks publishing
+Layer 1, which carries its own verification dates and freshness rules; all of them gate the first
+measurement run.
 
 1. **Terms of service.** Consuming a plan to exhaustion for measurement may fall under anti-abuse
    clauses. Read each provider's terms and document the position taken before any Layer 2 run.
+   Positions live in [docs/tos-positions.md](docs/tos-positions.md).
 2. **Reuse conditions** of any third-party evaluation data republished in Layer 1.
 3. **Run counts and variance.** A single run measures nothing; fix the minimum per task.
+   Fixed at n ≥ 10 per configuration — [workloads/wl-001/workload.md](workloads/wl-001/workload.md).
 4. **Grading agreement.** Double-grade a sample of Pass / Partial / Fail and publish the rate.
-5. **Re-verify every price** and bump the `verified` date on the affected rows.
+   Settled for auto-graded workloads (wl-001, where the grader is a script); open for research loads.
+
+The tooling for a run exists: `limitsapply measure` wraps one graded run and records it with the
+quota windows before and after, and `src/data/measured.ts` is where a protocol-complete summary
+lands. No run has cleared the protocol yet, so the array ships empty.
+
+Publishing Layer 1 has one recurring duty instead: keep every price inside `STALE_DAYS` by
+re-verifying rows and bumping their `verified` dates.
 
 ## License and third-party material
 

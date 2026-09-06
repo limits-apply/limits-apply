@@ -1,10 +1,12 @@
 import type { Candidate, Verdict, WorkloadProfile } from "./types";
+import type { AgentPair, AgentVerdict } from "./agents";
 
 export interface EvidenceSnapshot {
   kind: "evidence";
   version: string;
   retrievedAt: string;
   candidates: Candidate[];
+  agentPairs?: AgentPair[];
 }
 
 export interface VerdictSnapshot {
@@ -14,6 +16,7 @@ export interface VerdictSnapshot {
   generatedAt: string;
   profile: WorkloadProfile;
   verdict: Verdict;
+  agents?: AgentVerdict;
 }
 
 export function stableJson(value: unknown): string {
@@ -38,6 +41,15 @@ export function validateEvidenceSnapshot(snapshot: EvidenceSnapshot): string[] {
     if (!(candidate.intelligence.value >= 0)) errors.push(`${candidate.id} has invalid intelligence`);
     if (!(candidate.speed.value > 0)) errors.push(`${candidate.id} has invalid speed`);
     if (!(candidate.concurrency >= 0)) errors.push(`${candidate.id} has invalid concurrency`);
+  }
+  if (snapshot.agentPairs) {
+    const pairIds = new Set<string>();
+    for (const pair of snapshot.agentPairs) {
+      if (pairIds.has(pair.id)) errors.push(`duplicate agent pair ${pair.id}`);
+      pairIds.add(pair.id);
+      if (!(pair.index.value >= 0 && pair.index.value <= 100)) errors.push(`${pair.id} has invalid index`);
+      if (!(pair.minutesPerTask.value > 0)) errors.push(`${pair.id} has invalid minutesPerTask`);
+    }
   }
   return errors;
 }

@@ -11,6 +11,7 @@ import {
   monthlyFromWindow, scaleBand, weakest, widenIfDegenerate,
 } from "../../lib/provenance";
 import { COMMUNITY_MEASUREMENTS } from "../community";
+import { FIRST_PARTY_MEASUREMENTS } from "../measured";
 import {
   ALT_PRICES, FX, PLANS, PUBLISHED_MULTIPLES, VERIFIED_ON,
   type Billing, type Plan,
@@ -31,12 +32,15 @@ const num = (n: number) => n.toLocaleString("en-US", { maximumFractionDigits: 2 
 
 const BY_NAME = new Map(PLANS.map(plan => [plan.plan, plan]));
 
-/** The community trace for a plan, expanded from its quota window to a month. */
+/** The strongest trace for a plan — first-party ahead of community — expanded from its quota window to a month. */
 function observedAllowance(name: string) {
-  const row = COMMUNITY_MEASUREMENTS.find(measurement => measurement.plan === name);
+  const firstParty = FIRST_PARTY_MEASUREMENTS.find(
+    measurement => measurement.plan === name && measurement.apiPerPercent !== null,
+  );
+  const row = firstParty ?? COMMUNITY_MEASUREMENTS.find(measurement => measurement.plan === name);
   if (!row) return null;
-  const [low, high] = row.apiPerPercent.map(perPercent => monthlyFromWindow(perPercent, row.windowDays));
-  const perPercent = (row.apiPerPercent[0] + row.apiPerPercent[1]) / 2;
+  const [low, high] = row.apiPerPercent!.map(perPercent => monthlyFromWindow(perPercent, row.windowDays));
+  const perPercent = (row.apiPerPercent![0] + row.apiPerPercent![1]) / 2;
   const reported = { value: (low + high) / 2, low, high };
   return {
     band: widenIfDegenerate(reported),
@@ -44,6 +48,8 @@ function observedAllowance(name: string) {
     perPercent,
     row,
     source: row.sources[0][1],
+    protocol: firstParty ? `first-party protocol ${firstParty.workload} · n=${firstParty.runs} runs` : null,
+    verified: firstParty ? firstParty.verified : VERIFIED_ON,
   };
 }
 
@@ -187,17 +193,19 @@ function resolveAllowanceRung(plan: Plan, ceiling: number | null, ceilingNote: s
       formula: `${usd(observed.perPercent)} per 1 % of the window × 100 × (${DAYS_PER_MONTH} ÷ ${observed.row.windowDays} days)`
         + ` = ${usd(observed.band.value)} / month`,
       assumptions: [
+        ...(observed.protocol ? [observed.protocol] : []),
         `${observed.row.evidence} — one account's workload, not a cohort`,
         "the window resets exactly as documented",
         ...(observed.single ? [`a single report carries no range, so the band is widened ×${THIN_SPREAD} either side`] : []),
         ...ceilingNote,
       ],
       source: observed.source,
-      // Not plan.verified: this is the date a community report was read, which has
-      // nothing to do with when the plan's own price/quota was last re-checked —
-      // COMMUNITY_MEASUREMENTS carries no date of its own, so the site-wide oldest
-      // is the least-wrong fallback until it does.
-      verified: VERIFIED_ON,
+      // For a community trace this is not plan.verified: that is the date a report
+      // was read, which has nothing to do with when the plan's own price/quota was
+      // last re-checked — COMMUNITY_MEASUREMENTS carries no date of its own, so the
+      // site-wide oldest is the least-wrong fallback until it does. A first-party
+      // row carries the date of its own last run instead.
+      verified: observed.verified,
     };
   }
 

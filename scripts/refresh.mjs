@@ -55,9 +55,9 @@ function loadPlans() {
 }
 
 /** True when the meaningful payload changed — ignores `retrieved_on`, which always differs. */
-function drifted(previous, fetched, key = "models") {
+function drifted(previous, fetched, keys = "models") {
   if (!previous) return true;
-  return JSON.stringify(previous[key]) !== JSON.stringify(fetched[key]);
+  return [keys].flat().some(key => JSON.stringify(previous[key]) !== JSON.stringify(fetched[key]));
 }
 
 /* ---------- the two modes ---------- */
@@ -119,7 +119,7 @@ async function runReportStep(name, fetcher, summarize, isDrift) {
   }
 }
 
-await runWriteStep("opencode", "opencode-go-", fetchOpenCode, summarizeOpenCode, "models",
+await runWriteStep("opencode", "opencode-go-", fetchOpenCode, summarizeOpenCode, ["limits", "models"],
   () => importedSnapshot("src/data/opencode.ts").snapshot);
 
 await runWriteStep("releases", "model-releases-", async () => fetchReleases(aaSmall().models.map(m => m.name)), summarizeReleases,

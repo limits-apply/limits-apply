@@ -36,7 +36,7 @@ function card(harness: Harness) {
     ${(harness.date || harness.configPath) ? html`
     <dl class="fields">
       ${harness.date ? html`<dt>Run on</dt><dd>${harness.date}</dd>` : nothing}
-      ${harness.configPath ? html`<dt>Config path</dt><dd><code>${harness.configPath}</code></dd>` : nothing}
+      ${harness.configPath ? html`<dt>Where the tool keeps its config</dt><dd><code>${harness.configPath}</code></dd>` : nothing}
     </dl>` : nothing}
     <p class="note"><a href=${harness.site} target="_blank" rel="noopener">${harness.name} ↗</a></p>
   </div>`;

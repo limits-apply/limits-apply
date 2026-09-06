@@ -36,6 +36,9 @@ importers:
       '@limits-apply/intelligence':
         specifier: workspace:*
         version: link:../intelligence
+      '@limits-apply/sources':
+        specifier: workspace:*
+        version: link:../sources
 
   packages/intelligence: {}
 

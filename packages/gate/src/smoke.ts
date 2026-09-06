@@ -1,3 +1,5 @@
+export const DEFAULT_PROXY = "http://127.0.0.1:4000";
+
 export interface SmokeResponse {
   status: number;
   body: string;

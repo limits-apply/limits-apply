@@ -2,7 +2,7 @@ import { expect, test } from "vitest";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { GLOBAL_PROFILE, buildVerdict, overlayProfile, validateEvidenceSnapshot } from "../packages/intelligence/src/index";
+import { DEFAULT_CLASSES, GLOBAL_PROFILE, buildVerdict, overlayProfile, validateEvidenceSnapshot } from "../packages/intelligence/src/index";
 import { activate, generateLiteLlmConfig, gatePaths, rollback, updateGate } from "../packages/gate/index";
 import type { Candidate } from "../packages/intelligence/src/index";
 
@@ -150,11 +150,13 @@ test("failed activation leaves the active config untouched and can roll back", (
   const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2)];
   const verdict = buildVerdict(candidates, { ...GLOBAL_PROFILE, turnsPerMonth: 1 }, "evidence-v1", "2026-08-17");
   const config = generateLiteLlmConfig(verdict, candidates);
-  const active = activate(null, config, () => true);
+  const active = activate(null, config);
   expect(active.error).toBeNull();
-  const replacement = activate(active.active, config, () => false);
-  expect(replacement.active).toBe(active.active);
-  const committed = activate(active.active, config, () => true);
+  const broken = { ...config, model_list: config.model_list.filter(model => model.model_name !== "plan") };
+  const rejected = activate(active.active, broken, Object.keys(verdict.routes));
+  expect(rejected.error).toContain("missing plan alias");
+  expect(rejected.active).toBe(active.active);
+  const committed = activate(active.active, config);
   expect(rollback(committed).active).toBe(active.active);
 });
 
@@ -168,11 +170,67 @@ test("Gate writes isolated state atomically and turns repeated updates into no-o
       generatedAt: "2026-08-17", profile: verdict.profile, verdict,
     };
     const paths = gatePaths(root);
-    expect(await updateGate(paths, snapshot, candidates, () => true, "2026-08-17T00:00:00Z")).toBe("activated");
+    expect(await updateGate(paths, snapshot, candidates, async () => true, "2026-08-17T00:00:00Z")).toBe("activated");
     expect(JSON.parse(await readFile(paths.runtime, "utf8")).general_settings.host).toBe("127.0.0.1");
-    expect(await updateGate(paths, snapshot, candidates, () => true, "2026-08-17T01:00:00Z")).toBe("noop");
+    expect(await updateGate(paths, snapshot, candidates, async () => true, "2026-08-17T01:00:00Z")).toBe("noop");
     expect((await readFile(paths.audit, "utf8")).split("\n").filter(Boolean)).toHaveLength(2);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test("without taskClasses the verdict still selects build and plan exactly as before", () => {
+  const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2)];
+  const verdict = buildVerdict(candidates, GLOBAL_PROFILE, "evidence-v1", "2026-08-24");
+  expect(Object.keys(verdict.routes).sort()).toEqual(["build", "plan"]);
+  expect(verdict.selected).toEqual({ build: "cheap", plan: "smart" });
+  expect(verdict.fallbacks).toEqual({ build: ["plan"] });
+});
+
+test("a bulk class with a lower floor routes to the cheaper candidate build refuses", () => {
+  const candidates = [candidate("cheap", 42, 1), candidate("smart", 70, 2)];
+  const profile = {
+    ...GLOBAL_PROFILE,
+    taskClasses: [...DEFAULT_CLASSES, { alias: "bulk", pick: "cheapest-above-floor" as const, intelligenceFloor: 40 }],
+  };
+  const verdict = buildVerdict(candidates, profile, "evidence-v1", "2026-08-24");
+  expect(Object.keys(verdict.routes).sort()).toEqual(["build", "bulk", "plan"]);
+  expect(verdict.routes.build).toEqual(["smart"]);
+  expect(verdict.routes.bulk).toEqual(["cheap", "smart"]);
+});
+
+test("duplicate aliases and dangling fallbacks are refused by name", () => {
+  const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2)];
+  const dup = { ...GLOBAL_PROFILE, taskClasses: [DEFAULT_CLASSES[0], DEFAULT_CLASSES[0]] };
+  expect(() => buildVerdict(candidates, dup, "evidence-v1", "2026-08-24")).toThrow(/build/);
+  const dangling = {
+    ...GLOBAL_PROFILE,
+    taskClasses: [{ alias: "a", pick: "cheapest-above-floor" as const, fallbackAlias: "ghost" }],
+  };
+  expect(() => buildVerdict(candidates, dangling, "evidence-v1", "2026-08-24")).toThrow(/ghost/);
+});
+
+const localCandidate: Candidate = {
+  ...candidate("local/qwen", 48, 0), billing: "local", speed: evidence(20),
+};
+
+test("without includeLocal a market verdict never routes to local", () => {
+  const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2), localCandidate];
+  const verdict = buildVerdict(candidates, GLOBAL_PROFILE, "evidence-v1", "2026-08-24");
+  for (const route of Object.values(verdict.routes)) expect(route).not.toContain(localCandidate.id);
+});
+
+test("with includeLocal, local wins the classes whose floor it clears and no other", () => {
+  const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2), localCandidate];
+  const profile = {
+    ...GLOBAL_PROFILE,
+    includeLocal: true,
+    taskClasses: [
+      { alias: "build", pick: "cheapest-above-floor" as const, fallbackAlias: "deep" },
+      { alias: "deep", pick: "cheapest-above-floor" as const, intelligenceFloor: 60 },
+    ],
+  };
+  const verdict = buildVerdict(candidates, profile, "evidence-v1", "2026-08-24");
+  expect(verdict.selected.build).toBe(localCandidate.id);
+  expect(verdict.routes.deep).not.toContain(localCandidate.id);
 });

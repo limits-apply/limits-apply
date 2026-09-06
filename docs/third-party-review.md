@@ -41,7 +41,7 @@ under the Apache License 2.0. A file absent from this register is original, not 
 | `data/artificial-analysis-small-2026-08-19.json` | [Artificial Analysis small open-weights table](https://artificialanalysis.ai/models/open-source/small) and Data API | **Blocked** | Obtain redistribution rights or replace the bundled snapshot with a permitted source. Open model weights do not imply an open licence for AA's index data. |
 | `data/fx-rates-2026-08-17.json` | [European Central Bank reference rates](https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml) | Review pending | Record the ECB reuse terms that cover redistribution of the normalized snapshot. |
 | `data/model-releases-2026-08-19.json` | [models.dev catalogue](https://models.dev/api.json) and linked Hugging Face repositories | Review pending | Record the catalogue licence and preserve per-model upstream attribution where required. |
-| `data/opencode-go-2026-08-17.json` | [OpenCode Go](https://opencode.ai/fr/go) | Review pending | Confirm that the recorded factual quota table may be redistributed in this form. |
+| `data/opencode-go-2026-08-21.json` | [OpenCode Go docs](https://opencode.ai/docs/go) | Review pending | Confirm that the recorded factual usage limits and model roster may be redistributed in this form. |
 | `src/data/plans.json` | Per-row provider and secondary URLs | Review per row | Keep factual extracts minimal; record any copied expressive text and applicable reuse terms during source review. |
 
 Official Artificial Analysis documentation consulted for this status:

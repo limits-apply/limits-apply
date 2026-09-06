@@ -11,8 +11,6 @@ export interface LiteLlmConfig {
   general_settings: { master_key_env: string; host: "127.0.0.1"; port: number };
 }
 
-const ALIASES = ["build", "plan"] as const;
-
 /** A flat-rate 429 means a window closed, not that a burst was refused, so it sits out far longer. */
 const WINDOW_COOLDOWN_SECONDS = 300;
 const BURST_COOLDOWN_SECONDS = 60;
@@ -23,7 +21,7 @@ function deploymentName(alias: string, rank: number): string {
 
 export function generateLiteLlmConfig(verdict: Verdict, candidates: Candidate[]): LiteLlmConfig {
   const byId = new Map(candidates.map(candidate => [candidate.id, candidate]));
-  const routes = ALIASES.map(alias => ({
+  const routes = Object.keys(verdict.routes).map(alias => ({
     alias,
     route: verdict.routes[alias]
       .map(id => byId.get(id))

@@ -1,4 +1,7 @@
+import { mergeClaudeCodeConfig } from "../../packages/gate/src/claude-code";
+import { codexConfigBlock } from "../../packages/gate/src/codex";
 import { mergeOpencodeConfig } from "../../packages/gate/src/opencode";
+import { mergePiConfig } from "../../packages/gate/src/pi";
 
 type HarnessStatus = "verified" | "recipe" | "planned";
 
@@ -21,67 +24,9 @@ export const VERIFIED_DEF = {
 };
 
 const OPENCODE_SNIPPET = JSON.stringify(mergeOpencodeConfig({}).config, null, 2);
-
-/**
- * Hand-written, not generated: `recipe` means a human ran it, so there is no function to derive it from
- * and no test that can keep it honest. Verified on the date the pi row carries, against a LiteLLM proxy
- * exposing the contract `generateLiteLlmConfig` emits — `build` and `plan` on 127.0.0.1:4000 — rather
- * than against a Gate-generated one, which is the pi side of the wiring and all this row claims.
- * `apiKey` holds the value of `LITELLM_MASTER_KEY`, not a second secret.
- *
- * `contextWindow` and `maxTokens` are a deliberate floor. The recipe is blind to which model the verdict
- * put behind an alias, the same way `mergeOpencodeConfig` is, so it claims only what any of them holds.
- */
-const PI_MODEL = (id: string, name: string) => ({
-  id, name, reasoning: true, input: ["text"],
-  contextWindow: 32768, maxTokens: 8192,
-  cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-});
-
-const PI_SNIPPET = JSON.stringify({
-  providers: {
-    LIMITSAPPLY: {
-      baseUrl: "http://127.0.0.1:4000/v1",
-      api: "openai-completions",
-      apiKey: "local",
-      compat: { supportsDeveloperRole: false, supportsReasoningEffort: false },
-      models: [PI_MODEL("build", "Limits Apply build"), PI_MODEL("plan", "Limits Apply plan")],
-    },
-  },
-}, null, 2);
-
-/**
- * The same afternoon as the pi row, against the same proxy, and with the same blindness to which
- * model sits behind an alias. Both were run with `build` and `plan` live: `build` answered in each
- * harness, `plan` answered in neither — the model the verdict had put behind it that day is served
- * only in the chat-completions shape, so LiteLLM refuses it the Responses and Anthropic endpoints
- * these two harnesses speak. That is a proxy-side limit on the day, not a defect in either config.
- *
- * `env_key` names the variable; `ANTHROPIC_AUTH_TOKEN` holds its value, the way pi's `apiKey` does.
- * Codex 0.147 no longer accepts `wire_api = "chat"`, so the proxy's `/v1/responses` is the only
- * surface left to it.
- */
-const CODEX_SNIPPET = `model = "build"
-model_provider = "limitsapply"
-model_context_window = 32768
-model_max_output_tokens = 8192
-
-[model_providers.limitsapply]
-name = "Limits Apply"
-base_url = "http://127.0.0.1:4000/v1"
-env_key = "LITELLM_MASTER_KEY"
-wire_api = "responses"`;
-
-const CLAUDE_CODE_SNIPPET = JSON.stringify({
-  env: {
-    ANTHROPIC_BASE_URL: "http://127.0.0.1:4000",
-    ANTHROPIC_AUTH_TOKEN: "local",
-    ANTHROPIC_MODEL: "build",
-    ANTHROPIC_DEFAULT_HAIKU_MODEL: "plan",
-    CLAUDE_CODE_MAX_CONTEXT_TOKENS: "32768",
-  },
-}, null, 2);
-
+const PI_SNIPPET = JSON.stringify(mergePiConfig({}).config, null, 2);
+const CLAUDE_CODE_SNIPPET = JSON.stringify(mergeClaudeCodeConfig({}).config, null, 2);
+const CODEX_SNIPPET = codexConfigBlock();
 
 export const HARNESSES: Harness[] = [
   {
@@ -99,7 +44,7 @@ export const HARNESSES: Harness[] = [
     name: "OpenAI-compatible client",
     site: "https://docs.litellm.ai/docs/proxy/configs",
     status: "planned",
-    summary: "The surface every harness below would ultimately use: base URL http://127.0.0.1:4000/v1, an API key read from LITELLM_MASTER_KEY, and a model name of build or plan. Gate exposes this proxy today, but writes it into a client's own config file only for OpenCode.",
+    summary: "The surface every harness below would ultimately use: base URL http://127.0.0.1:4000/v1, an API key read from LITELLM_MASTER_KEY, and a model name of build or plan. Gate exposes this proxy today. OpenCode is the only client whose config file it writes unprompted; pi and Claude Code are written when a flag names the file.",
     snippet: null,
   },
   {
@@ -114,8 +59,8 @@ export const HARNESSES: Harness[] = [
     id: "pi",
     name: "Pi",
     site: "https://github.com/earendil-works/pi",
-    status: "recipe",
-    summary: "A terminal coding agent whose provider layer already speaks OpenAI-compatible, so pointing it at the proxy is a config merge and nothing more. This block was pasted into a real models.json and both aliases answered against a proxy serving the same contract Gate emits. Gate does not write it, nothing regenerates it, and it will drift the day pi's provider schema moves.",
+    status: "verified",
+    summary: "A terminal coding agent whose provider layer already speaks OpenAI-compatible, so pointing it at the proxy is a config merge and nothing more. Point --pi at your models.json and Gate merges providers.LIMITSAPPLY into it; without that flag pi is left alone. This snippet is generated from the same function that does the merge. Both aliases answered from a real models.json carrying this block on the date below.",
     snippet: PI_SNIPPET,
     date: "2026-08-18",
     configPath: "~/.pi/agent/models.json (or $PI_CONFIG)",
@@ -132,9 +77,9 @@ export const HARNESSES: Harness[] = [
     id: "claude-code",
     name: "Claude Code",
     site: "https://claude.com/claude-code",
-    status: "recipe",
+    status: "verified",
     icon: "claude",
-    summary: "Anthropic's own CLI, pointed at the proxy's Anthropic-shaped /v1/messages endpoint through the env block of its settings file. This block was pasted into a real settings.json and build answered; plan did not, because that day's plan model is served only in the chat-completions shape. Gate does not write it and nothing catches it drifting.",
+    summary: "Anthropic's own CLI, pointed at the proxy's Anthropic-shaped /v1/messages endpoint through the env block of its settings file. Point --claude-code at your settings.json and Gate merges those five variables in, preserving the rest; without that flag Claude Code is left alone. This snippet is generated from the same function that does the merge. On the date below build answered; plan did not, because that day's plan model is served only in the chat-completions shape.",
     snippet: CLAUDE_CODE_SNIPPET,
     date: "2026-08-18",
     configPath: "~/.claude/settings.json (or $CLAUDE_CONFIG_DIR/settings.json)",
@@ -145,7 +90,7 @@ export const HARNESSES: Harness[] = [
     site: "https://developers.openai.com/codex/",
     status: "recipe",
     icon: "chatgpt",
-    summary: "OpenAI's CLI. Codex 0.147 dropped wire_api = \"chat\", so this points it at the proxy's Responses endpoint instead. This block was pasted into a real config.toml and build answered; plan did not, because that day's plan model is served only in the chat-completions shape. Gate does not write it and nothing catches it drifting.",
+    summary: "OpenAI's CLI. Codex 0.147 dropped wire_api = \"chat\", so this points it at the proxy's Responses endpoint instead. Merging into an existing config.toml would need a TOML parser Gate doesn't carry, so this block is generated from code but pasted by hand. On the date below build answered; plan did not, because that day's plan model is served only in the chat-completions shape.",
     snippet: CODEX_SNIPPET,
     date: "2026-08-18",
     configPath: "~/.codex/config.toml (or $CODEX_HOME/config.toml)",

@@ -72,12 +72,6 @@ billing mode. A PAYG row can still fill a primary alias, and can still be the fi
   stop at field-level merging and do not compute effective `$`/Mtok rates — that derivation
   belongs to the `lib/provenance.ts` "modelled" fit described in `docs/methodology.md`, which is
   out of scope here.
-- Post-activation smoke-test failures (`packages/gate/src/cli.ts`'s `runUpdate`) are reported
-  in the result but do not trigger `rollback()` (`packages/gate/src/activation.ts:31`). The
-  design's "restore the prior configuration and verdict after any activation failure"
-  requires `activate`/`updateGate` to accept an async smoke-test callback so a real network
-  check can gate the commit itself; that is a change to already-tested existing code and is
-  deliberately left for when Gate drives a real LiteLLM process end-to-end.
 
 ## Beyond the port
 

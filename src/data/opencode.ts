@@ -1,19 +1,31 @@
 /**
- * OpenCode Go publishes a request quota per *model*, not per plan. Reads
- * data/opencode-go-2026-08-17.json, scraped by `pnpm refresh`.
+ * OpenCode Go publishes its allowance in dollars of usage — $12 per 5 h, $30 per
+ * week, $60 per month — and rations each model against a monthly sub-cap of its
+ * own. Reads data/opencode-go-2026-08-21.json, scraped by `pnpm refresh`.
  *
- * The three configurations `PLAN_MODEL_KEYS` grants span 110 to 4,100 requests per
- * 5 h under one $10 fee — a 37× spread. Even the tightest of them implies a monthly
- * ceiling far above what the flat-class fit predicts for a $10 plan, so the quota
- * caps this plan's allowance without ever binding it. It is recorded, and the
- * ledger says the provider quantifies something; it does not move the row's rung.
+ * The request counts sitting beside those dollars are OpenCode's own estimates
+ * from observed token patterns, so they are recorded and never converted: the
+ * dollar figure is the published one, and `plans.json` carries it as `equiv.usd`.
+ * The three configurations `PLAN_MODEL_KEYS` grants sit at $15, $15 and $60 of that
+ * $60 month, so which model you point at decides how much of the plan you can reach.
  */
 import type { ModelKey } from "./aa";
-import snapshot from "../../data/opencode-go-2026-08-17.json";
+import snapshot from "../../data/opencode-go-2026-08-21.json";
 
-/** Requests per 5 h, as published, under OpenCode's own model slugs. */
-const PUBLISHED: Record<string, number> = Object.fromEntries(
-  snapshot.models.map(model => [model.slug, model.requestsPer5h])
+export const OPENCODE_LIMITS = snapshot.limits;
+
+interface Rationed {
+  usdPerMonth: number;
+  requestsPer5h: number;
+}
+
+/** Models with a published ration, under OpenCode's own slugs. Free-trial rows carry none. */
+const PUBLISHED: Record<string, Rationed> = Object.fromEntries(
+  snapshot.models.flatMap(model =>
+    model.usdPerMonth == null || model.requestsPer5h == null
+      ? []
+      : [[model.slug, { usdPerMonth: model.usdPerMonth, requestsPer5h: model.requestsPer5h }]]
+  )
 );
 
 /**
@@ -27,16 +39,16 @@ const GRANTED: Record<string, ModelKey> = {
   "glm-5.2": "glmMax",
 };
 
-export const OPENCODE_QUOTA: Partial<Record<ModelKey, number>> = Object.fromEntries(
+export const OPENCODE_QUOTA: Partial<Record<ModelKey, Rationed>> = Object.fromEntries(
   Object.entries(GRANTED).map(([slug, key]) => {
-    const per = PUBLISHED[slug];
-    if (per == null) throw new Error(`OpenCode Go maps ${slug}, but the snapshot no longer publishes it`);
-    return [key, per];
+    const rationed = PUBLISHED[slug];
+    if (!rationed) throw new Error(`OpenCode Go maps ${slug}, but the snapshot no longer rations it`);
+    return [key, rationed];
   })
 );
 
 /** Models OpenCode rations that no scored configuration claims. Named, never dropped in silence. */
 export const UNSCORED_OPENCODE_MODELS: string[] = Object.keys(PUBLISHED).filter(slug => !GRANTED[slug]);
 
-const counts = Object.values(PUBLISHED);
-export const OPENCODE_RANGE = { low: Math.min(...counts), high: Math.max(...counts) };
+const caps = Object.values(PUBLISHED).map(rationed => rationed.usdPerMonth);
+export const OPENCODE_MODEL_CAP = { low: Math.min(...caps), high: Math.max(...caps) };

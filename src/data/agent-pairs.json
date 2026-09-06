@@ -1,0 +1,12 @@
+[
+  { "id": "claude-code/claude-opus-5-xhigh", "agent": "Claude Code", "model": "Claude Opus 5", "label": "Claude Code - Opus 5 (xhigh)" },
+  { "id": "codex/gpt-5-6-sol-max", "agent": "Codex", "model": "GPT-5.6 Sol", "label": "Codex - GPT-5.6 Sol (max)" },
+  { "id": "claude-code/fable-5-max-fallback", "agent": "Claude Code", "model": "Fable 5", "label": "Claude Code - Fable 5 (max) (with fallback)" },
+  { "id": "grok-build/grok-4-5-high", "agent": "Grok Build", "model": "Grok 4.5", "label": "Grok Build - Grok 4.5 (high)" },
+  { "id": "kimi-code-cli/kimi-k3", "agent": "Kimi Code CLI", "model": "Kimi K3", "label": "Kimi Code CLI - Kimi K3" },
+  { "id": "muse-code/muse-spark-1-2-xhigh", "agent": "Muse Code", "model": "Muse Spark 1.2", "label": "Muse Code - Muse Spark 1.2 (xhigh)" },
+  { "id": "opencode/gemini-3-7-flash-high", "agent": "Opencode", "model": "Gemini 3.7 Flash", "label": "Opencode - Gemini 3.7 Flash (high)" },
+  { "id": "codex/deepseek-v4-flash-max", "agent": "Codex", "model": "DeepSeek V4 Flash", "label": "Codex - DeepSeek V4 Flash (max)" },
+  { "id": "claude-code/glm-5-2", "agent": "Claude Code", "model": "GLM-5.2", "label": "Claude Code - GLM-5.2" },
+  { "id": "cursor-cli/composer-2-5-fast", "agent": "Cursor CLI", "model": "Composer 2.5 Fast", "label": "Cursor CLI - Composer 2.5 Fast" }
+]

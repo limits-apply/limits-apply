@@ -1,5 +1,5 @@
 import type {
-  Candidate, LocalOverlay, RankedCandidate, Rejection, Verdict, WorkloadProfile,
+  Candidate, LocalOverlay, RankedCandidate, Rejection, TaskClass, Verdict, WorkloadProfile,
 } from "./types";
 import { overlayProfile } from "./profile";
 
@@ -48,6 +48,23 @@ function frontier(rows: RankedCandidate[]): { frontier: RankedCandidate[]; domin
   return { frontier: rows.filter(row => !dominated.includes(row)), dominated };
 }
 
+export const DEFAULT_CLASSES: TaskClass[] = [
+  { alias: "build", pick: "cheapest-above-floor", fallbackAlias: "plan" },
+  { alias: "plan", pick: "strongest-within-budget" },
+];
+
+function classRoute(cls: TaskClass, pool: RankedCandidate[], profile: WorkloadProfile): string[] {
+  const floor = cls.intelligenceFloor ?? profile.intelligenceFloor;
+  const budget = cls.monthlyBudgetUsd ?? profile.monthlyBudgetUsd;
+  const rows = cls.pick === "cheapest-above-floor"
+    ? pool.filter(row => row.candidate.intelligence.value >= floor)
+      .sort((a, b) => a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)
+    : pool.filter(row => row.effectiveCostUsd * profile.turnsPerMonth <= budget)
+      .sort((a, b) => b.candidate.intelligence.value - a.candidate.intelligence.value
+        || a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed);
+  return routeOrder(rows);
+}
+
 export function buildVerdict(
   candidates: Candidate[],
   profile: WorkloadProfile,
@@ -70,27 +87,34 @@ export function buildVerdict(
   // A local model costs nothing to run, so pooled with priced candidates it would take `build` on cost
   // alone and say nothing about the market. It fills an alias only when the evidence asks a local-only
   // question — never when a remote candidate exists but was rejected, which stays the hard failure
-  // `docs/gate-parity.md` preserves from rank.py's `paths()`.
-  const pool = candidates.every(candidate => candidate.billing === "local")
+  // `docs/gate-parity.md` preserves from rank.py's `paths()`. Pooling is also allowed when the
+  // profile opts in — a personal verdict routing its own machine is the point, and the class floor
+  // is what keeps "free" from meaning "always".
+  const pool = candidates.every(candidate => candidate.billing === "local") || profile.includeLocal
     ? front
     : frontier(eligible.filter(row => row.candidate.billing !== "local")).frontier;
-  const routes = {
-    build: routeOrder(pool
-      .filter(row => row.candidate.intelligence.value >= profile.intelligenceFloor)
-      .sort((a, b) => a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)),
-    plan: routeOrder(pool
-      .filter(row => row.effectiveCostUsd * profile.turnsPerMonth <= profile.monthlyBudgetUsd)
-      .sort((a, b) => b.candidate.intelligence.value - a.candidate.intelligence.value
-        || a.effectiveCostUsd - b.effectiveCostUsd || b.speed - a.speed)),
-  };
-  const build = routes.build[0] ?? null;
-  const plan = routes.plan[0] ?? null;
-  const selected = { build, plan };
-  const formulas = [
-    "effective cost = input + cached input × (1 − cache discount) + output",
-    "build = cheapest frontier candidate above the intelligence floor",
-    "plan = strongest frontier candidate within the monthly budget",
-  ];
+  const classes = profile.taskClasses ?? DEFAULT_CLASSES;
+  const seen = new Set<string>();
+  for (const cls of classes) {
+    if (seen.has(cls.alias)) throw new Error(`duplicate task class "${cls.alias}"`);
+    seen.add(cls.alias);
+  }
+  for (const cls of classes) {
+    if (cls.fallbackAlias && !seen.has(cls.fallbackAlias)) {
+      throw new Error(`task class "${cls.alias}" falls back to unknown alias "${cls.fallbackAlias}"`);
+    }
+  }
+  const routes = Object.fromEntries(classes.map(cls => [cls.alias, classRoute(cls, pool, profile)]));
+  const selected = Object.fromEntries(classes.map(cls => [cls.alias, routes[cls.alias][0] ?? null]));
+  const fallbacks = Object.fromEntries(classes
+    .filter(cls => cls.fallbackAlias && selected[cls.alias] && selected[cls.fallbackAlias])
+    .map(cls => [cls.alias, [cls.fallbackAlias as string]]));
+  const formulas = ["effective cost = input + cached input × (1 − cache discount) + output"];
+  for (const cls of classes) {
+    formulas.push(cls.pick === "cheapest-above-floor"
+      ? `${cls.alias} = cheapest frontier candidate above the intelligence floor`
+      : `${cls.alias} = strongest frontier candidate within the monthly budget`);
+  }
   const body = JSON.stringify({ evidenceVersion, profile, selected, routes, rejected, frontier: front.map(row => row.candidate.id) });
   let hash = 2166136261;
   for (let index = 0; index < body.length; index += 1) hash = Math.imul(hash ^ body.charCodeAt(index), 16777619);
@@ -100,7 +124,7 @@ export function buildVerdict(
     profile,
     selected,
     routes,
-    fallbacks: build && plan ? { build: ["plan"] } : {},
+    fallbacks,
     frontier: front,
     dominated,
     rejected,

@@ -114,10 +114,12 @@ plans that disclose split in two, and `Plan.billing` records which:
 
 - **metered** — usage draws down a credit or dollar balance. The eight plans that publish an
   allowance return ×1.10 of price (IQR ×1.00–×1.57, n=8).
-- **flat** — a fee plus rate limits. The two plans anybody has measured return ×23 of price.
+- **flat** — a fee plus rate limits. Three plans anchor it: the two anybody has measured, at ×23 of
+  price, and OpenCode Go, which publishes ×6 of its price in dollars of usage. The fit is ×22.74,
+  band ×3–×46.88 (n=3).
 
-n=2 is a thin sample, so `fitAllowanceMultiple` reports min/max widened by `THIN_SPREAD` instead of
-an interquartile range that would be a coincidence of two points. Every modelled row inherits that
+n=3 is a thin sample, so `fitAllowanceMultiple` reports min/max widened by `THIN_SPREAD` instead of
+an interquartile range that would be a coincidence of three points. Every modelled row inherits that
 width, and the width is the row's main claim.
 
 ### What the ladder still refuses
@@ -341,17 +343,22 @@ output-token and cost figures need a Pro key, so without one those two fields ca
 previous snapshot unchanged and the report says so, rather than either fetching nothing or
 inventing them.
 
-OpenCode publishes its per-model request quota as server-rendered markup, and
+OpenCode publishes its usage limits and its model roster as server-rendered markup, and
 `scripts/sources/opencode.mjs` reads it, same as before Phase 3 — that never made the figure
 automatic. A human still copies the granted models into `src/data/opencode.ts` and bumps its
 `verified`; a failed or sparse scrape exits non-zero and leaves the previous snapshot standing
 rather than dating a degraded one today.
 
-OpenCode Go is also the one plan whose provider quantifies the allowance **per model rather than per
-plan** — 110 to 30,100 requests per 5 h across its roster, 110 to 4,100 across the three
-configurations we score. So the row is `quantified` and carries the published range, but its `equiv`
-stays `null`: there is no plan-wide countable rate to convert, and picking one of eleven would be a
-choice dressed as a disclosure. Recorded, and left at the rung the ladder gives it.
+The scrape reads the docs page (`opencode.ai/docs/go`), not the plan page: only the docs page states
+what the limits actually are. **They are dollars of usage** — $12 per 5 h, $30 per week, $60 per
+month — so the row converts on the published figure, `equiv: { usd: 60 }`, at the `measured` rung.
+The per-model request counts printed beside them (110 to 45,300 per 5 h across the roster) are
+OpenCode's own estimates from observed token patterns, and are recorded without ever being
+converted: an estimate the provider derived is still an estimate, and the dollars it was derived
+from are the stronger figure. Each model also carries a monthly sub-cap of $15, $30 or $60 —
+the three configurations we score sit at $15, $15 and $60 — so which model a subscriber points at
+decides how much of the $60 month is reachable. That sub-cap is recorded in `src/data/opencode.ts`;
+it never lowers the plan's own allowance, which is what the provider says the plan includes.
 
 ## Dependence on Artificial Analysis
 
@@ -518,12 +525,14 @@ rather than hidden — they *are* the argument.
 
 1. **Terms of service.** Deliberately consuming a plan to exhaustion for measurement may fall
    under anti-abuse or anti-automation clauses. Read each provider's terms, document the position
-   taken, and do not start Layer 2 against a provider before that.
+   taken, and do not start Layer 2 against a provider before that. Positions live in
+   [docs/tos-positions.md](tos-positions.md).
 2. **Cost.** Layer 2 means paying for every subscription tested, every month, over time. The full
    scope above is out of reach — hence a 3-plan MVP.
 3. **Variance.** A single run measures nothing. Fix a minimum number of runs per task and publish
-   the variance as a range.
+   the variance as a range. Fixed at n ≥ 10 per configuration — workloads/wl-001/workload.md.
 4. **Quota non-determinism.** Limits vary by hour, load, account age and region. A quota measured
    once is not a quota.
 5. **Grading.** Pass / Partial / Fail is subjective on research and knowledge-work loads.
-   Double-grade a sample and publish the agreement rate.
+   Double-grade a sample and publish the agreement rate. Settled for auto-graded workloads
+   (wl-001); open for research loads.

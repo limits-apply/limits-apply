@@ -2,13 +2,15 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { expect, test } from "vitest";
+import { mergeClaudeCodeConfig } from "../packages/gate/src/claude-code";
 import { mergeOpencodeConfig } from "../packages/gate/src/opencode";
+import { mergePiConfig } from "../packages/gate/src/pi";
 import { smokeTestAlias, smokeTestAliases } from "../packages/gate/src/smoke";
 import { bootstrapProfile, runUpdate } from "../packages/gate/src/cli";
 import { gatePaths } from "../packages/gate/src/storage";
 import { generateLiteLlmConfig } from "../packages/gate/src/litellm";
 import { liveQuota, scanOpencodeMessages } from "../packages/gate/src/quota";
-import { GLOBAL_PROFILE, buildVerdict } from "../packages/intelligence/src/index";
+import { DEFAULT_CLASSES, GLOBAL_PROFILE, buildVerdict } from "../packages/intelligence/src/index";
 import type { Candidate } from "../packages/intelligence/src/index";
 
 
@@ -33,7 +35,7 @@ test("reports no changes when re-applying the same config", () => {
 
 test("reports changes when the LiteLLM base URL differs", () => {
   const first = mergeOpencodeConfig({});
-  const second = mergeOpencodeConfig(first.config, "http://127.0.0.1:5000/v1");
+  const second = mergeOpencodeConfig(first.config, "http://127.0.0.1:5000");
   expect(second.changes.length).toBeGreaterThan(0);
 });
 
@@ -49,6 +51,34 @@ test("does not mutate the caller's original config, provider, or mode objects", 
 
   expect(config.provider).toEqual(providerSnapshot);
   expect(config.mode).toEqual(modeSnapshot);
+});
+
+test("pi keeps other providers and unrelated keys, and re-applying changes nothing", () => {
+  const config = { defaults: { agent: "keep" }, providers: { other: { baseUrl: "http://elsewhere" } } };
+  const { config: next } = mergePiConfig(config);
+  expect(next.defaults).toEqual({ agent: "keep" });
+  expect((next.providers as Record<string, unknown>).other).toEqual({ baseUrl: "http://elsewhere" });
+  expect((next.providers as Record<string, unknown>).LIMITSAPPLY).toMatchObject({
+    models: [{ id: "build" }, { id: "plan" }],
+  });
+  expect(mergePiConfig(next).changes).toEqual([]);
+  expect(config.providers).toEqual({ other: { baseUrl: "http://elsewhere" } });
+});
+
+test("claude-code keeps other env vars and settings, and re-applying changes nothing", () => {
+  const config = { permissions: { allow: ["Bash"] }, env: { EDITOR: "vim" } };
+  const { config: next } = mergeClaudeCodeConfig(config);
+  expect(next.permissions).toEqual({ allow: ["Bash"] });
+  expect(next.env).toMatchObject({ EDITOR: "vim", ANTHROPIC_MODEL: "build", ANTHROPIC_DEFAULT_HAIKU_MODEL: "plan" });
+  expect(mergeClaudeCodeConfig(next).changes).toEqual([]);
+  expect(config.env).toEqual({ EDITOR: "vim" });
+});
+
+test("claude-code points at the proxy root, not the /v1 surface the others use", () => {
+  const { config: anthropic } = mergeClaudeCodeConfig({}, "http://127.0.0.1:4000");
+  const { config: openai } = mergePiConfig({}, "http://127.0.0.1:4000");
+  expect((anthropic.env as Record<string, string>).ANTHROPIC_BASE_URL).toBe("http://127.0.0.1:4000");
+  expect((openai.providers as Record<string, { baseUrl: string }>).LIMITSAPPLY.baseUrl).toBe("http://127.0.0.1:4000/v1");
 });
 
 test("a 200 response containing pong passes", async () => {
@@ -110,8 +140,11 @@ test("runUpdate activates, merges OpenCode config, and smoke-tests both aliases"
     let written: Record<string, unknown> | null = null;
     const result = await runUpdate({
       paths: gatePaths(root), snapshot, candidates,
-      readOpencodeConfig: async () => ({ mcp: { keep: "me" } }),
-      writeOpencodeConfig: async config => { written = config; },
+      harnesses: [{
+        id: "opencode", merge: mergeOpencodeConfig,
+        read: async () => ({ mcp: { keep: "me" } }),
+        write: async config => { written = config; },
+      }],
       post: async (_url, body) => {
         const model = (body as { model: string }).model;
         return { status: 200, body: model === "build" || model === "plan" ? "pong" : "{}" };
@@ -119,7 +152,7 @@ test("runUpdate activates, merges OpenCode config, and smoke-tests both aliases"
       now: "2026-08-17T00:00:00Z",
     });
     expect(result.gate).toBe("activated");
-    expect(result.opencodeChanges.length).toBeGreaterThan(0);
+    expect(result.changes.opencode.length).toBeGreaterThan(0);
     expect(result.smoke).toEqual({ build: true, plan: true });
     expect((written as unknown as Record<string, unknown>).mcp).toEqual({ keep: "me" });
   } finally {
@@ -127,7 +160,7 @@ test("runUpdate activates, merges OpenCode config, and smoke-tests both aliases"
   }
 });
 
-test("runUpdate short-circuits on a no-op verdict without touching OpenCode or smoke-testing", async () => {
+test("a no-op verdict still configures OpenCode, and probes nothing when no poster was given", async () => {
   const root = await mkdtemp(join(tmpdir(), "limits-apply-cli-"));
   try {
     const candidates = [candidate("cheap", 50, 1)];
@@ -140,13 +173,80 @@ test("runUpdate short-circuits on a no-op verdict without touching OpenCode or s
     let opencodeTouched = false;
     const result = await runUpdate({
       paths, snapshot, candidates,
-      readOpencodeConfig: async () => { opencodeTouched = true; return {}; },
-      writeOpencodeConfig: async () => { opencodeTouched = true; },
+      harnesses: [{
+        id: "opencode", merge: mergeOpencodeConfig,
+        read: async () => { opencodeTouched = true; return {}; },
+        write: async () => { opencodeTouched = true; },
+      }],
       now: "2026-08-17T01:00:00Z",
     });
     expect(result.gate).toBe("noop");
-    expect(opencodeTouched).toBe(false);
+    // The verdict didn't move, but the harness config still has to end up pointing at the proxy.
+    expect(opencodeTouched).toBe(true);
+    expect(result.changes.opencode.length).toBeGreaterThan(0);
     expect(result.smoke).toBeNull();
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("a failed probe restores the previous runtime and verdict, and records the rollback", async () => {
+  const root = await mkdtemp(join(tmpdir(), "limits-apply-cli-"));
+  try {
+    const paths = gatePaths(root);
+    const priorCandidates = [candidate("cheap", 50, 1)];
+    const priorVerdict = buildVerdict(priorCandidates, { ...GLOBAL_PROFILE, turnsPerMonth: 1 }, "evidence-v0", "2026-08-16");
+    const priorSnapshot = { kind: "verdict" as const, version: "verdict-v1", evidenceVersion: "evidence-v0", generatedAt: "2026-08-16", profile: priorVerdict.profile, verdict: priorVerdict };
+    await writeFile(paths.verdict, `${JSON.stringify(priorSnapshot, null, 2)}\n`, "utf8");
+    await writeFile(paths.runtime, `${JSON.stringify(generateLiteLlmConfig(priorVerdict, priorCandidates), null, 2)}\n`, "utf8");
+    const runtimeBefore = await readFile(paths.runtime, "utf8");
+    const verdictBefore = await readFile(paths.verdict, "utf8");
+
+    const candidates = [candidate("cheap", 50, 1), candidate("smart", 70, 2)];
+    const verdict = buildVerdict(candidates, { ...GLOBAL_PROFILE, turnsPerMonth: 1 }, "evidence-v1", "2026-08-17");
+    const snapshot = { kind: "verdict" as const, version: "verdict-v1", evidenceVersion: "evidence-v1", generatedAt: "2026-08-17", profile: verdict.profile, verdict };
+    let opencodeTouched = false;
+    const result = await runUpdate({
+      paths, snapshot, candidates,
+      harnesses: [{
+        id: "opencode", merge: mergeOpencodeConfig,
+        read: async () => { opencodeTouched = true; return {}; },
+        write: async () => { opencodeTouched = true; },
+      }],
+      post: async () => ({ status: 500, body: "no proxy" }),
+      now: "2026-08-17T00:00:00Z",
+    });
+
+    expect(result.gate).toBe("rolled-back");
+    expect(opencodeTouched).toBe(false);
+    expect(await readFile(paths.runtime, "utf8")).toBe(runtimeBefore);
+    expect(await readFile(paths.verdict, "utf8")).toBe(verdictBefore);
+    const audit = (await readFile(paths.audit, "utf8")).trim().split("\n").map(line => JSON.parse(line));
+    expect(audit.at(-1)).toMatchObject({ event: "rollback", newVerdict: verdict.id });
+    expect(audit.at(-1).reason).toContain("restored");
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("a failed probe with no previous configuration keeps the new one and says so, without calling it a rollback", async () => {
+  const root = await mkdtemp(join(tmpdir(), "limits-apply-cli-"));
+  try {
+    const paths = gatePaths(root);
+    const candidates = [candidate("cheap", 50, 1)];
+    const verdict = buildVerdict(candidates, { ...GLOBAL_PROFILE, turnsPerMonth: 1 }, "evidence-v1", "2026-08-17");
+    const snapshot = { kind: "verdict" as const, version: "verdict-v1", evidenceVersion: "evidence-v1", generatedAt: "2026-08-17", profile: verdict.profile, verdict };
+    const result = await runUpdate({
+      paths, snapshot, candidates,
+      harnesses: [],
+      post: async () => ({ status: 500, body: "no proxy" }),
+      now: "2026-08-17T00:00:00Z",
+    });
+
+    expect(result.gate).toBe("kept");
+    expect(JSON.parse(await readFile(paths.runtime, "utf8"))).toEqual(generateLiteLlmConfig(verdict, candidates));
+    const audit = (await readFile(paths.audit, "utf8")).trim().split("\n").map(line => JSON.parse(line));
+    expect(audit.at(-1).reason).toContain("no previous configuration");
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -202,4 +302,16 @@ test("an abort is not a refusal, and an unmapped provider is named rather than d
   const result = scanOpencodeMessages([unknown], () => null, 5);
   expect(result.events).toEqual([]);
   expect(result.unmapped).toEqual(["nowhere"]);
+});
+
+test("litellm config carries one alias per route key, not a fixed pair", () => {
+  const candidates = [candidate("cheap", 42, 1), candidate("smart", 70, 2)];
+  const profile = {
+    ...GLOBAL_PROFILE, turnsPerMonth: 1,
+    taskClasses: [...DEFAULT_CLASSES, { alias: "bulk", pick: "cheapest-above-floor" as const, intelligenceFloor: 40 }],
+  };
+  const verdict = buildVerdict(candidates, profile, "evidence-v1", "2026-08-17");
+  const names = generateLiteLlmConfig(verdict, candidates).model_list.map(model => model.model_name);
+  expect(names).toContain("bulk");
+  expect(names).toContain("bulk-2");
 });

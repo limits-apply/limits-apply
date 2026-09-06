@@ -37,7 +37,8 @@ export type Equiv = { usd?: number; per?: number; hours?: number; unit?: QuotaUn
  *   metered  usage is drawn down against a credit or dollar balance — the plans
  *            in this class that publish an allowance return ~1× the price
  *   flat     a fee plus rate limits — the two plans in this class anybody has
- *            measured return ~23× the price
+ *            measured return ~23× the price, and the one that publishes its own
+ *            dollar allowance returns ×6
  * Fitting one exchange rate across both classes averages those into a number
  * true of neither, so the ladder fits each class separately.
  */

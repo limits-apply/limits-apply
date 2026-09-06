@@ -1,7 +1,7 @@
 import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { dirname } from "node:path";
 
-export type QuotaRung = "observed" | "derived";
+type QuotaRung = "observed" | "derived";
 
 /**
  * A closed window and the time it was said to reopen — never a count of what is left, which would
@@ -15,12 +15,12 @@ export interface QuotaEvent {
   source: string;
 }
 
-export function parseQuota(raw: string): QuotaEvent[] {
+function parseQuota(raw: string): QuotaEvent[] {
   return raw.split("\n").filter(line => line.trim()).map(line => JSON.parse(line) as QuotaEvent);
 }
 
 /** The last event for a domain is the whole truth about it: a later reading supersedes an earlier one. */
-export function latestByDomain(events: QuotaEvent[]): QuotaEvent[] {
+function latestByDomain(events: QuotaEvent[]): QuotaEvent[] {
   const byDomain = new Map<string, QuotaEvent>();
   for (const event of events) byDomain.set(event.domain, event);
   return [...byDomain.values()];

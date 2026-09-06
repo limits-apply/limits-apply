@@ -7,20 +7,34 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test } from "vitest";
+import { mergeClaudeCodeConfig } from "../packages/gate/src/claude-code";
+import { codexConfigBlock } from "../packages/gate/src/codex";
+import { HARNESS_WRITERS } from "../packages/gate/src/writers";
 import { mergeOpencodeConfig } from "../packages/gate/src/opencode";
+import { mergePiConfig } from "../packages/gate/src/pi";
 import { HARNESSES, VERIFIED_DEF } from "../src/data/harnesses";
 
 const ROOT = join(__dirname, "..");
 const harnessesHtml = readFileSync(join(ROOT, "docs", "harnesses.html"), "utf8");
 
-test("the opencode snippet equals mergeOpencodeConfig(...) on an empty config, so it cannot drift", () => {
-  const expected = JSON.stringify(mergeOpencodeConfig({}).config, null, 2);
-  const opencode = HARNESSES.find(h => h.id === "opencode");
-  expect(opencode?.snippet).toBe(expected);
+const snippet = (id: string) => HARNESSES.find(harness => harness.id === id)?.snippet;
+
+test("every published snippet is generated from the code that writes it, so none can drift", () => {
+  expect(snippet("opencode")).toBe(JSON.stringify(mergeOpencodeConfig({}).config, null, 2));
+  expect(snippet("pi")).toBe(JSON.stringify(mergePiConfig({}).config, null, 2));
+  expect(snippet("claude-code")).toBe(JSON.stringify(mergeClaudeCodeConfig({}).config, null, 2));
+  expect(snippet("codex")).toBe(codexConfigBlock());
 });
 
-test("verified ids equal exactly [\"opencode\"]", () => {
-  expect(HARNESSES.filter(h => h.status === "verified").map(h => h.id)).toEqual(["opencode"]);
+test("verified ids are exactly the harnesses Gate has a writer for", () => {
+  expect(HARNESSES.filter(h => h.status === "verified").map(h => h.id).sort())
+    .toEqual(HARNESS_WRITERS.map(writer => writer.id).sort());
+});
+
+test("codex is generated but not written, so it never claims the verified mark", () => {
+  expect(snippet("codex")).toBeTruthy();
+  expect(HARNESS_WRITERS.map(writer => writer.id)).not.toContain("codex");
+  expect(HARNESSES.find(h => h.id === "codex")?.status).toBe("recipe");
 });
 
 test("every recipe row has a date and a config path; every planned row has a null snippet", () => {

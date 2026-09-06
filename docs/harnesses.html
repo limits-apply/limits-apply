@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harnesses — what Gate configures today</title>
 <meta name="description" content="Every coding harness Gate could point at build and plan, and what stage each one is actually at: verified, recipe, or planned.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="Harnesses — what Gate configures today">
+<meta property="og:description" content="Every coding harness Gate could point at build and plan, and what stage each one is actually at: verified, recipe, or planned.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/docs/harnesses.html">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,9 +30,11 @@
     <a class="brand" href="../index.html#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
     <nav class="nav" aria-label="Sections">
       <a href="../index.html">Home</a>
+      <a href="../break-even.html">Break-even</a>
       <a href="../local.html">Local</a>
       <a href="../gate.html">Gate</a>
       <a href="./index.html" aria-current="page">Docs</a>
+      <a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">GitHub</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-pressed="false"
             aria-label="Switch to the dark theme">
@@ -58,11 +67,11 @@
 
 <section class="hero">
   <span class="eyebrow">Harnesses</span>
-  <h1>One harness writes itself. Others were wired by hand. The rest are honest about not yet.</h1>
+  <h1>Three harnesses write themselves. One is generated and pasted. The rest are honest about not yet.</h1>
   <p class="lead">
     <code>build</code> and <code>plan</code> resolve behind a loopback LiteLLM proxy, so any
-    OpenAI-compatible client can use them — but Gate only generates a client's own config file
-    for one harness today. This page says which, and what it would take for the rest.
+    OpenAI-compatible client can use them — but Gate writes a client's own config file for only
+    three harnesses today. This page says which, and what it would take for the rest.
   </p>
 </section>
 
@@ -72,8 +81,8 @@
   <p>
     A card carries <span class="hstatus verified">Verified</span> when Gate writes this
     configuration itself, and a test compares the published snippet to the code that writes it.
-    Nothing else on this page carries a mark: a configuration below it was pasted in by hand on the
-    date its card names, and a card with no configuration has none to publish. The mark is
+    Nothing else on this page carries a mark: Codex's block is generated from code too, but you
+    paste it, and a card with no configuration has none to publish. The mark is
     deliberately not the <code>measured · observed · derived · chained · modelled</code> ladder the
     benchmark tables use, which is about the strength of a <em>figure</em>, not whether Gate can
     talk to a tool.
@@ -82,14 +91,22 @@
 
 <section id="harnesses">
   <span class="eyebrow">Recommended</span>
-  <h2>One writes itself. The others were wired by hand, on a dated afternoon.</h2>
+  <h2>OpenCode writes itself. Pi and Claude Code write when you name the file.</h2>
   <p>
-    Gate writes only OpenCode's config file itself; that snippet is generated from
-    <code>mergeOpencodeConfig</code>, the same function <a href="../gate.html#aliases">gate.html</a>
-    describes. Pi, Codex and Claude Code were configured by hand and answered on the date each card
-    carries — Gate does not write them, and nothing catches them drifting. Pi answered on both
-    aliases; Codex and Claude Code answered on <code>build</code> only, because that day's
-    <code>plan</code> model was served in the chat-completions shape alone.
+    Gate can write OpenCode, Pi and Claude Code's own config files, and each snippet below is
+    generated from the function that does it — the same arrangement
+    <a href="../gate.html#aliases">gate.html</a> describes for <code>mergeOpencodeConfig</code>.
+    Codex is the exception: merging into an existing <code>config.toml</code> would need a TOML
+    parser Gate doesn't carry, so its block is generated from code but pasted by hand. Every
+    configuration here also answered on the date its card carries — Pi on both aliases; Codex and
+    Claude Code on <code>build</code> only, because that day's <code>plan</code> model was served in
+    the chat-completions shape alone.
+  </p>
+  <p class="note">
+    OpenCode is the only harness <code>update</code> writes on its own, as it always has been.
+    Pi and Claude Code are written when — and only when — <code>--pi</code> or
+    <code>--claude-code</code> names the file: a coding agent's settings are not something Gate
+    should reach into because it recognised a path. Codex it never writes at all.
   </p>
   <div id="harness-cards" class="hgrid"></div>
 </section>

@@ -1,0 +1,184 @@
+{
+  "retrieved_on": "2026-08-21",
+  "source": "OpenCode Go",
+  "source_url": "https://opencode.ai/docs/go/",
+  "notes": "Limits are published in dollars of usage; the request counts are OpenCode's own estimates from observed token patterns, and each model also carries the monthly dollars included with it.",
+  "limits": {
+    "usdPer5h": 12,
+    "usdPerWeek": 30,
+    "usdPerMonth": 60
+  },
+  "models": [
+    {
+      "slug": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "usdPerMonth": 30,
+      "requestsPer5h": 7600,
+      "requestsPerWeek": 18900,
+      "requestsPerMonth": 37800
+    },
+    {
+      "slug": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "usdPerMonth": 15,
+      "requestsPer5h": 1050,
+      "requestsPerWeek": 2600,
+      "requestsPerMonth": 5200
+    },
+    {
+      "slug": "glm-5.1",
+      "name": "GLM-5.1",
+      "usdPerMonth": 60,
+      "requestsPer5h": 880,
+      "requestsPerWeek": 2150,
+      "requestsPerMonth": 4300
+    },
+    {
+      "slug": "glm-5.2",
+      "name": "GLM-5.2",
+      "usdPerMonth": 60,
+      "requestsPer5h": 880,
+      "requestsPerWeek": 2150,
+      "requestsPerMonth": 4300
+    },
+    {
+      "slug": "glm-5.3",
+      "name": "GLM-5.3",
+      "usdPerMonth": 15,
+      "requestsPer5h": 220,
+      "requestsPerWeek": 540,
+      "requestsPerMonth": 1080
+    },
+    {
+      "slug": "gpt-5.6-luna",
+      "name": "GPT 5.6 Luna",
+      "usdPerMonth": 15,
+      "requestsPer5h": 2050,
+      "requestsPerWeek": 5100,
+      "requestsPerMonth": 10250
+    },
+    {
+      "slug": "grok-4.5",
+      "name": "Grok 4.5",
+      "usdPerMonth": 15,
+      "requestsPer5h": 120,
+      "requestsPerWeek": 300,
+      "requestsPerMonth": 600
+    },
+    {
+      "slug": "hy3",
+      "name": "Hy3",
+      "usdPerMonth": 60,
+      "requestsPer5h": 4300,
+      "requestsPerWeek": 10750,
+      "requestsPerMonth": 21500
+    },
+    {
+      "slug": "kimi-k2.6",
+      "name": "Kimi K2.6",
+      "usdPerMonth": 60,
+      "requestsPer5h": 1150,
+      "requestsPerWeek": 2880,
+      "requestsPerMonth": 5750
+    },
+    {
+      "slug": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "usdPerMonth": 60,
+      "requestsPer5h": 1350,
+      "requestsPerWeek": 3380,
+      "requestsPerMonth": 6750
+    },
+    {
+      "slug": "kimi-k3",
+      "name": "Kimi K3",
+      "usdPerMonth": 15,
+      "requestsPer5h": 110,
+      "requestsPerWeek": 250,
+      "requestsPerMonth": 490
+    },
+    {
+      "slug": "mimo-v2.5",
+      "name": "MiMo-V2.5",
+      "usdPerMonth": 60,
+      "requestsPer5h": 30100,
+      "requestsPerWeek": 75200,
+      "requestsPerMonth": 150400
+    },
+    {
+      "slug": "mimo-v2.5-pro",
+      "name": "MiMo-V2.5-Pro",
+      "usdPerMonth": 15,
+      "requestsPer5h": 3250,
+      "requestsPerWeek": 8150,
+      "requestsPerMonth": 16300
+    },
+    {
+      "slug": "minimax-m2.7",
+      "name": "MiniMax M2.7",
+      "usdPerMonth": 60,
+      "requestsPer5h": 3400,
+      "requestsPerWeek": 8500,
+      "requestsPerMonth": 17000
+    },
+    {
+      "slug": "minimax-m3",
+      "name": "MiniMax M3",
+      "usdPerMonth": 60,
+      "requestsPer5h": 3200,
+      "requestsPerWeek": 8000,
+      "requestsPerMonth": 16000
+    },
+    {
+      "slug": "muse-spark-1.2-contributor",
+      "name": "Muse Spark 1.2 Contributor",
+      "usdPerMonth": 60,
+      "requestsPer5h": 45300,
+      "requestsPerWeek": 113300,
+      "requestsPerMonth": 226600
+    },
+    {
+      "slug": "ox-alpha-free",
+      "name": "Ox Alpha Free",
+      "usdPerMonth": null,
+      "requestsPer5h": null,
+      "requestsPerWeek": null,
+      "requestsPerMonth": null
+    },
+    {
+      "slug": "qwen3.6-plus",
+      "name": "Qwen3.6 Plus",
+      "usdPerMonth": 60,
+      "requestsPer5h": 3300,
+      "requestsPerWeek": 8200,
+      "requestsPerMonth": 16300
+    },
+    {
+      "slug": "qwen3.7-max",
+      "name": "Qwen3.7 Max",
+      "usdPerMonth": 60,
+      "requestsPer5h": 340,
+      "requestsPerWeek": 840,
+      "requestsPerMonth": 1690
+    },
+    {
+      "slug": "qwen3.7-plus",
+      "name": "Qwen3.7 Plus",
+      "usdPerMonth": 60,
+      "requestsPer5h": 4300,
+      "requestsPerWeek": 10800,
+      "requestsPerMonth": 21600
+    },
+    {
+      "slug": "qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "usdPerMonth": 15,
+      "requestsPer5h": 160,
+      "requestsPerWeek": 400,
+      "requestsPerMonth": 810
+    }
+  ],
+  "pricedNotRationed": [
+    "minimax-m2.5"
+  ]
+}

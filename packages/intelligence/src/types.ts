@@ -38,6 +38,16 @@ export interface Candidate {
   concurrency: number;
 }
 
+export type TaskPick = "cheapest-above-floor" | "strongest-within-budget";
+
+export interface TaskClass {
+  alias: string;
+  pick: TaskPick;
+  intelligenceFloor?: number;
+  monthlyBudgetUsd?: number;
+  fallbackAlias?: string;
+}
+
 export interface WorkloadProfile {
   id: string;
   currency: "USD";
@@ -52,6 +62,8 @@ export interface WorkloadProfile {
   region: string;
   availableCredentials?: string[];
   exhaustedDomains?: string[];
+  taskClasses?: TaskClass[];
+  includeLocal?: boolean;
 }
 
 export interface LocalOverlay {
@@ -62,6 +74,8 @@ export interface LocalOverlay {
   minimumConcurrency?: number;
   /** The global floor is set for the frontier; a local tier sits well below it and would select nothing. */
   intelligenceFloor?: number;
+  taskClasses?: TaskClass[];
+  includeLocal?: boolean;
 }
 
 export interface Rejection {
@@ -81,8 +95,8 @@ export interface Verdict {
   id: string;
   evidenceVersion: string;
   profile: WorkloadProfile;
-  selected: { build: string | null; plan: string | null };
-  routes: { build: string[]; plan: string[] };
+  selected: Record<string, string | null>;
+  routes: Record<string, string[]>;
   fallbacks: Record<string, string[]>;
   frontier: RankedCandidate[];
   dominated: RankedCandidate[];

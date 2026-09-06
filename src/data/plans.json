@@ -429,13 +429,15 @@
     "plan": "OpenCode Go",
     "price": 10,
     "quantified": true,
-    "equiv": null,
+    "equiv": {
+      "usd": 60
+    },
     "billing": "flat",
-    "conf": "medium",
-    "src": "opencode.ai/go",
-    "quota": "110–30,100 requests / 5h, per model — no plan-wide figure",
-    "sourceUrl": "https://opencode.ai/go",
-    "verified": "2026-08-15"
+    "conf": "high",
+    "src": "opencode.ai/docs/go",
+    "quota": "$12 / 5h · $30 / week · $60 / month of usage — per-model cap $15–$60",
+    "sourceUrl": "https://opencode.ai/docs/go",
+    "verified": "2026-08-21"
   },
   {
     "plan": "Warp Build",

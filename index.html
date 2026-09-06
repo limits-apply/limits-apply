@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Limits Apply — the economics of using AI</title>
 <meta name="description" content="API pricing is measured down to the millionth token. Subscription limits are described as “usage limits apply.” We benchmark how much useful work AI subscriptions actually deliver.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="Limits Apply — the economics of using AI">
+<meta property="og:description" content="API pricing is measured down to the millionth token. Subscription limits are described as “usage limits apply.” We benchmark how much useful work AI subscriptions actually deliver.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,9 +28,11 @@
     <a class="brand" href="#top"><span class="track" aria-hidden="true"></span><span class="base">limitsapply</span><span class="over" aria-hidden="true">limitsapply</span><i aria-hidden="true"></i></a>
     <nav class="nav" aria-label="Sections">
       <a href="./index.html" aria-current="page">Home</a>
+      <a href="./break-even.html">Break-even</a>
       <a href="./local.html">Local</a>
       <a href="./gate.html">Gate</a>
       <a href="./docs/index.html">Docs</a>
+      <a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">GitHub</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-pressed="false"
             aria-label="Switch to the dark theme">
@@ -45,18 +54,20 @@
     <span class="ticks"></span>
   </div>
   <span class="eyebrow">“Usage limits apply”</span>
-  <h1>Always run the best model your money actually buys.</h1>
+  <h1>The public record of what AI subscriptions won’t tell you.</h1>
   <p class="lead">
     API pricing is measured down to the millionth token. Subscription limits are usually
-    described as “usage limits apply.” The benchmark below measures what’s actually behind that
-    sentence — how much useful work each plan delivers against the same workload, compared with
-    paying by the token.
+    described as “usage limits apply.” This site keeps the record of what’s actually behind that
+    sentence — what each provider discloses, what can honestly be derived from it, and the
+    arithmetic of when a plan stops being worth it — with every figure dated, sourced, and
+    labelled with how it was obtained.
   </p>
   <p class="lead">
-    This site is three layers. The <a href="#ledger">ledger</a> prices every subscription against
-    that same work. <a href="./local.html">Local</a> prices the alternative — your own machine, no
-    quota, a lower ceiling. <a href="./gate.html">Gate</a> is the CLI that takes whichever one wins
-    and points your editor at it.
+    Four pages. The <a href="#ledger">ledger</a> prices every subscription against the same work.
+    <a href="./break-even.html">Break-even</a> is the arithmetic of subscription against API.
+    <a href="./local.html">Local</a> prices the alternative — your own machine, no quota, a lower
+    ceiling. <a href="./gate.html">Gate</a> is the CLI that takes whichever one wins and points
+    your editor at it.
   </p>
   <div class="cta">
     <a class="btn" href="#benchmark">Explore the benchmark</a>
@@ -374,6 +385,11 @@
   </figure>
   <p class="pull" style="margin-top:28px">
     A subscription worth $2,000 of API compute is worth $0 of API compute if you use it twice a month.
+  </p>
+  <p class="note" style="margin-top:14px">
+    The full arithmetic — the disclosure staircase, the formula, and the one break-even anchor a
+    provider has published about its own plan — has
+    <a href="./break-even.html">its own page</a>.
   </p>
 </section>
 
@@ -813,6 +829,11 @@ Dominated points list what dominates them below.</figcaption>
         <li><a href="https://opencode.ai" target="_blank" rel="noopener">OpenCode</a></li>
         <li><a href="https://huggingface.co/models" target="_blank" rel="noopener">Hugging Face</a></li>
         <li><a href="https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml" target="_blank" rel="noopener">ECB reference rates</a></li>
+      </ul>
+      <h3>Project</h3>
+      <ul>
+        <li><a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">Source on GitHub</a></li>
+        <li><a href="https://github.com/limits-apply/limits-apply/issues" target="_blank" rel="noopener">Correct a figure</a></li>
       </ul>
       </div>
     </div>

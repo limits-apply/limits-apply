@@ -2,11 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Static site built with Vite + TypeScript, no framework, plus a published CLI. Seven HTML entries
+Static site built with Vite + TypeScript, no framework, plus a published CLI. Eight HTML entries
 (`vite.config.ts`): `index.html` — the landing, with the Layer 1 ledger as a section inside it —
-`local.html`, `gate.html`, and four under `docs/`. Data lives in `src/data/`, maths in `src/lib/`
+`break-even.html`, `local.html`, `gate.html`, and four under `docs/`. Data lives in `src/data/`, maths in `src/lib/`
 (`benchmark.ts` for the base figures, `provenance.ts` for the ladder), rendering in `src/ui/`.
-`packages/` holds the `limitsapply` CLI and the pure logic it shares with the site.
+`packages/` holds the `@limits-apply/cli` package (the `limitsapply` command) and the pure
+logic it shares with the site.
 Never put data or maths back in a page.
 
 `docs/methodology.md` is the doctrine every figure obeys — read it before changing what the page
@@ -26,6 +27,9 @@ The constraint behind every design decision here:
 **Layer 1 makes the map. Layer 2 makes the claim.** Layer 1 is public pricing and third-party
 model evals — broad, cheap, structurally unable to say "this plan completes N tasks". Layer 2 is
 our own runs; none exist yet. So no code path may turn a Layer 1 figure into a capacity claim.
+
+Closing a gap deletes its entry from the Gate roadmap register (`docs/index.html#roadmap`) in
+the same commit; opening one adds it. The register is part of the change, not follow-up work.
 
 Never present an inferred figure as a published one. Every cell on both tables carries a figure
 *and* a rung saying how it was obtained — an unlabelled estimate is still a lie, a labelled one is
@@ -82,7 +86,7 @@ every cell, so nothing is dropped for being unrankable.
 ## Freshness
 
 `VERIFIED_ON` / `STALE_DAYS` in `src/data/plans.ts`: past `STALE_DAYS` the page renders itself stale.
-The reported freshness is deliberately the **oldest** verification, not the newest — across five
+The reported freshness is deliberately the **oldest** verification, not the newest — across six
 inputs (`ui/freshness.ts`), not just `VERIFIED_ON` itself. `.github/workflows/stale-prices.yml`
 opens an issue weekly once it passes 30 days. Re-verifying a price means bumping that row's
 `verified` date in `src/data/plans.json`; `VERIFIED_ON` is derived, never bumped directly.

@@ -1,0 +1,470 @@
+{
+  "kind": "evidence",
+  "version": "catalog-2026-08-24-7779f1e9",
+  "retrievedAt": "2026-08-24",
+  "candidates": [
+    {
+      "id": "anthropic/claude-opus-5",
+      "model": "anthropic/claude-opus-5",
+      "provider": "anthropic",
+      "endpoint": "https://api.anthropic.com/v1",
+      "failureDomain": "anthropic-api",
+      "billing": "api",
+      "priceUsd": {
+        "value": 0,
+        "rung": "derived",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-08-24"
+      },
+      "allowanceUsd": {
+        "value": null,
+        "rung": "derived",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-08-24"
+      },
+      "inputRateUsdPerMillion": {
+        "value": 5,
+        "rung": "derived",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-08-24"
+      },
+      "cachedInputRateUsdPerMillion": {
+        "value": 0.5,
+        "rung": "derived",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-08-24"
+      },
+      "outputRateUsdPerMillion": {
+        "value": 25,
+        "rung": "derived",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-08-24"
+      },
+      "intelligence": {
+        "value": 63.0532,
+        "rung": "derived",
+        "source": "https://artificialanalysis.ai/models",
+        "verified": "2026-08-14"
+      },
+      "speed": {
+        "value": 58.8,
+        "rung": "derived",
+        "source": "https://artificialanalysis.ai/models/claude-opus-5",
+        "verified": "2026-08-24"
+      },
+      "compatible": true,
+      "identityWorkaround": false,
+      "regions": [
+        "global"
+      ],
+      "credentials": [
+        "ANTHROPIC_API_KEY"
+      ],
+      "concurrency": 4
+    },
+    {
+      "id": "openai/gpt-5.6-sol",
+      "model": "openai/gpt-5.6-sol",
+      "provider": "openai",
+      "endpoint": "https://api.openai.com/v1",
+      "failureDomain": "openai-api",
+      "billing": "api",
+      "priceUsd": {
+        "value": 0,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "allowanceUsd": {
+        "value": null,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "inputRateUsdPerMillion": {
+        "value": 4,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "cachedInputRateUsdPerMillion": {
+        "value": 0.4,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "outputRateUsdPerMillion": {
+        "value": 20,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "intelligence": {
+        "value": 60.9299,
+        "rung": "derived",
+        "source": "https://artificialanalysis.ai/models",
+        "verified": "2026-08-14"
+      },
+      "speed": {
+        "value": 73.6,
+        "rung": "derived",
+        "source": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+        "verified": "2026-08-24"
+      },
+      "compatible": true,
+      "identityWorkaround": false,
+      "regions": [
+        "global"
+      ],
+      "credentials": [
+        "OPENAI_API_KEY"
+      ],
+      "concurrency": 4
+    },
+    {
+      "id": "google/gemini-3.7-flash",
+      "model": "gemini/gemini-3.7-flash",
+      "provider": "google",
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta",
+      "failureDomain": "google-api",
+      "billing": "api",
+      "priceUsd": {
+        "value": 0,
+        "rung": "derived",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "allowanceUsd": {
+        "value": null,
+        "rung": "derived",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "inputRateUsdPerMillion": {
+        "value": 0.75,
+        "rung": "derived",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "cachedInputRateUsdPerMillion": {
+        "value": 0.075,
+        "rung": "derived",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "outputRateUsdPerMillion": {
+        "value": 3.75,
+        "rung": "derived",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "intelligence": {
+        "value": 56.0301,
+        "rung": "derived",
+        "source": "https://artificialanalysis.ai/models",
+        "verified": "2026-08-14"
+      },
+      "speed": {
+        "value": 340.1,
+        "rung": "derived",
+        "source": "https://artificialanalysis.ai/models/gemini-3-7-flash",
+        "verified": "2026-08-24"
+      },
+      "compatible": true,
+      "identityWorkaround": false,
+      "regions": [
+        "global"
+      ],
+      "credentials": [
+        "GEMINI_API_KEY"
+      ],
+      "concurrency": 4
+    },
+    {
+      "id": "openai/gpt-5.6-luna",
+      "model": "openai/gpt-5.6-luna",
+      "provider": "openai",
+      "endpoint": "https://api.openai.com/v1",
+      "failureDomain": "openai-api",
+      "billing": "api",
+      "priceUsd": {
+        "value": 0,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "allowanceUsd": {
+        "value": null,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "inputRateUsdPerMillion": {
+        "value": 0.2,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "cachedInputRateUsdPerMillion": {
+        "value": 0.02,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "outputRateUsdPerMillion": {
+        "value": 1.2,
+        "rung": "derived",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-08-24"
+      },
+      "intelligence": {
+        "value": 52.3181,
+        "rung": "derived",
+        "source": "https://artificialanalysis.ai/models",
+        "verified": "2026-08-14"
+      },
+      "speed": {
+        "value": 141.9,
+        "rung": "derived",
+        "source": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+        "verified": "2026-08-24"
+      },
+      "compatible": true,
+      "identityWorkaround": false,
+      "regions": [
+        "global"
+      ],
+      "credentials": [
+        "OPENAI_API_KEY"
+      ],
+      "concurrency": 4
+    }
+  ],
+  "agentPairs": [
+    {
+      "id": "claude-code/claude-opus-5-xhigh",
+      "agent": "Claude Code",
+      "model": "Claude Opus 5",
+      "index": {
+        "value": 66.74,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 8.235,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 23.6,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "codex/gpt-5-6-sol-max",
+      "agent": "Codex",
+      "model": "GPT-5.6 Sol",
+      "index": {
+        "value": 66.57,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 7.084,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 10.2,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "claude-code/fable-5-max-fallback",
+      "agent": "Claude Code",
+      "model": "Fable 5",
+      "index": {
+        "value": 65.85,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 11.705,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 23.4,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "grok-build/grok-4-5-high",
+      "agent": "Grok Build",
+      "model": "Grok 4.5",
+      "index": {
+        "value": 64.44,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 2.592,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 16.5,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "kimi-code-cli/kimi-k3",
+      "agent": "Kimi Code CLI",
+      "model": "Kimi K3",
+      "index": {
+        "value": 61.34,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 3.175,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 23.8,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "muse-code/muse-spark-1-2-xhigh",
+      "agent": "Muse Code",
+      "model": "Muse Spark 1.2",
+      "index": {
+        "value": 60.53,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 2.326,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 42,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "opencode/gemini-3-7-flash-high",
+      "agent": "Opencode",
+      "model": "Gemini 3.7 Flash",
+      "index": {
+        "value": 57.07,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": null,
+      "minutesPerTask": {
+        "value": 8.5,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "codex/deepseek-v4-flash-max",
+      "agent": "Codex",
+      "model": "DeepSeek V4 Flash",
+      "index": {
+        "value": 55.47,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 0.071,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 14.6,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "claude-code/glm-5-2",
+      "agent": "Claude Code",
+      "model": "GLM-5.2",
+      "index": {
+        "value": 43.18,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 6.511,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 25.1,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    },
+    {
+      "id": "cursor-cli/composer-2-5-fast",
+      "agent": "Cursor CLI",
+      "model": "Composer 2.5 Fast",
+      "index": {
+        "value": 38.19,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "costPerTaskUsd": {
+        "value": 0.549,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      },
+      "minutesPerTask": {
+        "value": 6.8,
+        "rung": "derived",
+        "source": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+        "verified": "2026-08-15"
+      }
+    }
+  ]
+}
