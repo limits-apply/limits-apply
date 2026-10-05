@@ -1,0 +1,115 @@
+{
+  "retrieved_on": "2026-10-05",
+  "source": "Artificial Analysis",
+  "data_api_docs": "https://artificialanalysis.ai/data-api/docs",
+  "tier": "Open-weights models of 4B to 40B total parameters — the tier a portable Mac can hold.",
+  "notes": "Static Layer 1 snapshot. Parameter counts are the released weights, not the evaluated endpoint. A model listed twice differs only in reasoning mode: same weights file, same throughput, different index.",
+  "source_url": "https://artificialanalysis.ai/models/open-source/small",
+  "intelligence_index_version": "4.3.2",
+  "models": [
+    {
+      "name": "Qwen3.8 27B",
+      "variant": "Xhigh",
+      "intelligence": 34,
+      "total_params_b": 27,
+      "active_params_b": null
+    },
+    {
+      "name": "Qwen3.8 27B",
+      "variant": "Medium",
+      "intelligence": 28,
+      "total_params_b": 27,
+      "active_params_b": null
+    },
+    {
+      "name": "Qwen3.8 27B",
+      "variant": "Low",
+      "intelligence": 26,
+      "total_params_b": 27,
+      "active_params_b": null
+    },
+    {
+      "name": "K2 Horizon MoVA 36B A4B",
+      "variant": "",
+      "intelligence": 25,
+      "total_params_b": 36,
+      "active_params_b": 4
+    },
+    {
+      "name": "G9v3-39A5B",
+      "variant": "",
+      "intelligence": 22,
+      "total_params_b": 39,
+      "active_params_b": 5
+    },
+    {
+      "name": "K2 Horizon 7B",
+      "variant": "",
+      "intelligence": 21,
+      "total_params_b": 7,
+      "active_params_b": null
+    },
+    {
+      "name": "Qwen3.8 27B",
+      "variant": "Non-reasoning",
+      "intelligence": 20,
+      "total_params_b": 27,
+      "active_params_b": null
+    },
+    {
+      "name": "Qwen3.6 35B A3B",
+      "variant": "Reasoning",
+      "intelligence": 18,
+      "total_params_b": 36,
+      "active_params_b": 3
+    },
+    {
+      "name": "Muse Glimmer",
+      "variant": "High",
+      "intelligence": 17,
+      "total_params_b": 30,
+      "active_params_b": null
+    },
+    {
+      "name": "Gemma 4 26B A4B",
+      "variant": "Reasoning",
+      "intelligence": 17,
+      "total_params_b": 25.2,
+      "active_params_b": 3.8
+    },
+    {
+      "name": "Qwen3.6 35B A3B",
+      "variant": "Non-reasoning",
+      "intelligence": 15,
+      "total_params_b": 36,
+      "active_params_b": 3
+    },
+    {
+      "name": "Granite 4.2 30B",
+      "variant": "",
+      "intelligence": 15,
+      "total_params_b": 30,
+      "active_params_b": null
+    }
+  ],
+  "entered": [
+    "Qwen3.8 27B (Xhigh)",
+    "Qwen3.8 27B (Medium)",
+    "Qwen3.8 27B (Low)",
+    "K2 Horizon MoVA 36B A4B",
+    "K2 Horizon 7B",
+    "Qwen3.8 27B (Non-reasoning)",
+    "Muse Glimmer (High)",
+    "Granite 4.2 30B"
+  ],
+  "left": [
+    "Qwen3.8 27B",
+    "Qwen3.6 27B (Reasoning)",
+    "Muse Glimmer (high)",
+    "Qwen3.6 27B (Non-reasoning)",
+    "Gemma 4 31B (Reasoning)",
+    "Ling 3.0 Tiny",
+    "Qwen3.5 35B A3B (Non-reasoning)",
+    "Nemotron 3.5 Lightning"
+  ]
+}
