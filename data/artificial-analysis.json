@@ -1,0 +1,280 @@
+{
+  "retrieved_on": "2026-10-30",
+  "source": "Artificial Analysis",
+  "data_api_docs": "https://artificialanalysis.ai/data-api/docs",
+  "notes": "Static Layer 1 snapshot. Output tokens include answer and reasoning tokens. Cost is the weighted AA Intelligence Index cost per task. Speed is AA's median output tokens per second on the model's own page, measured on its API, not on a plan's harness. Index v5.0 supersedes v4.3.2: scores are not comparable across versions, so a row is never carried between them. Models AA no longer prices on this version are absent, not carried.",
+  "intelligence_index_version": "5.0",
+  "source_url": "https://artificialanalysis.ai/models",
+  "models": [
+    {
+      "slug": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "reasoning": "max · fallback",
+      "intelligence": 58.406,
+      "cost_per_task_usd": 10.0364,
+      "output_tokens_per_task": 173312.6389,
+      "output_speed_tps": 96.6267
+    },
+    {
+      "slug": "claude-opus-5-5-xhigh",
+      "name": "Claude Opus 5.5",
+      "reasoning": "xhigh · fallback",
+      "intelligence": 56.9947,
+      "cost_per_task_usd": 6.0472,
+      "output_tokens_per_task": 103395.267,
+      "output_speed_tps": 85.4208
+    },
+    {
+      "slug": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "reasoning": "max",
+      "intelligence": 56.8539,
+      "cost_per_task_usd": 6.2447,
+      "output_tokens_per_task": 51973.199,
+      "output_speed_tps": 78.7422
+    },
+    {
+      "slug": "gpt-6-1-sol",
+      "name": "GPT-6.1 Sol",
+      "reasoning": "max",
+      "intelligence": 54.5087,
+      "cost_per_task_usd": 1.2721,
+      "output_tokens_per_task": 67823.6917,
+      "output_speed_tps": 81.0725
+    },
+    {
+      "slug": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "reasoning": "max · fallback",
+      "intelligence": 54.2413,
+      "cost_per_task_usd": 10.0206,
+      "output_tokens_per_task": 285387.1134,
+      "output_speed_tps": 140.1527
+    },
+    {
+      "slug": "gpt-6-1-sol-xhigh",
+      "name": "GPT-6.1 Sol",
+      "reasoning": "xhigh",
+      "intelligence": 52.3082,
+      "cost_per_task_usd": 0.764,
+      "output_tokens_per_task": 30241.1839,
+      "output_speed_tps": 66.8122
+    },
+    {
+      "slug": "claude-opus-5-5-high",
+      "name": "Claude Opus 5.5",
+      "reasoning": "high · fallback",
+      "intelligence": 51.686,
+      "cost_per_task_usd": 3.4647,
+      "output_tokens_per_task": 60070.9586,
+      "output_speed_tps": 79.9776
+    },
+    {
+      "slug": "gpt-6-1-terra",
+      "name": "GPT-6.1 Terra",
+      "reasoning": "max",
+      "intelligence": 50.9765,
+      "cost_per_task_usd": 0.9611,
+      "output_tokens_per_task": 59883.1647,
+      "output_speed_tps": 90.9311
+    },
+    {
+      "slug": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "reasoning": "high",
+      "intelligence": 50.4122,
+      "cost_per_task_usd": 7.6827,
+      "output_tokens_per_task": 116368.0291,
+      "output_speed_tps": 83.4481
+    },
+    {
+      "slug": "gpt-6-1-sol-high",
+      "name": "GPT-6.1 Sol",
+      "reasoning": "high",
+      "intelligence": 50.2291,
+      "cost_per_task_usd": 0.591,
+      "output_tokens_per_task": 22606.1991,
+      "output_speed_tps": 65.4292
+    },
+    {
+      "slug": "claude-fable-5-1-xhigh",
+      "name": "Claude Fable 5.1",
+      "reasoning": "xhigh · fallback",
+      "intelligence": 49.6716,
+      "cost_per_task_usd": 10.8475,
+      "output_tokens_per_task": 97058.788,
+      "output_speed_tps": 62.7187
+    },
+    {
+      "slug": "claude-sonnet-5-5-xhigh",
+      "name": "Claude Sonnet 5.5",
+      "reasoning": "xhigh · fallback",
+      "intelligence": 49.574,
+      "cost_per_task_usd": 4.092,
+      "output_tokens_per_task": 122204.8989,
+      "output_speed_tps": 107.3459
+    },
+    {
+      "slug": "claude-fable-5-1",
+      "name": "Claude Fable 5.1",
+      "reasoning": "max · fallback",
+      "intelligence": 49.0102,
+      "cost_per_task_usd": 12.994,
+      "output_tokens_per_task": 117940.938,
+      "output_speed_tps": 65.4872
+    },
+    {
+      "slug": "claude-opus-5-5-medium",
+      "name": "Claude Opus 5.5",
+      "reasoning": "medium · fallback",
+      "intelligence": 48.0581,
+      "cost_per_task_usd": 2.4511,
+      "output_tokens_per_task": 43816.5465,
+      "output_speed_tps": 79.4249
+    },
+    {
+      "slug": "claude-fable-5-1-high",
+      "name": "Claude Fable 5.1",
+      "reasoning": "high · fallback",
+      "intelligence": 47.025,
+      "cost_per_task_usd": 7.54,
+      "output_tokens_per_task": 66030.7135,
+      "output_speed_tps": 57.1199
+    },
+    {
+      "slug": "gpt-6-1-sol-medium",
+      "name": "GPT-6.1 Sol",
+      "reasoning": "medium",
+      "intelligence": 46.1469,
+      "cost_per_task_usd": 0.3594,
+      "output_tokens_per_task": 13518.3359,
+      "output_speed_tps": 52.7854
+    },
+    {
+      "slug": "kimi-k3-1-pro",
+      "name": "Kimi K3.1 Pro",
+      "reasoning": "max",
+      "intelligence": 46.0026,
+      "cost_per_task_usd": 3.6812,
+      "output_tokens_per_task": 72238.9702,
+      "output_speed_tps": 32.0755
+    },
+    {
+      "slug": "claude-fable-5-1-medium",
+      "name": "Claude Fable 5.1",
+      "reasoning": "medium · fallback",
+      "intelligence": 42.9716,
+      "cost_per_task_usd": 5.5643,
+      "output_tokens_per_task": 48545.4957,
+      "output_speed_tps": 56.3119
+    },
+    {
+      "slug": "claude-sonnet-5-5-high",
+      "name": "Claude Sonnet 5.5",
+      "reasoning": "high · fallback",
+      "intelligence": 41.1151,
+      "cost_per_task_usd": 1.6361,
+      "output_tokens_per_task": 58421.212,
+      "output_speed_tps": 106.6857
+    },
+    {
+      "slug": "claude-fable-5-1-low",
+      "name": "Claude Fable 5.1",
+      "reasoning": "low · fallback",
+      "intelligence": 38.4836,
+      "cost_per_task_usd": 4.4711,
+      "output_tokens_per_task": 37836.5127,
+      "output_speed_tps": 54.7737
+    },
+    {
+      "slug": "gpt-6-1-sol-low",
+      "name": "GPT-6.1 Sol",
+      "reasoning": "low",
+      "intelligence": 34.5029,
+      "cost_per_task_usd": 0.1615,
+      "output_tokens_per_task": 5837.9947,
+      "output_speed_tps": 59.3822
+    },
+    {
+      "slug": "claude-opus-5-5-low",
+      "name": "Claude Opus 5.5",
+      "reasoning": "low · fallback",
+      "intelligence": 34.5028,
+      "cost_per_task_usd": 0.9755,
+      "output_tokens_per_task": 19059.5575,
+      "output_speed_tps": 80.3439
+    },
+    {
+      "slug": "grok-4-7",
+      "name": "Grok 4.7",
+      "reasoning": "xhigh",
+      "intelligence": 34.335,
+      "cost_per_task_usd": 7.5118,
+      "output_tokens_per_task": 92969.5064,
+      "output_speed_tps": 88.2906
+    },
+    {
+      "slug": "deepseek-v4-1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "reasoning": "max",
+      "intelligence": 32.4896,
+      "cost_per_task_usd": 0.6021,
+      "output_tokens_per_task": 138961.7059,
+      "output_speed_tps": 175.607
+    },
+    {
+      "slug": "glm-5-3",
+      "name": "GLM-5.3",
+      "reasoning": "max",
+      "intelligence": 31.6534,
+      "cost_per_task_usd": 5.0093,
+      "output_tokens_per_task": 118986.5048,
+      "output_speed_tps": 77.5681
+    },
+    {
+      "slug": "gemini-3-8-flash",
+      "name": "Gemini 3.8 Flash",
+      "reasoning": "high",
+      "intelligence": 30.5468,
+      "cost_per_task_usd": 7.766,
+      "output_tokens_per_task": 98939.5141,
+      "output_speed_tps": 125.9863
+    },
+    {
+      "slug": "claude-sonnet-5-5-medium",
+      "name": "Claude Sonnet 5.5",
+      "reasoning": "medium · fallback",
+      "intelligence": 30.3196,
+      "cost_per_task_usd": 0.7807,
+      "output_tokens_per_task": 30745.8948,
+      "output_speed_tps": 99.5392
+    },
+    {
+      "slug": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "reasoning": "max",
+      "intelligence": 27.7552,
+      "cost_per_task_usd": 0.152,
+      "output_tokens_per_task": 75296.0524,
+      "output_speed_tps": 121.6362
+    },
+    {
+      "slug": "glm-5-3-flash",
+      "name": "GLM-5.3-Flash",
+      "reasoning": "max",
+      "intelligence": 27.7539,
+      "cost_per_task_usd": 0.5833,
+      "output_tokens_per_task": 134204.9254,
+      "output_speed_tps": 70.5099
+    },
+    {
+      "slug": "claude-sonnet-5-5-low",
+      "name": "Claude Sonnet 5.5",
+      "reasoning": "low · fallback",
+      "intelligence": 25.2997,
+      "cost_per_task_usd": 0.5113,
+      "output_tokens_per_task": 20856.3718,
+      "output_speed_tps": 102.9389
+    }
+  ]
+}

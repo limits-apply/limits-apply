@@ -1,0 +1,19 @@
+{
+  "name": "@limits-apply/cli",
+  "version": "0.1.0",
+  "description": "Local activation and audit tooling for Limits Apply verdicts.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": { "limitsapply": "dist/limitsapply.mjs" },
+  "files": ["dist"],
+  "engines": { "node": ">=20" },
+  "keywords": ["llm", "cli", "litellm", "model-routing", "opencode", "provenance"],
+  "homepage": "https://github.com/limits-apply/limits-apply#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/limits-apply/limits-apply.git", "directory": "packages/gate" },
+  "bugs": "https://github.com/limits-apply/limits-apply/issues",
+  "publishConfig": { "access": "public" },
+  "scripts": {
+    "prepublishOnly": "pnpm -w gate:build && pnpm -w gate:pack-test"
+  },
+  "devDependencies": { "@limits-apply/intelligence": "workspace:*", "@limits-apply/sources": "workspace:*" }
+}

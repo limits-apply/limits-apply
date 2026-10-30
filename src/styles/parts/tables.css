@@ -1,0 +1,39 @@
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r);background:var(--paper)}
+/* Nine columns only read as one table when they are all on screen at once, so the
+   widest two step out of the column — the prose around them does not. Margins go
+   negative only once the target exceeds the column; below that this is a no-op.
+   Width, not transform: a transformed ancestor would re-anchor the fixed .tip. */
+.tw.wide{max-width:none;--tw-col:min(var(--measure-wide),calc(100vw - var(--gutter) * 2));
+  width:var(--tw-col);
+  margin-inline:calc((100% - var(--tw-col)) / 2)}
+table{border-collapse:collapse;width:100%;font-size:13px;font-family:var(--sans)}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--rule-2);white-space:nowrap}
+th{font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+   border-bottom:1px solid var(--rule);background:var(--panel)}
+/* That sticky is inert until here. .tw scrolls horizontally, which makes it the header's
+   scrollport, and it never scrolls vertically — so the header has nothing to stick to.
+   Past 1420px the decision table's 1357px of columns fit, the wrapper stops scrolling,
+   and the header pins to the page instead: under the bar, over the frozen columns.
+   Sticky lives on thead, not on each th — per-cell top sticky splits the row in Chrome
+   when the first columns also stick left. */
+@media (min-width:1420px){
+  .tw.wide{overflow-x:visible}
+  .tw.wide thead{position:sticky;top:var(--bar);z-index:3}
+}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.pico{width:15px;height:15px;object-fit:contain;vertical-align:-3px;margin-right:7px;border-radius:2px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--panel)}
+td.empty{color:var(--ink-3)}
+/* confidence is ordinal, so it is encoded as fill weight — not as four hues */
+.badge{display:inline-flex;align-items:center;gap:5px;font:500 10px var(--mono);letter-spacing:.08em;
+       text-transform:uppercase;padding:2px 7px;border-radius:var(--r);
+       border:1px solid var(--rule-2);color:var(--ink-3)}
+.badge::before{content:"";width:7px;height:7px;border:1px solid currentColor;flex:none}
+.badge.high{color:var(--ink);border-color:var(--rule)}
+.badge.high::before{background:currentColor}
+.badge.medium{color:var(--ink-2);border-color:var(--rule)}
+.badge.medium::before{background:linear-gradient(-45deg,currentColor 50%,transparent 50%)}
+.badge.estimated{color:var(--amber);border-color:currentColor}
+

@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLI reference — Gate</title>
+<meta name="description" content="Every limitsapply command, flag and exit code the Gate CLI defines, the five files it owns and the default root, and the environment variables it reads.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="CLI reference — Gate">
+<meta property="og:description" content="Every limitsapply command, flag and exit code the Gate CLI defines, the five files it owns and the default root, and the environment variables it reads.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/docs/cli.html">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<link rel="stylesheet" href="/src/styles/parts/docs.css">
+<link rel="stylesheet" href="/src/styles/parts/gate.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- site-header -->
+
+<div class="docs-shell">
+
+<nav class="docs-nav" aria-label="Docs">
+  <h3 class="eyebrow">Docs</h3>
+  <ul>
+    <li><a href="./index.html">Quickstart</a></li>
+    <li><a href="./cli.html" aria-current="page">CLI reference</a>
+      <ul>
+        <li><a href="#commands">Commands</a></li>
+        <li><a href="#exit-codes">Exit codes</a></li>
+        <li><a href="#files">Files &amp; root</a></li>
+        <li><a href="#format">litellm.yaml</a></li>
+        <li><a href="#env">Environment</a></li>
+      </ul>
+    </li>
+    <li><a href="./verdict.html">The verdict</a></li>
+    <li><a href="./harnesses.html">Harnesses</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+
+<section class="hero">
+  <span class="eyebrow">CLI reference</span>
+  <h1>Seven commands. No hidden ones.</h1>
+  <p class="lead">
+    Every command below comes straight from the CLI's own command table —
+    <code>limitsapply --help</code> prints the same list, in the same order.
+  </p>
+</section>
+
+<section id="commands">
+  <span class="eyebrow">Commands</span>
+  <h2>init · update · status · quota · advise · measure · observe · evidence.</h2>
+
+  <div class="panel">
+    <h3 id="cmd-init">limitsapply init</h3>
+    <p>Write the default local profile if none exists yet.</p>
+    <dl class="fields">
+      <dt>--root &lt;value&gt;</dt><dd>Gate root directory (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+    </dl>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-update">limitsapply update</h3>
+    <p>Activate a verdict: write the LiteLLM config and point OpenCode at it.</p>
+    <dl class="fields">
+      <dt>--root &lt;value&gt;</dt><dd>Gate root directory (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+      <dt>--verdict &lt;value&gt;</dt><dd>Path or URL to a verdict snapshot.</dd>
+      <dt>--evidence &lt;value&gt;</dt><dd>Path or URL to an evidence snapshot, ranked locally against the global workload.</dd>
+      <dt>--example</dt><dd>Rank the bundled example evidence fixture instead of a real source.</dd>
+      <dt>--opencode &lt;value&gt;</dt><dd>OpenCode config path (default: <code>OPENCODE_CONFIG</code>, then <code>$XDG_CONFIG_HOME/opencode/opencode.json</code>).</dd>
+      <dt>--no-opencode</dt><dd>Skip writing the OpenCode config.</dd>
+      <dt>--pi &lt;value&gt;</dt><dd>Write a pi config at this path. Nothing is written without it — pi is never configured unless you name the file.</dd>
+      <dt>--claude-code &lt;value&gt;</dt><dd>Write a Claude Code config at this path. Nothing is written without it — Claude Code is never configured unless you name the file.</dd>
+      <dt>--smoke</dt><dd>Ping the aliases through the proxy after writing, and restore the previous configuration if they don't answer.</dd>
+      <dt>--proxy &lt;value&gt;</dt><dd>LiteLLM proxy base URL for <code>--smoke</code> (default: <code>http://127.0.0.1:4000</code>).</dd>
+    </dl>
+    <p class="note">Local endpoints declared in <code>profile.json</code> as <code>localCandidates</code> join the ranking when <code>includeLocal</code> is set, and are probed before it: one that doesn't answer is written to <code>quota.jsonl</code> as a 15-minute closed window with source <code>endpoint-probe</code>, and sits the run out. What decides whether such a candidate wins is the task class's intelligence floor, never its price. On <code>--verdict</code> they are noted and ignored — a published verdict is not personalised.</p>
+    <p class="note">Exactly one of <code>--verdict</code>, <code>--evidence</code> or <code>--example</code> is required — with none, <code>update</code> exits 2.</p>
+    <p class="note"><code>--smoke</code> asks one question: is a proxy up and answering every alias the verdict routes? LiteLLM loads its config at startup, so the probe reaches whatever the running proxy already has, never the file Gate just wrote. Both halves of that cut: against a stopped proxy it rolls back a configuration never given a chance, and against a still-running <em>old</em> proxy it passes — the old config carries the same alias names, so the old one answers for the new one. Restart LiteLLM, then <code>status --smoke</code>, to check the verdict now serving. Without the flag, <code>update</code> writes and does not probe.</p>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-status">limitsapply status</h3>
+    <p>Print the verdict currently active in this root.</p>
+    <dl class="fields">
+      <dt>--root &lt;value&gt;</dt><dd>Gate root directory (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+      <dt>--smoke</dt><dd>Also ping every routed alias through the LiteLLM proxy.</dd>
+      <dt>--proxy &lt;value&gt;</dt><dd>LiteLLM proxy base URL for --smoke (default: http://127.0.0.1:4000).</dd>
+    </dl>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-quota">limitsapply quota</h3>
+    <p>
+      With no arguments, list the access paths recorded as exhausted. With
+      <code>exhausted &lt;domain&gt;</code>, record that one closed its window. With
+      <code>scan &lt;path&gt;</code>, read them out of OpenCode's own message records — one JSON file
+      per message — mapping each <code>providerID</code> to a failure domain through the active
+      verdict, and naming on stderr any provider it cannot map rather than dropping it. With
+      <code>pull --domain &lt;domain&gt;</code>, read the official Claude Code CLI's own OAuth token
+      and ask Anthropic's own usage endpoint how much of the subscription's own usage windows are
+      used, recording the domain closed if any window is at or past 100% utilization.
+    </p>
+    <dl class="fields">
+      <dt>--root &lt;value&gt;</dt><dd>Gate root directory (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+      <dt>--resets &lt;value&gt;</dt><dd>ISO timestamp the window is said to reopen at.</dd>
+      <dt>--domain &lt;value&gt;</dt><dd>Failure domain to record a pulled window against.</dd>
+      <dt>--credentials &lt;value&gt;</dt><dd>Claude CLI credentials path for <code>quota pull</code> (default: <code>~/.claude/.credentials.json</code>).</dd>
+    </dl>
+    <p class="note">
+      A recorded window takes effect at the next <code>update</code>, which rejects every candidate
+      on that failure domain until the timestamp passes. It counts nothing: Gate never knows how
+      much of an allowance is left, only that a window was seen closed and when it was said to
+      reopen.
+    </p>
+    <p class="note">
+      <code>pull</code> reads that token to account against Anthropic's own API and never routes it
+      anywhere else. A missing token, or one whose <code>expiresAt</code> has passed, exits 1 — sign
+      in or refresh with <code>claude</code> and try again. If nothing is closed it exits 0 and
+      writes nothing; if more than one window is closed it writes a single event at the latest of
+      their reopen times, because the domain is one access path and isn't usable again until every
+      closed window has reopened.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-advise">limitsapply advise</h3>
+    <p>
+      Price the last N days from what is already on this machine — nothing is activated, nothing
+      is written, and no Gate root is needed. Two sources, each optional: OpenCode's own
+      per-message <code>cost</code> field, summed per provider×model over the window
+      (<em>observed</em> — the tool's own figure, never re-derived), and the Claude
+      subscription's usage windows read through the official CLI's own OAuth token
+      (<em>observed</em>), each paced against its stated length — utilization ÷ elapsed
+      fraction, printed as <em>derived</em> with the formula. With <code>--price</code>, the
+      break-even line: the window's spend normalized to the average month
+      (× 30.4375 ÷ days, the same 365.25 ÷ 12 month every page prints) against the plan price.
+    </p>
+    <dl class="fields">
+      <dt>--opencode &lt;value&gt;</dt><dd>OpenCode message storage directory (default: <code>$XDG_DATA_HOME/opencode/storage/message</code>, then <code>~/.local/share/opencode/storage/message</code>).</dd>
+      <dt>--credentials &lt;value&gt;</dt><dd>Claude CLI credentials path for the usage windows (default: <code>~/.claude/.credentials.json</code>).</dd>
+      <dt>--days &lt;value&gt;</dt><dd>Window to summarize, in days (default: 30).</dd>
+      <dt>--price &lt;value&gt;</dt><dd>Your plan's monthly price in USD — adds the break-even line against the metered-equivalent spend.</dd>
+      <dt>--export</dt><dd>Print a pre-filled measurement submission instead of the summary, ready for the GitHub issue form.</dd>
+    </dl>
+    <p class="note">
+      A source that cannot be read is named on stderr and skipped; only when neither source
+      exists does the command exit 1. <code>--export</code> fills the submission with everything
+      the machine knows — configurations, windows, tokens, OpenCode's own costs — and leaves the
+      fields only you can know (plan, grading, evidence artifact) as prompts, because inventing
+      them is exactly what the ladder forbids.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-measure">limitsapply measure</h3>
+    <p>
+      Wrap one graded run: read the Claude subscription's usage windows before and after — the
+      provider's own report (<em>observed</em>) — execute the command after <code>--</code>, and
+      append one run record to a JSONL evidence log. The outcome is the grader's exit code
+      (0 is pass, anything else fail); <code>partial</code> exists only as a manual override.
+    </p>
+    <dl class="fields">
+      <dt>--workload &lt;value&gt;</dt><dd>Versioned workload id the run executes (e.g. <code>wl-001@v1</code>).</dd>
+      <dt>--access &lt;value&gt;</dt><dd>Exact access path measured — the plan's name, or e.g. <code>Anthropic API (metered)</code>.</dd>
+      <dt>--config &lt;value&gt;</dt><dd>Model and harness the run used (e.g. <code>claude-opus-5 · Claude Code 2.1.x</code>).</dd>
+      <dt>--outcome &lt;value&gt;</dt><dd>Manual override: <code>pass</code>, <code>partial</code> or <code>fail</code>. Without it the graded command's exit code decides.</dd>
+      <dt>--credentials &lt;value&gt;</dt><dd>Claude CLI credentials path for the usage windows (default: <code>~/.claude/.credentials.json</code>). A missing file is a stderr note and empty windows, not a failure.</dd>
+      <dt>--sessions &lt;value&gt;</dt><dd>Codex rollout directory for the run's observed tokens (default: <code>$CODEX_HOME/sessions</code>, then <code>~/.codex/sessions</code>).</dd>
+      <dt>--projects &lt;value&gt;</dt><dd>Claude Code transcript directory for the run's observed tokens (default: <code>~/.claude/projects</code>).</dd>
+      <dt>--out &lt;value&gt;</dt><dd>JSONL file the run record is appended to (default: <code>measurements.jsonl</code> in the working directory — run evidence belongs to the run's directory, not the Gate root).</dd>
+    </dl>
+    <p class="note">
+      A failed run is a recorded <code>fail</code> and exit 0 — the run's failure is data, not a
+      CLI failure. Only unusable flags or a command that cannot be spawned exit non-zero.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-observe">limitsapply observe</h3>
+    <p>
+      Collect quota observations from the harness's own logs — one interval: X tokens of a known
+      mix consumed Y points of quota in window Z. <code>observe codex</code> reads Codex's own
+      rollout files, where the client records its rate-limit events (the 5-hour and weekly
+      windows' used percentage and reset time alongside each turn's token counts);
+      <code>observe claude</code> sums Claude Code's transcripts against two quota readings you
+      supply or pull from Anthropic's own usage endpoint. Every observation is validated against
+      the schema in
+      <a href="https://github.com/limits-apply/limits-apply/blob/main/docs/observations-schema.md">docs/observations-schema.md</a>
+      before it is written, is stored under <code>data/observations/</code> as one JSON file named
+      by its content hash, and a second run writes nothing new. No prompt, transcript, path or
+      credential is ever collected — an export carrying one is refused, not cleaned.
+    </p>
+    <dl class="fields">
+      <dt>--sessions &lt;value&gt;</dt><dd>Codex rollout directory (default: <code>$CODEX_HOME/sessions</code>, then <code>~/.codex/sessions</code>).</dd>
+      <dt>--projects &lt;value&gt;</dt><dd>Claude Code transcript directory (default: <code>~/.claude/projects</code>).</dd>
+      <dt>--store &lt;value&gt;</dt><dd>Observation store directory (default: <code>data/observations</code> in the working directory).</dd>
+      <dt>--root &lt;value&gt;</dt><dd>Gate root holding the reporter token (default: <code>LIMITSAPPLY_HOME</code>, then <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code>).</dd>
+      <dt>--reporter &lt;value&gt;</dt><dd>Explicit opaque reporter id — keeps CI runs deterministic.</dd>
+      <dt>--since &lt;value&gt;</dt><dd>Only collect observations at or after this ISO timestamp.</dd>
+      <dt>--isolated</dt><dd>Assert that no other session consumed quota inside the collected intervals. Without it, the collector marks an interval isolated only when no other collected session lands inside it.</dd>
+      <dt>--region &lt;value&gt;</dt><dd>ISO-3166 alpha-2 region the sessions ran in.</dd>
+      <dt>--workload &lt;value&gt;</dt><dd>Versioned workload id the sessions executed (e.g. <code>wl-001@v1</code>).</dd>
+      <dt>--window &lt;value&gt;</dt><dd>Quota window to record against for claude: <code>5h</code> or <code>weekly</code> (default: weekly).</dd>
+      <dt>--plan &lt;value&gt;</dt><dd>Subscription id for claude collection (e.g. <code>anthropic.claude-max-5x</code>).</dd>
+      <dt>--before &lt;value&gt;</dt><dd>Quota percentage read before the collected range.</dd>
+      <dt>--after &lt;value&gt;</dt><dd>Quota percentage read after the collected range; <code>--pull</code> fills it from the official usage endpoint.</dd>
+      <dt>--until &lt;value&gt;</dt><dd>ISO timestamp the collected range ends at (default: now).</dd>
+      <dt>--pull</dt><dd>Read the current usage windows from the Claude subscription's official endpoint instead of <code>--after</code>.</dd>
+      <dt>--credentials &lt;value&gt;</dt><dd>Claude CLI credentials path for <code>--pull</code> (default: <code>~/.claude/.credentials.json</code>).</dd>
+      <dt>--runs &lt;value&gt;</dt><dd>Workload runs the collected range executed — recorded beside the interval.</dd>
+      <dt>--successful-runs &lt;value&gt;</dt><dd>Of those, how many passed the grader. Cannot exceed <code>--runs</code>.</dd>
+      <dt>--sanitized</dt><dd>Print the export bundle with <code>region</code> and <code>evidenceRef</code> stripped to the minimum a review needs.</dd>
+    </dl>
+    <p class="note">
+      Subcommands: <code>observe codex</code>, <code>observe claude</code>,
+      <code>observe report</code> (summarize the store: intervals, reporters, evidence status and
+      the change verdict per group) and <code>observe export</code> (print a reviewable bundle for
+      a pull request). One interval that saw the counter reset is stored with
+      <code>resetDetected: true</code> and never enters a statistic; a delta below one percentage
+      point — the counters' display precision — is stored but excluded the same way.
+    </p>
+    <p class="note">
+      <code>observe claude</code> needs two readings: <code>--before</code> with
+      <code>--after</code> or <code>--pull</code>. One reading is not an interval, and a one-sided
+      reading writes nothing.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3 id="cmd-evidence">limitsapply evidence</h3>
+    <p>
+      Build an evidence snapshot from a candidate catalog and an Artificial Analysis snapshot.
+      Both inputs are files on disk — nothing is fetched — and every rate keeps the page it was
+      read on and the day it was read. A catalog row missing a source, or naming an
+      <code>aaSlug</code> the AA snapshot no longer publishes, is refused by name; it is never
+      dropped in silence. This is how the hosted
+      <a href="./index.html#quickstart"><code>current.json</code></a> is generated.
+    </p>
+    <dl class="fields">
+      <dt>--candidates &lt;value&gt;</dt><dd>Path to the hand-verified candidate catalog.</dd>
+      <dt>--aa &lt;value&gt;</dt><dd>Path to the committed Artificial Analysis snapshot.</dd>
+      <dt>--out &lt;value&gt;</dt><dd>Path the evidence snapshot is written to.</dd>
+      <dt>--agents &lt;value&gt;</dt><dd>Path to the committed Artificial Analysis coding-agents snapshot. Needs --agent-pairs alongside it.</dd>
+      <dt>--agent-pairs &lt;value&gt;</dt><dd>Path to the hand-verified agent-pair catalog. Needs --agents alongside it.</dd>
+    </dl>
+    <p class="note">
+      It writes evidence, not a verdict: the ranking still happens locally, in
+      <code>update</code>, against your own profile. The snapshot carries no capacity claim —
+      a Layer 1 rate is a rate.
+    </p>
+  </div>
+</section>
+
+<section id="exit-codes">
+  <span class="eyebrow">Exit codes</span>
+  <h2>Four, and they mean the same thing every time.</h2>
+  <dl class="fields">
+    <dt>0 — ok</dt><dd>The command did what it says.</dd>
+    <dt>1 — failed</dt><dd>A candidate was rejected, or a harness config couldn't be parsed. Nothing already active was overwritten.</dd>
+    <dt>2 — usage</dt><dd>Bad or missing arguments — an unknown command, or <code>update</code> with no verdict source.</dd>
+    <dt>3 — smoke</dt><dd>A ping to a routed alias didn't come back clean. From <code>status --smoke</code> that is all it means; from <code>update --smoke</code> the activation was rolled back and the previous configuration is active again.</dd>
+  </dl>
+</section>
+
+<section id="files">
+  <span class="eyebrow">Files &amp; root</span>
+  <h2>One root directory, five files.</h2>
+  <p>
+    Every command resolves its root the same way: <code>LIMITSAPPLY_HOME</code>, then
+    <code>$XDG_CONFIG_HOME/limitsapply</code>, then <code>~/.config/limitsapply</code> — or
+    whatever <code>--root</code> says instead.
+  </p>
+  <dl class="fields">
+    <dt>profile.json</dt><dd>Your local overlay. The only file you edit.</dd>
+    <dt>verdict.json</dt><dd>The verdict currently active on this machine.</dd>
+    <dt>litellm.yaml</dt><dd>Generated proxy configuration — an output, never a setting.</dd>
+    <dt>audit.jsonl</dt><dd>One line per transition: activation, no-op, failure, rollback.</dd>
+    <dt>quota.jsonl</dt><dd>One line per observed closed window. Local to this machine, never published.</dd>
+  </dl>
+</section>
+
+<section id="format">
+  <span class="eyebrow">litellm.yaml</span>
+  <h2>It's JSON. That's not a bug.</h2>
+  <p>
+    <code>litellm.yaml</code> is generated as JSON, not hand-written YAML — and that's fine.
+    JSON is a strict subset of YAML, and PyYAML, what LiteLLM's proxy loads its config with,
+    parses it exactly the same as any other YAML document. The extension stays
+    <code>.yaml</code> because that's what LiteLLM's <code>--config</code> flag expects; the
+    contents don't need to look more YAML-like than this to be read correctly.
+  </p>
+</section>
+
+<section id="env">
+  <span class="eyebrow">Environment</span>
+  <h2>Four variables, none of them secret to Gate.</h2>
+  <dl class="fields">
+    <dt>LIMITSAPPLY_HOME</dt><dd>Overrides the gate root outright — checked first, ahead of everything else.</dd>
+    <dt>XDG_CONFIG_HOME</dt><dd>If set and <code>LIMITSAPPLY_HOME</code> isn't, the root becomes <code>$XDG_CONFIG_HOME/limitsapply</code>, and the OpenCode default becomes <code>$XDG_CONFIG_HOME/opencode/opencode.json</code>.</dd>
+    <dt>LITELLM_MASTER_KEY</dt><dd>Read by LiteLLM itself, not by Gate — Gate only writes the setting name into <code>litellm.yaml</code>. The proxy binds to <code>http://127.0.0.1:4000</code> and its master key setting is always <code>LITELLM_MASTER_KEY</code>.</dd>
+    <dt>OPENCODE_CONFIG</dt><dd>Overrides the OpenCode config path Gate writes to, ahead of the <code>$XDG_CONFIG_HOME</code> default.</dd>
+  </dl>
+</section>
+
+</main>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. This section is Gate's how-to: install it, run it, and see what every flag and exit code means.</p>
+      </div>
+
+      <nav aria-label="Docs">
+      <h3>Docs</h3>
+      <ul>
+        <li><a href="./index.html#prerequisites">Prerequisites</a></li>
+        <li><a href="./index.html#quickstart">Quickstart</a></li>
+        <li><a href="./cli.html#commands">CLI reference</a></li>
+        <li><a href="./verdict.html#source">The verdict</a></li>
+        <li><a href="./harnesses.html#status">Harnesses</a></li>
+        <li><a href="./index.html#roadmap">Roadmap</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="The site">
+      <h3>The site</h3>
+      <ul>
+        <li><a href="../index.html#benchmark">Benchmark</a></li>
+        <li><a href="../local.html#machine">Your machine</a></li>
+        <li><a href="../gate.html#install">Gate</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://docs.litellm.ai/docs/proxy/configs" target="_blank" rel="noopener">LiteLLM proxy config</a></li>
+        <li><a href="https://opencode.ai/docs/config" target="_blank" rel="noopener">OpenCode configuration</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/docs.ts"></script>
+</body>
+</html>

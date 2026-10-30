@@ -1,0 +1,11 @@
+{
+  "checkedAt": "2026-10-30",
+  "note": "Providers whose newest AA-scored model outranks the one the site maps (scripts/sources/membership.mjs). Each row is a deliberate follow-up, not an oversight. When a mapping is remapped or a sibling re-verified, drop the row: test/membership.test.ts fails on an allowlisted provider that no longer lags, so a stale excuse cannot sit here.",
+  "allowed": [
+    {
+      "provider": "google",
+      "reason": "Google AI Pro and Ultra grant Gemini 4 Argon; the catalogue's Gemini 4 Carbon scores higher but has no public API and no plan page names it.",
+      "verified": "2026-10-30"
+    }
+  ]
+}

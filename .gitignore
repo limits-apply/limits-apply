@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.claude/
+.superpowers/
+tasks/
+docs/plans/
+docs/superpowers/
+.DS_Store
+.env*
+.playwright-mcp/
+.ruff_cache/

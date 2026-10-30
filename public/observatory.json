@@ -1,0 +1,4912 @@
+{
+  "schemaVersion": 1,
+  "observations": 954,
+  "admissibleIntervals": 193,
+  "groups": [
+    {
+      "key": {
+        "provider": "openai",
+        "subscriptionId": "openai.chatgpt-plus",
+        "modelId": "codex-auto-review",
+        "harness": "codex",
+        "windowType": "5h"
+      },
+      "plan": "ChatGPT Plus",
+      "intervals": 48,
+      "reporters": 1,
+      "status": "preliminary",
+      "tokensPerPoint": {
+        "value": 52255,
+        "low": 27121,
+        "high": 96473.75
+      },
+      "apiUsdPerPoint": null,
+      "cacheShare": {
+        "value": 0.9319160580425174,
+        "low": 0.864557984326326,
+        "high": 0.971147216418391
+      },
+      "firstObservedAt": "2026-10-14T07:35:48.916Z",
+      "lastObservedAt": "2026-10-14T09:41:43.248Z",
+      "series": [
+        {
+          "observedAt": "2026-10-14T07:35:48.916Z",
+          "observationId": "0614a54a036b52b6",
+          "tokensPerPoint": 12614.5,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.7610289745927306,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:39:46.280Z",
+          "observationId": "622ac0baec5f0b70",
+          "tokensPerPoint": 18373,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.6618407445708376,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:40:25.815Z",
+          "observationId": "a12ec66bbdca2faa",
+          "tokensPerPoint": 41254,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8625587821786979,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:40:42.965Z",
+          "observationId": "cbffbd17175c846e",
+          "tokensPerPoint": 41945,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9704136369054714,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:44:46.331Z",
+          "observationId": "4839c41f808bbb4f",
+          "tokensPerPoint": 48503,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9236542069562708,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:46:17.119Z",
+          "observationId": "fe228e953d469226",
+          "tokensPerPoint": 55329,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8652243850422021,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:46:54.517Z",
+          "observationId": "9dd54d120974f976",
+          "tokensPerPoint": 58301,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9440661395173324,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:47:40.063Z",
+          "observationId": "e49ae468086216cb",
+          "tokensPerPoint": 61725,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9580558930741191,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:49:16.367Z",
+          "observationId": "0cbc22d0afbf2a2c",
+          "tokensPerPoint": 67847,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8716081772222796,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:52:15.754Z",
+          "observationId": "e4b191ca80e8d6d8",
+          "tokensPerPoint": 86015,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.06845317677149335,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:56:41.415Z",
+          "observationId": "270191776dc28590",
+          "tokensPerPoint": 46816,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9159261790840738,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:57:39.004Z",
+          "observationId": "7869cf2bced4fbf7",
+          "tokensPerPoint": 98342,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9865977913810986,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:58:46.723Z",
+          "observationId": "4067ec28d572dbf2",
+          "tokensPerPoint": 104356,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9395530683429798,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:16:59.121Z",
+          "observationId": "eb017bb0cd8289b8",
+          "tokensPerPoint": 107829,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9092915634940507,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:26:00.857Z",
+          "observationId": "6ceae14a66565a2d",
+          "tokensPerPoint": 15030.75,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8920379887896479,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:26:33.092Z",
+          "observationId": "77fa9c67d39ffceb",
+          "tokensPerPoint": 123169,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9706338445550423,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:28:23.253Z",
+          "observationId": "b3119cddc90c846f",
+          "tokensPerPoint": 64244.5,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9543540692199333,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:29:15.477Z",
+          "observationId": "6a1a978f4028f8d7",
+          "tokensPerPoint": 131331,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9726873320084367,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:36:37.358Z",
+          "observationId": "3c78a9d69e0aef5e",
+          "tokensPerPoint": 47011,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.927555962079797,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:37:31.623Z",
+          "observationId": "7debc364bacc980e",
+          "tokensPerPoint": 143431,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9763021940863551,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:37:46.899Z",
+          "observationId": "8b9712bdaf1e9311",
+          "tokensPerPoint": 144821,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9881439846431112,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:39:28.211Z",
+          "observationId": "1f71d8ed67be894d",
+          "tokensPerPoint": 148305,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9787397592798625,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:48:32.455Z",
+          "observationId": "1441ae4cea82ae9a",
+          "tokensPerPoint": 25297,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9613788196228802,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:14.412Z",
+          "observationId": "3bd912a53cbf0edb",
+          "tokensPerPoint": 19828,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.7940286463586846,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:50:01.538Z",
+          "observationId": "16a94aeb0eb9814c",
+          "tokensPerPoint": 46974,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9101204921871674,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:52:31.773Z",
+          "observationId": "bc980f9339fd4ef4",
+          "tokensPerPoint": 14901.25,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.7687945642144115,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:53:12.795Z",
+          "observationId": "bc9cb0cd6c620ced",
+          "tokensPerPoint": 69691,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.966093182763915,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:54:24.800Z",
+          "observationId": "f2e15a21cf1a9279",
+          "tokensPerPoint": 74517,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9447508622193593,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:54:50.899Z",
+          "observationId": "3449a78b3cc1c8b5",
+          "tokensPerPoint": 77054,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9800918836140888,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:02:28.317Z",
+          "observationId": "700d7ce393b5b105",
+          "tokensPerPoint": 22430,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.17975925100312082,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:11:39.582Z",
+          "observationId": "59613469cb1d9aa0",
+          "tokensPerPoint": 45643,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9731174550314396,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:00.624Z",
+          "observationId": "bd53c882e7e83246",
+          "tokensPerPoint": 93407,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9729463530570513,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:17.445Z",
+          "observationId": "33df4584c9bbfbdf",
+          "tokensPerPoint": 95851,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9695047521674265,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:31.799Z",
+          "observationId": "a1cdfa532074005a",
+          "tokensPerPoint": 102295,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.928452026003226,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:41.813Z",
+          "observationId": "30203a643eb60e96",
+          "tokensPerPoint": 103863,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9933084929185562,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:13:06.225Z",
+          "observationId": "2bcdfc2ffea8e450",
+          "tokensPerPoint": 110125,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9461248581157775,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:13:17.753Z",
+          "observationId": "924c0a4f51abe82a",
+          "tokensPerPoint": 110882,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9858408037373063,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:18:38.549Z",
+          "observationId": "c9b239892e4699f6",
+          "tokensPerPoint": 12366,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.23807213326863982,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:21:19.176Z",
+          "observationId": "2609d1490e30150a",
+          "tokensPerPoint": 19208,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.6863806747188671,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:25:42.408Z",
+          "observationId": "a7b371de490fcbcc",
+          "tokensPerPoint": 43516,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.935380090081809,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:27:16.591Z",
+          "observationId": "9e1f85dad4907858",
+          "tokensPerPoint": 49181,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8692787865232509,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:28:57.305Z",
+          "observationId": "dd6dc1e66b6fabe0",
+          "tokensPerPoint": 27729,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8816762234483754,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:35:41.595Z",
+          "observationId": "5f11ad20d2714380",
+          "tokensPerPoint": 13536,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.557919621749409,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:36:07.046Z",
+          "observationId": "b90740247804c3df",
+          "tokensPerPoint": 30348,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8688546197442995,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:37:53.051Z",
+          "observationId": "ee453d119f5cbd7c",
+          "tokensPerPoint": 22354,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8188243714771406,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:38:31.567Z",
+          "observationId": "dc77b1e981471cb7",
+          "tokensPerPoint": 48038,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9752279445439027,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:41:07.769Z",
+          "observationId": "7325ab2ac6fb2866",
+          "tokensPerPoint": 19641,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8472073723333843,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:41:43.248Z",
+          "observationId": "2ecb168d31dcf664",
+          "tokensPerPoint": 63538,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9790676445591614,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        }
+      ],
+      "excluded": [
+        {
+          "observationId": "001d30c12230aed6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "012b8b970534790f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "124be54245177334",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "17be5afad062ab69",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1c97a87eefb4ada4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1e546c092e8694fc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "260cef82c4abb0d1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "295045835ac379ff",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "2b81fbee6d7f6fca",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3241ff7afd3288c4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3b3696930ccf8b58",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3fdc72e29e71beb1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4575a40edf9a565c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "49e89bee7933cb18",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5613a9619d4af25c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5ef3d240d1b040b7",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "60d35950e0c543ff",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "637b7b205a40df27",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "63d96f1645f91f84",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6c3f6c9aeab9bc6c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6de80cd97a30cf67",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7d1dcfe71da11c42",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8342b0fc4dbada9d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8c1452ce8feb0c7c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "926116c4718f6ec9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "93298141aceaa911",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "971c040bd4e15304",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a20ed54b9a5d66f0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a6b655e3e21899cc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a91b9816e2a4e480",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "af610fd6bfb8b488",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b1711a4f8923d9c0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b28fda550e4b9941",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b2f93827f28eb9e9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b4634dc3e23d4366",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c7154579156cef69",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cec390a6a5700202",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cfd769a1460af507",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d2104c839b5147ce",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d42e536b59dd647e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d47d70469a014179",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d6559aab6a9c2ec4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "db4ec266e422407b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f1e838f578408b6d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "face97628935100f",
+          "reason": "non-positive quota delta"
+        }
+      ],
+      "change": null
+    },
+    {
+      "key": {
+        "provider": "openai",
+        "subscriptionId": "openai.chatgpt-plus",
+        "modelId": "codex-auto-review",
+        "harness": "codex",
+        "windowType": "weekly"
+      },
+      "plan": "ChatGPT Plus",
+      "intervals": 12,
+      "reporters": 1,
+      "status": "preliminary",
+      "tokensPerPoint": {
+        "value": 73275.5,
+        "low": 47708,
+        "high": 108592.25
+      },
+      "apiUsdPerPoint": null,
+      "cacheShare": {
+        "value": 0.9643106530068073,
+        "low": 0.9052124527956402,
+        "high": 0.9740804188093491
+      },
+      "firstObservedAt": "2026-10-14T07:40:42.965Z",
+      "lastObservedAt": "2026-10-14T09:41:51.843Z",
+      "series": [
+        {
+          "observedAt": "2026-10-14T07:40:42.965Z",
+          "observationId": "e0e78223c285cac3",
+          "tokensPerPoint": 41945,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9704136369054714,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:50:28.458Z",
+          "observationId": "41e041a2835568b1",
+          "tokensPerPoint": 75204,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9769693101430775,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:16:59.121Z",
+          "observationId": "34decfe37e110962",
+          "tokensPerPoint": 107829,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9092915634940507,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:26:00.857Z",
+          "observationId": "9ee26a2b1e4d277f",
+          "tokensPerPoint": 120246,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8920379887896479,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:36:37.358Z",
+          "observationId": "5ee68e3c7bd10504",
+          "tokensPerPoint": 141033,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.927555962079797,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:26.200Z",
+          "observationId": "dac976b281252aaf",
+          "tokensPerPoint": 43289,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8929751207004089,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:53:40.022Z",
+          "observationId": "368971f85b59103e",
+          "tokensPerPoint": 71347,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9723744516237544,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:11:39.582Z",
+          "observationId": "d7f6be7bed440443",
+          "tokensPerPoint": 91286,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9731174550314396,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:13:17.753Z",
+          "observationId": "afa08fe0e82ba857",
+          "tokensPerPoint": 110882,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9858408037373063,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:27:16.591Z",
+          "observationId": "edf51cf5b252883b",
+          "tokensPerPoint": 49181,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8692787865232509,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:36:19.726Z",
+          "observationId": "f67767456a3fb013",
+          "tokensPerPoint": 37136,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.958207669108143,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:41:51.843Z",
+          "observationId": "f411a265fdf3211a",
+          "tokensPerPoint": 64432,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.981375713930966,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        }
+      ],
+      "excluded": [
+        {
+          "observationId": "019ebd0290003ab8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "04a5b72e5c3ab0f4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "099ab132e14f06a6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0f8fc46b8f14451b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "145b9eb8950b02a4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "15cbfc15202cf6a4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1752e179a2e73299",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1a4b0bc7b2913cb7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1d13c4438721fbbc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2257825b5ab00241",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "281f3c3dd5f46022",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2a14a72ba1122304",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "365ed7eb5d1c816c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "39714080a630b056",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3a346f9b078464cd",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3afbb98ee54d32a6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "400438fa0d80c050",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4d5f3fd16ffbcf29",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4d7a650cd678e8ad",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4f9362e54508aa5c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5240b0c3849a704e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "53238697b12f8f82",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "53256fbd9640c800",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5574641246ca6682",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "55f49deb456118f6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "58c3ef7438247ede",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "58fad30733a9ffed",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5eaac48d536b4197",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5f2dc88b4cc0b711",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "60bd8c2a508dedac",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "62a2ad0ded690b85",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "637e12d70f1b0037",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6529b0a3ea7aeb2a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "712a9866621867ca",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "73a3e6829c3df6f8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "776ecc4705d292f6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "779dbe206a0a6603",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "78b8d0c9d454080a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7cd08d743bbbab4d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7d2c8063f08a3d77",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7da7ad251ed91f0a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7f66227edec37a48",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "81a3d96a99a1c7f9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "81eded18b9a71863",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "828b1c4640744163",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "85ad50a720a3970a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "88dcfa1d53275227",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8bd58896074901c7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "95235bc6f5073dda",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9741981d1ae191da",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9836c55bb0447d9a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9d3b1b699e6cae07",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a0a79f1b9fd83ce9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a0f0fe0af19f28f8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a342adbb67e25ad6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a3e4242e12581c4f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a63213e3856ab175",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a94ebe2d8a25b26f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a9b461e23fd18ca4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b4aa5b3974ce8fc7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b9c425a9a752e2c2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bb3bd6c961a8537a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "be0ae83befb415a2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c09ea559005e4e11",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c0a35bdd39aaface",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c213a2075b6ccf1a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c3ab99ebba598586",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c3c03a2f1af8ea33",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c688cd22a3b32f69",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cc8718c08f10ad1e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d4e8dcaaf81917c1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d9e99889d6681919",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dafed3db2e0166e0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dfbb7b27cca0dd72",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e363d3991c136522",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e5e9ad31a8efb0c0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e67222a8025418f7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e6a773b6c34a9f6a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e9e65110c2f49d12",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f1e855cf099a7c62",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f9beb14b025fb034",
+          "reason": "non-positive quota delta"
+        }
+      ],
+      "change": null
+    },
+    {
+      "key": {
+        "provider": "openai",
+        "subscriptionId": "openai.chatgpt-plus",
+        "modelId": "gpt-6.1-sol",
+        "harness": "codex",
+        "windowType": "5h"
+      },
+      "plan": "ChatGPT Plus",
+      "intervals": 112,
+      "reporters": 1,
+      "status": "preliminary",
+      "tokensPerPoint": {
+        "value": 94810.5,
+        "low": 51070.25,
+        "high": 161086.75
+      },
+      "apiUsdPerPoint": null,
+      "cacheShare": {
+        "value": 0.9802539627749649,
+        "low": 0.9616587083753726,
+        "high": 0.9892193308991558
+      },
+      "firstObservedAt": "2026-10-14T07:34:12.247Z",
+      "lastObservedAt": "2026-10-14T09:41:51.888Z",
+      "series": [
+        {
+          "observedAt": "2026-10-14T07:34:12.247Z",
+          "observationId": "dbe43288437047d2",
+          "tokensPerPoint": 32084,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9814237626231144,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:34:14.304Z",
+          "observationId": "7d42948f99a4bf67",
+          "tokensPerPoint": 42510,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.972571159727123,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:34:39.532Z",
+          "observationId": "1fa2fbe7a296f96c",
+          "tokensPerPoint": 44725,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9644717719396311,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:34:56.494Z",
+          "observationId": "e0ba4378c79291c1",
+          "tokensPerPoint": 58657,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8554136761170875,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:35:19.065Z",
+          "observationId": "410aa2b3ee4c08b8",
+          "tokensPerPoint": 70104,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9001483510213397,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:35:20.914Z",
+          "observationId": "b105652cd34f6b80",
+          "tokensPerPoint": 48687,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9858894571446176,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:35:50.075Z",
+          "observationId": "9d81b20b788e949b",
+          "tokensPerPoint": 76841,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9678166603766218,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:37:14.708Z",
+          "observationId": "c24e864bbf2b925b",
+          "tokensPerPoint": 85160,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.976984499765148,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:39:06.666Z",
+          "observationId": "3152fa5c662dcda7",
+          "tokensPerPoint": 91736,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9739251765937037,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:41:01.813Z",
+          "observationId": "64b822ebfb3a8b81",
+          "tokensPerPoint": 109543,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9885433117588527,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:44:47.491Z",
+          "observationId": "ed187db9f32897a9",
+          "tokensPerPoint": 116072,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9671238541594872,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:45:49.240Z",
+          "observationId": "e509bbe2333f9562",
+          "tokensPerPoint": 122962,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9618581350335876,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:46:35.230Z",
+          "observationId": "e7045c2f8f826896",
+          "tokensPerPoint": 125806,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9940384401379903,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:47:40.162Z",
+          "observationId": "c328da5157aff683",
+          "tokensPerPoint": 131524,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9926705392171771,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:49:02.463Z",
+          "observationId": "772c832bbc4dc2e0",
+          "tokensPerPoint": 137418,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.981763669970455,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:50:34.067Z",
+          "observationId": "7740f2cd2ab9b42b",
+          "tokensPerPoint": 151104,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9970351545955104,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:52:16.086Z",
+          "observationId": "267e2b4af500510c",
+          "tokensPerPoint": 161362,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9836268762162095,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:53:16.730Z",
+          "observationId": "21f341fd07beddf9",
+          "tokensPerPoint": 164733,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9875859724523927,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:56:42.689Z",
+          "observationId": "c8167e8ec6756a41",
+          "tokensPerPoint": 169601,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9901828409030607,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:57:48.260Z",
+          "observationId": "1558b5e4b3ae9cc9",
+          "tokensPerPoint": 174209,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9977900108490376,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:58:47.882Z",
+          "observationId": "7a603c18fe66ad5b",
+          "tokensPerPoint": 178246,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9895537627772854,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:16:37.985Z",
+          "observationId": "dded109c8cb5aa9c",
+          "tokensPerPoint": 179685,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9951637588001224,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:16:59.074Z",
+          "observationId": "fcbc6819268558cb",
+          "tokensPerPoint": 36555,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8964026808918069,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:17:23.752Z",
+          "observationId": "7f89f0429314b018",
+          "tokensPerPoint": 193943,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9596221570255178,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:17:24.408Z",
+          "observationId": "f1b5864baafa7794",
+          "tokensPerPoint": 49149,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9531831776841848,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:18:08.420Z",
+          "observationId": "20b9effc98fe7876",
+          "tokensPerPoint": 53138,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9779818585569648,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:19:35.187Z",
+          "observationId": "b5c04aa1a95fecd2",
+          "tokensPerPoint": 102794.5,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9843328193629036,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:21:15.702Z",
+          "observationId": "09a4372e6544e85e",
+          "tokensPerPoint": 212901,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9781823476639377,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:22:00.965Z",
+          "observationId": "5e6056edcaecc743",
+          "tokensPerPoint": 218269,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9758234105621962,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:23:45.420Z",
+          "observationId": "e3095318d3381a27",
+          "tokensPerPoint": 224096,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9847208339283164,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:26:18.460Z",
+          "observationId": "a0f95fd0793b7250",
+          "tokensPerPoint": 228671,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9840513226425738,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:27:16.154Z",
+          "observationId": "a1761a5987d73f61",
+          "tokensPerPoint": 233346,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9917633042777678,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:28:24.415Z",
+          "observationId": "fc32859d9393605d",
+          "tokensPerPoint": 238818,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9808305906589956,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:29:16.639Z",
+          "observationId": "d4c3d7fb5aaf1a53",
+          "tokensPerPoint": 242425,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9884129112096525,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:31:30.123Z",
+          "observationId": "327e02f52c148e70",
+          "tokensPerPoint": 249054,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9847181735687843,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:32:51.214Z",
+          "observationId": "28f7b4f060b49ec3",
+          "tokensPerPoint": 250928,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9921571127972965,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:36:56.382Z",
+          "observationId": "1e5d3824d30c772f",
+          "tokensPerPoint": 258227,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9953413082288064,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:37:53.412Z",
+          "observationId": "795c52303b505d3e",
+          "tokensPerPoint": 260739,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9940975458216837,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:39:29.373Z",
+          "observationId": "afa4df356c762b61",
+          "tokensPerPoint": 263432,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9907376476661909,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:41:21.201Z",
+          "observationId": "a8bc1f3340d8c068",
+          "tokensPerPoint": 264096,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9979401429783109,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:41:40.465Z",
+          "observationId": "a96cb86e02de60d7",
+          "tokensPerPoint": 24888,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9823207971713276,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:46:07.551Z",
+          "observationId": "0f1d48dc6c1deee5",
+          "tokensPerPoint": 32525,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9641813989239046,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:48:13.891Z",
+          "observationId": "2f1376f40044c9ba",
+          "tokensPerPoint": 34487,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9872705657204164,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:48:19.354Z",
+          "observationId": "920c92342f090546",
+          "tokensPerPoint": 38436,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8825059839733583,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:48:26.926Z",
+          "observationId": "db75d1558ff629e3",
+          "tokensPerPoint": 16467,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9832999331997327,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:48:32.683Z",
+          "observationId": "f06ed8b02ff206c3",
+          "tokensPerPoint": 51816,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.7880191446657403,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:48:37.747Z",
+          "observationId": "4e2571892ac81d24",
+          "tokensPerPoint": 33397,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9773332934095876,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:48:37.882Z",
+          "observationId": "b58922c219bdaadd",
+          "tokensPerPoint": 43524,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9499126918481757,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:48:40.351Z",
+          "observationId": "f756ba183ac98a73",
+          "tokensPerPoint": 61938,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8328328328328328,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:00.502Z",
+          "observationId": "0b4d36f7c559b333",
+          "tokensPerPoint": 67182,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.920246494596767,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:00.955Z",
+          "observationId": "dcadb83e9ff1c68f",
+          "tokensPerPoint": 49486,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.920826092228105,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:18.322Z",
+          "observationId": "3e2f06a0e8acfbe5",
+          "tokensPerPoint": 51505,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9891078536064459,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:26.513Z",
+          "observationId": "2ff551f6c7a36b8e",
+          "tokensPerPoint": 78695,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9596543617764788,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:56.615Z",
+          "observationId": "a35ec3de209c4159",
+          "tokensPerPoint": 61964,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9522948808985863,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:50:01.991Z",
+          "observationId": "69b3e33b566924d1",
+          "tokensPerPoint": 90238,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9489572020656486,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:50:14.007Z",
+          "observationId": "52713e28ebc184ef",
+          "tokensPerPoint": 63543,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9729474529059062,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:50:16.762Z",
+          "observationId": "e5e1190a4cbe70df",
+          "tokensPerPoint": 94634,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9562736437221294,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:50:50.198Z",
+          "observationId": "3fdae4c0a5d031aa",
+          "tokensPerPoint": 99298,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9796773348909343,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:51:05.921Z",
+          "observationId": "18e98ef7c6838ed7",
+          "tokensPerPoint": 6703.4,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9852910463346958,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:51:27.837Z",
+          "observationId": "aeffe91147d4f5c3",
+          "tokensPerPoint": 34270,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.97858185001459,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:52:09.553Z",
+          "observationId": "4cd6e5cb09c2c6ae",
+          "tokensPerPoint": 104773,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9675775247439703,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:52:36.371Z",
+          "observationId": "173c420badbf853a",
+          "tokensPerPoint": 109264,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.96178064138234,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:53:13.227Z",
+          "observationId": "afb5352d311dfc81",
+          "tokensPerPoint": 118253,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9882539977844114,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:53:58.904Z",
+          "observationId": "0d32961f21386b07",
+          "tokensPerPoint": 123088,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9733523982841544,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:54:50.977Z",
+          "observationId": "f63621a208d51da6",
+          "tokensPerPoint": 125347,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9956361141471276,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:56:03.812Z",
+          "observationId": "2843b8475a479d00",
+          "tokensPerPoint": 129491,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9973820574402854,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:58:01.373Z",
+          "observationId": "05b887b3fa164241",
+          "tokensPerPoint": 135949,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9791907259339899,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:00:16.887Z",
+          "observationId": "bad076c2698eb7f4",
+          "tokensPerPoint": 138888,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9980991878348021,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:02:28.323Z",
+          "observationId": "4a59fd16965ec145",
+          "tokensPerPoint": 144021,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9811902430895494,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:09:48.797Z",
+          "observationId": "0e82150f6432ae41",
+          "tokensPerPoint": 28668,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.7813590065578345,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:10:11.909Z",
+          "observationId": "005368e20a5c0d99",
+          "tokensPerPoint": 46551,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8798951687396619,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:12:01.002Z",
+          "observationId": "543b89ecf95117e1",
+          "tokensPerPoint": 146791,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9888344653282558,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:06.537Z",
+          "observationId": "fe3a1fd362373908",
+          "tokensPerPoint": 59589,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9709174512074377,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:12.368Z",
+          "observationId": "1b63335a6308fb89",
+          "tokensPerPoint": 62013,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9536065018625127,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:17.460Z",
+          "observationId": "6fe2fa037828fefd",
+          "tokensPerPoint": 148718,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9889320727820439,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:32.961Z",
+          "observationId": "56b790df3f958ca3",
+          "tokensPerPoint": 160995,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9962048510823317,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:34.605Z",
+          "observationId": "4b147f915fe0c466",
+          "tokensPerPoint": 66569,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9864050834472502,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:12:52.294Z",
+          "observationId": "d3ba015a5ee5774e",
+          "tokensPerPoint": 161664,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.997624703087886,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:13:04.036Z",
+          "observationId": "141ba68974f7d958",
+          "tokensPerPoint": 26584,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9437255492025278,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:13:17.409Z",
+          "observationId": "4f0e5a10ab6d867b",
+          "tokensPerPoint": 35638,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9769347325888097,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:13:17.992Z",
+          "observationId": "fa7f2656e34ff25b",
+          "tokensPerPoint": 168593,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9839554429899224,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:13:33.682Z",
+          "observationId": "6c251d050f1d1917",
+          "tokensPerPoint": 169824,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9888826078763897,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:13:39.132Z",
+          "observationId": "3bb268ae08a54425",
+          "tokensPerPoint": 37898,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.986226186078421,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:13:41.506Z",
+          "observationId": "39b78c87817a2106",
+          "tokensPerPoint": 170004,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9968706618667796,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:15:42.476Z",
+          "observationId": "918354609df3f2df",
+          "tokensPerPoint": 176825,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9707224657146897,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:15:42.560Z",
+          "observationId": "0fdc661967b88aa2",
+          "tokensPerPoint": 35026,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8295551875749443,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:16:03.945Z",
+          "observationId": "f8d93dc97439c275",
+          "tokensPerPoint": 40655,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9382363792891403,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:16:19.841Z",
+          "observationId": "c5a82a7dabbd6923",
+          "tokensPerPoint": 185441,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9766987882938509,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:16:28.806Z",
+          "observationId": "1e4fdc5d5aacbb52",
+          "tokensPerPoint": 186718,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9905847320558275,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:16:34.752Z",
+          "observationId": "f43efba73c92ee54",
+          "tokensPerPoint": 49766,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9439376280995057,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:16:46.273Z",
+          "observationId": "4aa35d42da82e082",
+          "tokensPerPoint": 32494,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8784390964485751,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:17:06.533Z",
+          "observationId": "f725455980c58334",
+          "tokensPerPoint": 41453,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9387016621233686,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:17:25.468Z",
+          "observationId": "58f77c771b28384b",
+          "tokensPerPoint": 52394,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9747681032179257,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:17:32.303Z",
+          "observationId": "d598aee325d551b7",
+          "tokensPerPoint": 46756,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9773291128411327,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:17:35.228Z",
+          "observationId": "b099f92ef6a8c760",
+          "tokensPerPoint": 188338,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9908993405473139,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:18:25.758Z",
+          "observationId": "e58f2094f60239b3",
+          "tokensPerPoint": 57905,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.957153959070892,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:19:42.353Z",
+          "observationId": "7578955d72d3beb2",
+          "tokensPerPoint": 64846,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9612929093544705,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:20:53.977Z",
+          "observationId": "f8bd1efe303f4852",
+          "tokensPerPoint": 71549,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9857300591203232,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:22:01.761Z",
+          "observationId": "37dab04f00c1d484",
+          "tokensPerPoint": 77045,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9918359400350445,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:26:36.266Z",
+          "observationId": "98659aece864b1a9",
+          "tokensPerPoint": 87155,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9781194423727841,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:27:59.671Z",
+          "observationId": "d706bf119d2571e2",
+          "tokensPerPoint": 91252,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9917152500767107,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:29:06.444Z",
+          "observationId": "a3cb89bd6384fd1c",
+          "tokensPerPoint": 95096,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9933540842937663,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:33:05.315Z",
+          "observationId": "9a6af1fdf3f861ce",
+          "tokensPerPoint": 32264,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8847012149764444,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:33:34.638Z",
+          "observationId": "55eab0435823ac6b",
+          "tokensPerPoint": 53575,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8075408306112926,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:34:44.886Z",
+          "observationId": "242c71b1cd862fb4",
+          "tokensPerPoint": 65345,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9657051036804652,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:35:56.412Z",
+          "observationId": "3500f6a0d39f6c01",
+          "tokensPerPoint": 71974,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9870230916719926,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:36:43.243Z",
+          "observationId": "19bc359510f5f5d2",
+          "tokensPerPoint": 94987,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9729331382189141,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:37:38.816Z",
+          "observationId": "3cf4142a9ad944cb",
+          "tokensPerPoint": 101101,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.984995202816985,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:38:32.724Z",
+          "observationId": "0b430746cf1c27ff",
+          "tokensPerPoint": 105421,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9919845192134394,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:39:29.562Z",
+          "observationId": "2b3e46fe0a772e5b",
+          "tokensPerPoint": 110217,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9964343068673617,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:41:08.926Z",
+          "observationId": "bce05dd37493d002",
+          "tokensPerPoint": 117682,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9963120953076936,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:41:51.888Z",
+          "observationId": "61d3012b84dc8710",
+          "tokensPerPoint": 120256,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9973390101117616,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        }
+      ],
+      "excluded": [
+        {
+          "observationId": "0185bbbdc5f10881",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "026e94e81de8b9a0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "038eb532bb18541b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "03da47d900297e8a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "04df48f4fa8f1280",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "07c1b8a1acd16178",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "087b6af5785ba98e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "09fa48ac77a514db",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0bfe24fe866f9b53",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0c995fcc9d69c8d6",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "0ce242ec1834055c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0ceb5c50e794c3bc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0e746b8a228d4518",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0fba82d4a333618f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "10678e0610749a4a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "11a6584d99b4ef66",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "135cb545d05d2abd",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "142e79d1b6b14a46",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "154edb43a705ab10",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1600688d78ddd5c7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "185617a789d7afb6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "18ba982174e4f524",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1b576a534160f937",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1c597a36500307c0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1c73d2acfee365d9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1d4c815fb12166d4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1ed79ec8b49acb01",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "213d84b02ce15821",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "231c69b4c1849d27",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "236c4eff11612a2d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "24bb3dd3c577df49",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "25c351f51550a0eb",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "2affa5ffdbbe0511",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2baddd9d8907eb11",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2d27216e2f4bea80",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2db9c2c7985f3a9c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2f3d83f6ada17e22",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2fd05eb77ff3a1b4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3089a507bb7b36ef",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "33c8bb5ab92a0624",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3403b809768f506e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3507a72f13091696",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3581b92c7769ba13",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "35d25a3a495bce81",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "367791a1f659654c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "399aae62b3c2c144",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3aff6ebc2935d2b8",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "3b88ce7e6ed1c828",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3bda8fe049d8c445",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3d3f9fec67fa9b58",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3d6fb35f5dce89c4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3d71668d499fc49a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3ef69c5f93f5eaa8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3f3221502f9e5684",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3f93c6ac5e9b641c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "41b714f602be0c22",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "41e953ef0ed9c609",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "42ca658ab99fface",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "42df5172f6a5761e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "431ba40ad2be079c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "45294dc5f0921284",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4665a602868898af",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "46917446d2ac22f5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4804e50fb7b56630",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "48715e46fcd8651b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "48ae3470e2a89183",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4a8ab123f14d4f49",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4abe6447a2e5bc34",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4b3ac8aeaf2093f3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4b80a64265d86d2a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4c564c97421249cc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4cd68a4b382e010b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4da6a192c9043a9e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4e7d9a545755ff7c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4ee19003cf74731d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4ee8bd840fa8a7de",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "4f3c9ac2bf898abf",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4f43e19038a2fc41",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "50e4ea3bbe7751a4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "516ef8fafb8d2503",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5350a5374451c3b0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "54ce97e9c6952768",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5676138ac90226bf",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "57dd44f23929124e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "57f8ffdc22c38e3d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "584cce74e8048952",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5944edea07234394",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "595587df5550b4a0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "59e83b1952eb7a57",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5c28d6f59c9dc294",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5c897f908f16168f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5d29205a5023fe8f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5d6c2d352f4c410f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5e602d544ee7dfb6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5eca7080a7189da2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5f6ce965146303d8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "60d16dffd23a9efb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "619c432b88776987",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "63fec31a748ad5e4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6466379814a124dd",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "66c3159cfe81052f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "66ceab49506a8b40",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "66f22d3d6c51e0ce",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "69758eddc25f2513",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "698cf8e46da91916",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6a96f8ab7bef58c8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6ab22da9df94f2af",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6b6650441bfe82c2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6bdbc29ef8b177ac",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6cb4961c3b233e0a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6cb4e4e8156405b0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6d472e8a65d7b1f9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6dd73ab837de05e7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6e223791632bbb44",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6f2d5f8560c397c5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "701f055adc9968f9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "71ea8e489c597fd8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7247aa986010613f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "72948fbf3131eeff",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "773f81711aaefa95",
+          "reason": "no tokens observed in the interval"
+        },
+        {
+          "observationId": "7a8afb97a16af504",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7a9a66c496664390",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7bb021f244102ae0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7c53ff44dfa5633b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7c54d28471829be5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7d18afb949891c00",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7dedfa3d4aa0b3b7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7df248bf13d65016",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7e991abe03b26d12",
+          "reason": "no tokens observed in the interval"
+        },
+        {
+          "observationId": "7ebf1535b537b177",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7f7776bb3c2280d8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "80a890c3cc2c1979",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "86efe6528cd3cdb6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8a5be8b0c78eaeb3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8ae02b9557573160",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8bc489321cc1b0ea",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8c1d49f75b8011d2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8c4b9105ca8fa46e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8c8c747584f7d9c0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8d11d7ca7d6d5c74",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "8dec3e425acc727e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8ea45cb063cba2dc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8eaa27836dfb2c81",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8f44c405bd5df529",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8f4a57ef9c01854f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "90a43747b8c222d5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "92a814c62a2d8a2c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "93dd0010bdbddc41",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "93fa967a0c4178dc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "94b758f12b4cf8b5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "94bd8409b229bffc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "94d7bdfbaf848212",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "954ae18828763fa4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "955283eb62210380",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "978623786fe82b79",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "98bd94c556e28846",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "997613d42b83d1f2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9982d3884437be45",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9a892553191ef93f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9ae764438a833715",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9b85d472b39cc8e8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9cd06fe2f888533b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9d596c713d6d5ce4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9f2cbd9e52580edb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a08a31d74df41f9e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a23c42964adf5357",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a2ca78a131318c7e",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "a2f84ca6a60d72d4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a3482428b2cfb3da",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "a41e3e775e84a242",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a652f1af92e7282f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a9bf5bfaa7b3a7bc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a9c122b6dd47f4b5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a9df6b4d113c8e67",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ab5ad8e316051ebb",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "ab7fa506eed9b56f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ac40e5d25fe34ef5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "acd97ea82f523a3a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ad88d8e7ccda3a54",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b028462e020c9f14",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b04a66eafe3eaeda",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b3654e30c3464497",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b3aff9d347c81b60",
+          "reason": "no tokens observed in the interval"
+        },
+        {
+          "observationId": "b3b6a9fc119add5e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b46bb8bfea68fe8d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b4886e05f5a6dfc9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b49fbcc2321e976e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b64b9cbe6f57b6dc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b6bad99f49fbe619",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b88c2acbac3a4c5b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b89a3606b7b2cc7e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b8f01bedc7a4bc01",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "b9934ffc8d5fd501",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bdbea45ef52ee11e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bdee3ba225bf1dc6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "be53272d6bda9002",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bf308548052b784f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c130481f9a4c9098",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c1869d47b73c8aaf",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c1af7a4ab5f2eb02",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c1fd32a39930b354",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c2b8eeb3357758de",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c2e5a26040554d5c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c4a3bb05f08c2425",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "c6df9990b27fcade",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c95886c92f97d844",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c9ac2a193010269f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ca8e8b5ab7a7acc5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cb2b2594a33f55b2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cc5e9d2a380a2cf5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cd58f06395290d2c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ce141d574c44fed0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ce1f1f6e9cb6fdf3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cea046a9d59b19aa",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cf3571d44c0e9280",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d25894e7a9e2100d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d32445ce9dd7a1a4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d3b245807b639674",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d469f29652ef0996",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d5441b32a2af335b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d5a948daf5411bd3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d726610bc25bcff6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d7789365fd94c0a1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d8e1981371577073",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d964b44c032fe640",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "db0145828bdc714f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "db45bb149c5ed6a4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dc1f63ae79780f21",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ddfb3118d9f673a6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "de486ac94ae11d4a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "de4e0e04f288b950",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "df4bbaac398df8de",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dfaff3b272cb8201",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dfc6eccfa88ce129",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dfc93aed0d207460",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e29eca0e921ee5a6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e2f20c99ca57bb79",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e399a5ca9e378e35",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e3d8ffc9ae879121",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e3e5c0b84eff033b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e4c3a3c55b1c300b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e7f558391cf9aa90",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e8eb1165eb24fd01",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e95f0a73c71fd910",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e97850d26e354c6d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "eb3624d68a8d892a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ece55a14871f79e2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "eefa834cf42b38c1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f126f3cb0ab1d4d6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f137a5c961b57580",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f1c9feb6ed8f4bd6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f25700bcd9e245d3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f28472ba9609140c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f42bfa100567e9ef",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f489562e3d436a0a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f4bd60281141f116",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f5bb83109ad4c842",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f81b20d00f3c0dce",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f88aec197d65b743",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fa8da86924e57547",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fa954cf64eae65b3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "faa648cc197cf46b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fab2a0f6fbfadc6a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fb59985e21705ed6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fc91cb186bb8ef0c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fce59abe92345f13",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fdc717bc6196f573",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "febeab5385073599",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ff59c24c6cbe43c5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ff98291851a6f089",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ffc780efb1f463ba",
+          "reason": "the counter reset inside the interval"
+        },
+        {
+          "observationId": "fff04256e4f6550a",
+          "reason": "non-positive quota delta"
+        }
+      ],
+      "change": null
+    },
+    {
+      "key": {
+        "provider": "openai",
+        "subscriptionId": "openai.chatgpt-plus",
+        "modelId": "gpt-6.1-sol",
+        "harness": "codex",
+        "windowType": "weekly"
+      },
+      "plan": "ChatGPT Plus",
+      "intervals": 21,
+      "reporters": 1,
+      "status": "preliminary",
+      "tokensPerPoint": {
+        "value": 92610,
+        "low": 41453,
+        "high": 151104
+      },
+      "apiUsdPerPoint": null,
+      "cacheShare": {
+        "value": 0.9847181735687843,
+        "low": 0.9387016621233686,
+        "high": 0.9944790027230258
+      },
+      "firstObservedAt": "2026-10-14T07:34:28.065Z",
+      "lastObservedAt": "2026-10-14T09:41:51.888Z",
+      "series": [
+        {
+          "observedAt": "2026-10-14T07:34:28.065Z",
+          "observationId": "eb6afd9af734f5d6",
+          "tokensPerPoint": 41051,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.8512338310881586,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T07:34:42.993Z",
+          "observationId": "f15148ef1487448d",
+          "tokensPerPoint": 50516,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.87164462744477,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:40:43.086Z",
+          "observationId": "8f3abf8cee572aa7",
+          "tokensPerPoint": 108667,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9941564596427618,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T07:50:34.067Z",
+          "observationId": "fe32dc177a4454ac",
+          "tokensPerPoint": 151104,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9970351545955104,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:16:59.572Z",
+          "observationId": "2b368f11f069f3d2",
+          "tokensPerPoint": 186415,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9976879542955235,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:22:54.557Z",
+          "observationId": "042d8fd2f792099e",
+          "tokensPerPoint": 222575,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9776479838256767,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:31:30.123Z",
+          "observationId": "57d6e1baebaa99ca",
+          "tokensPerPoint": 249054,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9847181735687843,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:41:21.201Z",
+          "observationId": "5c3ea5136e37bf08",
+          "tokensPerPoint": 264096,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9979401429783109,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:41:40.465Z",
+          "observationId": "4bcc0ebd4f364fa7",
+          "tokensPerPoint": 24888,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9823207971713276,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:26.298Z",
+          "observationId": "b2d547cd9ebf090f",
+          "tokensPerPoint": 53436,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9581555505651621,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:49:33.595Z",
+          "observationId": "057d3afe0530f585",
+          "tokensPerPoint": 78996,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9916451465897007,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T08:51:05.921Z",
+          "observationId": "2ab2eb2cc04845c3",
+          "tokensPerPoint": 33517,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9852910463346958,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T08:53:50.987Z",
+          "observationId": "91f43029f379b0ce",
+          "tokensPerPoint": 120087,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9944790027230258,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:09:48.797Z",
+          "observationId": "a20b2b6e2a31e97c",
+          "tokensPerPoint": 28668,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.7813590065578345,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:11:40.744Z",
+          "observationId": "321b3be3a0c843a1",
+          "tokensPerPoint": 144884,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9947820325225698,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:13:09.865Z",
+          "observationId": "92492a9fc876c4cd",
+          "tokensPerPoint": 35166,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.6369789000739351,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:13:17.992Z",
+          "observationId": "aa447fca7d0736ae",
+          "tokensPerPoint": 168593,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9839554429899224,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:17:06.533Z",
+          "observationId": "e7fb6ca0aa1515a8",
+          "tokensPerPoint": 41453,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9387016621233686,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:27:17.751Z",
+          "observationId": "b2780f60c44f1efe",
+          "tokensPerPoint": 88265,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9890216960290036,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        },
+        {
+          "observedAt": "2026-10-14T09:36:33.584Z",
+          "observationId": "4f18cbe97109d059",
+          "tokensPerPoint": 92610,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9384731670445956,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": true
+        },
+        {
+          "observedAt": "2026-10-14T09:41:51.888Z",
+          "observationId": "de4518370aba6781",
+          "tokensPerPoint": 120256,
+          "apiUsdPerPoint": null,
+          "cacheShare": 0.9973390101117616,
+          "collectionMethod": "local_log",
+          "isolationConfirmed": false
+        }
+      ],
+      "excluded": [
+        {
+          "observationId": "001966c84b465130",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0032a8d08177a175",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "004b2f91e81bd42d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0073b541b3d1ca9a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "014c888cc0049f15",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "022fc28f5b8515fb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "043a8ce7199b9b5d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "06a66a6d838b983c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "06c2af84d1c9e946",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "071483c9c54457eb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "07bd152fd07d3061",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "07d2871af2f6df55",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "083eb4f5352e120e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "084df54fd83c4f8f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "085907d25590a813",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "09d321e54d3dbc7f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0ae87b0f357bc1ab",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0bdd2fbf36d8f680",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0c79f2bcdbb57f6e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0cc54cbf8eb1137a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0d3a7436e97e5f99",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0dfbb3b435a611e4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "0f857381223dfd93",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1041eeed7d8c4c8f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "123d67d5f7a6a287",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "128fcb3bb7277758",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1323a8c17876c2ae",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "13eaa56008077bb1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "14524f7be86083ef",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "14d98104c861af51",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "14f76414f1cad88c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1518cff213a77bbc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "15770f6130831440",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "163eea8a623df587",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1842a5edef4773d2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "18f2384b0dc0d209",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1942c14fa2477a89",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1ae72b36cb7a69bc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1af74b75b67a0613",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1bec4c9d5408457c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1c661ff672f1ac2f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1d60120cf522a0cb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "1f8ae4e5af465a0a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "201ab1a0dfa7979d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2070d79c425f0906",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "211f952acae9b53e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "22c7533267d729ba",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "26710ba3436f4103",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "26cf5a1a626aea2d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "281f6f45cd5b99ea",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2867c4b7eccdf339",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2a68af7a74857663",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2bbcaeddcfc5aca2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2c50cc64a608da98",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2c794c7ab9e080b2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2d762788c53e5c70",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "2ded87dd7785daef",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3029fb036aa4b433",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3071c70ede7b3edb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3113820f796ae026",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "321fb3026a807e4c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3291cc1c7b0dba84",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "329e9b868aeb013e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "333ad4c2487f9cf5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "34341ac657aac8a5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "344f44fe7dcc67eb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3523e717e0715eb1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3570961cc0ca1587",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "358fce75cdf4f0ce",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "367080e4c23ffad7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "372702cf63b3a71c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "379a80d44b144cda",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "38e87228dd716dce",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3902ee746b5b071d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "39dbb710f1bb8826",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3a33a3e198f65f4e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3c42f4f2fd7622cf",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3d0a1f88dd85fbb4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3e50f8fd0d7ac34b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3e6e5e8fcdd32905",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3e6f7ab32d5e9727",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3eb432b81edd85fb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3ed84a2f1f655d7f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "3ef3f3d703c625be",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "400f9e799eae75cd",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "40435b347b0b74f9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "40c42c75a0bfcd43",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "416801364b6e68d8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "419d5ccb467851c6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "42124675bbb201f9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4265711f9f7d4212",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "43f8431b40d9c46e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4504dbda2feaae1e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "459e4e28ca9a5aae",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "470555bcc8e3e367",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "474da9c0f43b1559",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "480a26268f296977",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "480b8ddf3ed0ae2d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "481f2c6cd047906a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "49009cecfffe1ecd",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "491f37d057fc5ce8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "49320c20b53ce112",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "493f51acecf96837",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4b02a8efa00bb54c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4c4541f5e5596194",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4d2f3b50d0beb75a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4d807b6ec48fd0a2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4da3f5c52288294a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4e2725739d3243a9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4f0101010f7b0205",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4f7c4c99df50cb61",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "4fe7bbad7accc29e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5072e67b04ab31ac",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "50792e1d7940e7e9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "527da0d787751ca3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "52a9bf67cc723a1b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5330e9b3319b8cf0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "53485aa68a63a83e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5406d7ad40ccee49",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5499413bb2c17340",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "551eacd400a49287",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5623c87b9f1c5b28",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "566138a619538cfa",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "57754c3cf6812a81",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5a9e54aacfa6bc05",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5c3c030e6fb97140",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5cae2739950eaec0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5caf9acde937dc4b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5cb86881c9f5943b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5d2cc106ad4e767e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5d7ba886fbff2de0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5e6478e76a30c303",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5ee62e3721366fba",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "5f71830c76b0dd61",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "60bb20b5e63ca05d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "61fc7ffb49d3eaf4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "62c7633f29b1c677",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "62df6baafdcca699",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "62f091f75ae9ec57",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "63b64b4c6b9ca00c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "63eb9e54f0aafd79",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6400ef35cf3af8b1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "657fe44942b568fc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6622378ebbd26355",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "666ab63cbc83f885",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6726d5b960725d4c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "68ba508eb546e9e0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "68bf268aeb7037bd",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6952c424bfd92219",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6a7945a11323e511",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6a7b6b7f04bd53f9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6aeb5df065713207",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6c22f5c5359b4f72",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6c52cc5ad2513a24",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6c8f0b0177000f1c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6d6cb80628dd885b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "6e39277273ed1fb9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "701ed155732178ec",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "715a7982de098c42",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "71791ad7dd8a1092",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "72799734266830fb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "74e4fffc497aade3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "74f8ef27fb5d477e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7578e46bcb820f5b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "75dac9868122963b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "764822619c7fa7fc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "76acec7b10eb23d6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "77a76cd2cccdd3da",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "789a4bd5a36ebffc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "78a956bb51434b6a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "78eda5e083e9bfaa",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "79abe54bb98b5dc5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7a147bb268ef4448",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7a4e6bf216656a74",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7a519aa4607de347",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7ad8a6fc8b757bed",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7aed5038caec3cac",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7f27c8c35482c289",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "7fdba39e76f20d91",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "808d869d35351ebb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "80c03c1d9648d1ca",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "84cb7182f6527713",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "852e315a67138674",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "85afb43c07310f98",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "860a74a7896c9498",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "86130c45520e665f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "869f6c628f56f76a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8724f487bb56984c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "877ae470e8bb7c5d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "877dff2a7af0e523",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "87923bc1a1838ffa",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "88a511edb72ed86a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "88b85d0358f21d72",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "897dfd7e6c2a4001",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8990736b1e7095aa",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8a2de2cfee39eda7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8afc90be5c1e8486",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8bdad06877e6658a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8ca92dc9afca9e9c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8ccd4e4a12fa8a4a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "8f3b0c51ab4a023c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "908bc90e750421c5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "90d19b6c4efae9e4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "915ba1414ba9e09c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "91f53d60a189279e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9333c49be4d8de47",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9423252df963b6bd",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "94ad8680670ab555",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "952b50a1c91c2b47",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "96c11922d52387a7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "971bfcb29d073fc8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9734a5cb61239bdb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "98dfe5df4850dbca",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "99abb7fa928e9d2c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9a2950256ad2cb30",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9b1c1b025b158304",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9c00747d38cdaa00",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9d6ce5e8445de097",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9d78126827a3636e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "9dbdc4e0ebf321fe",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a020454c30a1337c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a028401007bc2c86",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a0a975a59b386a72",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a55f14d70a93ff09",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a5dad184a239c158",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a73c111b56b95b6c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a767abd959e62c13",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a8b44b5802e9c372",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "a92a99ea9dd7b2bf",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aa29ef41176ece91",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aa3e3aabb996b108",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aa41d90656c3eb15",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aa5c3672ba57681b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aa6e3925302fba6b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aa94df5f7205ee9e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aaa7ee2c49b95670",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ac128eaa3cb8018d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ad470989b5ed2eb7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ad58fd9235b6864e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ad83e198534630fa",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ae6a71e22d1d7dbd",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aeb376b39360db1a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "aec04fbc78c9ac2b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "af9d22d181270612",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b0285e28a5384c41",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b05d0ad0918dd2a8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b1390442f0fe2fee",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b1a2dfd816ff360e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b1c0bdcc3dca5fd3",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b24edc2ed8eee714",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b2988fd00ad9e65c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b45081f232f36191",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b5912b407b05c7f5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b5c03af89e263f63",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b6475dd27daa27e4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b698f768b23f5c37",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b69d7686f60ec8e5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b7c136221cde612a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b800152f89ce56d9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b87afcf1d0a34059",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "b8fdd1ad8aa73b09",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ba86f5d18d46a7b4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ba9cfb06e6f023f7",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bb5b18080f37b911",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bb69c2bcbbcfcaae",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bb6ca1c4ab4b4da4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bc36757a096ef4e0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bd3c47d3b17ef9f8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bfc6c3bebefd089f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "bfd498dbae2d1937",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c119d585733b9900",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c11e1ab53f6757ca",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c2638194dd852f8b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c2d9d527c53a8212",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c485f236f27d453b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c58a781d0d2e7ac4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c5d363ea657451ff",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c5edde85096b5b0d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c5f6cbdd33d43a2c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c6a60e08df5ab147",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c6d411d9ef727f09",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c793974f53489cf5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c87718bbfbf8f860",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c8ef5b82653b097e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "c9efdc15686e49a8",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ca7183562239813f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cae32950e2869a49",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cb7a94069cfa7261",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ccfd138bfade2b4a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cdd879aaf1bd3886",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ce6cd5c3422af379",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "cfd2f084df75d067",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d183b79137bd6692",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d1d1b725820d7e04",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d21918b24a450455",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d3bebd10f312d81a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d3f11ed20ea385ae",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d402585d74add1ac",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d6885a68185c8e8b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d699d6044411fd12",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d72f0a0793bccfea",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d7d853a30bef19c5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d94f2037ea23751c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "d9e61b233b64ca0d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "da476d29eaff9ae9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dbc975b23d6a3da1",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dc52940cf4ce6b61",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dcd597ca2cd61b06",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dced877b6f05160c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dd4f080eddc91ad0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dd762cff10809ad2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "de1bcae5cfc0206f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "de3624ae8ec79ff6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "de3d6a15feadb460",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "de67c32faef14519",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dec5c5a0236b4a27",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dee23c62abddf86d",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dfd3c77b9e34dd4b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "dfe051eb961e7342",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e046618412eb4fe9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e0ad562e3a6feed6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e0ba8dece78b1b15",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e17b6c95bfcdf454",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e1bc69bbec2855e9",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e24ba4cd86333a29",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e2f4b9f648893e2c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e2faa7390c4bceb6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e47e26069f609c1b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e488b8b9fa9077fb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e48f6a2944892110",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e497abbf1e117816",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e55defef23a07969",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "e9d6f13d52b58bc4",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ea78b54ae8d46c21",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "eb20d77cf9ba250a",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "eb78f88181f5ef1c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ebb25da659c79539",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ec666e9b31a54af6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ecf2e40a3b589df6",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ecf49304e91682f2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ed7590def589be48",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "edc90d0d0f7a8260",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ee35627eb745bae2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "ef66acdae6b503c5",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f1096695ebd1a1cc",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f1db13c3fc82121b",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f1ff385d25530557",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f21a2cc9ef14fd6e",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f257e656664514d0",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f334ec0e5c377bda",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f39df60f28874259",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f3e3ea809cd9d35c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f4098a5f897fdd5c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f45f61339f73cf83",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f50afc39da03b2bb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f5daf8a3a0d395e2",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f6259a6f5c112192",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f6ec5e4726d70f2c",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f6fd4658ae180e95",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "f8c03b70115fbbcb",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fbd9b657e31e2e7f",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fcaac47b1d280270",
+          "reason": "non-positive quota delta"
+        },
+        {
+          "observationId": "fd39ad0171415107",
+          "reason": "non-positive quota delta"
+        }
+      ],
+      "change": null
+    }
+  ]
+}

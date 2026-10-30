@@ -1,0 +1,12 @@
+/* optimizer */
+.budgets{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 20px}
+.budgets button{font:500 15px var(--mono);letter-spacing:-.02em;padding:9px 19px;
+  border:1px solid var(--rule);background:var(--paper);color:var(--ink-2);border-radius:var(--r);cursor:pointer}
+.budgets button:hover{color:var(--ink);border-color:var(--ink-3)}
+.budgets button[aria-pressed=true]{border-color:var(--signal);background:var(--signal);color:var(--paper)}
+.alloc{list-style:none;padding:0;margin:0 0 18px;font-family:var(--sans)}
+.alloc li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;
+  border-bottom:1px solid var(--rule-2);font-size:14.5px}
+.alloc li:last-child{border-bottom:0}
+.alloc .amt{font-family:var(--mono);color:var(--ink);font-weight:500}
+.alloc li.buffer{color:var(--ink-3)}

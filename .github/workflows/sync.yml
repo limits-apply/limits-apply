@@ -1,0 +1,69 @@
+name: sync
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: sync
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm sync
+      - name: commit to main and deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "nothing moved"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A data index.html public/current.json
+          git commit -m "sync: third-party data $(date -u +%F)"
+          git push origin HEAD:main
+          # A push made with GITHUB_TOKEN triggers no workflow, so deploy is dispatched.
+          gh workflow run deploy.yml --ref main
+      - name: new models to map
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "Model mappings behind the AA index"
+        run: |
+          set +e
+          table=$(node scripts/membership.mjs 2>&1)
+          code=$?
+          set -e
+          echo "$table"
+          if [ "$code" -eq 0 ]; then exit 0; fi
+          open=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq length)
+          if [ "$open" != "0" ]; then exit 0; fi
+          gh issue create --title "$TITLE" --body "A vendor's newest AA-scored model outranks the one this site maps.
+
+          $table
+
+          Open the provider's model page, map the model in \`src/data/aa.ts\` and run \`pnpm sync aa\` — or record why not in \`src/data/mapping-lag.json\`."
+      - name: report a failed sync
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          existing=$(gh issue list --state open --search "Sync failing in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "Still failing: $RUN_URL"
+          else
+            gh issue create --title "Sync failing — the site shows the last good data" --body "Run: $RUN_URL"
+          fi

@@ -1,0 +1,44 @@
+name: Bug report
+description: Report reproducible incorrect behavior in the site, data pipeline, or Gate.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Do not include credentials, exploit details, personal data, private prompts, or proprietary source code. Use SECURITY.md for vulnerabilities.
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Commit, version, or snapshot date
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Environment and additional context
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Submission checks
+      options:
+        - label: I removed sensitive material and may lawfully share the reproduction details.
+          required: true

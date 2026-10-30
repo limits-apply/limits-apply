@@ -1,0 +1,81 @@
+/* ledger — the disclosure staircase, then the table it summarises */
+.mono{font-family:var(--mono)}
+.derived{color:var(--amber)}
+.staircase{display:flex;flex-wrap:wrap;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  border-radius:var(--r);overflow:hidden;margin-top:var(--block)}
+.step{flex:1 1 180px;background:var(--panel);padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.step .k{font:400 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.step .v{font:500 42px/1 var(--mono);letter-spacing:-.04em;color:var(--ink)}
+.step .of{font-size:14px;color:var(--ink-3)}
+.step .d{font-family:var(--sans);font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+.step.on .v{color:var(--signal)}
+.step.off .v{color:var(--ink-3)}
+
+.ledger td{padding:7px 10px;vertical-align:middle}
+.ledger td.name{font-weight:600;white-space:nowrap}
+.ledger th.disc,.ledger td.disc{text-align:center;width:56px}
+.ledger th.r,.ledger td.r{text-align:right}
+.plan-src{display:block;font:400 10.5px/1.4 var(--mono);color:var(--ink-3);
+  white-space:normal;overflow-wrap:anywhere;max-width:250px}
+.ledger .barcell{width:17%;min-width:118px}
+/* the verbatim quota is the widest cell by far — wrapping it is what keeps the
+   two payoff columns on screen instead of behind a horizontal scroll */
+.ledger td:nth-child(3),.ledger th:nth-child(3){white-space:normal;min-width:210px}
+.bar{position:relative;height:8px;background:var(--panel-2);border-radius:1px;overflow:hidden}
+.bar span{position:absolute;inset:0 auto 0 0;background:var(--ink-3);
+  transition:width .5s cubic-bezier(.2,.7,.3,1)}
+tr[data-rung="measured"] .bar span{background:var(--ink)}
+tr[data-rung="observed"] .bar span{background:var(--signal)}
+tr[data-rung="derived"] .bar span{background:var(--ink-2)}
+.ltag{font:400 11.5px var(--mono);color:var(--ink-2)}
+/* fill vs hollow is the secondary encoding, so the column reads without colour */
+.sq{display:inline-block;width:11px;height:11px;border:1.5px solid var(--ink-3);background:transparent}
+.sq.yes{background:var(--ink);border-color:var(--ink)}
+.sq.yes.signal{background:var(--signal);border-color:var(--signal)}
+.sq.yes.derived{background:var(--amber);border-color:var(--amber)}
+.sq.half{background:linear-gradient(135deg,var(--signal) 50%,transparent 50%);border-color:var(--signal)}
+.equiv{font-family:var(--mono)}
+.equiv.measured{color:var(--ink)}
+.equiv.observed{color:var(--signal)}
+.equiv.derived{color:var(--ink-2)}
+.equiv.chained,.equiv.modelled{color:var(--amber)}
+.ledger td[data-tip],.ledger .ltag[data-tip]{cursor:help}
+/* the allowance cell stacks value / interval / rung — it must never wrap mid-figure */
+.ledger th.r,.ledger td.r{min-width:132px;white-space:nowrap}
+.ledger .r .equiv{display:block;font-size:13.5px}
+.ledger .r .plan-src{margin-top:2px}
+.ledger .r .rung{margin-top:3px}
+.ledger .ltag .rung{margin-left:5px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font:400 11.5px var(--mono);color:var(--ink-2)}
+.legend i{display:inline-block;width:11px;height:11px;margin-right:7px;vertical-align:-1px;font-style:normal}
+.legend .f-signal{background:var(--signal)}
+.legend .f-derived{background:var(--amber)}
+.legend .f-flat{background:var(--ink-3)}
+.legend .f-hollow{border:1.5px solid var(--ink-3)}
+
+.four{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  border-radius:var(--r);overflow:hidden;margin:var(--block) 0}
+.frow{background:var(--panel);padding:16px 20px;display:grid;
+  grid-template-columns:minmax(140px,1fr) 2fr;gap:16px;align-items:center}
+.frow .who{display:flex;flex-direction:column;gap:2px}
+.frow .who b{font-weight:600;font-size:14px}
+.frow .who span{font:400 10.5px var(--mono);color:var(--ink-3)}
+.pair{display:flex;flex-direction:column;gap:6px}
+.pair .line{display:flex;align-items:center;gap:10px}
+.pair .tag{font:400 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);width:74px;flex:none}
+.pair .track{flex:1;height:10px;background:var(--panel-2);border-radius:1px;position:relative;min-width:60px;overflow:hidden}
+.pair .track i{position:absolute;inset:0 auto 0 0;display:block}
+.pair .track i.cost{background:var(--ink-3)}
+.pair .track i.worth{background:var(--signal)}
+.pair .track i.ceil{background:var(--amber)}
+.pair .val{font:400 12px var(--mono);width:76px;text-align:right;flex:none}
+
+.callout{border-left:2px solid var(--amber);padding:14px 0 14px 18px;margin:var(--block) 0}
+.callout .eyebrow{color:var(--amber)}
+.assume{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:20px 22px}
+.assume code{font-family:var(--mono);font-size:12.5px;background:var(--panel-2);padding:1px 5px;border-radius:2px}
+.assume p:last-child{margin-bottom:0}
+.formula{font:400 12.5px/1.9 var(--mono);color:var(--ink-2);overflow-x:auto;margin:0 0 18px}
+@media (max-width:760px){.frow{grid-template-columns:1fr}}
+

@@ -1,0 +1,63 @@
+/* The $0 catalogue: filter chips, a card grid, and confidence marks.
+   Tokens and the base .badge come from the shared parts. */
+
+.subline{display:block;color:var(--ink-3);font:400 10.5px/1.45 var(--mono);margin-top:3px}
+
+#free-filters{margin:var(--block) 0 18px}
+#free-note{margin:18px 0 0}
+
+.free-filters{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:18px 28px;padding:16px 18px;border:1px solid var(--rule);border-radius:var(--r);
+  background:var(--panel)}
+.free-filter{display:flex;flex-direction:column;gap:8px;min-width:0}
+.free-chips{display:flex;flex-wrap:wrap;gap:6px}
+.free-chip{font:400 12.5px var(--sans);padding:7px 12px;border:1px solid var(--rule);
+  background:var(--paper);color:var(--ink-2);border-radius:var(--r);cursor:pointer}
+.free-chip:hover{border-color:var(--ink-3);color:var(--ink)}
+.free-chip[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:var(--paper)}
+.free-select{font:400 12.5px var(--sans);padding:7px 10px;border:1px solid var(--rule);
+  border-radius:var(--r);background:var(--paper);color:var(--ink);min-width:190px}
+
+.free-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.free-card{display:flex;flex-direction:column;gap:16px;min-width:0;padding:22px;background:var(--paper)}
+.free-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.free-card-title{min-width:0}
+.free-card h3{margin:4px 0 0;font-size:16px;line-height:1.3}
+.free-card-head .badge{flex:none}
+
+.free-fields{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 14px;margin:0;font-size:13px}
+.free-fields dt{font:500 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);padding-top:2px}
+.free-fields dd{margin:0;font-family:var(--sans);color:var(--ink);overflow-wrap:anywhere}
+
+.free-block h4{font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 6px}
+.free-limits,.free-fallbacks{list-style:none;margin:0;padding:0;font-family:var(--sans);
+  font-size:13px;line-height:1.5;max-width:none}
+.free-limits li,.free-fallbacks li{margin:0 0 6px;color:var(--ink-2)}
+.free-limits strong{color:var(--ink);font-weight:500}
+
+.free-card-foot{display:flex;flex-direction:column;gap:3px;margin-top:auto;padding-top:12px;
+  border-top:1px solid var(--rule-2);font:400 11px/1.5 var(--mono);color:var(--ink-3)}
+.free-card-foot a{overflow-wrap:anywhere}
+
+.free-empty{padding:22px;border:1px dashed var(--rule);border-radius:var(--r);max-width:none}
+
+/* Confidence is ordinal: fill weight, never a second hue scale. */
+.badge.official{color:var(--ink);border-color:var(--rule)}
+.badge.official::before{background:currentColor}
+.badge.community-observed{color:var(--signal);border-color:currentColor}
+.badge.community-observed::before{background:linear-gradient(45deg,currentColor 50%,transparent 50%)}
+.badge.derived{color:var(--ink-2);border-color:var(--rule)}
+.badge.derived::before{background:linear-gradient(-45deg,currentColor 50%,transparent 50%)}
+.badge.estimated{color:var(--amber);border-color:currentColor}
+.badge.unknown{color:var(--ink-3);border-color:var(--rule-2)}
+.badge.unknown::before{background:repeating-linear-gradient(-45deg,transparent 0 2px,currentColor 2px 3px)}
+
+@media (max-width:720px){
+  .free-grid{grid-template-columns:1fr}
+  .free-filters{gap:16px}
+  .free-filter{width:100%}
+  .free-select{width:100%}
+}

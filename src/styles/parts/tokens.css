@@ -1,0 +1,38 @@
+/* ------------------------------------------------------------------ *
+ * Tokens. The palette *is* the confidence taxonomy (docs/methodology.md):
+ *   signal  published / ranked / interactive
+ *   amber   estimated — a ceiling or a derivation, never a verdict
+ *   hatch   unknown — rendered as texture, never as a colour
+ * Confidence itself is an ordinal fill scale, not a hue scale, so the
+ * column reads with the colour switched off.
+ *
+ * Both themes live in one list: `light-dark()` picks the branch from the
+ * used `color-scheme`, so the toggle only has to set that one property
+ * and no token is ever declared twice.
+ * ------------------------------------------------------------------ */
+:root{
+  color-scheme:light dark;
+  --paper:light-dark(#ffffff,#0d100f); --panel:light-dark(#f6f7f5,#141817); --panel-2:light-dark(#eff1ee,#1a1f1d);
+  --ink:light-dark(#14171a,#e6eae6); --ink-2:light-dark(#5a6270,#9ba59e); --ink-3:light-dark(#626a74,#818b85);
+  --rule:light-dark(#e1e4e1,#262d2a); --rule-2:light-dark(#edefed,#1e2422);
+  --signal:light-dark(#0b5d45,#4fbf95); --signal-soft:light-dark(#edf4f0,#142a22);
+  --amber:light-dark(#9a6100,#d4a05a);
+  --void:light-dark(#b4bcb6,#4a534e);
+  /* Syntax colours sit deliberately outside the confidence taxonomy above: a
+     highlighted token says what it is to a parser, never how strong a figure is. */
+  --code-name:light-dark(#1c4f7c,#8fbce0);
+  --code-str:light-dark(#8a3d4f,#dd97a4);
+  --code-lit:light-dark(#6b4c9a,#b7a1e0);
+  /* The tooltip is a dark surface in both themes — its text is fixed light,
+     so it cannot ride --ink, which inverts. Lifted off --paper in dark. */
+  --tip:light-dark(#14171a,#1f2523);
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --serif:"IBM Plex Serif",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:3px;
+  --bar:54px;
+  --block:28px; --sect:72px;
+  --measure:1120px; --measure-wide:1700px; --gutter:24px;
+}
+:root[data-theme="light"]{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}

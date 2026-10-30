@@ -1,0 +1,52 @@
+{
+  "retrieved_on": "2026-10-30",
+  "source": "Artificial Analysis",
+  "data_api_docs": "https://artificialanalysis.ai/data-api/docs",
+  "tier": "Open-weights models of 4B to 40B total parameters — the tier a portable Mac can hold.",
+  "notes": "Static Layer 1 snapshot. Parameter counts are the released weights, not the evaluated endpoint. A model listed twice differs only in reasoning mode: same weights file, same throughput, different index.",
+  "source_url": "https://artificialanalysis.ai/models/open-source/small",
+  "intelligence_index_version": "5.0",
+  "models": [
+    {
+      "name": "Qwen3.8 27B",
+      "variant": "Xhigh",
+      "intelligence": 20,
+      "total_params_b": 27,
+      "active_params_b": null
+    },
+    {
+      "name": "Qwen3.8 27B",
+      "variant": "Medium",
+      "intelligence": 17,
+      "total_params_b": 27,
+      "active_params_b": null
+    },
+    {
+      "name": "Qwen3.8 27B",
+      "variant": "Low",
+      "intelligence": 16,
+      "total_params_b": 27,
+      "active_params_b": null
+    },
+    {
+      "name": "Muse Glimmer",
+      "variant": "High",
+      "intelligence": 6,
+      "total_params_b": 30,
+      "active_params_b": null
+    },
+    {
+      "name": "Nemotron 3.5 Lightning",
+      "variant": "",
+      "intelligence": 6,
+      "total_params_b": 31.6,
+      "active_params_b": 3.6
+    }
+  ],
+  "entered": [
+    "Qwen3.8 27B (Medium)",
+    "Qwen3.8 27B (Low)",
+    "Nemotron 3.5 Lightning"
+  ],
+  "left": []
+}

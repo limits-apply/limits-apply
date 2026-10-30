@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compare Free AI &amp; Paid Plans | Limits Apply</title>
+<meta name="description" content="Compare free AI tools, paid subscriptions, and coding setups. See available models, usage limits, and which option fits your budget.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="Limits Apply — Find the best AI for your budget">
+<meta property="og:description" content="Know the limits. Get more done. Compare free and paid AI plans with dated sources and transparent uncertainty.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<link rel="stylesheet" href="/src/styles/parts/home.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body class="home">
+
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- site-header -->
+
+<main id="top">
+
+<section class="hero">
+  <span class="eyebrow">Every AI plan, one scale</span>
+  <h1>How much work does your AI plan actually buy?</h1>
+  <p class="lead">
+    Find the best AI subscription as models, prices and limits change. We keep track so you can
+    see which plans offer the strongest models and how much work your monthly budget could buy.
+  </p>
+  <p class="lead">
+    Every provider counts usage differently. We use
+    <a href="https://artificialanalysis.ai/models" target="_blank" rel="noreferrer">Artificial Analysis</a>
+    benchmarks to put plans on a common scale: model capability and estimated monthly capacity,
+    based on published allowances and the tokens each model needs for the same tasks.
+  </p>
+  <p class="lead">
+    These figures are theoretical ceilings, with the source and calculation shown for each plan.
+    Your actual usage will vary.
+  </p>
+</section>
+
+<section class="decision" id="benchmark">
+  <h2 class="sr-only">AI subscriptions by tasks per month</h2>
+  <div class="score-controls" data-filter="strategy" role="group" aria-label="Strategy">
+    <span class="kicker" data-tip="Two ways to spend the same allowance. Delivery picks, per plan, the configuration with the most AA Index per dollar of task cost among those within 0.85 of the plan's strongest — the most intelligence-weighted work per month. Planning picks the smartest configuration the plan grants and shows how many of those tasks the allowance covers. No configuration wins both; that trade-off is the point.">Strategy</span>
+    <button type="button" data-value="delivery" aria-pressed="true">Delivery</button>
+    <button type="button" data-value="planning" aria-pressed="false">Planning</button>
+  </div>
+
+  <div class="tw wide" role="region" aria-label="AI subscription decision table" tabindex="0">
+    <table class="score-table" data-sortable>
+      <caption class="sr-only">AI subscriptions ranked under the selected strategy using Artificial Analysis model data and published plan capacity.</caption>
+      <thead>
+        <tr>
+          <th scope="col" data-tip="The plan, the model its figures are scored on, and the monthly price. Click a plan to choose another model it grants. Hover a cell for the reasoning level, cost per task, sources and the weakest rung the row rests on.">Plan (Model)</th>
+          <th scope="col" class="num" data-tip="What the plan’s monthly allowance buys: the allowance in API-equivalent dollars ÷ AA cost per task. The allowance is resolved on the ladder — measured, observed, derived, chained or modelled. A ceiling from public figures, not a count of tasks the plan completes.">Tasks / month</th>
+          <th scope="col" class="num" data-tip="Allowance in API-equivalent dollars ÷ plan price: what the plan hands back for what it costs, whatever the model. 10× means ten dollars of API usage per dollar paid. Undefined at $0.">× price</th>
+          <th scope="col" class="num" data-tip="Artificial Analysis Intelligence Index v5.0 for the configuration the strategy picks. Higher is smarter.">AA Index</th>
+          <th scope="col" class="num" data-tip="Answer + reasoning tokens AA measured for one evaluated task. Higher means the model is more verbose to reach its score.">Tokens / task</th>
+          <th scope="col" class="num" data-nosort data-tip="Artificial Analysis median output tokens per second for the model, measured on its API rather than on the plan’s own harness. Under it, the wall time of one evaluated task: tokens per task ÷ speed, first-token delay left out. 🐌 under 40 tok/s, where waiting is felt in full · 🐇 40–120 · 🚀 120 and up. Not sortable: speed is a second dimension to read beside the task count, not a rank.">Speed</th>
+        </tr>
+      </thead>
+      <tbody id="score-rows"></tbody>
+    </table>
+  </div>
+  <div class="score-foot">
+    <p class="aa-source">
+      Scores from <a href="https://artificialanalysis.ai/models" target="_blank" rel="noreferrer">Artificial Analysis</a>
+      Intelligence Index v5.0 · snapshot 2026-10-30 · <a id="aa-snapshot-link">frozen data</a>.
+    </p>
+    <div id="score-note"></div>
+  </div>
+  </section>
+
+<section class="research-cta">
+  <a class="btn" href="./research.html">Methodology and detailed analysis</a>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. Layer 1 is public pricing and third-party model evaluations, and every figure carries the rung that says how it was obtained. Those evaluations are credited and treated as an input, not as ground truth.</p>
+      </div>
+
+      <nav aria-label="The ledger">
+      <h3>The ledger</h3>
+      <ul>
+        <li><a href="#benchmark">Benchmark</a></li>
+        <li><a href="./research.html#agentic">Agentic work</a></li>
+        <li><a href="./research.html#break-even">Break-even</a></li>
+        <li><a href="./research.html#frontier">Budget frontier</a></li>
+        <li><a href="./research.html#portfolio">Optimise the stack</a></li>
+        <li><a href="./research.html#methodology">Methodology</a></li>
+        <li><a href="./research.html#limitations">Limitations</a></li>
+        <li><a href="./gate.html">Gate</a></li>
+        <li><a href="./docs/index.html">Docs</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="Local">
+      <h3>Local</h3>
+      <ul>
+        <li><a href="./local.html#machine">Your machine</a></li>
+        <li><a href="./local.html#tier">What it reaches</a></li>
+        <li><a href="./local.html#trade">The trade</a></li>
+        <li><a href="./research.html#community-measurements">Community measurements</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">Artificial Analysis</a></li>
+        <li><a href="https://models.dev" target="_blank" rel="noopener">models.dev</a></li>
+        <li><a href="https://openrouter.ai/models" target="_blank" rel="noopener">OpenRouter</a></li>
+        <li><a href="https://opencode.ai" target="_blank" rel="noopener">OpenCode</a></li>
+        <li><a href="https://huggingface.co/models" target="_blank" rel="noopener">Hugging Face</a></li>
+        <li><a href="https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml" target="_blank" rel="noopener">ECB reference rates</a></li>
+      </ul>
+      <h3>Project</h3>
+      <ul>
+        <li><a href="https://github.com/limits-apply/limits-apply" target="_blank" rel="noopener">Source on GitHub</a></li>
+        <li><a href="https://github.com/limits-apply/limits-apply/issues" target="_blank" rel="noopener">Correct a figure</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

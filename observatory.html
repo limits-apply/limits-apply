@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Observatory — quota intervals, measured on real subscriptions</title>
+<meta name="description" content="The Historical Quota Observatory: community-collected quota intervals — tokens and API-equivalent dollars per quota point, per plan, model and window — with provenance on every row and “insufficient data” as a valid answer.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Limits Apply">
+<meta property="og:title" content="Observatory — quota intervals, measured on real subscriptions">
+<meta property="og:description" content="The Historical Quota Observatory: community-collected quota intervals — tokens and API-equivalent dollars per quota point, per plan, model and window — with provenance on every row and “insufficient data” as a valid answer.">
+<meta property="og:url" content="https://limits-apply.github.io/limits-apply/observatory.html">
+<meta property="og:image" content="https://limits-apply.github.io/limits-apply/logo-square-1024.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/src/styles/index.css">
+<link rel="stylesheet" href="/src/styles/parts/gate.css">
+<link rel="stylesheet" href="/src/styles/parts/observatory.css">
+<script>{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}</script>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- site-header -->
+
+<main id="top">
+
+<section class="hero">
+  <span class="eyebrow">Community observations</span>
+  <h1>What one quota point bought, <span class="amt">measured</span> on a real subscription.</h1>
+  <p class="lead">
+    The Historical Quota Observatory is the community's half of this project. Contributors
+    collect quota intervals on their own accounts — X tokens of a known mix consumed Y points of
+    quota in one window — and the page reads the aggregation of what they sent, one JSON record
+    per interval. Nothing here is modelled from a plan's price.
+  </p>
+  <p class="lead">
+    Every figure carries the status of the sample behind it. An interval set too thin to
+    estimate says <strong>insufficient data</strong>, and that is a valid answer: it is what the
+    page shows until enough people report the same plan, model and window.
+  </p>
+  <div class="cta">
+    <a class="btn" href="#controls">Open the store</a>
+    <a class="btn ghost" href="https://github.com/limits-apply/limits-apply/blob/main/docs/observations-schema.md">The interval schema</a>
+  </div>
+  <div class="pull">
+    <p>One interval is a report, never an estimate.</p>
+    <p>Fewer than five stay that way; three reporters make it a community figure.</p>
+  </div>
+</section>
+
+<section id="controls">
+  <span class="eyebrow">01 — the store</span>
+  <h2>One plan, one model, one window at a time.</h2>
+  <p class="lead">
+    A group is a plan, a model, a window type and a harness — nothing wider. A combination no
+    interval has been collected for cannot be selected, so the selects never offer a plan, a
+    model or a window this store has never seen.
+  </p>
+  <div id="observatory-controls"></div>
+  <div id="observatory-empty"></div>
+</section>
+
+<section id="summary">
+  <span class="eyebrow">02 — the evidence</span>
+  <h2>What this sample is allowed to claim.</h2>
+  <p class="lead">
+    Intervals and the distinct reporters behind them, the window they were observed over, and
+    the three figures the project exists to measure: tokens per quota point, the
+    API-equivalent dollars per quota point at a published rate card, and the share of those
+    tokens that arrived from cache.
+  </p>
+  <div id="observatory-summary"></div>
+</section>
+
+<section id="history">
+  <span class="eyebrow">03 — the history</span>
+  <h2>Every interval, and the ones that were refused.</h2>
+  <p class="lead">
+    One row per admissible interval, oldest first, and the priced series drawn as a line. An
+    interval that failed admissibility keeps its identifier and the reason it was refused —
+    provenance, never statistics.
+  </p>
+  <div id="observatory-history"></div>
+</section>
+
+<section id="export">
+  <span class="eyebrow">04 — the export</span>
+  <h2>Take the selection with you.</h2>
+  <p class="lead">
+    Both exports are cut from the selection above, in this browser. Nothing is uploaded, and
+    neither file claims a figure the rows behind it do not carry.
+  </p>
+  <div id="observatory-export"></div>
+</section>
+
+<section id="provenance">
+  <span class="eyebrow">05 — provenance</span>
+  <h2>Where the file comes from, and how to read one record.</h2>
+  <p class="lead">
+    This page reads one generated file and nothing else. A single observation — every field, the
+    admissibility rules and the validation that refuses a malformed one — is published as
+    <a href="https://github.com/limits-apply/limits-apply/blob/main/docs/observations-schema.md">the
+    observations schema</a>, next to the code that enforces it.
+  </p>
+  <div id="observatory-provenance"></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <span class="brand" aria-hidden="true"><span class="track"></span><span class="base">limitsapply</span><span class="over">limitsapply</span><i></i></span>
+        <p>The economics of using AI, measured in work rather than tokens. The Observatory is the part that reports: quota intervals collected by the people who pay for the subscriptions, aggregated into the one ratio this project exists to measure.</p>
+      </div>
+
+      <nav aria-label="Observatory">
+      <h3>Observatory</h3>
+      <ul>
+        <li><a href="#controls">The store</a></li>
+        <li><a href="#summary">The evidence</a></li>
+        <li><a href="#history">The history</a></li>
+        <li><a href="#export">The export</a></li>
+        <li><a href="#provenance">Provenance</a></li>
+      </ul>
+      </nav>
+
+      <nav aria-label="The ledger">
+      <h3>The ledger</h3>
+      <ul>
+        <li><a href="./index.html#benchmark">Benchmark</a></li>
+        <li><a href="./research.html#frontier">Budget frontier</a></li>
+        <li><a href="./research.html#methodology">Methodology</a></li>
+        <li><a href="./gate.html">Gate</a></li>
+      </ul>
+      </nav>
+
+      <div>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://github.com/limits-apply/limits-apply/blob/main/docs/observations-schema.md" target="_blank" rel="noopener">Observations schema</a></li>
+        <li><a href="https://github.com/limits-apply/limits-apply/blob/main/docs/methodology.md" target="_blank" rel="noopener">Methodology</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="fbar">
+      <p class="note" id="footer-freshness"></p>
+      <p class="note copy">© 2026 Limits Apply</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/observatory.ts"></script>
+</body>
+</html>

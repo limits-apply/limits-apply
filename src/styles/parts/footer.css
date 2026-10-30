@@ -1,0 +1,28 @@
+/* footer — the site map, its sources, and the freshness line the header used to carry */
+footer{border-top:1px solid var(--rule);margin-top:var(--sect);padding:44px 0 56px;
+       font-size:13px;color:var(--ink-3)}
+footer .wrap{max-width:var(--measure);margin:0 auto;padding:0 var(--gutter)}
+
+.fgrid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.1fr;gap:36px 32px;align-items:start}
+.fbrand .brand{margin-bottom:16px}
+.fbrand p{margin:0;max-width:44ch;font-family:var(--serif);font-size:14px;line-height:1.6;
+          color:var(--ink-2)}
+
+/* the column heads borrow the eyebrow treatment without its trailing rule */
+footer h3{font:500 10.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+          color:var(--ink-3);margin:0 0 14px}
+footer ul{list-style:none;margin:0;padding:0;max-width:none;font-family:var(--sans)}
+footer li{margin:0 0 9px}
+footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent}
+footer a:hover{color:var(--ink);border-bottom-color:var(--signal)}
+footer a[target]::after{content:"↗";margin-left:4px;font-size:10px;color:var(--ink-3)}
+
+.fbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 32px;
+      margin-top:40px;padding-top:18px;border-top:1px solid var(--rule-2)}
+.fbar p{margin:0;font-size:12px}
+.fbar #footer-freshness{max-width:78ch}
+.fbar .copy{font-family:var(--mono);letter-spacing:.01em;white-space:nowrap}
+
+@media (max-width:860px){.fgrid{grid-template-columns:1fr 1fr;gap:32px}
+  .fbrand{grid-column:1/-1}}
+@media (max-width:560px){.fgrid{grid-template-columns:1fr}}

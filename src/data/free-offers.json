@@ -1,0 +1,456 @@
+[
+  {
+    "id": "chatgpt-free",
+    "provider": "OpenAI",
+    "name": "ChatGPT Free",
+    "type": "chat",
+    "price": 0,
+    "regions": ["Not published"],
+    "models": {
+      "default": "GPT-6 Luna",
+      "best": "GPT-6 Luna",
+      "access": "default",
+      "confidence": "official"
+    },
+    "usage": ["general", "research", "coding", "image", "long-context"],
+    "features": [
+      "Unlimited text chats with GPT-6, subject to abuse guardrails",
+      "GPT-6 Luna is listed as available on Free",
+      "GPT-5 Thinking Mini is listed as available on Free",
+      "GPT-5.6 Terra is limited to Work and Codex on desktop",
+      "Limited messages with uploads",
+      "Limited image creation",
+      "Limited voice chats",
+      "Limited deep research",
+      "Limited Codex access",
+      "GPT Instant context window: 27K total, with a smaller user-input portion"
+    ],
+    "limits": [
+      {
+        "metric": "text chats",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Unlimited text chats subject to abuse guardrails; no numeric cap is published."
+      },
+      {
+        "metric": "messages with uploads",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Limited on Free; no number is published."
+      },
+      {
+        "metric": "image creations",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Limited image creation; no number is published."
+      },
+      {
+        "metric": "voice chats",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Limited voice chats; no number is published."
+      },
+      {
+        "metric": "deep research reports",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Limited deep research; no number is published."
+      },
+      {
+        "metric": "Codex usage",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Limited Codex access; no number is published."
+      },
+      {
+        "metric": "context window (GPT Instant)",
+        "amount": 27000,
+        "window": "per request",
+        "windowKind": "unknown",
+        "note": "Total context window; the user-input portion is smaller. A context limit is not a consumption quota."
+      }
+    ],
+    "fallbacks": [
+      "GPT-5.6 Terra is limited to Work and Codex on desktop",
+      "Response times are limited by bandwidth and availability",
+      "Codex usage is limited on Free"
+    ],
+    "commercialUse": "unknown",
+    "source": {
+      "title": "ChatGPT pricing",
+      "url": "https://openai.com/chatgpt/pricing/",
+      "checkedAt": "2026-10-18"
+    },
+    "confidence": "official"
+  },
+  {
+    "id": "claude-free",
+    "provider": "Anthropic",
+    "name": "Claude Free",
+    "type": "chat",
+    "price": 0,
+    "regions": ["Not published"],
+    "models": {
+      "default": "Not published",
+      "best": "Claude Sonnet",
+      "access": "selector",
+      "confidence": "derived"
+    },
+    "usage": ["general", "coding", "long-context"],
+    "features": [
+      "Chat on web, desktop, and mobile",
+      "Web search, file creation, and code execution",
+      "Memory across conversations, connectors, skills, and artifacts",
+      "Claude Sonnet and Claude Haiku are listed for Free",
+      "Claude Opus and Claude Fable are not included on Free",
+      "Context window: up to 1M tokens, varies by model"
+    ],
+    "limits": [
+      {
+        "metric": "usage",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "The pricing page says usage limits apply and links to a support article; no numeric cap is published there."
+      },
+      {
+        "metric": "context window",
+        "amount": 1000000,
+        "window": "per request",
+        "windowKind": "unknown",
+        "note": "Up to 1M tokens, varies by model. A context limit is not a consumption quota."
+      }
+    ],
+    "fallbacks": [
+      "Claude Opus and Claude Fable are not available on Free",
+      "The default model is not named; Sonnet and Haiku are both listed",
+      "Priority access at high traffic times is not included"
+    ],
+    "commercialUse": "unknown",
+    "source": {
+      "title": "Claude plans and pricing",
+      "url": "https://claude.com/pricing",
+      "checkedAt": "2026-10-18"
+    },
+    "confidence": "official"
+  },
+  {
+    "id": "google-gemini-app-free",
+    "provider": "Google",
+    "name": "Gemini app Free",
+    "type": "chat",
+    "price": 0,
+    "regions": ["140+ countries"],
+    "models": {
+      "default": "Gemini Flash-Lite",
+      "best": "Gemini Flash-Lite",
+      "access": "default",
+      "confidence": "official"
+    },
+    "usage": ["general", "research", "image"],
+    "features": [
+      "Access to the Flash-Lite model",
+      "Image generation and editing",
+      "Deep Research, Gemini Live, Canvas, and Gems",
+      "Google Flow with limited access to Nano Banana Pro",
+      "15 GB of cloud storage with a Google account"
+    ],
+    "limits": [
+      {
+        "metric": "usage limit",
+        "amount": null,
+        "window": "5 hours",
+        "windowKind": "rolling",
+        "note": "Limits are compute-based and refresh every five hours until the weekly limit is reached."
+      },
+      {
+        "metric": "weekly limit",
+        "amount": null,
+        "window": "week",
+        "windowKind": "unknown",
+        "note": "The page says a weekly ceiling applies but does not quantify it or state the reset anchor."
+      }
+    ],
+    "fallbacks": [
+      "Gemini 4 Argon requires Google AI Pro or AI Ultra",
+      "Free tier gets Flash-Lite, not the Pro model",
+      "Higher usage limits require a paid plan"
+    ],
+    "commercialUse": "unknown",
+    "source": {
+      "title": "Gemini plans and subscriptions",
+      "url": "https://gemini.google/subscriptions/",
+      "checkedAt": "2026-10-18"
+    },
+    "confidence": "official"
+  },
+  {
+    "id": "mistral-le-chat-free",
+    "provider": "Mistral",
+    "name": "Le Chat Free",
+    "type": "chat",
+    "price": 0,
+    "regions": ["Not published"],
+    "models": {
+      "default": "Not published",
+      "best": "Not published",
+      "access": "default",
+      "confidence": "unknown"
+    },
+    "usage": ["general", "research", "coding", "image"],
+    "features": [
+      "Web and mobile access",
+      "Limited messages and web searches",
+      "Limited coding sessions",
+      "Basic image generation and editing",
+      "100+ connectors",
+      "Access to Mistral Studio"
+    ],
+    "limits": [
+      {
+        "metric": "messages",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "The Free plan says limited messages; no number is published."
+      },
+      {
+        "metric": "web searches",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "The Free plan says limited web searches; no number is published."
+      },
+      {
+        "metric": "coding sessions",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "The Free plan says limited coding sessions; no number is published."
+      },
+      {
+        "metric": "image generations",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "The Free plan offers basic image generation; no number is published."
+      }
+    ],
+    "fallbacks": [
+      "Limited messages and web searches",
+      "Limited coding sessions",
+      "Basic image generation only",
+      "No API credits on Free"
+    ],
+    "commercialUse": "unknown",
+    "source": {
+      "title": "Mistral pricing",
+      "url": "https://mistral.ai/pricing",
+      "checkedAt": "2026-10-18"
+    },
+    "confidence": "official"
+  },
+  {
+    "id": "perplexity-free",
+    "provider": "Perplexity",
+    "name": "Perplexity Free",
+    "type": "chat",
+    "price": 0,
+    "regions": ["Not published"],
+    "models": {
+      "default": "Not published",
+      "best": "Not published",
+      "access": "default",
+      "confidence": "unknown"
+    },
+    "usage": ["general", "research"],
+    "features": [
+      "Web answer engine with cited sources",
+      "The Perplexity Pro page returned no readable text on 2026-10-18"
+    ],
+    "limits": [
+      {
+        "metric": "searches",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "The Perplexity Pro page could not be read on 2026-10-18; no free-tier limit was verified."
+      }
+    ],
+    "fallbacks": [
+      "Free-tier model access was not verified",
+      "Free-tier limits were not verified"
+    ],
+    "commercialUse": "unknown",
+    "source": {
+      "title": "Perplexity Pro",
+      "url": "https://www.perplexity.ai/pro",
+      "checkedAt": "2026-10-18"
+    },
+    "confidence": "unknown"
+  },
+  {
+    "id": "github-copilot-free",
+    "provider": "GitHub",
+    "name": "GitHub Copilot Free",
+    "type": "ide",
+    "price": 0,
+    "regions": ["Not published"],
+    "models": {
+      "default": "Auto model selection",
+      "best": "Not published",
+      "access": "default",
+      "confidence": "unknown"
+    },
+    "usage": ["coding"],
+    "features": [
+      "Copilot in IDEs, GitHub Mobile, GitHub, and Windows Terminal",
+      "Auto model selection only",
+      "An allowance of GitHub AI Credits",
+      "Copilot CLI and the Copilot app are included",
+      "Premium models are not selectable on Free",
+      "Available only to individual developers without Copilot through an organization or enterprise"
+    ],
+    "limits": [
+      {
+        "metric": "code completions",
+        "amount": 2000,
+        "window": "month",
+        "windowKind": "fixed",
+        "note": "Up to 2,000 completions per month."
+      },
+      {
+        "metric": "GitHub AI Credits",
+        "amount": null,
+        "window": "month",
+        "windowKind": "fixed",
+        "note": "An allowance of credits; the amount is not published."
+      },
+      {
+        "metric": "chat and agent usage",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Limited chat and agent usage; no number is published."
+      }
+    ],
+    "fallbacks": [
+      "Auto model selection only — no manual model choice",
+      "Premium models are not available",
+      "Limited chat and agent usage"
+    ],
+    "commercialUse": "unknown",
+    "source": {
+      "title": "GitHub Copilot plans",
+      "url": "https://docs.github.com/en/copilot/get-started/plans",
+      "checkedAt": "2026-10-12"
+    },
+    "confidence": "official"
+  },
+  {
+    "id": "google-gemini-api-free",
+    "provider": "Google",
+    "name": "Gemini API Free tier",
+    "type": "api",
+    "price": 0,
+    "regions": ["Not published"],
+    "models": {
+      "default": "Not published",
+      "best": "Gemini 3.8 Flash",
+      "access": "selector",
+      "confidence": "derived"
+    },
+    "usage": ["coding", "long-context", "image"],
+    "features": [
+      "Free input and output tokens on eligible models",
+      "Gemini 3.8 Flash, 3.6 Flash, 3.5 Flash-Lite, and 3.1 Flash-Lite are listed with a free tier",
+      "Gemini 4 Argon is not available on the Free tier",
+      "Context caching, Batch API, and the most advanced models require the paid tier",
+      "Content is used to improve Google's products"
+    ],
+    "limits": [
+      {
+        "metric": "rate limit",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "The pricing page says paid tiers get higher rate limits but does not publish the free-tier numbers; the rate-limit page was not read."
+      },
+      {
+        "metric": "free input and output tokens",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Eligible models are free of charge; no token allowance is published on the pricing page."
+      }
+    ],
+    "fallbacks": [
+      "Gemini 4 Argon is not available on the Free tier",
+      "Context caching and Batch API require the paid tier",
+      "Free-tier content is used to improve Google's products"
+    ],
+    "commercialUse": "unknown",
+    "source": {
+      "title": "Gemini Developer API pricing",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "checkedAt": "2026-10-12"
+    },
+    "confidence": "official"
+  },
+  {
+    "id": "opencode-zen-free",
+    "provider": "OpenCode",
+    "name": "OpenCode Zen free models",
+    "type": "coding-agent",
+    "price": 0,
+    "regions": ["Not published"],
+    "models": {
+      "default": "Not published",
+      "best": "Not published",
+      "access": "selector",
+      "confidence": "unknown"
+    },
+    "usage": ["coding"],
+    "features": [
+      "Seven free models are listed: Big Pickle, MiMo-V2.5 Free, Ling 3.0 Flash Fin Free, Nemotron 3 Ultra Free, Nemotron 3.5 Lightning Free, Muse Spark 1.3 Contributor Free, and Jev 1.13 Free",
+      "Free input, output, and cache-read prices on the listed models",
+      "Jev 1.13 Free returns structured decisions, not generated text",
+      "Some free models log or use data for training; the NVIDIA trial warns against personal or confidential data",
+      "Free offers can expire and are not a promise of unlimited or permanent inference"
+    ],
+    "limits": [
+      {
+        "metric": "requests",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "Zen publishes a free price for the listed models but no rate limit; availability can change."
+      },
+      {
+        "metric": "free-model availability",
+        "amount": null,
+        "window": "not published",
+        "windowKind": "unknown",
+        "note": "The docs say free offers can expire and model-specific data terms differ."
+      }
+    ],
+    "fallbacks": [
+      "Some free models log or train on data",
+      "Jev 1.13 Free returns structured decisions, not generated text",
+      "Free offers can expire"
+    ],
+    "commercialUse": "unknown",
+    "source": {
+      "title": "OpenCode Zen — model list, pricing, and free coding models",
+      "url": "https://open-code.ai/en/docs/zen",
+      "checkedAt": "2026-10-12"
+    },
+    "confidence": "official"
+  }
+]

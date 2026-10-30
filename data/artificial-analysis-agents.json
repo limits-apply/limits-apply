@@ -1,0 +1,250 @@
+{
+  "retrieved_on": "2026-10-30",
+  "attribution": "Artificial Analysis — https://artificialanalysis.ai/agents/coding-agents",
+  "note": "Top-42 agent variants embedded in the page's RSC payload. Index is the AA Coding Agent Index (DeepSWE v1.1, Terminal-Bench 4.0, SWE-Atlas-QnA); cost is pay-per-token API USD per task.",
+  "source_url": "https://artificialanalysis.ai/agents/coding-agents",
+  "variants": [
+    {
+      "label": "Claude Code - Claude Sonnet 5.5 (Max, Default Fallback)",
+      "index": 0.593374426631911,
+      "costUsd": 13.3015082635468,
+      "wallSeconds": 4784.64130125774
+    },
+    {
+      "label": "Muse Code - Muse Wonder (Max)",
+      "index": 0.519768236993592,
+      "costUsd": 8.04811220428196,
+      "wallSeconds": 1472.5084254817
+    },
+    {
+      "label": "Codex - GPT-6.1 Sol (Max)",
+      "index": 0.541279798631476,
+      "costUsd": 1.5046389983744,
+      "wallSeconds": 1421.42885321603
+    },
+    {
+      "label": "Antigravity CLI - Gemini 4 Carbon (High)",
+      "index": 0.594049025741284,
+      "costUsd": 7.7432202900257,
+      "wallSeconds": 1789.89670714312
+    },
+    {
+      "label": "Mistral Vibe - Mistral Large 4 (High)",
+      "index": 0.482774919409145,
+      "costUsd": 1.25944220793442,
+      "wallSeconds": 2903.91483346258
+    },
+    {
+      "label": "Codex - GPT-6 Astra (Max)",
+      "index": 0.546635690561529,
+      "costUsd": 7.03615822479963,
+      "wallSeconds": 1486.68747959053
+    },
+    {
+      "label": "Grok Build - Grok 4.7 (Xhigh)",
+      "index": 0.465968752688172,
+      "costUsd": 9.47935653344195,
+      "wallSeconds": 2146.05576560009
+    },
+    {
+      "label": "Claude Code - Claude Opus 5.5 (Max, Default Fallback)",
+      "index": 0.616528649505811,
+      "costUsd": 11.4227202144224,
+      "wallSeconds": 3661.21221302161
+    },
+    {
+      "label": "Codex - GPT-6.1 Terra (Max)",
+      "index": 0.481004244053438,
+      "costUsd": 1.24038465572461,
+      "wallSeconds": 1568.79046882589
+    },
+    {
+      "label": "Codex - GPT-6 Luna (Max)",
+      "index": 0.311260251113284,
+      "costUsd": 0.159155559086193,
+      "wallSeconds": 1275.79489619203
+    },
+    {
+      "label": "Mistral Vibe - Mistral Large 4 (Medium)",
+      "index": 0.354072051699794,
+      "costUsd": 0.782666187098099,
+      "wallSeconds": 2330.06956728793
+    },
+    {
+      "label": "Claude Code - Step 5 Preview",
+      "index": 0.431274491691105,
+      "costUsd": 1.84006320525524,
+      "wallSeconds": 3665.13740781145
+    },
+    {
+      "label": "Codex - DeepSeek V4.1 Flash (Max)",
+      "index": 0.473001334419464,
+      "costUsd": 0.38619359563592,
+      "wallSeconds": 2283.94687962311
+    },
+    {
+      "label": "Antigravity SDK - Gemini 3.8 Flash (High)",
+      "index": 0.33272301118714,
+      "costUsd": 2.51071545979138,
+      "wallSeconds": 786.045572632779
+    },
+    {
+      "label": "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (Max)",
+      "index": 0.463051957532312,
+      "costUsd": 0.29627468390668,
+      "wallSeconds": 1284.94041000543
+    },
+    {
+      "label": "Antigravity CLI - Gemini 4 Argon (High)",
+      "index": 0.532462665363311,
+      "costUsd": 11.7318632341125,
+      "wallSeconds": 2081.39574652818
+    },
+    {
+      "label": "Devin Fusion CLI - GPT-6 Astra XHigh + SWE-2 Medium",
+      "index": 0.530769734767025,
+      "costUsd": 4.33822148437056,
+      "wallSeconds": 1270.3477207201
+    },
+    {
+      "label": "Codex - GPT-6.1 Terra (Low)",
+      "index": 0.3485683422396,
+      "costUsd": 0.198820047696481,
+      "wallSeconds": 379.469317133703
+    },
+    {
+      "label": "Muse Code - Muse Spark Open (Xhigh)",
+      "index": 0.263007023894863,
+      "costUsd": 3.54324946048794,
+      "wallSeconds": 1558.86632482568
+    },
+    {
+      "label": "GitHub Copilot - Copilot Fusion (max)",
+      "index": 0.598570672857608,
+      "costUsd": 5.58738499550885,
+      "wallSeconds": 2167.26806006408
+    },
+    {
+      "label": "Claude Code - Qwen3.8 Max",
+      "index": 0.392199207885305,
+      "costUsd": 3.79584401482699,
+      "wallSeconds": 4568.4135207125
+    },
+    {
+      "label": "Devin Fusion CLI - Claude Opus 5.5 Max + GPT-6 Luna High",
+      "index": 0.615117219506897,
+      "costUsd": 7.99768820548534,
+      "wallSeconds": 3067.08119502552
+    },
+    {
+      "label": "Codex - GPT-6.1 Terra (Non-reasoning)",
+      "index": 0.392151614641034,
+      "costUsd": 0.454255643441512,
+      "wallSeconds": 572.437023079179
+    },
+    {
+      "label": "Devin Fusion CLI - Claude Fable 5.1 XHigh + SWE-2 Medium",
+      "index": 0.586619030954708,
+      "costUsd": 8.19825160322711,
+      "wallSeconds": 2253.66843252199
+    },
+    {
+      "label": "Muse Code - Muse Wonder Full (Max)",
+      "index": 0.588804489084392,
+      "costUsd": null,
+      "wallSeconds": 2096.2841057163
+    },
+    {
+      "label": "Mirror - Beam 1.0",
+      "index": 0.20478987379168,
+      "costUsd": 0.319490234063365,
+      "wallSeconds": 2321.25393509395
+    },
+    {
+      "label": "Codex - GPT-6.1 Terra (Xhigh)",
+      "index": 0.482238344954925,
+      "costUsd": 0.690844449567775,
+      "wallSeconds": 981.713951073096
+    },
+    {
+      "label": "Claude Code - Claude Haiku 5.5 (Max)",
+      "index": 0.373496050722277,
+      "costUsd": 2.67388407176395,
+      "wallSeconds": 4255.92477550559
+    },
+    {
+      "label": "Muse Code - Muse Spark 1.3 (Max)",
+      "index": 0.457077885630498,
+      "costUsd": 3.91029139020419,
+      "wallSeconds": 1398.49826969262
+    },
+    {
+      "label": "Kimi Code CLI - Kimi K3 (Max)",
+      "index": 0.41417319257087,
+      "costUsd": 5.16526976917945,
+      "wallSeconds": 3772.73379345389
+    },
+    {
+      "label": "Claude Code - Claude Fable 5.1 (Max, Default Fallback)",
+      "index": 0.576200245682633,
+      "costUsd": 11.5301045391259,
+      "wallSeconds": 2115.55138904529
+    },
+    {
+      "label": "Opencode - GLM-5.3 (Max)",
+      "index": 0.489161690344303,
+      "costUsd": 5.23102713863476,
+      "wallSeconds": 3369.69557528728
+    },
+    {
+      "label": "Codex - GPT-6.1 Terra (High)",
+      "index": 0.462787772238514,
+      "costUsd": 0.544031579042956,
+      "wallSeconds": 759.266290102096
+    },
+    {
+      "label": "Codex - GPT-6.1 Terra (Medium)",
+      "index": 0.420492375909634,
+      "costUsd": 0.394994482142174,
+      "wallSeconds": 610.752293823178
+    }
+  ],
+  "gone": [
+    "Claude Code - Sonnet 5.5 (max)",
+    "Muse Code - Muse Wonder Full (max)",
+    "Claude Code - Opus 5.5 (max)",
+    "Antigravity CLI - Gemini 4 Argon (high)",
+    "Muse Code - Muse Wonder (max)",
+    "Codex - GPT-6.1 Sol (xhigh) ({'reasoning_effort': 'xhigh'})",
+    "Claude Code - Sonnet 5.5 (xhigh)",
+    "Claude Code - Fable 5.1 (max) (with fallback)",
+    "Codex - GPT-6 Astra (max)",
+    "Codex - GPT-6.1 Sol (medium) ({'reasoning_effort': 'medium'})",
+    "Codex - GPT-6.1 Sol (high) ({'reasoning_effort': 'high'})",
+    "Codex - GPT-6.1 Sol (max)",
+    "Claude Code - Opus 5 (max)",
+    "Codex - GPT-6.1 Sol (low) ({'reasoning_effort': 'low'})",
+    "Codex - GPT-6 Sol (max)",
+    "Grok Build - Grok 4.7 (xhigh)",
+    "Claude Code - Sonnet 5.5 (high)",
+    "Codex - GPT-5.6 Sol (max) ({'reasoning_effort': 'max'})",
+    "Muse Code - Muse Spark 1.3 (max)",
+    "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
+    "Kimi Code CLI - Kimi K3",
+    "Muse Code - Muse Spark 1.3 (xhigh)",
+    "Grok Build - Grok 4.6 (xhigh)",
+    "Claude Code - Sonnet 5.5 (medium)",
+    "Codex - GPT-5.6 Luna (max)",
+    "Codex - DeepSeek V4 Pro 0813 (max)",
+    "Claude Code - Sonnet 5.5 (low)",
+    "Antigravity SDK - Gemini 3.8 Flash (high)",
+    "Claude Code - Haiku 5.5 (xhigh)",
+    "Muse Code - Muse Spark Open (xhigh)",
+    "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
+    "Codex - DeepSeek V4 Flash 0731 (max)",
+    "Claude Code - Haiku 5.5 (max)",
+    "Claude Code - Haiku 5.5 (high)",
+    "Claude Code - Haiku 5.5 (medium)",
+    "Claude Code - Haiku 5.5 (low)"
+  ]
+}
